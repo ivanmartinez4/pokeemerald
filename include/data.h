@@ -3,7 +3,7 @@
 
 #include "constants/moves.h"
 
-#define SPECIES_SHINY_TAG 500
+#define SPECIES_SHINY_TAG 5000
 #define N_FOLLOWER_HAPPY_MESSAGES 31
 #define N_FOLLOWER_NEUTRAL_MESSAGES 15
 #define N_FOLLOWER_SAD_MESSAGES 3
@@ -115,11 +115,13 @@ extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 
 extern const union AnimCmd *const gAnims_MonPic[];
 extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct CompressedSpriteSheet gMonStillFrontPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
+extern const struct CompressedSpriteSheet gMonBackPicTableFemale[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
+extern const struct CompressedSpritePalette gMonPaletteTableFemale[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+extern const struct CompressedSpritePalette gMonShinyPaletteTableFemale[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
@@ -133,6 +135,8 @@ extern const u8 gEnemyMonElevation[NUM_SPECIES];
 
 extern const union AnimCmd *const *const gMonFrontAnimsPtrTable[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const struct CompressedSpriteSheet gMonFrontPicTableFemale[];
+extern const bool8 SpeciesHasGenderDifference[NUM_SPECIES];
 
 extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];
