@@ -28,6 +28,7 @@
 #include "palette.h"
 #include "pokeball.h"
 #include "pokemon.h"
+#include "pokemon_debug.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
@@ -365,7 +366,7 @@ struct TilemapCtrl
     u8 field_9;
 };
 
-static const u16 sStatusTilemap[] = INCBIN_U16("graphics/interface/status_tilemap.bin");
+static const u16 sStatusTilemap[] = INCBIN_U16("graphics/summary_screen/status_tilemap.bin");
 static const struct TilemapCtrl sStatusTilemapCtrl1 =
 {
     sStatusTilemap, 1, 10, 2, 0, 18
@@ -376,11 +377,11 @@ static const struct TilemapCtrl sStatusTilemapCtrl2 =
 };
 static const struct TilemapCtrl sBattleMoveTilemapCtrl =
 {
-    gSummaryScreenPowAcc_Tilemap, 0, 10, 7, 0, 45
+    gSummaryScreen_MoveEffect_Battle_Tilemap, 0, 10, 7, 0, 45
 };
 static const struct TilemapCtrl sContestMoveTilemapCtrl =
 {
-    gSummaryScreenAppealJam_Tilemap, 0, 10, 7, 0, 45
+    gSummaryScreen_MoveEffect_Contest_Tilemap, 0, 10, 7, 0, 45
 };
 static const s8 sMultiBattleOrder[] = {0, 2, 3, 1, 4, 5};
 static const struct WindowTemplate sSummaryTemplate[] =
@@ -701,8 +702,8 @@ static const u8 sTextColors[][3] =
     {0, 7, 8}
 };
 
-static const u8 sSummaryAButtonBitmap[] = INCBIN_U8("graphics/interface/summary_a_button.4bpp");
-static const u8 sSummaryBButtonBitmap[] = INCBIN_U8("graphics/interface/summary_b_button.4bpp");
+static const u8 sAButton_Gfx[] = INCBIN_U8("graphics/summary_screen/a_button.4bpp");
+static const u8 sBButton_Gfx[] = INCBIN_U8("graphics/summary_screen/b_button.4bpp");
 
 static void (*const sTextPrinterFunctions[])(void) =
 {
@@ -819,6 +820,10 @@ static const union AnimCmd sSpriteAnim_TypeDark[] = {
     ANIMCMD_FRAME(TYPE_DARK * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
+static const union AnimCmd sSpriteAnim_TypeFairy[] = {
+    ANIMCMD_FRAME(TYPE_FAIRY * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
 static const union AnimCmd sSpriteAnim_CategoryCool[] = {
     ANIMCMD_FRAME((CONTEST_CATEGORY_COOL + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
@@ -858,6 +863,7 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_TypeIce,
     sSpriteAnim_TypeDragon,
     sSpriteAnim_TypeDark,
+    sSpriteAnim_TypeFairy,
     sSpriteAnim_CategoryCool,
     sSpriteAnim_CategoryBeauty,
     sSpriteAnim_CategoryCute,
@@ -901,6 +907,7 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIE
     [TYPE_ICE] = 14,
     [TYPE_DRAGON] = 15,
     [TYPE_DARK] = 13,
+    [TYPE_FAIRY] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = 13,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = 14,
@@ -1071,7 +1078,7 @@ static const struct SpriteTemplate sSpriteTemplate_StatusCondition =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
-static const u16 sSummaryMarkingsPalette[] = INCBIN_U16("graphics/interface/summary_markings.gbapal");
+static const u16 sMarkings_Pal[] = INCBIN_U16("graphics/summary_screen/markings.gbapal");
 
 // code
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
@@ -1312,7 +1319,7 @@ static bool8 DecompressGraphics(void)
         }
         break;
     case 2:
-        LZDecompressWram(gSummaryPage_InfoCopy_Tilemap, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1]);
+        LZDecompressWram(gSummaryPage_InfoEgg_Tilemap, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1]);
         sMonSummaryScreen->switchCounter++;
         break;
     case 3:
@@ -1549,6 +1556,15 @@ static void Task_HandleInput(u8 taskId)
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);
         }
+        #if P_ENABLE_DEBUG == TRUE
+        else if (JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
+        {
+            sMonSummaryScreen->callback = CB2_Debug_Pokemon;
+            StopPokemonAnimations();
+            PlaySE(SE_SELECT);
+            CloseSummaryScreen(taskId);
+        }
+        #endif
     }
 }
 
@@ -2551,6 +2567,7 @@ static void Task_ShowStatusWindow(u8 taskId)
     }
 }
 
+// Toggles the "Cancel" window that appears when selecting a move
 static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
 {
     u16 i, id;
@@ -2561,18 +2578,18 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
     {
         for (i = 0; i < 20; i++)
         {
-            dst[id + i] = gSummaryScreenWindow_Tilemap[i] + palette;
-            dst[id + i + 0x20] = gSummaryScreenWindow_Tilemap[i] + palette;
-            dst[id + i + 0x40] = gSummaryScreenWindow_Tilemap[i + 20] + palette;
+            dst[id + i] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i] + palette;
+            dst[id + i + 0x20] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i] + palette;
+            dst[id + i + 0x40] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 20] + palette;
         }
     }
     else // Remove
     {
         for (i = 0; i < 20; i++)
         {
-            dst[id + i] = gSummaryScreenWindow_Tilemap[i + 20] + palette;
-            dst[id + i + 0x20] = gSummaryScreenWindow_Tilemap[i + 40] + palette;
-            dst[id + i + 0x40] = gSummaryScreenWindow_Tilemap[i + 40] + palette;
+            dst[id + i] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 20] + palette;
+            dst[id + i + 0x20] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 40] + palette;
+            dst[id + i + 0x40] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 40] + palette;
         }
     }
 }
@@ -2788,8 +2805,8 @@ static void PrintGenderSymbol(struct Pokemon *mon, u16 species)
 
 static void PrintAOrBButtonIcon(u8 windowId, bool8 bButton, u32 x)
 {
-    // sSummaryBButtonBitmap - 0x80 = sSummaryAButtonBitmap
-    BlitBitmapToWindow(windowId, (bButton) ? sSummaryBButtonBitmap : sSummaryBButtonBitmap - 0x80, x, 0, 16, 16);
+    // sBButton_Gfx - sizeof(sBButton_Gfx) = sAButton_Gfx
+    BlitBitmapToWindow(windowId, (bButton) ? sBButton_Gfx : sBButton_Gfx - sizeof(sBButton_Gfx), x, 0, 16, 16);
 }
 
 static void PrintPageNamesAndStats(void)
@@ -3883,44 +3900,26 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
     case 0:
         if (gMain.inBattle)
         {
-            if (ShouldIgnoreDeoxysForm(3, sMonSummaryScreen->curMonIndex))
-                HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2],
-                                                          gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-                                                          summary->species2,
-                                                          summary->pid);
-            else
-                HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], 
-                                           gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-                                           summary->species2,
-                                           summary->pid);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
+                                     gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                     summary->species2,
+                                     summary->pid);
         }
         else
         {
             if (gMonSpritesGfxPtr != NULL)
             {
-                if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->unk40EF == TRUE)
-                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
-                                               gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-                                               summary->species2, 
-                                               summary->pid);
-                else
-                    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2],
-                                                              gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
-                                                              summary->species2,
-                                                              summary->pid);
+                HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
+                                         gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
+                                         summary->species2,
+                                         summary->pid);
             }
             else
             {
-                if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->unk40EF == TRUE)
-                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
-                                                MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
-                                                summary->species2,
-                                                summary->pid);
-                else
-                    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[summary->species2],
-                                                              MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
-                                                              summary->species2,
-                                                              summary->pid);
+                HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
+                                         MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
+                                         summary->species2,
+                                         summary->pid);
             }
         }
         (*state)++;
@@ -4022,7 +4021,7 @@ static void StopPokemonAnimations(void)  // A subtle effect, this function stops
 
 static void CreateMonMarkingsSprite(struct Pokemon *mon)
 {
-    struct Sprite *sprite = CreateMonMarkingAllCombosSprite(TAG_MON_MARKINGS, TAG_MON_MARKINGS, sSummaryMarkingsPalette);
+    struct Sprite *sprite = CreateMonMarkingAllCombosSprite(TAG_MON_MARKINGS, TAG_MON_MARKINGS, sMarkings_Pal);
 
     sMonSummaryScreen->markingsSprite = sprite;
     if (sprite != NULL)

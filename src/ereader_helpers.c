@@ -10,7 +10,6 @@
 #include "task.h"
 #include "util.h"
 #include "trainer_hill.h"
-#include "constants/easy_chat.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"
 #include "constants/items.h"
@@ -150,7 +149,7 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
             [3] = {
                 .species = SPECIES_CACTURNE,
                 .heldItem = ITEM_QUICK_CLAW,
-                .moves = { MOVE_GIGA_DRAIN, MOVE_FAINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
+                .moves = { MOVE_GIGA_DRAIN, MOVE_FEINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
                 .level = 0,
                 .ppBonuses = 0x0,
                 .hpEV = 55,

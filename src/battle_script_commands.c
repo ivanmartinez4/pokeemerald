@@ -4065,7 +4065,7 @@ static void Cmd_playanimation(void)
     }
 }
 
-// Same as playanimation, expect it takes a pointer to some animation id, instead of taking the value directly
+// Same as playanimation, except it takes a pointer to some animation id, instead of taking the value directly
 static void Cmd_playanimation_var(void)
 {
     const u16* argumentPtr;
@@ -6170,7 +6170,7 @@ static void PutMonIconOnLvlUpBanner(void)
     u16 species = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_PERSONALITY);
 
-    const u8* iconPtr = GetMonIconPtr(species, personality, 1);
+    const u8* iconPtr = GetMonIconPtr(species, personality);
     iconSheet.data = iconPtr;
     iconSheet.size = 0x200;
     iconSheet.tag = TAG_LVLUP_BANNER_MON_ICON;

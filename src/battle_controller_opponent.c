@@ -598,7 +598,6 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         battleMon.speed = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED);
         battleMon.spAttack = GetMonData(&gEnemyParty[monId], MON_DATA_SPATK);
         battleMon.spDefense = GetMonData(&gEnemyParty[monId], MON_DATA_SPDEF);
-        battleMon.isEgg = GetMonData(&gEnemyParty[monId], MON_DATA_IS_EGG);
         battleMon.abilityNum = GetMonData(&gEnemyParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gEnemyParty[monId], MON_DATA_OT_ID);
         GetMonData(&gEnemyParty[monId], MON_DATA_NICKNAME, nickname);
@@ -1523,7 +1522,7 @@ static void OpponentHandlePrintString(void)
     BufferStringBattle(*stringId);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
-    BattleArena_DeductMindPoints(gActiveBattler, *stringId);
+    BattleArena_DeductSkillPoints(gActiveBattler, *stringId);
 }
 
 static void OpponentHandlePrintSelectionString(void)
