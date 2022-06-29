@@ -6393,7 +6393,8 @@ u16 GetBattleBGM(void)
     else
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
-        {        case SPECIES_ARTICUNO:
+        {    
+        case SPECIES_ARTICUNO:
         case SPECIES_ZAPDOS:
         case SPECIES_MOLTRES:
         #ifdef POKEMON_EXPANSION
