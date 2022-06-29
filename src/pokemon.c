@@ -6393,8 +6393,7 @@ u16 GetBattleBGM(void)
     else
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
-        {
-        case SPECIES_ARTICUNO:
+        {        case SPECIES_ARTICUNO:
         case SPECIES_ZAPDOS:
         case SPECIES_MOLTRES:
         #ifdef POKEMON_EXPANSION
@@ -6502,6 +6501,34 @@ u16 GetBattleBGM(void)
         case SPECIES_ARCEUS_DARK:
         case SPECIES_ARCEUS_FAIRY:
             return MUS_DP_VS_ARCEUS;
+        case SPECIES_VICTINI:
+        case SPECIES_COBALION:
+        case SPECIES_TERRAKION:
+        case SPECIES_VIRIZION:
+        case SPECIES_TORNADUS:
+        case SPECIES_THUNDURUS:
+        case SPECIES_LANDORUS:
+        case SPECIES_TORNADUS_THERIAN:
+        case SPECIES_THUNDURUS_THERIAN:
+        case SPECIES_LANDORUS_THERIAN:
+        case SPECIES_KELDEO:
+        case SPECIES_KELDEO_RESOLUTE:
+        case SPECIES_MELOETTA:
+        case SPECIES_MELOETTA_PIROUETTE:
+        case SPECIES_GENESECT:
+        case SPECIES_GENESECT_DOUSE_DRIVE:
+        case SPECIES_GENESECT_SHOCK_DRIVE:
+        case SPECIES_GENESECT_BURN_DRIVE:
+        case SPECIES_GENESECT_CHILL_DRIVE:
+            return MUS_BW_VS_LEGEND;
+        case SPECIES_RESHIRAM:
+        case SPECIES_ZEKROM:
+            return MUS_BW_VS_RESHIRAM_ZEKROM;
+        case SPECIES_KYUREM:
+            return MUS_BW_VS_KYUREM;
+        case SPECIES_KYUREM_WHITE:
+        case SPECIES_KYUREM_BLACK:
+            return MUS_B2_VS_BLACK_WHITE_KYUREM;
         #endif
         default:
             return MUS_VS_WILD;
