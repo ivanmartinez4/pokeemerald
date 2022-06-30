@@ -2341,10 +2341,10 @@ $(MID_SUBDIR)/mus_hg_win_minigame.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V091 -p5
 
 $(MID_SUBDIR)/mus_bw_intro_1.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V092
+	$(MID) $< $@ -E -R0 -G274 -V092
 
 $(MID_SUBDIR)/mus_bw_intro_2.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V093
+	$(MID) $< $@ -E -R0 -G275 -V093
 
 $(MID_SUBDIR)/mus_bw_title.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V106

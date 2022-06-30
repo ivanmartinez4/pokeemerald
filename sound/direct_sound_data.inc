@@ -3465,3 +3465,71 @@ DirectSoundWaveData_hg_hoohclap::
 	.align 2
 DirectSoundWaveData_hg_choirc5::
 	.incbin "sound/direct_sound_samples/hg_choirc5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_female_choir_c5::
+	.incbin "sound/direct_sound_samples/bw_female_choir_c5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_female_choir_f4::
+	.incbin "sound/direct_sound_samples/bw_female_choir_f4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_female_choir_f5::
+	.incbin "sound/direct_sound_samples/bw_female_choir_f5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_gong1_c4::
+	.incbin "sound/direct_sound_samples/bw_gong1_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_male_choir_g2::
+	.incbin "sound/direct_sound_samples/bw_male_choir_g2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_male_choir_e3::
+	.incbin "sound/direct_sound_samples/bw_male_choir_e3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_male_choir_c4::
+	.incbin "sound/direct_sound_samples/bw_male_choir_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_c2::
+	.incbin "sound/direct_sound_samples/bw_piano1_c2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_c3::
+	.incbin "sound/direct_sound_samples/bw_piano1_c3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_c4::
+	.incbin "sound/direct_sound_samples/bw_piano1_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_c5::
+	.incbin "sound/direct_sound_samples/bw_piano1_c5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_g2::
+	.incbin "sound/direct_sound_samples/bw_piano1_g2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_g3::
+	.incbin "sound/direct_sound_samples/bw_piano1_g3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_g4::
+	.incbin "sound/direct_sound_samples/bw_piano1_g4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_piano1_g5::
+	.incbin "sound/direct_sound_samples/bw_piano1_g5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_suspended_cymbal_e2::
+	.incbin "sound/direct_sound_samples/bw_suspended_cymbal_e2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_trombone_stab_cs2::
+	.incbin "sound/direct_sound_samples/bw_trombone_stab_cs2.bin"
