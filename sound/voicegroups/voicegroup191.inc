@@ -10,7 +10,7 @@ voicegroup191:: @ DPPt main
 	voice_keysplit voicegroup199, KeySplitTable10    @ clavi
 	voice_directsound 60, 0, DirectSoundWaveData_purenoise, 81, 0, 57, 178	@ 110/127/ 60/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_glocken_c6_16, 255, 246, 0, 208	@ 127/ 90/  0/116/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_puresquare_50, 255, 242, 25, 197	@ 126/100/ 50/118/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_puresquare_50, 255, 242, 40, 197	@ 126/100/ 50/118/ 64
 	voice_keysplit voicegroup200, KeySplitTable11    @ vibraphone
 	voice_keysplit voicegroup201, KeySplitTable12    @ marimba
 	voice_keysplit voicegroup202, KeySplitTable13    @ xylophone
