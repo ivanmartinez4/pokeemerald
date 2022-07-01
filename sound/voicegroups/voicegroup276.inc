@@ -1,9 +1,5 @@
 	.align 2
-voicegroup275:: @ used in: intro_2
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroup235, KeySplitTable75	@ piano octave	@ -44 not used
-	voice_keysplit voicegroupInst15, KeySplitTable36    @ rhode piano
+voicegroup276:: @ used in: title
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -13,11 +9,12 @@ voicegroup275:: @ used in: intro_2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_glockenspiel_c5, 255, 249, 0, 208	@ 127/ 75/  1/116/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_hg_146tbellc5, 255, 249, 0, 208	@ 127/ 80/  1/116/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -28,46 +25,44 @@ voicegroup275:: @ used in: intro_2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_hg_000uprigc2, 255, 251, 0, 208	@ 127/ 60/  1/116/ 64	@ 46+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroup254, KeySplitTable76    @ synth bass
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst2, KeySplitTable60	@ strings 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 255, 242, 227, 208	@ 124/100/120/116/ 64	@ 50+ not used
+	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 240, 242, 255, 208	@ 120/100/127/116/ 64
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst10, KeySplitTable67	@ flute 2 ||| 75
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_hg_133timpg3, 255, 252, 0, 208	@ 127/ 50/  1/116/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst7, KeySplitTable27	@ trombones | 48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroupInst3, KeySplitTable71	@ timpani 1 | 58	@ 65+ not used
-	voice_keysplit voicegroupInst6, KeySplitTable64	@ trumpets | 65	@ 75+ not used
-	voice_keysplit voicegroupInst7, KeySplitTable27	@ trombones | 48	@ 58+ not used
+	voice_keysplit voicegroupInst8, KeySplitTable68	@ french horns ||| 69
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroupInst8, KeySplitTable65	@ french horns || 53 | 62	@ -53 not used
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroupInst9, KeySplitTable66	@ flute 1
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_directsound 60, 0, DirectSoundWaveData_bw_trombone_stab_cs2, 255, 197, 227, 208	@ 127/120/120/116/ 64
+	voice_keysplit voicegroupInst12, KeySplitTable69	@ oboe || 77
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_trombone_stab_cs2, 255, 64, 227, 178	@ 127/125/120/120/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst13, KeySplitTable39	@ trumpets (sharp attack)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_solo_trumpet_c5, 255, 0, 255, 178	@ 127/127/127/120/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_suspended_cymbal_e2, 255, 0, 255, 237	@ 127/127/127/100/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -80,4 +75,9 @@ voicegroup275:: @ used in: intro_2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit_all voicegroupDrum2	@ drums
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit_all voicegroupDrum3	@ drums

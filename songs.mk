@@ -2347,22 +2347,22 @@ $(MID_SUBDIR)/mus_bw_intro_2.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G275 -V093
 
 $(MID_SUBDIR)/mus_bw_title.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V106
+	$(MID) $< $@ -E -R0 -G276 -V106
 
 $(MID_SUBDIR)/mus_bw_new_game_1.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V045
+	$(MID) $< $@ -E -R0 -G277 -V045
 
 $(MID_SUBDIR)/mus_bw_new_game_2.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V090
+	$(MID) $< $@ -E -R0 -G277 -V090
 
 $(MID_SUBDIR)/mus_bw_evolution_intro.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V068
+	$(MID) $< $@ -E -R0 -G274 -V068 -X
 
 $(MID_SUBDIR)/mus_bw_evolution.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076
+	$(MID) $< $@ -E -R0 -G274 -V076
 
 $(MID_SUBDIR)/mus_bw_cycling.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V082
+	$(MID) $< $@ -E -R0 -G275 -V082
 
 $(MID_SUBDIR)/mus_bw_surf.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V068

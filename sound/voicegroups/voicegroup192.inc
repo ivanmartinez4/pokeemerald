@@ -1,31 +1,31 @@
 	.align 2
 voicegroup192:: @ 
 	voice_directsound 60, 0, DirectSoundWaveData_dp_whistle_c5_16, 255, 246, 78, 197	@ 127/ 90/ 70/118/ 64
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 197, 255, 178	@ 127/120/127/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 197, 255, 178	@ 127/120/127/120/ 64
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0											@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroup227, KeySplitTable25    @ music box (platinum only)
 	voice_keysplit voicegroup228, KeySplitTable34    @ banjo
 	voice_directsound 60, 64, DirectSoundWaveData_dp_sne1_roop, 255, 255, 191, 48	@ 127/  0/110/125/ 64
