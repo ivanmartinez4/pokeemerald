@@ -2365,10 +2365,10 @@ $(MID_SUBDIR)/mus_bw_cycling.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G275 -V082
 
 $(MID_SUBDIR)/mus_bw_surf.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V068
+	$(MID) $< $@ -E -R0 -G278 -V068
 
 $(MID_SUBDIR)/mus_bw_underwater.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V084
+	$(MID) $< $@ -E -R0 -G275 -V084
 
 $(MID_SUBDIR)/mus_bw_hall_of_fame.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V074

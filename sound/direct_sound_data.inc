@@ -3535,6 +3535,10 @@ DirectSoundWaveData_bw_marschall_guitar_c5::
 	.incbin "sound/direct_sound_samples/bw_marschall_guitar_c5.bin"
 
 	.align 2
+DirectSoundWaveData_bw_muted_conga::
+	.incbin "sound/direct_sound_samples/bw_muted_conga.bin"
+
+	.align 2
 DirectSoundWaveData_bw_open_triangle::
 	.incbin "sound/direct_sound_samples/bw_open_triangle.bin"
 
@@ -3583,6 +3587,26 @@ DirectSoundWaveData_bw_sd90_power_kick::
 	.incbin "sound/direct_sound_samples/bw_sd90_power_kick.bin"
 
 	.align 2
+DirectSoundWaveData_bw_sd90_standard_kick::
+	.incbin "sound/direct_sound_samples/bw_sd90_standard_kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitar_a3::
+	.incbin "sound/direct_sound_samples/bw_sitar_a3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitar_c3::
+	.incbin "sound/direct_sound_samples/bw_sitar_c3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitar_d5::
+	.incbin "sound/direct_sound_samples/bw_sitar_d5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sitar_f4::
+	.incbin "sound/direct_sound_samples/bw_sitar_f4.bin"
+
+	.align 2
 DirectSoundWaveData_bw_solo_trumpet_c5::
 	.incbin "sound/direct_sound_samples/bw_solo_trumpet_c5.bin"
 
@@ -3601,3 +3625,19 @@ DirectSoundWaveData_bw_trumpet_ensemble_a4::
 	.align 2
 DirectSoundWaveData_bw_trumpet_ensemble_c4::
 	.incbin "sound/direct_sound_samples/bw_trumpet_ensemble_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_underwater_fx_c3::
+	.incbin "sound/direct_sound_samples/bw_underwater_fx_c3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_underwater_fx_c4::
+	.incbin "sound/direct_sound_samples/bw_underwater_fx_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_underwater_fx_c6::
+	.incbin "sound/direct_sound_samples/bw_underwater_fx_c6.bin"
+
+	.align 2
+DirectSoundWaveData_bw_vibraphone_c6::
+	.incbin "sound/direct_sound_samples/bw_vibraphone_c6.bin"
