@@ -33,7 +33,7 @@ voicegroup275:: @ used in: intro_2; cycling; underwater
 	voice_keysplit voicegroupInst2, KeySplitTable60	@ strings 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 255, 242, 227, 208	@ 124/100/120/116/ 64	@ 50+ not used
+	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 255, 242, 227, 208	@ 124/100/120/116/ 64	@ 49+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

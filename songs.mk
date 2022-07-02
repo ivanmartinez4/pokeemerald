@@ -2371,10 +2371,10 @@ $(MID_SUBDIR)/mus_bw_underwater.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G275 -V084
 
 $(MID_SUBDIR)/mus_bw_hall_of_fame.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V074
+	$(MID) $< $@ -E -R0 -G277 -V074
 
 $(MID_SUBDIR)/mus_bw_credits.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V106
+	$(MID) $< $@ -E -R0 -G279 -V106
 
 $(MID_SUBDIR)/mus_bw_nuvema.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V071
