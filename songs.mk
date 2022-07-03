@@ -2377,22 +2377,22 @@ $(MID_SUBDIR)/mus_bw_credits.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G279 -V106
 
 $(MID_SUBDIR)/mus_bw_nuvema.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V071
+	$(MID) $< $@ -E -R0 -G275 -V071
 
 $(MID_SUBDIR)/mus_bw_accumula.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V060
+	$(MID) $< $@ -E -R0 -G275 -V060
 
 $(MID_SUBDIR)/mus_bw_anville.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V082
+	$(MID) $< $@ -E -R0 -G280 -V082
 
 $(MID_SUBDIR)/mus_bw_lacunosa.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V090
+	$(MID) $< $@ -E -R0 -G275 -V090 -X
 
 $(MID_SUBDIR)/mus_bw_undella_winter.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V077
+	$(MID) $< $@ -E -R0 -G274 -V077
 
 $(MID_SUBDIR)/mus_bw_undella_summer.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V094
+	$(MID) $< $@ -E -R0 -G279 -V094
 
 $(MID_SUBDIR)/mus_bw_striaton.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V064

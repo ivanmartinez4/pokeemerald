@@ -48,7 +48,7 @@ voicegroup277:: @ used in: new_game_1; new_game_2; hall_of_fame
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroupInst9, KeySplitTable66	@ flute 1 || 74 | 82	@ -67 not used
+	voice_keysplit voicegroupInst9, KeySplitTable72	@ flute 1 || 74 | 82	@ -67 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

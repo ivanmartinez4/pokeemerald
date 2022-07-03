@@ -1,16 +1,16 @@
 	.align 2
-voicegroup274:: @ used in: intro_1; evolution_intro; evolution
+voicegroup274:: @ used in: intro_1; evolution_intro; evolution; undella_winter
 	voice_keysplit voicegroupInst1, KeySplitTable59	@ piano 1 |||||| 70 | 77	@ 83+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst15, KeySplitTable36	@ rhode piano
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_bw_celesta_g3, 255, 249, 0, 208	@ 127/ 80/  1/116/ 64
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vibraphone_c6, 255, 249, 0, 208	@ 127/ 80/  1/116/ 64	@ -80 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -23,7 +23,7 @@ voicegroup274:: @ used in: intro_1; evolution_intro; evolution
 	voice_keysplit voicegroup253, KeySplitTable43	@ fretless bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_hg_123elastkc2, 255, 64, 227, 178	@ 127/125/120/120/ 64
-	voice_keysplit voicegroupInst2, KeySplitTable60	@ strings 1 | 66	@ 76+ not used
+	voice_keysplit voicegroupInst2, KeySplitTable74	@ strings 1 | 66	@ 76+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -54,7 +54,7 @@ voicegroup274:: @ used in: intro_1; evolution_intro; evolution
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_ocean_waves_sfx_c4, 255, 0, 255, 0	@ 127/127/127/127/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

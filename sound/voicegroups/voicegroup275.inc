@@ -1,35 +1,35 @@
 	.align 2
-voicegroup275:: @ used in: intro_2; cycling; underwater
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacunosa
+	voice_keysplit voicegroupInst1, KeySplitTable90	@ piano 1 | 41 | 46 | 53 | 58 | 65 | 70 | 77	@ -53 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroup235, KeySplitTable75	@ piano octave	@ -44 not used
-	voice_keysplit voicegroupInst15, KeySplitTable36    @ rhode piano
+	voice_keysplit voicegroupInst15, KeySplitTable36	@ rhode piano
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst25, KeySplitTable81	@ harpsichord	@ -53; 73+ not used
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst16, KeySplitTable83	@ vibraphone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst17, KeySplitTable79	@ drawbar organ
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst23, KeySplitTable79	@ accordion	@ -56 not used
+	voice_keysplit voicegroupInst24, KeySplitTable87	@ nylon string guitar | 52 | 60
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst26, KeySplitTable54	@ upright bass	@ 54+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroupInst17, KeySplitTable79    @ drawbar organ
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroup254, KeySplitTable76    @ synth bass
+	voice_keysplit voicegroup254, KeySplitTable76	@ synth bass
 	voice_keysplit voicegroupInst2, KeySplitTable60	@ strings 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -47,7 +47,7 @@ voicegroup275:: @ used in: intro_2; cycling; underwater
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst11, KeySplitTable88	@ flute 2	@ -71 not used
 	voice_keysplit voicegroupInst9, KeySplitTable66	@ flute 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -56,7 +56,7 @@ voicegroup275:: @ used in: intro_2; cycling; underwater
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroupInst18, KeySplitTable80    @ underwater sfx
+	voice_keysplit voicegroupInst18, KeySplitTable80	@ underwater sfx
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -75,7 +75,7 @@ voicegroup275:: @ used in: intro_2; cycling; underwater
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_keysplit voicegroupInst19, KeySplitTable81    @ sitar
+	voice_keysplit voicegroupInst19, KeySplitTable81	@ sitar
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

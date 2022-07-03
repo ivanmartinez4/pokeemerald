@@ -1,5 +1,5 @@
 	.align 2
-voicegroup279:: @ used in: credits
+voicegroup279:: @ used in: credits; undella_summer
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -24,9 +24,9 @@ voicegroup279:: @ used in: credits
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_bw_marschall_guitar_g2, 255, 254, 0, 178	@ 127/ 30/  1/120/ 64	@ 53+ not used
+	voice_keysplit voicegroupInst31, KeySplitTable87	@ clean guitar | 52 | 60	@ 70+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst32, KeySplitTable43	@ fingered bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_hg_123elastkc2, 255, 64, 227, 178	@ 127/125/120/120/ 64	@ 45+ not used
@@ -39,8 +39,8 @@ voicegroup279:: @ used in: credits
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_hg_133timpg3, 255, 252, 0, 208	@ 127/ 50/  1/116/ 64	@ 59+ not used
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst6, KeySplitTable39	@ trumpets
+	voice_keysplit voicegroupInst7, KeySplitTable89	@ trombones || 57	@ -48 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst8, KeySplitTable84	@ french horns | 52 | 53
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -76,8 +76,30 @@ voicegroup279:: @ used in: credits
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst22, KeySplitTable86	@ pipe organ ||| 66 | 75
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst33, KeySplitTable91	@ steel drum
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit_all voicegroupDrum5	@ drums
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_ocean_waves_sfx_c4, 255, 0, 255, 0	@ 127/127/127/127/ 64

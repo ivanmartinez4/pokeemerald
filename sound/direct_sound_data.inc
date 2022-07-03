@@ -3479,6 +3479,18 @@ DirectSoundWaveData_bw_909_open_hihat::
 	.incbin "sound/direct_sound_samples/bw_909_open_hihat.bin"
 
 	.align 2
+DirectSoundWaveData_bw_accordion_c3::
+	.incbin "sound/direct_sound_samples/bw_accordion_c3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_accordion_c4::
+	.incbin "sound/direct_sound_samples/bw_accordion_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_accordion_c5::
+	.incbin "sound/direct_sound_samples/bw_accordion_c5.bin"
+
+	.align 2
 DirectSoundWaveData_bw_celesta_g3::
 	.incbin "sound/direct_sound_samples/bw_celesta_g3.bin"
 
@@ -3489,6 +3501,14 @@ DirectSoundWaveData_bw_choir_aahs_a3::
 	.align 2
 DirectSoundWaveData_bw_choir_aahs_f4::
 	.incbin "sound/direct_sound_samples/bw_choir_aahs_f4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_claps::
+	.incbin "sound/direct_sound_samples/bw_claps.bin"
+
+	.align 2
+DirectSoundWaveData_bw_closed_triangle::
+	.incbin "sound/direct_sound_samples/bw_closed_triangle.bin"
 
 	.align 2
 DirectSoundWaveData_bw_drum_loop_hof::
@@ -3531,6 +3551,18 @@ DirectSoundWaveData_bw_gong1_c4::
 	.incbin "sound/direct_sound_samples/bw_gong1_c4.bin"
 
 	.align 2
+DirectSoundWaveData_bw_harpsichord_a3::
+	.incbin "sound/direct_sound_samples/bw_harpsichord_a3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_harpsichord_d5::
+	.incbin "sound/direct_sound_samples/bw_harpsichord_d5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_harpsichord_f4::
+	.incbin "sound/direct_sound_samples/bw_harpsichord_f4.bin"
+
+	.align 2
 DirectSoundWaveData_bw_male_choir_c4::
 	.incbin "sound/direct_sound_samples/bw_male_choir_c4.bin"
 
@@ -3561,6 +3593,22 @@ DirectSoundWaveData_bw_marschall_guitar_g3::
 	.align 2
 DirectSoundWaveData_bw_muted_conga::
 	.incbin "sound/direct_sound_samples/bw_muted_conga.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylon_string_guitar_e4::
+	.incbin "sound/direct_sound_samples/bw_nylon_string_guitar_e4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylon_string_guitar_g2::
+	.incbin "sound/direct_sound_samples/bw_nylon_string_guitar_g2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_nylon_string_guitar_g3::
+	.incbin "sound/direct_sound_samples/bw_nylon_string_guitar_g3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_ocean_waves_sfx_c4::
+	.incbin "sound/direct_sound_samples/bw_ocean_waves_sfx_c4.bin"
 
 	.align 2
 DirectSoundWaveData_bw_open_triangle::
@@ -3607,6 +3655,10 @@ DirectSoundWaveData_bw_pipe_organ_f5::
 	.incbin "sound/direct_sound_samples/bw_pipe_organ_f5.bin"
 
 	.align 2
+DirectSoundWaveData_bw_pop_kick::
+	.incbin "sound/direct_sound_samples/bw_pop_kick.bin"
+
+	.align 2
 DirectSoundWaveData_bw_resonant_synth_c4::
 	.incbin "sound/direct_sound_samples/bw_resonant_synth_c4.bin"
 
@@ -3623,12 +3675,24 @@ DirectSoundWaveData_bw_rhode_piano_c5::
 	.incbin "sound/direct_sound_samples/bw_rhode_piano_c5.bin"
 
 	.align 2
+DirectSoundWaveData_bw_rim_hit::
+	.incbin "sound/direct_sound_samples/bw_rim_hit.bin"
+
+	.align 2
 DirectSoundWaveData_bw_sd90_power_kick::
 	.incbin "sound/direct_sound_samples/bw_sd90_power_kick.bin"
 
 	.align 2
-DirectSoundWaveData_bw_sd90_standard_kick::
-	.incbin "sound/direct_sound_samples/bw_sd90_standard_kick.bin"
+DirectSoundWaveData_bw_sd90_standard_kick_b1::
+	.incbin "sound/direct_sound_samples/bw_sd90_standard_kick_b1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_sd90_standard_kick_c2::
+	.incbin "sound/direct_sound_samples/bw_sd90_standard_kick_c2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_shaker::
+	.incbin "sound/direct_sound_samples/bw_shaker.bin"
 
 	.align 2
 DirectSoundWaveData_bw_sitar_a3::
@@ -3649,6 +3713,10 @@ DirectSoundWaveData_bw_sitar_f4::
 	.align 2
 DirectSoundWaveData_bw_solo_trumpet_c5::
 	.incbin "sound/direct_sound_samples/bw_solo_trumpet_c5.bin"
+
+	.align 2
+DirectSoundWaveData_bw_steel_drum_g4::
+	.incbin "sound/direct_sound_samples/bw_steel_drum_g4.bin"
 
 	.align 2
 DirectSoundWaveData_bw_suspended_cymbal_e2::

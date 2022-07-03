@@ -34,7 +34,7 @@ voicegroupDrum1:: @
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0		@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0		@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0		@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0		@ dummy
+	voice_directsound 60, 64, DirectSoundWaveData_dp_808snare_16, 255, 219, 0, 178	@ 127/116/  0/120/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 178	@ 127/127/127/120/ 64
 	voice_directsound 61, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 178	@ 127/127/127/120/ 64	@ not used
 	voice_directsound 62, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 178	@ 127/127/127/120/ 64	@ not used
