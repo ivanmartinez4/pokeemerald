@@ -78,11 +78,11 @@ voicegroupDrum2:: @
 	voice_directsound 68, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
 	voice_directsound 69, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
 	voice_directsound 70, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
-	voice_directsound 71, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
-	voice_directsound 72, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
-	voice_directsound 73, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
-	voice_directsound 74, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
-	voice_directsound 75, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
-	voice_directsound 76, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
-	voice_directsound 77, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105	@ not used
+	voice_directsound 60, 30, DirectSoundWaveData_bw_castanet, 255, 222, 227, 208	@ 127/115/120/116/ 30
+	voice_directsound 60, 40, DirectSoundWaveData_bw_short_guiro, 255, 233, 191, 208	@ 127/110/110/116/ 40
+	voice_directsound 60, 40, DirectSoundWaveData_bw_long_guiro, 255, 233, 191, 208	@ 127/110/110/116/ 40
+	voice_directsound 61, 40, DirectSoundWaveData_bw_long_guiro, 255, 233, 191, 208	@ 127/110/110/116/ 40	@ not used
+	voice_directsound 62, 40, DirectSoundWaveData_bw_long_guiro, 255, 233, 191, 208	@ 127/110/110/116/ 40	@ not used
+	voice_directsound 63, 40, DirectSoundWaveData_bw_long_guiro, 255, 233, 191, 208	@ 127/110/110/116/ 40	@ not used
+	voice_directsound 60, 32, DirectSoundWaveData_bw_closed_triangle, 255, 233, 191, 208	@ 127/110/110/116/ 32
 	voice_directsound 60, 32, DirectSoundWaveData_bw_open_triangle, 255, 233, 191, 208	@ 127/110/110/116/ 32

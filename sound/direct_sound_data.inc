@@ -3491,6 +3491,10 @@ DirectSoundWaveData_bw_accordion_c5::
 	.incbin "sound/direct_sound_samples/bw_accordion_c5.bin"
 
 	.align 2
+DirectSoundWaveData_bw_castanet::
+	.incbin "sound/direct_sound_samples/bw_castanet.bin"
+
+	.align 2
 DirectSoundWaveData_bw_celesta_g3::
 	.incbin "sound/direct_sound_samples/bw_celesta_g3.bin"
 
@@ -3561,6 +3565,10 @@ DirectSoundWaveData_bw_harpsichord_d5::
 	.align 2
 DirectSoundWaveData_bw_harpsichord_f4::
 	.incbin "sound/direct_sound_samples/bw_harpsichord_f4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_long_guiro::
+	.incbin "sound/direct_sound_samples/bw_long_guiro.bin"
 
 	.align 2
 DirectSoundWaveData_bw_male_choir_c4::
@@ -3659,6 +3667,22 @@ DirectSoundWaveData_bw_pop_kick::
 	.incbin "sound/direct_sound_samples/bw_pop_kick.bin"
 
 	.align 2
+DirectSoundWaveData_bw_psp_analog_kick_b1::
+	.incbin "sound/direct_sound_samples/bw_psp_analog_kick_b1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_psp_analog_kick_c2::
+	.incbin "sound/direct_sound_samples/bw_psp_analog_kick_c2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_psp_analog_snare_d2::
+	.incbin "sound/direct_sound_samples/bw_psp_analog_snare_d2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_psp_analog_snare_e2::
+	.incbin "sound/direct_sound_samples/bw_psp_analog_snare_e2.bin"
+
+	.align 2
 DirectSoundWaveData_bw_resonant_synth_c4::
 	.incbin "sound/direct_sound_samples/bw_resonant_synth_c4.bin"
 
@@ -3679,6 +3703,26 @@ DirectSoundWaveData_bw_rim_hit::
 	.incbin "sound/direct_sound_samples/bw_rim_hit.bin"
 
 	.align 2
+DirectSoundWaveData_bw_room_crash_cymbal::
+	.incbin "sound/direct_sound_samples/bw_room_crash_cymbal.bin"
+
+	.align 2
+DirectSoundWaveData_bw_room_closed_hihat::
+	.incbin "sound/direct_sound_samples/bw_room_closed_hihat.bin"
+
+	.align 2
+DirectSoundWaveData_bw_room_kick::
+	.incbin "sound/direct_sound_samples/bw_room_kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_room_open_hihat::
+	.incbin "sound/direct_sound_samples/bw_room_open_hihat.bin"
+
+	.align 2
+DirectSoundWaveData_bw_room_snare::
+	.incbin "sound/direct_sound_samples/bw_room_snare.bin"
+
+	.align 2
 DirectSoundWaveData_bw_sd90_power_kick::
 	.incbin "sound/direct_sound_samples/bw_sd90_power_kick.bin"
 
@@ -3693,6 +3737,10 @@ DirectSoundWaveData_bw_sd90_standard_kick_c2::
 	.align 2
 DirectSoundWaveData_bw_shaker::
 	.incbin "sound/direct_sound_samples/bw_shaker.bin"
+
+	.align 2
+DirectSoundWaveData_bw_short_guiro::
+	.incbin "sound/direct_sound_samples/bw_short_guiro.bin"
 
 	.align 2
 DirectSoundWaveData_bw_sitar_a3::

@@ -2395,10 +2395,10 @@ $(MID_SUBDIR)/mus_bw_undella_summer.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G279 -V094
 
 $(MID_SUBDIR)/mus_bw_striaton.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V064
+	$(MID) $< $@ -E -R0 -G281 -V064
 
 $(MID_SUBDIR)/mus_bw_nacrene.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V070
+	$(MID) $< $@ -E -R0 -G279 -V070
 
 $(MID_SUBDIR)/mus_bw_castelia.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V064
