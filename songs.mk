@@ -2401,7 +2401,7 @@ $(MID_SUBDIR)/mus_bw_nacrene.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G279 -V070
 
 $(MID_SUBDIR)/mus_bw_castelia.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V064
+	$(MID) $< $@ -E -R0 -G275 -V064
 
 $(MID_SUBDIR)/mus_bw_nimbasa.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V073

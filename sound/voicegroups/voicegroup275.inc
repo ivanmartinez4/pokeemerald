@@ -26,7 +26,7 @@ voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacun
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst26, KeySplitTable54	@ upright bass	@ 54+ not used
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst32, KeySplitTable43	@ fretless bass
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroup254, KeySplitTable76	@ synth bass
@@ -50,7 +50,7 @@ voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacun
 	voice_keysplit voicegroupInst11, KeySplitTable88	@ flute 2	@ -71 not used
 	voice_keysplit voicegroupInst9, KeySplitTable66	@ flute 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst36, KeySplitTable92	@ saxophone || 68	@ -56 not used
 	voice_directsound 60, 0, DirectSoundWaveData_bw_trombone_stab_cs2, 255, 197, 227, 208	@ 127/120/120/116/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

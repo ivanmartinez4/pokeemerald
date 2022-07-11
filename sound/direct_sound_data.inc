@@ -3723,6 +3723,14 @@ DirectSoundWaveData_bw_room_snare::
 	.incbin "sound/direct_sound_samples/bw_room_snare.bin"
 
 	.align 2
+DirectSoundWaveData_bw_saxophone_c4::
+	.incbin "sound/direct_sound_samples/bw_saxophone_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_saxophone_c5::
+	.incbin "sound/direct_sound_samples/bw_saxophone_c5.bin"
+
+	.align 2
 DirectSoundWaveData_bw_sd90_power_kick::
 	.incbin "sound/direct_sound_samples/bw_sd90_power_kick.bin"
 
