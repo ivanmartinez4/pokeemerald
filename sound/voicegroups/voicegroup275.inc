@@ -1,5 +1,5 @@
 	.align 2
-voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacunosa
+voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacunosa; castelia
 	voice_keysplit voicegroupInst1, KeySplitTable90	@ piano 1 | 41 | 46 | 53 | 58 | 65 | 70 | 77	@ -53 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroup235, KeySplitTable75	@ piano octave	@ -44 not used

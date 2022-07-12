@@ -2404,10 +2404,10 @@ $(MID_SUBDIR)/mus_bw_castelia.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G275 -V064
 
 $(MID_SUBDIR)/mus_bw_nimbasa.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V073
+	$(MID) $< $@ -E -R0 -G282 -V073
 
 $(MID_SUBDIR)/mus_bw_driftveil.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076
+	$(MID) $< $@ -E -R0 -G280 -V076
 
 $(MID_SUBDIR)/mus_bw_mistralton.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V089

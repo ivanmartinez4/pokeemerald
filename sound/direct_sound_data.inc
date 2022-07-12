@@ -3523,6 +3523,10 @@ DirectSoundWaveData_bw_drum_roll::
 	.incbin "sound/direct_sound_samples/bw_drum_roll.bin"
 
 	.align 2
+DirectSoundWaveData_bw_electric_bass_e2::
+	.incbin "sound/direct_sound_samples/bw_electric_bass_e2.bin"
+
+	.align 2
 DirectSoundWaveData_bw_female_choir_c5::
 	.incbin "sound/direct_sound_samples/bw_female_choir_c5.bin"
 
@@ -3581,6 +3585,18 @@ DirectSoundWaveData_bw_male_choir_e3::
 	.align 2
 DirectSoundWaveData_bw_male_choir_g2::
 	.incbin "sound/direct_sound_samples/bw_male_choir_g2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_marimba_c3::
+	.incbin "sound/direct_sound_samples/bw_marimba_c3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_marimba_c4::
+	.incbin "sound/direct_sound_samples/bw_marimba_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_marimba_c5::
+	.incbin "sound/direct_sound_samples/bw_marimba_c5.bin"
 
 	.align 2
 DirectSoundWaveData_bw_marschall_guitar_c5::
