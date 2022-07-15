@@ -2410,10 +2410,10 @@ $(MID_SUBDIR)/mus_bw_driftveil.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G280 -V076
 
 $(MID_SUBDIR)/mus_bw_mistralton.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V089
+	$(MID) $< $@ -E -R0 -G281 -V089
 
 $(MID_SUBDIR)/mus_bw_icirrus.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V064
+	$(MID) $< $@ -E -R0 -G283 -V064
 
 $(MID_SUBDIR)/mus_bw_opelucid_black.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V058

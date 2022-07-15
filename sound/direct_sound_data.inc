@@ -3523,6 +3523,10 @@ DirectSoundWaveData_bw_drum_roll::
 	.incbin "sound/direct_sound_samples/bw_drum_roll.bin"
 
 	.align 2
+DirectSoundWaveData_bw_electric_bass_a2::
+	.incbin "sound/direct_sound_samples/bw_electric_bass_a2.bin"
+
+	.align 2
 DirectSoundWaveData_bw_electric_bass_e2::
 	.incbin "sound/direct_sound_samples/bw_electric_bass_e2.bin"
 
@@ -3635,8 +3639,28 @@ DirectSoundWaveData_bw_ocean_waves_sfx_c4::
 	.incbin "sound/direct_sound_samples/bw_ocean_waves_sfx_c4.bin"
 
 	.align 2
+DirectSoundWaveData_bw_open_high_conga::
+	.incbin "sound/direct_sound_samples/bw_open_high_conga.bin"
+
+	.align 2
 DirectSoundWaveData_bw_open_triangle::
 	.incbin "sound/direct_sound_samples/bw_open_triangle.bin"
+
+	.align 2
+DirectSoundWaveData_bw_orchestra_strings_a3::
+	.incbin "sound/direct_sound_samples/bw_orchestra_strings_a3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_orchestra_strings_c3::
+	.incbin "sound/direct_sound_samples/bw_orchestra_strings_c3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_orchestra_strings_f2::
+	.incbin "sound/direct_sound_samples/bw_orchestra_strings_f2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_orchestra_strings_f4::
+	.incbin "sound/direct_sound_samples/bw_orchestra_strings_f4.bin"
 
 	.align 2
 DirectSoundWaveData_bw_piano1_c2::
@@ -3679,6 +3703,10 @@ DirectSoundWaveData_bw_pipe_organ_f5::
 	.incbin "sound/direct_sound_samples/bw_pipe_organ_f5.bin"
 
 	.align 2
+DirectSoundWaveData_bw_pop_crash_17::
+	.incbin "sound/direct_sound_samples/bw_pop_crash_17.bin"
+
+	.align 2
 DirectSoundWaveData_bw_pop_kick::
 	.incbin "sound/direct_sound_samples/bw_pop_kick.bin"
 
@@ -3717,6 +3745,10 @@ DirectSoundWaveData_bw_rhode_piano_c5::
 	.align 2
 DirectSoundWaveData_bw_rim_hit::
 	.incbin "sound/direct_sound_samples/bw_rim_hit.bin"
+
+	.align 2
+DirectSoundWaveData_bw_rimshot_snare::
+	.incbin "sound/direct_sound_samples/bw_rimshot_snare.bin"
 
 	.align 2
 DirectSoundWaveData_bw_room_crash_cymbal::
@@ -3767,6 +3799,10 @@ DirectSoundWaveData_bw_short_guiro::
 	.incbin "sound/direct_sound_samples/bw_short_guiro.bin"
 
 	.align 2
+DirectSoundWaveData_bw_side_stick::
+	.incbin "sound/direct_sound_samples/bw_side_stick.bin"
+
+	.align 2
 DirectSoundWaveData_bw_sitar_a3::
 	.incbin "sound/direct_sound_samples/bw_sitar_a3.bin"
 
@@ -3781,6 +3817,18 @@ DirectSoundWaveData_bw_sitar_d5::
 	.align 2
 DirectSoundWaveData_bw_sitar_f4::
 	.incbin "sound/direct_sound_samples/bw_sitar_f4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_slap_bass_c2::
+	.incbin "sound/direct_sound_samples/bw_slap_bass_c2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_slap_bass_c3::
+	.incbin "sound/direct_sound_samples/bw_slap_bass_c3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_slap_bass_g2::
+	.incbin "sound/direct_sound_samples/bw_slap_bass_g2.bin"
 
 	.align 2
 DirectSoundWaveData_bw_solo_trumpet_c5::

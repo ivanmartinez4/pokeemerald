@@ -63,26 +63,26 @@ voicegroupDrum5:: @
 	voice_directsound 68, 20, DirectSoundWaveData_hg_022china, 255, 249, 0, 225	@ 127/ 80/  0/110/ 20	@ not used
 	voice_directsound 69, 20, DirectSoundWaveData_hg_022china, 255, 249, 0, 225	@ 127/ 80/  0/110/ 20	@ not used
 	voice_directsound 70, 20, DirectSoundWaveData_hg_022china, 255, 249, 0, 225	@ 127/ 80/  0/110/ 20	@ not used
-	voice_directsound 60, 35, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 35
-	voice_directsound 57, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25
-	voice_directsound 58, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 59, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 60, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 61, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 62, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 63, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 64, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 65, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 66, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 67, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 68, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 25	@ not used
-	voice_directsound 60, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25
-	voice_directsound 61, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25	@ not used
-	voice_directsound 62, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25	@ not used
-	voice_directsound 63, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25	@ not used
-	voice_directsound 64, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25	@ not used
-	voice_directsound 65, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25	@ not used
-	voice_directsound 66, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25	@ not used
-	voice_directsound 67, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 178	@ 127/110/ 90/116/ 25	@ not used
-	voice_directsound 60, 90, DirectSoundWaveData_bw_closed_triangle, 255, 233, 191, 178	@ 127/110/110/116/ 90
-	voice_directsound 60, 90, DirectSoundWaveData_bw_open_triangle, 255, 233, 191, 178	@ 127/110/110/116/ 90
+	voice_directsound 60, 35, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 35
+	voice_directsound 57, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25
+	voice_directsound 58, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 59, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 60, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 61, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 62, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 63, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 64, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 65, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 66, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 67, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 68, 25, DirectSoundWaveData_dp_060conga, 255, 0, 255, 208	@ 127/127/127/116/ 25	@ not used
+	voice_directsound 60, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25
+	voice_directsound 61, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25	@ not used
+	voice_directsound 62, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25	@ not used
+	voice_directsound 63, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25	@ not used
+	voice_directsound 64, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25	@ not used
+	voice_directsound 65, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25	@ not used
+	voice_directsound 66, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25	@ not used
+	voice_directsound 67, 25, DirectSoundWaveData_bw_shaker, 255, 233, 127, 208	@ 127/110/ 90/116/ 25	@ not used
+	voice_directsound 60, 90, DirectSoundWaveData_bw_closed_triangle, 255, 233, 191, 208	@ 127/110/110/116/ 90
+	voice_directsound 60, 90, DirectSoundWaveData_bw_open_triangle, 255, 233, 191, 208	@ 127/110/110/116/ 90
