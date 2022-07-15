@@ -1,6 +1,6 @@
 	.align 2
-voicegroup283:: @ used in: icirrus
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+voicegroup283:: @ used in: icirrus; opelucid_black
+	voice_keysplit voicegroupInst25, KeySplitTable97	@ harpsichord || 62 | 72
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -32,7 +32,7 @@ voicegroup283:: @ used in: icirrus
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst46, KeySplitTable98	@ resonant synth (124 release) || 79
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst10, KeySplitTable88	@ flute 2
@@ -40,3 +40,44 @@ voicegroup283:: @ used in: icirrus
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit_all voicegroupDrum1	@ drums
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_sync_lead_b1, 255, 64, 227, 88	@ 127/125/120/124/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_bw_dancefloor_bass_fs1, 255, 249, 0, 208	@ 127/ 75/  1/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder_58, 255, 0, 255, 178	@ 127/127/127/120/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_bw_vocoder_59, 255, 0, 255, 178	@ 127/127/127/120/ 64
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_solo_trumpet_c5, 255, 0, 255, 178	@ 127/127/127/120/ 64
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit_all voicegroupDrum10	@ drums

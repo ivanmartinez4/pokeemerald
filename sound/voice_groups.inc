@@ -292,6 +292,7 @@
 .include "sound/voicegroups/voicegroupDrum7.inc"
 .include "sound/voicegroups/voicegroupDrum8.inc"
 .include "sound/voicegroups/voicegroupDrum9.inc"
+.include "sound/voicegroups/voicegroupDrum10.inc"
 .include "sound/voicegroups/voicegroupInst1.inc"
 .include "sound/voicegroups/voicegroupInst2.inc"
 .include "sound/voicegroups/voicegroupInst3.inc"
@@ -337,3 +338,4 @@
 .include "sound/voicegroups/voicegroupInst43.inc"
 .include "sound/voicegroups/voicegroupInst44.inc"
 .include "sound/voicegroups/voicegroupInst45.inc"
+.include "sound/voicegroups/voicegroupInst46.inc"

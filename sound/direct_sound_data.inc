@@ -3515,6 +3515,34 @@ DirectSoundWaveData_bw_closed_triangle::
 	.incbin "sound/direct_sound_samples/bw_closed_triangle.bin"
 
 	.align 2
+DirectSoundWaveData_bw_cowbell::
+	.incbin "sound/direct_sound_samples/bw_cowbell.bin"
+
+	.align 2
+DirectSoundWaveData_bw_dance_closed_hihat::
+	.incbin "sound/direct_sound_samples/bw_dance_closed_hihat.bin"
+
+	.align 2
+DirectSoundWaveData_bw_dance_kick::
+	.incbin "sound/direct_sound_samples/bw_dance_kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_dance_kick_crash::
+	.incbin "sound/direct_sound_samples/bw_dance_kick_crash.bin"
+
+	.align 2
+DirectSoundWaveData_bw_dance_open_hihat::
+	.incbin "sound/direct_sound_samples/bw_dance_open_hihat.bin"
+
+	.align 2
+DirectSoundWaveData_bw_dance_snare::
+	.incbin "sound/direct_sound_samples/bw_dance_snare.bin"
+
+	.align 2
+DirectSoundWaveData_bw_dancefloor_bass_fs1::
+	.incbin "sound/direct_sound_samples/bw_dancefloor_bass_fs1.bin"
+
+	.align 2
 DirectSoundWaveData_bw_drum_loop_hof::
 	.incbin "sound/direct_sound_samples/bw_drum_loop_hof.bin"
 
@@ -3843,8 +3871,20 @@ DirectSoundWaveData_bw_suspended_cymbal_e2::
 	.incbin "sound/direct_sound_samples/bw_suspended_cymbal_e2.bin"
 
 	.align 2
+DirectSoundWaveData_bw_sync_lead_b1::
+	.incbin "sound/direct_sound_samples/bw_sync_lead_b1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_t9_clap::
+	.incbin "sound/direct_sound_samples/bw_t9_clap.bin"
+
+	.align 2
 DirectSoundWaveData_bw_t9_kick::
 	.incbin "sound/direct_sound_samples/bw_t9_kick.bin"
+
+	.align 2
+DirectSoundWaveData_bw_t9_snare::
+	.incbin "sound/direct_sound_samples/bw_t9_snare.bin"
 
 	.align 2
 DirectSoundWaveData_bw_trombone_stab_cs2::
@@ -3873,3 +3913,11 @@ DirectSoundWaveData_bw_underwater_fx_c6::
 	.align 2
 DirectSoundWaveData_bw_vibraphone_c6::
 	.incbin "sound/direct_sound_samples/bw_vibraphone_c6.bin"
+
+	.align 2
+DirectSoundWaveData_bw_vocoder_58::
+	.incbin "sound/direct_sound_samples/bw_vocoder_58.bin"
+
+	.align 2
+DirectSoundWaveData_bw_vocoder_59::
+	.incbin "sound/direct_sound_samples/bw_vocoder_59.bin"

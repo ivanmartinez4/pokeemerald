@@ -2416,7 +2416,7 @@ $(MID_SUBDIR)/mus_bw_icirrus.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G283 -V064
 
 $(MID_SUBDIR)/mus_bw_opelucid_black.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V058
+	$(MID) $< $@ -E -R0 -G283 -V058
 
 $(MID_SUBDIR)/mus_bw_opelucid_white.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V080 -X
