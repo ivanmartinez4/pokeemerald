@@ -3559,6 +3559,10 @@ DirectSoundWaveData_bw_electric_bass_e2::
 	.incbin "sound/direct_sound_samples/bw_electric_bass_e2.bin"
 
 	.align 2
+DirectSoundWaveData_bw_erhu_c3::
+	.incbin "sound/direct_sound_samples/bw_erhu_c3.bin"
+
+	.align 2
 DirectSoundWaveData_bw_female_choir_c5::
 	.incbin "sound/direct_sound_samples/bw_female_choir_c5.bin"
 

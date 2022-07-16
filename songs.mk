@@ -2419,7 +2419,7 @@ $(MID_SUBDIR)/mus_bw_opelucid_black.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G283 -V058
 
 $(MID_SUBDIR)/mus_bw_opelucid_white.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V080 -X
+	$(MID) $< $@ -E -R0 -G284 -V080 -X
 
 $(MID_SUBDIR)/mus_bw_black_city.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V076
