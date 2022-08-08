@@ -615,7 +615,7 @@ static void HandleDecorationActionsMenuInput(u8 taskId)
 static void PrintCurMainMenuDescription(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, sSecretBasePCMenuItemDescriptions[sDecorationActionsCursorPos], 0, 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, sSecretBasePCMenuItemDescriptions[sDecorationActionsCursorPos], 0, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void DecorationMenuAction_Decorate(u8 taskId)
@@ -643,7 +643,7 @@ static void DecorationMenuAction_PutAway(u8 taskId)
     else
     {
         RemoveDecorationWindow(WINDOW_MAIN_MENU);
-        ClearDialogWindowAndFrame(0, 0);
+        ClearDialogWindowAndFrame(0, FALSE);
         FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].tState = 0;
         gTasks[taskId].func = Task_ContinuePuttingAwayDecorations;
@@ -688,7 +688,7 @@ static void ReturnToDecorationActionsAfterInvalidSelection(u8 taskId)
 static void SecretBasePC_PrepMenuForSelectingStoredDecors(u8 taskId)
 {
     LoadPalette(sDecorationMenuPalette, 0xd0, 0x20);
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     RemoveDecorationWindow(WINDOW_MAIN_MENU);
     InitDecorationCategoriesWindow(taskId);
 }
@@ -810,7 +810,7 @@ static void SelectDecorationCategory(u8 taskId)
 
 static void ReturnToDecorationCategoriesAfterInvalidSelection(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     InitDecorationCategoriesWindow(taskId);
 }
 
@@ -834,7 +834,7 @@ static void ReturnToActionsMenuFromCategories(u8 taskId)
 void ShowDecorationCategoriesWindow(u8 taskId)
 {
     LoadPalette(sDecorationMenuPalette, 0xd0, 0x20);
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     gTasks[taskId].tDecorationMenuCommand = DECOR_MENU_TRADE;
     sCurDecorationCategory = DECORCAT_DESK;
     InitDecorationCategoriesWindow(taskId);
@@ -1141,7 +1141,7 @@ static void Task_ShowDecorationItemsWindow(u8 taskId)
 
 static void DontTossDecoration(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     gTasks[taskId].func = Task_ShowDecorationItemsWindow;
 }
 
@@ -1149,7 +1149,7 @@ static void ReturnToDecorationItemsAfterInvalidSelection(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        ClearDialogWindowAndFrame(0, 0);
+        ClearDialogWindowAndFrame(0, FALSE);
         AddDecorationWindow(WINDOW_DECORATION_CATEGORIES);
         ShowDecorationItemsWindow(taskId);
     }
@@ -1640,7 +1640,7 @@ static void PlaceDecorationPrompt(u8 taskId)
 
 static void PlaceDecoration(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     PlaceDecoration_(taskId);
     if (gDecorations[gCurDecorationItems[gCurDecorationIndex]].permission != DECORPERM_SPRITE)
     {
@@ -1706,7 +1706,7 @@ static void CancelDecoratingPrompt(u8 taskId)
 
 static void CancelDecorating(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     CancelDecorating_(taskId);
 }
 
@@ -1891,7 +1891,7 @@ static void Task_SelectLocation(u8 taskId)
 
 static void ContinueDecorating(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 1);
+    ClearDialogWindowAndFrame(0, TRUE);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gTasks[taskId].tButton = 0;
     gTasks[taskId].func = Task_SelectLocation;
@@ -1985,7 +1985,7 @@ static void SetDecorSelectionBoxOamAttributes(u8 decorShape)
     sDecorSelectorOam.y = 0;
     sDecorSelectorOam.affineMode = ST_OAM_AFFINE_OFF;
     sDecorSelectorOam.objMode = ST_OAM_OBJ_NORMAL;
-    sDecorSelectorOam.mosaic = 0;
+    sDecorSelectorOam.mosaic = FALSE;
     sDecorSelectorOam.bpp = ST_OAM_4BPP;
     sDecorSelectorOam.shape = sDecorationMovementInfo[decorShape].shape;
     sDecorSelectorOam.x = 0;
@@ -2247,7 +2247,7 @@ static void Task_PutAwayDecoration(u8 taskId)
         if (!gPaletteFade.active) {
             DrawWholeMapView();
             ScriptContext1_SetupScript(SecretBase_EventScript_PutAwayDecoration);
-            ClearDialogWindowAndFrame(0, 1);
+            ClearDialogWindowAndFrame(0, TRUE);
             gTasks[taskId].tState = 2;
         }
         break;
@@ -2331,7 +2331,7 @@ static void Task_ContinuePuttingAwayDecorations(u8 taskId)
 
 static void ContinuePuttingAwayDecorations(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 1);
+    ClearDialogWindowAndFrame(0, TRUE);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = InitializeCameraSprite1;
@@ -2604,7 +2604,7 @@ static void StopPuttingAwayDecorationsPrompt(u8 taskId)
 
 static void StopPuttingAwayDecorations(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     StopPuttingAwayDecorations_(taskId);
 }
 
