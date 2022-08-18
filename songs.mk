@@ -136,7 +136,7 @@ $(MID_SUBDIR)/mus_route101.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G011 -V080
 
 $(MID_SUBDIR)/mus_dummy.s: %.s: %.mid
-	$(MID) $< $@ -E -R40
+	$(MID) $< $@ -E
 
 $(MID_SUBDIR)/mus_hall_of_fame_room.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G093 -V080
@@ -148,13 +148,13 @@ $(MID_SUBDIR)/mus_help.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G056 -V078
 
 $(MID_SUBDIR)/mus_level_up.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_obtain_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_evolved.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_gsc_route38.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -V080
@@ -250,46 +250,46 @@ $(MID_SUBDIR)/mus_mt_pyre_exterior.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G080 -V080
 
 $(MID_SUBDIR)/mus_heal.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_slots_jackpot.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_slots_win.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_obtain_badge.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_obtain_berry.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_obtain_b_points.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G103 -V090 -P5
+	$(MID) $< $@ -E -G103 -V090 -P5
 
 $(MID_SUBDIR)/mus_rg_photo.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G180 -V100 -P5
+	$(MID) $< $@ -E -G180 -V100 -P5
 
 $(MID_SUBDIR)/mus_evolution_intro.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G026 -V080
+	$(MID) $< $@ -E -G026 -V080 -P5
 
 $(MID_SUBDIR)/mus_obtain_symbol.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G103 -V100 -P5
+	$(MID) $< $@ -E -G103 -V100 -P5
 
 $(MID_SUBDIR)/mus_awaken_legend.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_register_match_call.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G105 -V090 -P5
+	$(MID) $< $@ -E -G105 -V090 -P5
 
 $(MID_SUBDIR)/mus_move_deleted.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_obtain_tmhm.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_too_bad.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -G012 -V090 -P5
 
 $(MID_SUBDIR)/mus_encounter_magma.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G087 -V072
@@ -364,13 +364,13 @@ $(MID_SUBDIR)/mus_rg_encounter_gym_leader.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G144 -V090
 
 $(MID_SUBDIR)/mus_rg_dex_rating.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G175 -V070 -P5
+	$(MID) $< $@ -E -G175 -V070 -P5
 
 $(MID_SUBDIR)/mus_rg_obtain_key_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G178 -V077 -P5
+	$(MID) $< $@ -E -G178 -V077 -P5
 
 $(MID_SUBDIR)/mus_rg_caught_intro.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G179 -V094 -P5
+	$(MID) $< $@ -E -G179 -V094 -P5
 
 $(MID_SUBDIR)/mus_rg_caught.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G170 -V100
@@ -448,13 +448,13 @@ $(MID_SUBDIR)/mus_rg_poke_center.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G162 -V096
 
 $(MID_SUBDIR)/mus_rg_poke_flute.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G165 -V048 -P5
+	$(MID) $< $@ -E -G165 -V048 -P5
 
 $(MID_SUBDIR)/mus_rg_poke_mansion.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G148 -V090
 
 $(MID_SUBDIR)/mus_rg_jigglypuff.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G135 -V068 -P5
+	$(MID) $< $@ -E -G135 -V068 -P5
 
 $(MID_SUBDIR)/mus_rg_encounter_rival.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G174 -V079
@@ -1621,49 +1621,49 @@ $(MID_SUBDIR)/mus_dp_cycling.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G191 -V115
 
 $(MID_SUBDIR)/mus_dp_lets_go_together.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V106 -P5
+	$(MID) $< $@ -E -G191 -V106 -P5
 
 $(MID_SUBDIR)/mus_dp_tv_end.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V090 -P5
+	$(MID) $< $@ -E -G191 -V090 -P5
 
 $(MID_SUBDIR)/mus_dp_level_up.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V125 -P5
+	$(MID) $< $@ -E -G191 -V125 -P5
 
 $(MID_SUBDIR)/mus_dp_evolved.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V094 -P5
+	$(MID) $< $@ -E -G191 -V094 -P5
 
 $(MID_SUBDIR)/mus_dp_obtain_key_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V094 -p5
+	$(MID) $< $@ -E -G191 -V094 -p5
 
 $(MID_SUBDIR)/mus_dp_obtain_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100 -P5
+	$(MID) $< $@ -E -G191 -V100 -P5
 
 $(MID_SUBDIR)/mus_dp_caught_intro.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100 -P5
+	$(MID) $< $@ -E -G191 -V100 -P5
 
 $(MID_SUBDIR)/mus_dp_dex_rating.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V094 -P5
+	$(MID) $< $@ -E -G191 -V094 -P5
 
 $(MID_SUBDIR)/mus_dp_obtain_badge.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100 -P5
+	$(MID) $< $@ -E -G191 -V100 -P5
 
 $(MID_SUBDIR)/mus_dp_poketch.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100 -P5
+	$(MID) $< $@ -E -G191 -V100 -P5
 
 $(MID_SUBDIR)/mus_dp_obtain_tmhm.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100 -P5
+	$(MID) $< $@ -E -G191 -V100 -P5
 
 $(MID_SUBDIR)/mus_dp_obtain_accessory.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V088 -P5
+	$(MID) $< $@ -E -G191 -V088 -P5
 
 $(MID_SUBDIR)/mus_dp_move_deleted.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V127 -P5
+	$(MID) $< $@ -E -G191 -V127 -P5
 
 $(MID_SUBDIR)/mus_dp_heal.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100 -P5
+	$(MID) $< $@ -E -G191 -V100 -P5
 
 $(MID_SUBDIR)/mus_dp_obtain_berry.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100 -P5
+	$(MID) $< $@ -E -G191 -V100 -P5
 
 $(MID_SUBDIR)/mus_dp_contest_dress_up.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G191 -V110
@@ -1717,7 +1717,7 @@ $(MID_SUBDIR)/mus_pl_tv_broadcast.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G191 -V096
 
 $(MID_SUBDIR)/mus_pl_tv_end.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V090 -P5
+	$(MID) $< $@ -E -G191 -V090 -P5
 
 $(MID_SUBDIR)/mus_pl_intro.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G191 -V127
@@ -1801,16 +1801,16 @@ $(MID_SUBDIR)/mus_pl_twinleaf_music_box.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G191 -V100
 
 $(MID_SUBDIR)/mus_pl_obtain_arcade_points.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V120
+	$(MID) $< $@ -E -G191 -V120 -p5
 
 $(MID_SUBDIR)/mus_pl_obtain_castle_points.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V105
+	$(MID) $< $@ -E -G191 -V105 -p5
 
 $(MID_SUBDIR)/mus_pl_obtain_b_points.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V127
+	$(MID) $< $@ -E -G191 -V127 -p5
 
 $(MID_SUBDIR)/mus_pl_win_minigame.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G191 -V100
+	$(MID) $< $@ -E -G191 -V100 -p5
 
 $(MID_SUBDIR)/mus_hg_intro.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V122
@@ -2248,97 +2248,97 @@ $(MID_SUBDIR)/mus_hg_vs_arceus.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V099
 
 $(MID_SUBDIR)/mus_hg_heal.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V080 -P5
+	$(MID) $< $@ -E -G229 -V080 -P5
 
 $(MID_SUBDIR)/mus_hg_level_up.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V102 -P5
+	$(MID) $< $@ -E -G229 -V102 -P5
 
 $(MID_SUBDIR)/mus_hg_obtain_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V081 -P5
+	$(MID) $< $@ -E -G229 -V081 -P5
 
 $(MID_SUBDIR)/mus_hg_obtain_key_item.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V081 -P5
+	$(MID) $< $@ -E -G229 -V081 -P5
 
 $(MID_SUBDIR)/mus_hg_evolved.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076 -p5
+	$(MID) $< $@ -E -G229 -V076 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_badge.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V104 -p5
+	$(MID) $< $@ -E -G229 -V104 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_tmhm.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V087 -p5
+	$(MID) $< $@ -E -G229 -V087 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_accessory.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V072 -p5
+	$(MID) $< $@ -E -G229 -V072 -p5
 
 $(MID_SUBDIR)/mus_hg_move_deleted.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V105 -p5
+	$(MID) $< $@ -E -G229 -V105 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_berry.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V082 -p5
+	$(MID) $< $@ -E -G229 -V082 -p5
 
 $(MID_SUBDIR)/mus_hg_dex_rating_1.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V092 -P5
+	$(MID) $< $@ -E -G229 -V092 -P5
 
 $(MID_SUBDIR)/mus_hg_dex_rating_2.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V095 -P5
+	$(MID) $< $@ -E -G229 -V095 -P5
 
 $(MID_SUBDIR)/mus_hg_dex_rating_3.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V081 -p5
+	$(MID) $< $@ -E -G229 -V081 -p5
 
 $(MID_SUBDIR)/mus_hg_dex_rating_4.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V092 -p5
+	$(MID) $< $@ -E -G229 -V092 -p5
 
 $(MID_SUBDIR)/mus_hg_dex_rating_5.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V092 -p5
+	$(MID) $< $@ -E -G229 -V092 -p5
 
 $(MID_SUBDIR)/mus_hg_dex_rating_6.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V092 -p5
+	$(MID) $< $@ -E -G229 -V092 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_egg.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V088 -P5
+	$(MID) $< $@ -E -G229 -V088 -P5
 
 $(MID_SUBDIR)/mus_hg_bug_contest_1st_place.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V097 -p5
+	$(MID) $< $@ -E -G229 -V097 -p5
 
 $(MID_SUBDIR)/mus_hg_bug_contest_2nd_place.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V102 -p5
+	$(MID) $< $@ -E -G229 -V102 -p5
 
 $(MID_SUBDIR)/mus_hg_bug_contest_3rd_place.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V097 -p5
+	$(MID) $< $@ -E -G229 -V097 -p5
 
 $(MID_SUBDIR)/mus_hg_card_flip.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V098 -p5
+	$(MID) $< $@ -E -G229 -V098 -p5
 
 $(MID_SUBDIR)/mus_hg_card_flip_game_over.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V097 -p5
+	$(MID) $< $@ -E -G229 -V097 -p5
 
 $(MID_SUBDIR)/mus_hg_pokegear_registered.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V097 -p5
+	$(MID) $< $@ -E -G229 -V097 -p5
 
 $(MID_SUBDIR)/mus_hg_lets_go_together.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V088 -p5
+	$(MID) $< $@ -E -G229 -V088 -p5
 
 $(MID_SUBDIR)/mus_hg_pokeathlon_ready.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V102 -p5
+	$(MID) $< $@ -E -G229 -V102 -p5
 
 $(MID_SUBDIR)/mus_hg_pokeathlon_1st_place.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V098 -p5
+	$(MID) $< $@ -E -G229 -V098 -p5
 
 $(MID_SUBDIR)/mus_hg_receive_pokemon.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V098 -p5
+	$(MID) $< $@ -E -G229 -V098 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_arcade_points.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V098 -p5
+	$(MID) $< $@ -E -G229 -V098 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_castle_points.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V086 -p5
+	$(MID) $< $@ -E -G229 -V086 -p5
 
 $(MID_SUBDIR)/mus_hg_obtain_b_points.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V107 -p5
+	$(MID) $< $@ -E -G229 -V107 -p5
 
 $(MID_SUBDIR)/mus_hg_win_minigame.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V091 -p5
+	$(MID) $< $@ -E -G229 -V091 -p5
 
 $(MID_SUBDIR)/mus_bw_intro_1.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G274 -V092

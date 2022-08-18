@@ -1976,7 +1976,7 @@ SECTIONS {
         src/anim_mon_front_pics.o(.rodata);
     } =0
 
-    gfx_data :
+    gfx_data  :
     ALIGN(4)
     {
         src/graphics.o(.rodata);

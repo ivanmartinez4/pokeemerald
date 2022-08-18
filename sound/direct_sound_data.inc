@@ -3759,6 +3759,22 @@ DirectSoundWaveData_bw_psp_analog_snare_e2::
 	.incbin "sound/direct_sound_samples/bw_psp_analog_snare_e2.bin"
 
 	.align 2
+DirectSoundWaveData_bw_psp_flute_a4::
+	.incbin "sound/direct_sound_samples/bw_psp_flute_a4.bin"
+
+@	.align 2
+@DirectSoundWaveData_bw_psp_flute_c4::
+@	.incbin "sound/direct_sound_samples/bw_psp_flute_c4.bin"
+@
+@	.align 2
+@DirectSoundWaveData_bw_psp_flute_c6::
+@	.incbin "sound/direct_sound_samples/bw_psp_flute_c6.bin"
+@
+@	.align 2
+@DirectSoundWaveData_bw_psp_flute_f5::
+@	.incbin "sound/direct_sound_samples/bw_psp_flute_f5.bin"
+
+	.align 2
 DirectSoundWaveData_bw_resonant_synth_c4::
 	.incbin "sound/direct_sound_samples/bw_resonant_synth_c4.bin"
 
