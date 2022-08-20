@@ -2428,19 +2428,19 @@ $(MID_SUBDIR)/mus_bw_white_forest.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G285 -V098
 
 $(MID_SUBDIR)/mus_bw_route1.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V063
+	$(MID) $< $@ -E -R0 -G286 -V063
 
 $(MID_SUBDIR)/mus_bw_route2_spring.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V082
+	$(MID) $< $@ -E -R0 -G286 -V082
 
 $(MID_SUBDIR)/mus_bw_route2_summer.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V082
+	$(MID) $< $@ -E -R0 -G286 -V082
 
 $(MID_SUBDIR)/mus_bw_route2_autumn.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V082
+	$(MID) $< $@ -E -R0 -G286 -V082
 
 $(MID_SUBDIR)/mus_bw_route2_winter.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V082
+	$(MID) $< $@ -E -R0 -G286 -V082
 
 $(MID_SUBDIR)/mus_bw_route4_spring.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V086

@@ -3763,6 +3763,10 @@ DirectSoundWaveData_bw_pop_crash_17::
 	.incbin "sound/direct_sound_samples/bw_pop_crash_17.bin"
 
 	.align 2
+DirectSoundWaveData_bw_pop_crash_18::
+	.incbin "sound/direct_sound_samples/bw_pop_crash_18.bin"
+
+	.align 2
 DirectSoundWaveData_bw_pop_kick::
 	.incbin "sound/direct_sound_samples/bw_pop_kick.bin"
 
@@ -3931,6 +3935,10 @@ DirectSoundWaveData_bw_t9_snare::
 	.incbin "sound/direct_sound_samples/bw_t9_snare.bin"
 
 	.align 2
+DirectSoundWaveData_bw_tambourine::
+	.incbin "sound/direct_sound_samples/bw_tambourine.bin"
+
+	.align 2
 DirectSoundWaveData_bw_trombone_stab_cs2::
 	.incbin "sound/direct_sound_samples/bw_trombone_stab_cs2.bin"
 
@@ -3965,6 +3973,10 @@ DirectSoundWaveData_bw_vocoder_58::
 	.align 2
 DirectSoundWaveData_bw_vocoder_59::
 	.incbin "sound/direct_sound_samples/bw_vocoder_59.bin"
+
+	.align 2
+DirectSoundWaveData_bw_whistle::
+	.incbin "sound/direct_sound_samples/bw_whistle.bin"
 
 	.align 2
 DirectSoundWaveData_bw_zero_g_side_stick::
