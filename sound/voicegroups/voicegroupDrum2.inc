@@ -32,13 +32,13 @@ voicegroupDrum2:: @
 	voice_directsound 60, 64, DirectSoundWaveData_bw_rim_hit, 255, 197, 227, 208	@ 127/120/120/116/ 64
 	voice_directsound 61, 64, DirectSoundWaveData_bw_rim_hit, 255, 197, 227, 208	@ 127/120/120/116/ 64	@ not used
 	voice_directsound 60, 64, DirectSoundWaveData_dp_sne2_loop, 255, 0, 227, 208	@ 127/127/120/116/ 64
-	voice_directsound 61, 64, DirectSoundWaveData_dp_sne2_loop, 255, 0, 227, 208	@ 127/127/120/116/ 64	@ not used
-	voice_directsound 62, 64, DirectSoundWaveData_dp_sne2_loop, 255, 0, 227, 208	@ 127/127/120/116/ 64	@ not used
+	voice_directsound 60, 64, DirectSoundWaveData_bw_zero_g_side_stick, 255, 0, 227, 208	@ 127/127/120/116/ 64	@ not used
+	voice_directsound 61, 64, DirectSoundWaveData_bw_zero_g_side_stick, 255, 0, 227, 208	@ 127/127/120/116/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_sd90_standard_kick_b1, 255, 0, 227, 208	@ 127/127/120/116/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_sd90_power_kick, 255, 0, 227, 208	@ 127/127/120/116/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_pop_kick, 255, 0, 227, 208	@ 127/127/120/116/ 64
 	voice_directsound 61, 64, DirectSoundWaveData_bw_pop_kick, 255, 0, 227, 208	@ 127/127/120/116/ 64	@ not used
-	voice_directsound 62, 64, DirectSoundWaveData_bw_pop_kick, 255, 0, 227, 208	@ 127/127/120/116/ 64	@ not used
+	voice_directsound 63, 64, DirectSoundWaveData_bw_sd90_power_kick, 255, 0, 227, 208	@ 127/127/120/116/ 64
 	voice_directsound 60, 30, DirectSoundWaveData_bw_claps, 255, 0, 227, 208	@ 127/127/120/116/ 30
 	voice_directsound 60, 64, DirectSoundWaveData_dp_093snare, 255, 225, 127, 208	@ 127/114/ 90/116/ 64
 	voice_directsound 60, 30, DirectSoundWaveData_hg_135tom, 255, 0, 255, 208	@ 127/127/127/116/ 30
@@ -67,7 +67,7 @@ voicegroupDrum2:: @
 	voice_directsound 57, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 26
 	voice_directsound 58, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 26
 	voice_directsound 59, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 26	@ not used
-	voice_directsound 60, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 26	@ not used
+	voice_directsound 60, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 26
 	voice_directsound 61, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 26	@ not used
 	voice_directsound 62, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/116/ 26	@ not used
 	voice_directsound 63, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 178	@ 127/127/127/120/105

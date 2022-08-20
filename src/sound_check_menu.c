@@ -82,7 +82,7 @@ static EWRAM_DATA int sSoundTestParams[9] = {0};
 static EWRAM_DATA u8 sDriverTest_Reverse = 0;
 static EWRAM_DATA u8 sDriverTest_Stereo = 0;
 
-struct MusicPlayerInfo *sMPlayInfo_Cry;
+struct MusicPlayerInfo *gMPlayInfo_Cry;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 static const struct BgTemplate sSoundCheckMenuBgTemplates[] =
@@ -561,7 +561,7 @@ static void Task_DrawDriverTestMenu(u8 taskId) // sub_080E8AA0
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT));
     sDriverTest_IsCryPlaying = 0;
     sDriverTest_IsCryPlayingOld = 0;
-    sMPlayInfo_Cry = NULL;
+    gMPlayInfo_Cry = NULL;
     sDriverTest_Reverse = 0;
     sDriverTest_Stereo = 1;
     sSoundTestParams[CRY_TEST_VOICE] = 0;
@@ -653,34 +653,34 @@ static void Task_ProcessDriverTestInput(u8 taskId) // sub_080E8D68
         {
         case 0:
             if (sDriverTest_Reverse)
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 0) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 0) + remaining]);
             else
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 0) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 0) + remaining]);
             break;
         case 1:
             if (sDriverTest_Reverse)
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 1) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 1) + remaining]);
             else
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 1) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 1) + remaining]);
             break;
         case 2:
             if (sDriverTest_Reverse)
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 2) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 2) + remaining]);
             else
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 2) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 2) + remaining]);
             break;
         case 3:
             if (sDriverTest_Reverse)
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 3) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable_Reverse[(128 * 3) + remaining]);
             else
-                sMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 3) + remaining]);
+                gMPlayInfo_Cry = SetPokemonCryTone(&gCryTable[(128 * 3) + remaining]);
             break;
         }
     }
 
-    if (sMPlayInfo_Cry != NULL)
+    if (gMPlayInfo_Cry != NULL)
     {
-        sDriverTest_IsCryPlaying = IsPokemonCryPlaying(sMPlayInfo_Cry);
+        sDriverTest_IsCryPlaying = IsPokemonCryPlaying(gMPlayInfo_Cry);
 
         if (sDriverTest_IsCryPlaying != sDriverTest_IsCryPlayingOld)
             PrintDriverTestMenuText();

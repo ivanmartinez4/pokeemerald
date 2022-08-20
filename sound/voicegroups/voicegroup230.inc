@@ -7,12 +7,12 @@ voicegroup230:: @
 	voice_directsound 60, 0, DirectSoundWaveData_puresquare_12, 240, 233, 191, 212	@ 120/110/110/115/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 197, 255, 178	@ 127/120/127/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 197, 255, 178	@ 127/120/127/120/ 64
-	voice_keysplit_all voicegroup232				 @ synth kick+snare
-	voice_keysplit voicegroup216, KeySplitTable27    @ DPPt timpani
+	voice_keysplit_all voicegroup232				@ synth kick+snare
+	voice_keysplit voicegroup216, KeySplitTable27	@ DPPt timpani
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass1_c2_16, 255, 64, 255, 197	@ 127/125/127/118/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synbass2_c1_16, 255, 0, 255, 221	@ 127/127/127/112/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sawtoothlead60, 255, 197, 255, 178	@ 127/120/127/120/ 64
-	voice_keysplit voicegroup272, KeySplitTable57    @ shamisen
+	voice_keysplit voicegroup272, KeySplitTable57	@ shamisen
 	voice_directsound 60, 0, DirectSoundWaveData_hg_hyoshigi, 255, 0, 255, 178	@ 127/127/127/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_hg_kodaiko, 255, 0, 255, 178	@ 127/127/127/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_hg_tsuzumi, 255, 0, 255, 178	@ 127/127/127/120/ 64
@@ -25,10 +25,10 @@ voicegroup230:: @
 	voice_directsound 60, 0, DirectSoundWaveData_dp_spearpillarwind60, 255, 0, 255, 48	@ 127/127/127/125/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_altosax_c3_16, 255, 216, 252, 192	@ 127/117/126/118/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_synthsnare, 255, 0, 255, 178	@ 127/127/127/120/ 64
-	voice_keysplit voicegroup273, KeySplitTable58    @ piano (national park)
+	voice_keysplit voicegroup273, KeySplitTable58	@ piano (national park)
 	voice_directsound 60, 0, DirectSoundWaveData_dp_tom1_16, 255, 0, 255, 48	@ 127/127/127/125/100
-	voice_keysplit voicegroup219, KeySplitTable29    @ dp trumpets (arceus)
-	voice_keysplit voicegroup220, KeySplitTable30    @ dp trombone (arceus)
+	voice_keysplit voicegroup219, KeySplitTable29	@ dp trumpets (arceus)
+	voice_keysplit voicegroup220, KeySplitTable30	@ dp trombone (arceus)
 	voice_directsound 60, 64, DirectSoundWaveData_dp_handclup1, 255, 0, 227, 178	@ 127/127/120/120/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_dp_sne2_loop, 255, 255, 191, 178	@ 127/  0/110/120/ 64
 	voice_directsound 48, 64, DirectSoundWaveData_dp_reverscyn_16, 2, 0, 227, 178	@   3/127/120/120/ 64

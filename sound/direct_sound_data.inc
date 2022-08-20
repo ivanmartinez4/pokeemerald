@@ -3587,6 +3587,30 @@ DirectSoundWaveData_bw_french_horn_ensemble_c3::
 	.incbin "sound/direct_sound_samples/bw_french_horn_ensemble_c3.bin"
 
 	.align 2
+DirectSoundWaveData_bw_french_horn_ensemble_soft_b3::
+	.incbin "sound/direct_sound_samples/bw_french_horn_ensemble_soft_b3.bin"
+
+	.align 2
+DirectSoundWaveData_bw_french_horn_ensemble_soft_f4::
+	.incbin "sound/direct_sound_samples/bw_french_horn_ensemble_soft_f4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fretless_bass_g1::
+	.incbin "sound/direct_sound_samples/bw_fretless_bass_g1.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fretless_bass_c2::
+	.incbin "sound/direct_sound_samples/bw_fretless_bass_c2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fretless_bass_g2::
+	.incbin "sound/direct_sound_samples/bw_fretless_bass_g2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_fretless_bass_c3::
+	.incbin "sound/direct_sound_samples/bw_fretless_bass_c3.bin"
+
+	.align 2
 DirectSoundWaveData_bw_glockenspiel_c5::
 	.incbin "sound/direct_sound_samples/bw_glockenspiel_c5.bin"
 
@@ -3941,3 +3965,7 @@ DirectSoundWaveData_bw_vocoder_58::
 	.align 2
 DirectSoundWaveData_bw_vocoder_59::
 	.incbin "sound/direct_sound_samples/bw_vocoder_59.bin"
+
+	.align 2
+DirectSoundWaveData_bw_zero_g_side_stick::
+	.incbin "sound/direct_sound_samples/bw_zero_g_side_stick.bin"

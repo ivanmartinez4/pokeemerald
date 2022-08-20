@@ -33,7 +33,7 @@ voicegroup284:: @ used in: opelucid_white
 	voice_keysplit voicegroupInst2, KeySplitTable70	@ strings 1 | 66 | 75	@ 83+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_bw_erhu_c3, 42, 233, 159, 208	@  80/110/100/116/ 64
-	voice_keysplit voicegroupInst48, KeySplitTable101	@ oboe (100 sustain) | 69
+	voice_keysplit voicegroupInst48, KeySplitTable101	@ oboe | 69
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

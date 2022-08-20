@@ -2422,10 +2422,10 @@ $(MID_SUBDIR)/mus_bw_opelucid_white.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G284 -V080 -X
 
 $(MID_SUBDIR)/mus_bw_black_city.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076
+	$(MID) $< $@ -E -R0 -G276 -V076
 
 $(MID_SUBDIR)/mus_bw_white_forest.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V098
+	$(MID) $< $@ -E -R0 -G285 -V098
 
 $(MID_SUBDIR)/mus_bw_route1.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V063
