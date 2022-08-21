@@ -1,5 +1,5 @@
 	.align 2
-voicegroup277:: @ used in: new_game_1; new_game_2; hall_of_fame
+voicegroup277:: @ used in: new_game_1; new_game_2; hall_of_fame; route4_spring; route4_summer; route4_autumn; route4_winter
 	voice_keysplit voicegroupInst1, KeySplitTable82	@ piano 1 ||||| 41 | 70 | 77 @ -77 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
@@ -12,10 +12,10 @@ voicegroup277:: @ used in: new_game_1; new_game_2; hall_of_fame
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst16, KeySplitTable83	@ vibraphone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy @ reserved
+	voice_keysplit voicegroupInst52, KeySplitTable64	@ xylophone 1 | 65	@ 75+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy @ reserved
+	voice_keysplit voicegroupInst39, KeySplitTable110	@ glockenspiel || 69	@ -69 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

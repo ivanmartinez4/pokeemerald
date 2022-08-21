@@ -3751,6 +3751,10 @@ DirectSoundWaveData_bw_piano1_g5::
 	.incbin "sound/direct_sound_samples/bw_piano1_g5.bin"
 
 	.align 2
+DirectSoundWaveData_bw_pipe_organ_a4::
+	.incbin "sound/direct_sound_samples/bw_pipe_organ_a4.bin"
+
+	.align 2
 DirectSoundWaveData_bw_pipe_organ_c4::
 	.incbin "sound/direct_sound_samples/bw_pipe_organ_c4.bin"
 
