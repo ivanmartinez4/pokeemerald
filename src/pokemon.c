@@ -6819,7 +6819,7 @@ const u8 *GetTrainerPartnerName(void)
 }
 
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \
-    (void *)(                                                    \
+    (void *)(                                                   \
     ((u16)(gTasks[taskId].data[dataId]) |                       \
     ((u16)(gTasks[taskId].data[dataId + 1]) << 16)))
 
