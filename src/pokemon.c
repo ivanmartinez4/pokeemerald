@@ -6436,6 +6436,7 @@ u16 GetBattleBGM(void)
             return MUS_VS_REGI;
         case SPECIES_LATIAS:
         case SPECIES_LATIOS:
+        case SPECIES_JIRACHI:
         #if P_NEW_POKEMON == TRUE
         case SPECIES_LATIAS_MEGA:
         case SPECIES_LATIOS_MEGA:
@@ -6450,8 +6451,6 @@ u16 GetBattleBGM(void)
         case SPECIES_GROUDON_PRIMAL:
         #endif
             return MUS_VS_KYOGRE_GROUDON;
-        case SPECIES_JIRACHI:
-            return MUS_VS_WILD;
         case SPECIES_DEOXYS:
         #if P_NEW_POKEMON == TRUE
         case SPECIES_DEOXYS_ATTACK:
