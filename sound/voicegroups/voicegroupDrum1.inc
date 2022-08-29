@@ -31,9 +31,9 @@ voicegroupDrum1:: @
 	voice_directsound 61, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 208	@ 127/120/120/116/ 64	@ not used
 	voice_directsound 62, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 208	@ 127/120/120/116/ 64	@ not used
 	voice_directsound 63, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 208	@ 127/120/120/116/ 64	@ not used
-	voice_directsound 64, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 208	@ 127/120/120/116/ 64	@ not used
-	voice_directsound 65, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 208	@ 127/120/120/116/ 64	@ not used
-	voice_directsound 66, 64, DirectSoundWaveData_dp_053clap, 255, 197, 227, 208	@ 127/120/120/116/ 64	@ not used
+	voice_directsound 60, 64, DirectSoundWaveData_dp_sne2_loop, 255, 0, 227, 208	@ 127/127/120/116/ 64
+	voice_directsound 61, 64, DirectSoundWaveData_dp_sne2_loop, 255, 0, 227, 208	@ 127/127/120/116/ 64	@ not used
+	voice_directsound 62, 64, DirectSoundWaveData_dp_sne2_loop, 255, 0, 227, 208	@ 127/127/120/116/ 64	@ not used
 	voice_directsound 60, 64, DirectSoundWaveData_dp_808snare_16, 255, 219, 0, 178	@ 127/116/  0/120/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_dp_bassdr2_16, 255, 0, 255, 178	@ 127/127/127/120/ 64
 	voice_directsound 60, 64, DirectSoundWaveData_bw_pop_kick, 255, 0, 227, 178	@ 127/127/120/120/ 64
@@ -57,7 +57,7 @@ voicegroupDrum1:: @
 	voice_directsound 62, 20, DirectSoundWaveData_hg_022china, 255, 249, 0, 225	@ 127/ 80/  0/110/ 20	@ not used
 	voice_directsound 63, 20, DirectSoundWaveData_hg_022china, 255, 249, 0, 225	@ 127/ 80/  0/110/ 20	@ not used
 	voice_directsound 64, 20, DirectSoundWaveData_hg_022china, 255, 249, 0, 225	@ 127/ 80/  0/110/ 20	@ not used
-	voice_directsound 65, 20, DirectSoundWaveData_hg_022china, 255, 249, 0, 225	@ 127/ 80/  0/110/ 20	@ not used
+	voice_directsound 60, 40, DirectSoundWaveData_bw_pop_crash_18, 255, 251, 0, 208	@ 127/ 62/  0/116/ 40
 	voice_directsound 61, 105, DirectSoundWaveData_bw_pop_crash_17, 255, 251, 0, 178	@ 127/ 62/  0/120/105
 	voice_directsound 62, 105, DirectSoundWaveData_bw_pop_crash_17, 255, 251, 0, 178	@ 127/ 62/  0/120/105	@ not used
 	voice_directsound 63, 105, DirectSoundWaveData_bw_pop_crash_17, 255, 251, 0, 178	@ 127/ 62/  0/120/105	@ not used

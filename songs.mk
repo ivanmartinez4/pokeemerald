@@ -2455,31 +2455,31 @@ $(MID_SUBDIR)/mus_bw_route4_winter.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G277 -V086
 
 $(MID_SUBDIR)/mus_bw_route6_spring.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076
+	$(MID) $< $@ -E -R0 -G275 -V076
 
 $(MID_SUBDIR)/mus_bw_route6_summer.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076
+	$(MID) $< $@ -E -R0 -G275 -V076
 
 $(MID_SUBDIR)/mus_bw_route6_autumn.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076
+	$(MID) $< $@ -E -R0 -G275 -V076
 
 $(MID_SUBDIR)/mus_bw_route6_winter.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V076
+	$(MID) $< $@ -E -R0 -G275 -V076
 
 $(MID_SUBDIR)/mus_bw_route12_spring.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V071
+	$(MID) $< $@ -E -R0 -G274 -V071
 
 $(MID_SUBDIR)/mus_bw_route12_summer.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V071
+	$(MID) $< $@ -E -R0 -G274 -V071
 
 $(MID_SUBDIR)/mus_bw_route12_autumn.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V071
+	$(MID) $< $@ -E -R0 -G274 -V071
 
 $(MID_SUBDIR)/mus_bw_route12_winter.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V071
+	$(MID) $< $@ -E -R0 -G274 -V071
 
 $(MID_SUBDIR)/mus_bw_route10.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V094
+	$(MID) $< $@ -E -R0 -G287 -V094
 
 $(MID_SUBDIR)/mus_bw_skyarrow_bridge.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V106

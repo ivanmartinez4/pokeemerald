@@ -3851,6 +3851,10 @@ DirectSoundWaveData_bw_room_snare::
 	.incbin "sound/direct_sound_samples/bw_room_snare.bin"
 
 	.align 2
+DirectSoundWaveData_bw_saxophone_c3::
+	.incbin "sound/direct_sound_samples/bw_saxophone_c3.bin"
+
+	.align 2
 DirectSoundWaveData_bw_saxophone_c4::
 	.incbin "sound/direct_sound_samples/bw_saxophone_c4.bin"
 
@@ -3953,6 +3957,14 @@ DirectSoundWaveData_bw_trumpet_ensemble_a4::
 	.align 2
 DirectSoundWaveData_bw_trumpet_ensemble_c4::
 	.incbin "sound/direct_sound_samples/bw_trumpet_ensemble_c4.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tuba_a2::
+	.incbin "sound/direct_sound_samples/bw_tuba_a2.bin"
+
+	.align 2
+DirectSoundWaveData_bw_tuba_c2::
+	.incbin "sound/direct_sound_samples/bw_tuba_c2.bin"
 
 	.align 2
 DirectSoundWaveData_bw_underwater_fx_c3::
