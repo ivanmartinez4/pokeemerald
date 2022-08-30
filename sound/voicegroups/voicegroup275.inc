@@ -1,6 +1,6 @@
 	.align 2
-voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacunosa; castelia; route6_spring; route6_summer; route6_autumn; route6_winter
-	voice_keysplit voicegroupInst1, KeySplitTable90	@ piano 1 | 41 | 46 | 53 | 58 | 65 | 70 | 77	@ -53 not used
+voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacunosa; castelia; route6_spring; route6_summer; route6_autumn; route6_winter; driftveil_drawbridge
+	voice_keysplit voicegroupInst1, KeySplitTable90	@ piano 1 | 41 | 46 | 53 | 58 | 65 | 70 | 77
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroup235, KeySplitTable75	@ piano octave	@ -44 not used
 	voice_keysplit voicegroupInst15, KeySplitTable36	@ rhode piano
@@ -9,12 +9,12 @@ voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacun
 	voice_keysplit voicegroupInst25, KeySplitTable81	@ harpsichord	@ -53; 73+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_glockenspiel_c5, 255, 249, 0, 208	@ 127/ 75/  1/116/ 64
 	voice_keysplit voicegroupInst16, KeySplitTable83	@ vibraphone
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst55, KeySplitTable25	@ tubular bell	@ 72+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_hg_073musboxc6, 255, 246, 0, 208	@ 127/ 90/  1/116/ 64
 	voice_keysplit voicegroupInst17, KeySplitTable79	@ drawbar organ
@@ -55,7 +55,7 @@ voicegroup275:: @ used in: intro_2; cycling; underwater; nuvema; accumula; lacun
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst2, KeySplitTable60	@ strings 1	@ 83+ not used
 	voice_keysplit voicegroupInst18, KeySplitTable80	@ underwater sfx
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

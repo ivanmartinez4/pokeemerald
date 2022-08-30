@@ -1,6 +1,6 @@
 	.align 2
-voicegroup279:: @ used in: credits; undella_summer; nacrene
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+voicegroup279:: @ used in: credits; undella_summer; nacrene; skyarrow_bridge
+	voice_keysplit voicegroupInst1, KeySplitTable112	@ piano 1 ||| 56 || 68 |
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst15, KeySplitTable36	@ rhode piano
@@ -20,13 +20,13 @@ voicegroup279:: @ used in: credits; undella_summer; nacrene
 	voice_keysplit voicegroupInst17, KeySplitTable79	@ drawbar organ
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst24, KeySplitTable87	@ nylon string guitar | 52 | 60	@ -52 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_bw_marschall_guitar_g2, 255, 254, 0, 178	@ 127/ 30/  1/120/ 64	@ 53+ not used
 	voice_keysplit voicegroupInst31, KeySplitTable87	@ clean guitar | 52 | 60	@ 70+ not used
 	voice_directsound 60, 0, DirectSoundWaveData_hg_000uprigc2, 255, 251, 0, 197	@ 127/ 60/  1/118/ 64
-	voice_keysplit voicegroupInst32, KeySplitTable43	@ fingered bass
+	voice_keysplit voicegroupInst32, KeySplitTable43	@ fretless bass 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_directsound 60, 0, DirectSoundWaveData_hg_123elastkc2, 255, 64, 227, 178	@ 127/125/120/120/ 64	@ 45+ not used
@@ -45,9 +45,9 @@ voicegroup279:: @ used in: credits; undella_summer; nacrene
 	voice_keysplit voicegroupInst8, KeySplitTable84	@ french horns | 52 | 53
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst35, KeySplitTable52	@ clarinet	@ -60 not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_keysplit voicegroupInst11, KeySplitTable88	@ flute 2	@ 88+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

@@ -2482,10 +2482,10 @@ $(MID_SUBDIR)/mus_bw_route10.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G287 -V094
 
 $(MID_SUBDIR)/mus_bw_skyarrow_bridge.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V106
+	$(MID) $< $@ -E -R0 -G279 -V106
 
 $(MID_SUBDIR)/mus_bw_driftveil_drawbridge.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V124
+	$(MID) $< $@ -E -R0 -G275 -V124 -X
 
 $(MID_SUBDIR)/mus_bw_tubeline_bridge.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V060
