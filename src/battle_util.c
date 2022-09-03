@@ -9400,6 +9400,8 @@ u16 GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
 
         if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE)
             modifier = UQ_4_12(0.0);
+        if (abilityDef == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0))
+            modifier = UQ_4_12(0.0);
     }
     
     return modifier;
