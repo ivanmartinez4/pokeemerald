@@ -2488,7 +2488,7 @@ $(MID_SUBDIR)/mus_bw_driftveil_drawbridge.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G275 -V124 -X
 
 $(MID_SUBDIR)/mus_bw_tubeline_bridge.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V060
+	$(MID) $< $@ -E -R0 -G288 -V060
 
 $(MID_SUBDIR)/mus_bw_village_bridge.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V090 -X
