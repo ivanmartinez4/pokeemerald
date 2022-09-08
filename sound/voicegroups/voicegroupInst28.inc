@@ -1,6 +1,6 @@
 	.align 2
 voicegroupInst28:: @ 
-	voice_directsound 60, 0, DirectSoundWaveData_bw_nylon_string_guitar_g2, 255, 253, 6, 178	@ 127/ 42/ 20/120/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_bw_nylon_string_guitar_g3, 255, 253, 6, 178	@ 127/ 42/ 20/120/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_bw_nylon_string_guitar_e4, 255, 253, 6, 178	@ 127/ 42/ 20/120/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_bw_nylon_string_guitar_e4, 255, 253, 6, 178	@ 127/ 42/ 20/120/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_058harpc3, 255, 249, 0, 208	@ 127/ 80/  1/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_059harpc4, 255, 246, 0, 208	@ 127/ 90/  1/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_060harpc5, 255, 246, 0, 208	@ 127/ 90/  1/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_060harpc5, 255, 246, 0, 208	@ 127/ 90/  1/116/ 64

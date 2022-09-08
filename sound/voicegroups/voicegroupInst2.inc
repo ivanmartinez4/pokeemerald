@@ -1,6 +1,4 @@
 	.align 2
 voicegroupInst2:: @ 
-	voice_directsound 60, 0, DirectSoundWaveData_hg_120str1c4, 255, 242, 191, 208	@ 127/100/110/116/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_hg_119str1a4, 255, 242, 191, 208	@ 127/100/110/116/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_hg_122str1f5, 255, 242, 191, 208	@ 127/100/110/116/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_hg_121str1c6, 255, 242, 191, 208	@ 127/100/110/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_bw_tack_piano_c4, 255, 249, 0, 178	@ 127/ 75/  1/120/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_bw_tack_piano_c5, 255, 249, 0, 178	@ 127/ 75/  1/120/ 64

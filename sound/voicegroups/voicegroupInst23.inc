@@ -1,5 +1,6 @@
 	.align 2
 voicegroupInst23:: @ 
-	voice_directsound 60, 0, DirectSoundWaveData_bw_accordion_c3, 255, 233, 191, 197	@ 127/110/110/118/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_bw_accordion_c4, 255, 233, 191, 197	@ 127/110/110/118/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_bw_accordion_c5, 240, 233, 191, 197	@ 120/110/110/118/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_120str1c4, 255, 242, 191, 208	@ 127/100/110/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_119str1a4, 255, 242, 191, 208	@ 127/100/110/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_122str1f5, 255, 242, 191, 208	@ 127/100/110/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_121str1c6, 255, 242, 191, 208	@ 127/100/110/116/ 64
