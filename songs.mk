@@ -2751,7 +2751,7 @@ $(MID_SUBDIR)/mus_bw_victory_trainer.s: %.s: %.mid
 $(MID_SUBDIR)/mus_bw_victory_gym_leader.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G274 -V096
 
-$(MID_SUBDIR)/mus_bw_victory_ghetsis.s: %.s: %.mid
+$(MID_SUBDIR)/mus_bw_victory_n_ghetsis.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G274 -V083
 
 $(MID_SUBDIR)/mus_bw_victory_champion.s: %.s: %.mid
@@ -2798,9 +2798,6 @@ $(MID_SUBDIR)/mus_bw_victory_plasma.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_bw_n_room.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G274 -V089
-
-$(MID_SUBDIR)/mus_bw_game_freak.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G274 -V070
 
 $(MID_SUBDIR)/mus_bw_musical_dlc_1.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G274 -V080

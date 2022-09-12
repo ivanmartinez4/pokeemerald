@@ -1037,7 +1037,7 @@ gSongTable::
 	song mus_bw_victory_wild, 0, 0
 	song mus_bw_victory_trainer, 0, 0
 	song mus_bw_victory_gym_leader, 0, 0
-	song mus_bw_victory_ghetsis, 0, 0
+	song mus_bw_victory_n_ghetsis, 0, 0
 	song mus_bw_victory_champion, 0, 0
 	song mus_bw_wfc, 0, 0
 	song mus_bw_mystery_gift, 0, 0
@@ -1053,7 +1053,6 @@ gSongTable::
 	song mus_bw_n_legend_appears, 0, 0
 	song mus_bw_victory_plasma, 0, 0
 	song mus_bw_n_room, 0, 0
-	song mus_bw_game_freak, 0, 0
 	song mus_bw_musical_dlc_1, 0, 0
 	song mus_bw_musical_dlc_2, 0, 0
 	song mus_bw_musical_dlc_3, 0, 0

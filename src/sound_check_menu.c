@@ -1729,7 +1729,7 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_BW_VICTORY_WILD             , "MUS-BW-VICTORY-WILD"             ) \
     X(MUS_BW_VICTORY_TRAINER          , "MUS-BW-VICTORY-TRAINER"          ) \
     X(MUS_BW_VICTORY_GYM_LEADER       , "MUS-BW-VICTORY-GYM-LEADER"       ) \
-    X(MUS_BW_VICTORY_GHETSIS          , "MUS-BW-VICTORY-GHETSIS"          ) \
+    X(MUS_BW_VICTORY_N_GHETSIS        , "MUS-BW-VICTORY-N-GHETSIS"        ) \
     X(MUS_BW_VICTORY_CHAMPION         , "MUS-BW-VICTORY-CHAMPION"         ) \
     X(MUS_BW_WFC                      , "MUS-BW-WFC"                      ) \
     X(MUS_BW_MYSTERY_GIFT             , "MUS-BW-MYSTERY-GIFT"             ) \
@@ -1745,7 +1745,6 @@ static void DestroyWindow(u8 windowId) // sub_080E9750
     X(MUS_BW_N_LEGEND_APPEARS         , "MUS-BW-N-LEGEND-APPEARS"         ) \
     X(MUS_BW_VICTORY_PLASMA           , "MUS-BW-VICTORY-PLASMA"           ) \
     X(MUS_BW_N_ROOM                   , "MUS-BW-N-ROOM"                   ) \
-    X(MUS_BW_GAME_FREAK               , "MUS-BW-GAME-FREAK"               ) \
     X(MUS_BW_MUSICAL_DLC_1            , "MUS-BW-MUSICAL-DLC-1"            ) \
     X(MUS_BW_MUSICAL_DLC_2            , "MUS-BW-MUSICAL-DLC-2"            ) \
     X(MUS_BW_MUSICAL_DLC_3            , "MUS-BW-MUSICAL-DLC-3"            ) \
