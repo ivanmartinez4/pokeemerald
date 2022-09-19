@@ -1,0 +1,1468 @@
+Program 0
+    Grand Piano (127/55/1/114) 41 | 46 | 53 | 58 | 65 | 70 | 77 | (x/50/x/x) 127
+        0907 surf (-65 not used)
+        0909 hall_of_fame (-77 not used)
+        0912 accumula (-58 not used)
+        0914 lacunosa (-53 not used)
+        0926 black_city (-65 not used)
+        0929 route2 (-70 not used)
+        0947 driftveil_drawbridge (71+ not used)
+        0950 marvelous_bridge (-53 not used)
+    Grand Piano (127/55/1/114) g4 70 | 77 | (x/50/x/x) 127
+        0899 intro_1
+        0907 surf (-65 not used)
+        0909 hall_of_fame (-77 not used)
+        0926 black_city (-65 not used)
+        0929 route2 (-70 not used)
+    Grand Piano (127/55/1/114) c3 56 || 68 || 127
+        0946 skyarrow_bridge
+    Grand Piano (127/55/1/114) 41 | 50 ||||| 77 | (x/50/x/x) 127
+        0909 hall_of_fame (-77 not used)
+        0928 route1
+        0929 route2 (-70 not used)
+    Grand Piano (127/35/1/114) 41 | 46 | 53 | 58 | 65 | 127
+        0925 opelucid_white
+    Grand Piano (127/60/1/114) 41 | 46 | 53 | 58 | 65 | 70 | 77 | (x/50/x/x) 127
+        0909 hall_of_fame (-77 not used)
+        0913 anville
+    [HG] Grand Piano (127/75/1/110) 43 | 55 | (x/x/x/116) 67 | (x/80/x/x) 79 | (x/85/x/x) 127
+        0952 shopping_mall_nine (-55 not used)
+    Harpsichord (127/60/1/118) a3 62 | 72 | 127
+        0924 opelucid_black
+    VB Singing 1 (127/127/120/120)
+        0949 village_bridge
+
+Program 1
+    Tack Piano (127/75/1/120) 67 | 127
+    [DP] 808 Snare (127/116/0/120)
+        0913 anville
+    VB Singing 2 (127/127/120/120)
+        0949 village_bridge
+
+Program 2
+    Octave Piano (127/75/1/116) 44 | 56 | 68 | 127
+        0906 cycling (-44 not used)
+        0948 tubeline_bridge (-44 not used)
+    VB Singing 3 (127/127/120/120)
+        0949 village_bridge
+
+Program 3
+    Rhodes (127/70/1/115) 67 | 127
+        0906 cycling
+        0908 underwater
+        0909 hall_of_fame
+        0915 undella_winter
+        0918 nacrene
+        0921 driftveil
+    Rhodes (127/70/1/125) 67 | 127
+        0922 mistralton (-67 not used)
+    Rhodes (127/60/1/116) 68 | 127
+        0951 poke_center
+    [HG] Suitcase EP (127/70/1/115) 68 | 127
+        0929 route2 (-68 not used)
+    VB Singing 4 (127/127/120/120)
+        0949 village_bridge
+
+Program 4
+    Rhodes (127/70/1/125) 67 | 127
+    VB Singing 5 (127/127/120/120)
+        0949 village_bridge
+
+Program 5
+    Rock Piano (127/75/1/120) 67 | 127
+    Softer Vibraphone (127/80/10/118) 68 | (x/x/x/116) 127
+        0951 poke_center (-68 not used)
+    VB Singing 6 (127/127/120/120)
+        0949 village_bridge
+
+Program 6
+    Harpsichord (127/60/1/118) 53 | 62 | 72 | 127
+        0911 nuvema (-53; 73+ not used)
+        0941 route12 (-53 not used)
+    Marimba (127/80/1/116) 55 | 67 | 127
+        0923 icirrus (-55 not used)
+        0951 poke_center
+    VB Singing 7 (127/127/120/120)
+        0949 village_bridge
+
+Program 7
+    VB Singing 8 (127/127/120/120)
+        0949 village_bridge
+
+Program 8
+    VB Singing 9 (127/127/120/120)
+        0949 village_bridge
+
+Program 9
+    Glockenspiel (127/75/1/116) c5
+        0901 title
+        0947 driftveil_drawbridge
+    Unknown Celesta (127/80/1/116) g3
+        0904 evolution_intro
+    VB Singing 10 (127/127/120/120)
+        0949 village_bridge
+
+Program 10
+    Vibraphone (127/80/1/118) 68 | (x/x/x/116) 80 | 127
+        0909 hall_of_fame
+        0914 lacunosa
+        0915 undella_winter (-80 not used)
+        0918 nacrene
+        0928 route1
+        0941 route12
+    Vibraphone (127/80/1/116) c5 80 | 127
+        0907 surf
+    Vibraphone (127/80/1/118) 60 | (x/x/x/116) 127
+        0925 opelucid_white
+    VB Singing 11 (127/127/120/120)
+        0949 village_bridge
+
+Program 11
+    Marimba (127/80/1/116) 57 | 69 | 127
+        0921 driftveil
+        0927 white_forest (70+ not used)
+        0928 route1 (-57 not used)
+        0929 route2 (-57 not used)
+    Glockenspiel (127/75/1/116) c5
+        0925 opelucid_white
+    VB Singing 12 (127/127/120/120)
+        0949 village_bridge
+
+Program 12
+    Xylophone 1 (127/72/1/116) 65 | 74 | 81 | 127
+        0933 route4 (75+ not used)
+    VB Singing 13 (127/127/120/120)
+        0949 village_bridge
+
+Program 13
+    Xylophone 2 (127/72/1/116) 65 | 74 | 81 | 127
+    Accordion (127/110/110/118) 56 | 68 | (120/x/x/x) 127
+        0918 nacrene
+        0923 icirrus (-56 not used)
+    VB Singing 14 (127/127/120/120)
+        0949 village_bridge
+
+Program 14
+    Tubular Bells (127/80/1/116) 71 | 127
+        0899 intro_1 (72+ not used)
+        0910 credits (72+ not used)
+        0941 route12
+        0947 driftveil_drawbridge (72+ not used)
+    Tubular Bells (127/80/1/116) c5
+        0901 title
+    Nylon String Guitar (127/42/20/116) 52 | 60 | 127
+        0923 icirrus
+        0951 poke_center
+    Nylon String Guitar (127/42/20/120) 52 | 60 | 127
+        0913 anville
+    VB Singing 15 (127/127/120/120)
+        0949 village_bridge
+
+Program 15
+    Glockenspiel (127/75/1/116) 57 | 69 | 127
+        0921 driftveil (-69 not used)
+        0933 route4 (-69 not used)
+    VB Singing 16 (127/127/120/120)
+        0949 village_bridge
+
+Program 16
+    Music Box (127/90/1/116) 68 | 80 | 127
+        0926 black_city (-68 not used)
+    Music Box (127/90/1/116) c6
+        0937 route6
+    VB Singing 17 (127/127/120/120)
+        0949 village_bridge
+
+Program 17
+    Drawbar Organ (127/120/120/116) 56 | (x/x/127/x) 68 | 127
+        0908 underwater (57-68 not used)
+        0918 nacrene
+        0919 castelia (69+ not used)
+        0948 tubeline_bridge (57+ not used)
+    Marschall Guitar (127/30/1/120) 52 | 60 | 70 | 127
+        0905 evolution (71+ not used)
+    VB Singing 18 (127/127/120/120)
+        0949 village_bridge
+
+Program 18
+    Jazz Organ (127/120/120/116) 56 | 68 | 127
+        0922 mistralton (-56 not used)
+    VB Singing 19 (127/127/120/120)
+        0949 village_bridge
+
+Program 19
+    Accordion (127/110/110/118) 56 | 68 | (120/x/x/x) 127
+        0911 nuvema (-56 not used)
+        0917 striaton
+        0945 route10 (-56 not used)
+    VB Singing 20 (127/127/120/120)
+        0949 village_bridge
+
+Program 20
+    Nylon String Guitar (127/42/20/116) 52 | 60 | 127
+        0911 nuvema
+        0912 accumula
+        0914 lacunosa
+        0919 castelia
+        0945 route10 (-52 not used)
+        0946 skyarrow_bridge (-52 not used)
+    Fretless Bass 1 (127/110/100/118) 53 | 127
+        0905 evolution
+    Electric Bass (127/110/110/118) 54 | 127
+        0923 icirrus
+        0951 poke_center
+    VB Singing 21 (127/127/120/120)
+        0949 village_bridge
+
+Program 21
+    Folk Guitar (127/60/30/118) 52 | 60 | 69 | 127
+    VB Singing 22 (127/127/120/120)
+        0949 village_bridge
+
+Program 22
+    Marschall Guitar (127/30/1/125) 52 | 60 | 70 | 127
+    Elastik Synth Bass (127/125/120/120) c2
+        0905 evolution
+    VB Singing 23 (127/127/120/120)
+        0949 village_bridge
+
+Program 23
+    Marschall Guitar (127/30/1/120) 52 | 60 | 70 | 127
+        0910 credits (53+ not used)
+    Strings 1 (127/100/110/116) 66 | 75 | 82 | 127
+        0905 evolution (76+ not used)
+        0913 anville (83+ not used)
+    Strings 2 (127/100/110/118) 46 | 54 | 63 | 71 | 127
+        0923 icirrus (-54; 72+ not used)
+        0951 poke_center (-46 not used)
+    VB Singing 24 (127/127/120/120)
+        0949 village_bridge
+
+Program 24
+    Clean Guitar (127/60/30/120) 52 | 60 | 69 | 127
+        0916 undella_summer (70+ not used)
+        0920 nimbasa (-52; 70+ not used)
+    Violin (127/110/120/116) 69 | (x/100/x/x) 77 | (x/110/x/x) 127
+        0923 icirrus
+    VB Singing 25 (127/127/120/120)
+        0949 village_bridge
+
+Program 25
+    Jazz Double Bass (127/60/1/118) 45 | 53 | 127
+        0912 accumula (46+ not used)
+        0914 lacunosa (54+ not used)
+        0952 shopping_mall_nine (54+ not used)
+    Jazz Double Bass (127/60/1/118) c2
+        0912 accumula (46+ not used)
+        0918 nacrene
+    Jazz Double Bass (127/60/1/116) c2
+        0901 title
+    Jazz Double Bass (127/50/1/118) 45 | 53 | 127
+        0917 striaton (54+ not used)
+    Jazz Double Bass (127/80/1/118) 48 | 127
+        0913 anville
+    Jazz Double Bass (127/80/1/118) c2
+        0925 opelucid_white
+
+Program 26
+    Fretless Bass 1 (127/110/110/118) 53 | 127
+        0916 undella_summer
+        0919 castelia
+        0945 route10
+        0946 skyarrow_bridge
+    Fretless Bass 2 (127/110/110/118) 34 | 41 | 46 | 127
+        0927 white_forest (42+ not used)
+
+Program 27
+    Fretless Bass 2 (127/110/110/118) 34 | 41 | 46 | 127
+    Independence Fingered Bass (127/110/110/118) 38 | 46 | 127
+        0920 nimbasa
+
+Program 28
+    Slap Bass (127/125/120/120) 40 | 46 | 127
+        0922 mistralton
+    Timpani (127/60/40/118) 59 | 127
+        0905 evolution
+
+Program 29
+    Elastik Synth Bass (127/125/120/120) 44 | 127
+        0906 cycling
+        0909 hall_of_fame (44 not used)
+        0910 credits (44+ not used)
+        0921 driftveil (44 not used)
+        0922 mistralton
+        0926 black_city
+    Elastik Synth Bass (127/125/120/120) 43 | 127
+        0907 surf
+        0909 hall_of_fame (44 not used)
+        0910 credits (44+ not used)
+        0921 driftveil (44 not used)
+
+Program 30
+    Strings 1 (127/100/110/116) 66 | 75 | 82 | 127
+        0899 intro_1
+        0900 intro_2
+        0901 title
+        0906 cycling (83+ not used)
+        0907 surf
+        0908 underwater
+        0910 credits
+        0915 undella_winter
+        0919 castelia (83+ not used)
+        0925 opelucid_white (83+ not used)
+        0926 black_city
+        0927 white_forest (76+ not used)
+        0933 route4 (83+ not used)
+        0937 route6
+        0941 route12 (83+ not used)
+        0945 route10 (76+ not used)
+        0946 skyarrow_bridge (76+ not used)
+        0948 tubeline_bridge
+        0952 shopping_mall_nine (76+ not used)
+    Strings 1 (127/100/110/116) 66 | 75 | 127
+        0906 cycling (83+ not used)
+        0909 hall_of_fame
+        0919 castelia (83+ not used)
+        0920 nimbasa
+        0925 opelucid_white (83+ not used)
+        0927 white_forest (76+ not used)
+        0933 route4 (83+ not used)
+        0941 route12 (83+ not used)
+        0945 route10 (76+ not used)
+        0946 skyarrow_bridge (76+ not used)
+        0952 shopping_mall_nine (76+ not used)
+    Strings 1 (127/100/110/118) 65 | 74 | (122/x/x/x) 83 | 127
+        0950 marvelous_bridge
+    Strings 2 (127/100/110/118) 46 | 54 | 63 | 127
+        0928 route1
+        0929 route2
+    Attack Trumpets (124/90/115/116) 65 | 74 | (127/x/x/x) 127
+        0922 mistralton
+
+Program 31
+    Strings 2 (127/100/110/116) 46 | 54 | 63 | 127
+
+Program 32
+    Violin (127/110/120/116) 69 | (x/100/x/x) 77 | 127
+    Resonant Synth (127/100/110/124) c5 79 | (x/110/x/x) 127
+        0924 opelucid_black
+    Erhu (80/110/100/116)
+        0925 opelucid_white
+
+Program 33
+    Cello (120/100/127/116) 49 | (x/90/x/x) 57 | 127
+        0899 intro_1 (50+ not used)
+        0910 credits (50+ not used)
+        0950 marvelous_bridge (50+ not used)
+    Cello (120/100/127/116) g2
+        0899 intro_1 (50+ not used)
+        0901 title
+        0910 credits (50+ not used)
+        0950 marvelous_bridge (50+ not used)
+    Cello (124/100/120/116) g2
+        0900 intro_2
+    Oboe (127/100/100/116) 69 | 127
+        0925 opelucid_white
+
+Program 34
+    Pizzicato Strings (127/70/1/116) 48 | (x/75/x/x) 57 | 65 | (x/80/x/x) 74 | 127
+        0913 anville (-48 not used)
+    Pizzicato Strings (127/80/20/116) 48 | 57 | 65 | 74 | 127
+        0929 route2 (-48 not used)
+    Clarinet Ensemble (127/100/100/116) 66 | 75 | 127
+        0951 poke_center (76+ not used)
+    Strings 1 (127/100/110/116) 66 | 75 | 82 | 127
+        0922 mistralton
+
+Program 35
+    Harp 2 (127/75/1/116) 64 | (x/80/x/x) 72 | 127
+    Flute 2 (127/90/100/116) 71 | 78 | 87 | 127
+        0913 anville
+    Flute 2 (127/90/100/118) 71 | 78 | 87 | 127
+        0923 icirrus
+        0951 poke_center (-71; 88+ not used)
+    Flute 2 (127/90/100/118) a5 75 | 127
+        0901 title
+
+Program 36
+    Harp 1 (127/80/1/116) 57 | (x/90/x/x) 69 | 81 | 127
+        0937 route6 (82+ not used)
+        0941 route12
+    Harp 1 (127/80/1/116) 55 | (x/90/x/x) 67 | (x/100/x/x) 127
+        0907 surf
+
+Program 37
+
+Program 38
+    Timpani (127/50/1/116) 58 | 64 | 127
+        0899 intro_1 (65+ not used)
+        0900 intro_2 (65+ not used)
+        0910 credits (59+ not used)
+        0922 mistralton
+        0933 route4 (65+ not used)
+        0937 route6 (59+ not used)
+    Timpani (127/50/1/116) g3
+        0901 title
+        0910 credits (59+ not used)
+        0937 route6 (59+ not used)
+
+Program 39
+    Trumpets (127/90/115/116) 65 | 74 | 127
+        0900 intro_2 (75+ not used)
+        0916 undella_summer
+        0920 nimbasa
+        0933 route4
+        0937 route6
+        0952 shopping_mall_nine
+    Trumpets (127/100/110/116) 65 | 74 | (x/110/x/x) 127
+        0907 surf
+    Harpsichord (127/60/1/118) a3 62 | 72 | 127
+        0949 village_bridge
+    Drum Set
+        27
+            [DP] SD-90 Clap (127/120/120/116/64)
+                0923 icirrus
+        28
+        29
+        30
+            [DP] Zero-G Orchestral Snare (127/0/110/120/64)
+                0951 poke_center
+        31
+        32
+        33
+        34
+            [DP] 808 Snare (127/116/0/120/64)
+                0913 anville
+        35
+            [DP] bassdr2_16 (127/127/127/120/64)
+                0905 evolution
+                0922 mistralton
+        36
+            Pop Kick (127/127/120/120/64)
+                0923 icirrus
+            [DP] bassdr1 (127/127/120/120/64)
+                0951 poke_center
+        37
+            Battery 3 Side Stick (127/127/120/120/58) +1
+                0923 icirrus
+        38
+            Rimshot Snare (127/127/120/120/64)
+                0923 icirrus
+        39
+        40
+            [DP] SD-90 Power Snare (127/114/90/116/64)
+                0905 evolution
+            Chorused SD-90 Power Snare (127/114/90/120/64)
+                0922 mistralton
+        41
+            [HG] Floor Tom Low (127/127/127/116/30)
+                0905 evolution
+            [HG] Floor Tom Low (127/127/127/120/30)
+                0951 poke_center
+            [HG] Floor Tom Low (127/127/127/120/20)
+                0922 mistralton
+        42
+            [HG] Closed Hi-Hat (127/124/0/116/80)
+                0905 evolution
+            [HG] Closed Hi-Hat (127/100/0/120/80)
+                0951 poke_center
+            [HG] Closed Hi-Hat (127/100/0/120/90)
+                0922 mistralton
+        43
+            [HG] Floor Tom High (127/127/127/116/40)
+                0905 evolution
+            [HG] Floor Tom High (127/127/127/120/40)
+                0951 poke_center
+            [HG] Floor Tom High (127/127/127/120/30)
+                0922 mistralton
+        44
+            [HG] Floor Tom High (127/127/127/120/40) +1
+                0951 poke_center
+            [HG] Floor Tom High (127/127/127/120/30) +1
+                0922 mistralton
+        45
+            [HG] Rack Tom Low (127/127/127/116/50)
+                0905 evolution
+            [HG] Rack Tom Low (127/127/127/120/50)
+                0951 poke_center
+            [HG] Rack Tom Low (127/127/127/120/40)
+                0922 mistralton
+        46
+            [HG] Open Hi-Hat (127/102/0/116/80)
+                0905 evolution
+            [HG] Open Hi-Hat (127/102/0/120/80)
+                0951 poke_center
+            [HG] Open Hi-Hat (127/102/0/120/90)
+                0922 mistralton
+        47
+            [HG] Rack Tom High (127/127/127/116/100)
+                0905 evolution
+            [HG] Rack Tom High (127/127/127/120/100)
+                0922 mistralton
+                0951 poke_center
+        48
+            [HG] Rack Tom High (127/127/127/120/100) +1
+                0922 mistralton
+        49
+            [HG] Rock Crash Cymbal (127/100/0/114/64) -3
+                0922 mistralton
+                0951 poke_center
+        50
+        51
+            [HG] Rock Crash Cymbal (127/80/0/114/64) +2
+                0905 evolution
+        52
+            [HG] Chinese Cymbal (127/80/0/110/20)
+                0905 evolution
+            [HG] Chinese Cymbal (127/70/0/110/20) -1
+                0951 poke_center
+            [HG] Rock Crash Cymbal (127/100/0/114/64)
+                0922 mistralton
+        53
+        54
+        55
+            [HG] Splash Cymbal (127/70/0/120/84)
+                0951 poke_center
+        56
+        57
+        58
+            Pop Crash 17 (127/62/0/120/105) +1
+                0923 icirrus
+        59
+        60
+        61
+            [HG] Rock Crash Cymbal (127/90/0/114/64)
+                0922 mistralton
+        62
+        63
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +2
+                0922 mistralton
+        64
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +3
+                0922 mistralton
+        65
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +4
+                0922 mistralton
+        66
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +5
+                0922 mistralton
+        67
+            Shaker (127/110/90/120/34)
+                0923 icirrus
+        68
+            Muted Conga (127/127/120/120/105)
+                0923 icirrus
+        69
+            [HG] Rock Crash Cymbal (127/90/0/114/114)
+                0922 mistralton
+            High Conga (127/127/120/120/105)
+                0923 icirrus
+        70
+            [HG] Rock Crash Cymbal (127/90/0/114/114) +1
+                0922 mistralton
+        71
+            [HG] Rock Crash Cymbal (127/90/0/114/114) +2
+                0922 mistralton
+        72
+        73
+        74
+            [HG] Rock Crash Cymbal (127/90/0/114/114) +5
+                0922 mistralton
+        75
+            [HG] Rock Crash Cymbal (127/90/0/114/114) +6
+                0922 mistralton
+        76
+        77
+            [HG] Rock Crash Cymbal (127/90/0/114/14)
+                0922 mistralton
+
+Program 40
+    Trombones (127/100/115/116) 48 | 57 | 127
+        0900 intro_2 (58+ not used)
+        0916 undella_summer (-48 not used)
+        0920 nimbasa
+        0921 driftveil (-48 not used)
+        0933 route4 (58+ not used)
+        0952 shopping_mall_nine (-48 not used)
+    Trombones (127/100/115/116) 48 | 127
+        0900 intro_2 (58+ not used)
+        0901 title
+        0933 route4 (58+ not used)
+
+Program 41
+    Solo Horn (127/127/126/118) 60 | 68 | 76 | 127
+
+Program 42
+    French Horns (127/110/120/116) 52 | 60 | 69 | 127
+        0917 striaton
+        0933 route4
+        0941 route12 (-52 not used)
+    French Horns (127/110/120/116) d4 69 | 127
+        0901 title
+    French Horns (127/110/120/116) 52 | 53 | 62 | 127
+        0900 intro_2 (-53 not used)
+        0911 nuvema (-53 not used)
+        0929 route2 (53 not used)
+        0937 route6 (-52 not used)
+    French Horns (127/110/120/116) 52 | 53 | 127
+        0910 credits
+    French Horns (127/117/118/116) f3 59 | 68 | (x/x/127/x) 127
+        0907 surf
+
+Program 43
+    Tuba (127/110/115/116) 43 | 50 | 127
+    Tuba (127/110/115/116) 43 | 127
+        0937 route6
+
+Program 44
+    Oboe (127/100/100/116) 69 | 77 | 127
+        0927 white_forest (78+ not used)
+    Oboe (127/100/100/116) c5 77 | 127
+        0901 title
+    Clarinet (127/100/100/116) 60 | 69 | 127
+        0928 route1 (-69 not used)
+
+Program 45
+    Clarinet (127/100/100/116) 60 | 69 | 127
+        0917 striaton
+        0929 route2 (-60 not used)
+        0937 route6
+        0946 skyarrow_bridge (-60 not used)
+        0948 tubeline_bridge
+    Nylon String Guitar (127/42/20/116) g3 60 | 127
+        0949 village_bridge
+
+Program 46
+
+Program 47
+    Flute 2 (127/90/100/116) 71 | 78 | 87 | 127
+        0911 nuvema (-71; 88+ not used)
+        0912 accumula (-71 not used)
+        0919 castelia (88+ not used)
+        0946 skyarrow_bridge (88+ not used)
+
+Program 48
+    Flute 1 (127/90/100/116) 67 | 74 | 82 | 127
+        0900 intro_2
+        0906 cycling (-67 not used)
+        0926 black_city (-67 not used)
+        0927 white_forest
+        0928 route1 (-67 not used)
+        0929 route2 (-74 not used)
+        0933 route4 (-67 not used)
+        0937 route6 (-67 not used)
+        0945 route10 (-67 not used)
+    Sync Lead (127/125/120/124)
+        0924 opelucid_black
+
+Program 49
+    Bassoon (127/100/100/116) 45 | 53 | 63 | 127
+    FM Bass (127/75/1/116)
+        0924 opelucid_black
+
+Program 50
+    Saxophone (127/110/120/116) 56 | 68 | 127
+        0919 castelia (-56 not used)
+        0941 route12
+    Saxophone (127/110/120/116) c4 68 | 127
+        0919 castelia (-56 not used)
+        0920 nimbasa
+    Vocoder "You have me and" (127/127/127/120)
+        0924 opelucid_black
+
+Program 51
+    Trombones Stab (127/120/120/116)
+        0900 intro_2
+    Trombones Stab (127/125/120/120)
+        0901 title
+    Vocoder "I can't stop" (127/127/127/120)
+        0924 opelucid_black
+    Long Whistle (127/127/127/120)
+        0929 route2
+
+Program 52
+
+Program 53
+
+Program 54
+    Seashore SFX (127/127/127/127)
+        0915 undella_winter
+
+Program 55
+    Strings 1 (127/100/110/116) 66 | 75 | 82 | 127
+        0947 driftveil_drawbridge (83+ not used)
+
+Program 56
+    Underwater SFX (127/75/1/120) 45 | 57 | 69 | 81 | 127
+        0908 underwater (70-81 not used)
+    Attack Trumpets (124/90/115/116) 65 | 74 | (127/x/x/x) 127
+        0901 title
+
+Program 57
+
+Program 58
+
+Program 59
+
+Program 60
+    Orchestra Hit (127/70/10/116) 63 | 70 | 127
+    Solo Trumpet c5 (127/127/127/120)
+        0901 title
+        0924 opelucid_black
+
+Program 61
+    Orch Hit Major (127/127/127/116) 62 | 64 | 67 | 127
+
+Program 62
+    Orch Hit Minor (127/127/127/116) 62 | 64 | 67 | 127
+    Suspended Cymbal Loop (127/127/127/100)
+        0899 intro_1
+        0901 title
+        0910 credits
+
+Program 63
+    Choir Aahs (127/100/110/118) 57 | 63 | 70 | 127
+        0950 marvelous_bridge (-63 not used)
+    Choir Aahs (127/100/110/118) a3 63 | 70 | 127
+        0910 credits
+        0950 marvelous_bridge (-63 not used)
+    Choir Aahs (127/100/110/118) f4 70 | 127
+        0926 black_city
+        0950 marvelous_bridge (-63 not used)
+    Choir Aahs Male (127/100/110/116) 48 | 58 | 127
+        0899 intro_1
+
+Program 64
+    Choir Aahs Female (127/100/110/116) 70 | 76 | 127
+        0899 intro_1
+
+Program 65
+
+Program 66
+
+Program 67
+
+Program 68
+
+Program 69
+
+Program 70
+    [HG] Pulse Wave (127/100/110/116) 67 | 79 | (x/110/x/x) 127
+        0949 village_bridge
+    Gong 34" (127/45/1/100)
+        0899 intro_1
+
+Program 71
+
+Program 72
+
+Program 73
+
+Program 74
+
+Program 75
+    Sitar (127/55/1/116) 53 | (x/x/x/118) 62 | (x/x/x/116) 72 | 127
+        0908 underwater
+    Pipe Organ (127/100/110/116) c4 66 | 75 | 127
+        0910 credits
+
+Program 76
+    SD-90 Steel Drums (127/50/1/116) 64 | 70 | 127
+        0916 undella_summer
+
+Program 77
+
+Program 78
+
+Program 79
+
+Program 80
+    Drum Set
+        23
+            T9 Analog Clap (127/120/120/126/64) -12
+                0924 opelucid_black
+        24
+            T9 Analog Clap (127/120/120/126/64)
+                0924 opelucid_black
+        25
+            T9 Analog Snare (127/127/120/126/64)
+                0924 opelucid_black
+        26
+            [DP] Reverse Cymbal (3/127/120/120/64)
+                0908 underwater
+                0921 driftveil
+                0933 route4
+            [DP] Reverse Cymbal (4/127/120/120/64)
+                0945 route10
+            T9 Analog Snare (127/127/120/126/64) +1
+                0924 opelucid_black
+        27
+            [DP] SD-90 Clap (127/120/120/116/64)
+                0906 cycling
+            Snare Roll (127/127/120/124/64) +1
+                0901 title
+            T9 Analog Snare (127/127/120/126/64) +2
+                0924 opelucid_black
+        28
+            Zero-G Snare Clap Thing (127/127/120/116/64)
+            Dance Drums Kick+Crash (127/127/120/116/64)
+                0924 opelucid_black
+        29
+            Zero-G Rim Hit (127/127/120/116/64)
+                0914 lacunosa
+                0925 opelucid_white
+                0945 route10
+            Dance Drums Kick (127/127/120/116/64)
+                0924 opelucid_black
+        30
+            Unknown Snare (127/127/120/116/64)
+            Dance Drums Kick (127/127/120/116/64) +1
+                0924 opelucid_black
+        31
+            [DP] Zero-G Orchestral Snare (127/127/120/116/64)
+                0900 intro_2
+                0910 credits
+                0912 accumula
+                0933 route4
+                0937 route6
+                0941 route12
+                0946 skyarrow_bridge
+            Dance Drums Kick (127/127/120/116/64) +2
+                0924 opelucid_black
+        32
+            Zero-G EQ Side Stick (127/127/120/116/64)
+        33
+            SD-90 Standard Kick C2 (127/127/120/116/64)
+                0907 surf
+                0925 opelucid_white
+            Zero-G EQ Side Stick (127/127/120/116/64) +1
+                0927 white_forest
+        34
+            SD-90 Standard Kick B1 (127/127/120/116/64)
+                0916 undella_summer
+                0919 castelia
+                0946 skyarrow_bridge
+            VB Beatbox A#1 (127/127/127/125/64)
+                0949 village_bridge
+        35
+            SD-90 Power Kick (127/127/120/116/64)
+                0906 cycling
+                0910 credits
+                0917 striaton
+                0920 nimbasa
+                0921 driftveil
+                0950 marvelous_bridge
+            Dance Drums Snare (127/127/127/127/64)
+                0924 opelucid_black
+            SD-90 Standard Kick C2 (127/127/120/116/64) +2
+                opelucid_white
+            VB Beatbox A#1 (127/127/127/125/64) +1
+                0949 village_bridge
+        36
+            Pop Kick (127/127/120/116/64)
+                0912 accumula
+                0914 lacunosa
+                0945 route10
+                0948 tubeline_bridge
+                0952 shopping_mall_nine
+            SD-90 Power Kick (127/127/120/116/64) +1
+                0910 credits
+            VB Beatbox C2 (127/127/127/125/64)
+                0949 village_bridge
+        37
+            Battery 3 Side Stick (127/127/120/116/58)
+            SD-90 Standard Kick C2 (127/127/120/116/64) +4
+                opelucid_white
+            VB Beatbox C#2 (127/127/120/125/64)
+                0949 village_bridge
+        38
+            Rimshot Snare (127/127/120/116/64)
+                0925 opelucid_white
+                0929 route2
+                0952 shopping_mall_nine
+            SD-90 Power Kick (127/127/120/116/64) +3
+                0927 white_forest
+            VB Beatbox D2 (127/127/120/125/64)
+                0949 village_bridge
+        39
+            Battery 3 Claps (127/127/120/116/30)
+                0912 accumula
+                0945 route10
+            Rimshot Snare (127/127/120/116/64) +1
+                0925 opelucid_white
+            VB Beatbox D#2 (127/127/127/125/64)
+                0949 village_bridge
+        40
+            [DP] SD-90 Power Snare (127/114/90/116/64)
+                0906 cycling
+                0907 surf
+                0910 credits
+                0916 undella_summer
+                0919 castelia
+                0920 nimbasa
+                0948 tubeline_bridge
+                0950 marvelous_bridge
+            Synth Cowbell (127/127/127/127/64) +4
+                0924 opelucid_black
+            Rimshot Snare (127/127/120/116/64) +2
+                0925 opelucid_white
+            VB Beatbox E2 (127/127/127/125/64)
+                0949 village_bridge
+        41
+            [HG] Floor Tom Low (127/127/127/116/30)
+                0907 surf
+                0910 credits
+                0912 accumula
+                0916 undella_summer
+                0919 castelia
+                0920 nimbasa
+                0946 skyarrow_bridge
+                0948 tubeline_bridge
+                0952 shopping_mall_nine
+            [HG] Floor Tom Low (127/127/127/120/30)
+                0925 opelucid_white
+            VB Beatbox E2 (127/127/127/125/64) +1
+                0949 village_bridge
+        42
+            [HG] Closed Hi-Hat (127/124/0/116/80)
+                0906 cycling
+                0907 surf
+                0910 credits
+                0912 accumula
+                0917 striaton
+                0919 castelia
+                0920 nimbasa
+                0925 opelucid_white
+                0946 skyarrow_bridge
+                0948 tubeline_bridge
+                0952 shopping_mall_nine
+        43
+            [HG] Floor Tom High (127/127/127/116/40)
+                0907 surf
+                0910 credits
+                0916 undella_summer
+                0919 castelia
+                0920 nimbasa
+                0950 marvelous_bridge
+                0952 shopping_mall_nine
+            [HG] Floor Tom High (127/127/127/120/40)
+                0925 opelucid_white
+            VB Beatbox E2 (127/127/127/125/64) +3
+                0949 village_bridge
+        44
+            [HG] Floor Tom High (127/127/127/116/40) +1
+                0910 credits
+            [HG] Floor Tom High (127/127/127/120/40) +1
+                0925 opelucid_white
+        45
+            [HG] Rack Tom Low (127/127/127/116/50)
+                0907 surf
+                0910 credits
+                0919 castelia
+                0948 tubeline_bridge
+                0952 shopping_mall_nine
+            [HG] Rack Tom Low (127/127/127/120/100)
+                0925 opelucid_white
+            VB Beatbox E2 (127/127/127/125/64) +5
+                0949 village_bridge
+        46
+            [HG] Open Hi-Hat (127/102/0/116/80)
+                0906 cycling
+                0907 surf
+                0910 credits
+                0912 accumula
+                0917 striaton
+                0919 castelia
+                0920 nimbasa
+                0925 opelucid_white
+                0946 skyarrow_bridge
+                0952 shopping_mall_nine
+            [HG] Rack Tom Low (127/127/127/116/50) +1
+                0948 tubeline_bridge
+            VB Beatbox A#2 (127/127/127/125/64)
+                0949 village_bridge
+        47
+            [HG] Rack Tom High (127/127/127/116/100)
+                0907 surf
+                0919 castelia
+                0948 tubeline_bridge
+                0952 shopping_mall_nine
+            [HG] Rack Tom High (127/127/127/120/110)
+                0925 opelucid_white
+            VB Beatbox B2 (127/127/127/125/64)
+                0949 village_bridge
+        48
+            [HG] Orchestral Cymbal (127/70/0/114/64)
+                0901 title
+                0910 credits
+                0933 route4
+            [HG] Orchestral Cymbal (127/80/0/114/64)
+                0900 intro_2
+                0937 route6
+            [HG] Orchestral Cymbal (127/80/0/114/45)
+                0899 intro_1
+            [HG] Rack Tom High (127/127/127/116/100) +1
+                0907 surf
+            [HG] Rack Tom High (127/127/127/120/110) +1
+                0925 opelucid_white
+            VB Beatbox B2 (127/127/127/125/64) +1
+                0949 village_bridge
+        49
+            [HG] Rock Crash Cymbal (127/90/0/114/64)
+                0906 cycling
+                0907 surf
+                0910 credits
+                0912 accumula
+                0916 undella_summer
+                0925 opelucid_white
+                0946 skyarrow_bridge
+                0948 tubeline_bridge
+            [HG] Rock Crash Cymbal (127/90/0/114/90)
+                0920 nimbasa
+            [HG] Rock Crash Cymbal (127/80/0/114/64)
+                0945 route10
+            VB Beatbox B2 (127/127/127/125/64) +2
+                0949 village_bridge
+        50
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +1
+                0906 cycling
+                0907 surf
+                0910 credits
+                0925 opelucid_white
+                0948 tubeline_bridge
+            [HG] Rock Crash Cymbal (127/90/0/114/40) +1
+                0920 nimbasa
+        51
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +2
+                0906 cycling
+                0907 surf
+                0910 credits
+            VB Beatbox B2 (127/127/127/125/64) +4
+                0949 village_bridge
+        52
+            [HG] Chinese Cymbal (127/80/0/110/20)
+                0907 surf
+                0910 credits
+                0946 skyarrow_bridge
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +3
+                0925 opelucid_white
+        53
+            [DP] Ride Bell (127/60/0/115/30)
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +4
+                0925 opelucid_white
+            VB Vocal Riff (127/127/127/125/64) +1
+                0949 village_bridge
+        54
+            KFL Tambourine (127/127/120/116/58)
+            Dance Drums Closed Hi-Hat (127/127/127/127/64)
+                0924 opelucid_black
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +5
+                0925 opelucid_white
+        55
+            Splash Cymbal (127/70/0/116/84)
+        56
+            [HG] Cowbell (127/127/127/116/110)
+                0921 driftveil
+            Dance Drums Closed Hi-Hat (127/127/127/127/64) +2
+                0924 opelucid_black
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +7
+                0925 opelucid_white
+        57
+            Pop Crash 18 (127/62/0/116/40)
+                0929 route2
+                0941 route12
+                0950 marvelous_bridge
+        58
+            Pop Crash 17 (127/62/0/116/105)
+            Pop Crash 17 (127/62/0/116/105) +1
+                0929 route2
+            Dance Drums Open Hi-Hat (127/127/127/127/64)
+                0924 opelucid_black
+        59
+            [DP] Ride Cymbal (127/70/0/114/86)
+        60
+            [DP] SD-90 Bongo (127/127/127/116/90)
+                0921 driftveil
+        61
+            [DP] SD-90 Bongo (127/127/127/116/90) -3
+                0908 underwater
+                0921 driftveil
+                0927 white_forest
+            [HG] Rock Crash Cymbal (127/90/0/114/64)
+                0924 opelucid_black
+        62
+            Muted Conga (127/127/127/116/20)
+                0908 underwater
+                0927 white_forest
+        63
+            [DP] SD-90 Conga (127/127/127/116/24)
+                0908 underwater
+                0927 white_forest
+            [DP] SD-90 Conga (127/127/127/116/35)
+                0916 undella_summer
+        64
+            [DP] SD-90 Conga (127/127/127/116/26) -3
+                0908 underwater
+                0927 white_forest
+                0950 marvelous_bridge
+            [DP] SD-90 Conga (127/127/127/116/25) -3
+                0916 undella_summer
+        65
+            [DP] SD-90 Conga (127/127/127/116/26) -2
+                0908 underwater
+                0927 white_forest
+                0950 marvelous_bridge
+            [DP] SD-90 Bongo (127/127/127/116/90) +1
+                0921 driftveil
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +4
+                0924 opelucid_black
+        66
+            Cabasa (127/100/90/120/30)
+            [DP] SD-90 Cabasa (127/100/90/120/30)
+                0946 skyarrow_bridge
+        67
+            Cabasa (127/100/90/120/102)
+            [DP] SD-90 Conga (127/127/127/116/26)
+                0927 white_forest
+        68
+            Muted Conga (127/127/120/116/105)
+        69
+            High Conga (127/127/120/116/105)
+        70
+            [DP] SD-90 Conga (127/127/127/120/105) +3
+                0914 lacunosa
+                0921 driftveil
+        71
+            [DP] SD-90 Conga (127/127/127/120/105) +4
+        72
+            [DP] SD-90 Conga (127/127/127/120/105) +5
+                0908 underwater
+        73
+            [DP] SD-90 Conga (127/127/127/120/105) +6
+                0914 lacunosa
+            [HG] Rock Crash Cymbal (127/90/0/114/64)
+                0925 opelucid_white
+        74
+            [DP] SD-90 Conga (127/127/127/120/105) +7
+        75
+            [DP] SD-90 Conga (127/127/127/120/105) +8
+        76
+            Shaker (127/110/90/116/25)
+                0916 undella_summer
+            Shaker (127/110/90/116/34)
+                0949 village_bridge
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +3
+                0925 opelucid_white
+        77
+            Shaker (127/110/90/116/105)
+        78
+            Castanet (127/115/120/116/30)
+                0917 striaton
+            [HG] Rock Crash Cymbal (127/90/0/114/64) +5
+                0925 opelucid_white
+        79
+            Guiro Short (127/110/110/116/40)
+                0917 striaton
+        80
+            Guiro Long (127/110/110/116/40)
+                0917 striaton
+        81
+            [DP] Jingle Bells (127/115/120/116/25)
+        82
+            Tambourine (127/115/120/116/30)
+                0928 route1
+        83
+            Wind Chimes (127/110/110/116/40)
+                0950 marvelous_bridge
+            [HG] Rock Crash Cymbal (127/90/0/114/114) +2
+                0925 opelucid_white
+        84
+            Triangle Closed (127/110/110/116/32)
+                0917 striaton
+                0950 marvelous_bridge
+            Triangle Closed (127/110/110/116/90)
+                0916 undella_summer
+        85
+            Triangle Open (127/110/110/116/32)
+                0906 cycling
+                0908 underwater
+                0917 striaton
+                0950 marvelous_bridge
+                0952 shopping_mall_nine
+            Triangle Open (127/110/110/116/90)
+                0916 undella_summer
+            [DP] SD-90 Triangle (127/80/0/118/44)
+                0929 route2
+        86
+            [HG] Rock Crash Cymbal (127/90/0/114/114) +5
+                0925 opelucid_white
+        87
+        88
+        89
+            [HG] Rock Crash Cymbal (127/90/0/114/14)
+                0925 opelucid_white
+
+Program 81
+    Drum Set
+        35
+            909 Kick C2 (127/127/120/116/64)
+                0918 nacrene
+            DnB Drum Loop (HoF) (127/127/120/116/64)
+                0909 hall_of_fame
+        36
+            909 Kick B1 (127/127/120/116/64)
+                0918 nacrene
+        37
+            909 Kick B1 (127/127/120/116/64) +1
+                0909 hall_of_fame
+                0921 driftveil
+                0926 black_city
+        38
+            909 Snare D2 (127/127/120/116/64)
+                0918 nacrene
+                0921 driftveil
+        39
+            909 Snare D2 (127/127/120/116/64) +1
+                0921 driftveil
+        40
+            909 Snare E2 (127/114/90/116/64)
+                0918 nacrene
+                0921 driftveil
+                0926 black_city
+        41
+            909 Snare E2 (127/114/90/116/64) +1
+                0921 driftveil
+        42
+            909 Closed Hi-Hat (127/105/0/116/80)
+                0909 hall_of_fame
+        43
+            909 Closed Hi-Hat (127/105/0/116/80) +1
+        44
+            909 Closed Hi-Hat (127/105/0/116/80) +2
+                0926 black_city
+        45
+            909 Closed Hi-Hat (127/105/0/116/80) +3
+        46
+            909 Open Hi-Hat (127/102/0/116/80)
+                0909 hall_of_fame
+        47
+            909 Open Hi-Hat (127/102/0/116/80) +1
+        48
+            909 Open Hi-Hat (127/102/0/116/80) +2
+        49
+            909 Crash (127/100/0/116/64)
+                0909 hall_of_fame
+                0921 driftveil
+        50
+            909 Crash (127/100/0/116/64) +1
+            909 Crash (127/100/0/116/64) +2
+                0926 black_city
+        51
+            909 Crash (127/100/0/116/64) +2
+        52
+            909 China (127/70/0/110/20)
+        53
+            909 Ride (127/70/0/116/30)
+        54
+            909 Ride (127/70/0/116/30) +1
+        55
+            909 Splash (127/70/0/116/84)
+        56
+            909 Splash (127/70/0/116/84) +1
+        57
+            909 Other Crash (127/62/0/116/40)
+
+Program 82
+    Drum Set
+        36
+            Room Kick (127/127/120/116/64)
+                0918 nacrene
+        37
+            Room Kick (127/127/120/116/64) +1
+        38
+            Room Kick (127/127/120/116/64) +2
+        39
+            Room Kick (127/127/120/116/64) +3
+        40
+            Room Snare (127/127/120/116/64)
+                0918 nacrene
+        41
+            Room Floor Tom Low (127/127/127/116/30)
+            Room Snare (127/127/120/116/64) +1
+                0918 nacrene
+        42
+            Room Closed Hi-Hat (127/115/0/116/80)
+                0918 nacrene
+        43
+            Room Floor Tom High (127/127/127/116/40)
+        44
+            Room Floor Tom High (127/127/127/116/40) +1
+        45
+            Room Rack Tom Low (127/127/127/116/50)
+        46
+            Room Open Hi-Hat (127/102/0/116/80)
+                0918 nacrene
+        47
+            Room Rack Tom High (127/127/127/116/100)
+        48
+            Room Rack Tom High (127/127/127/116/100) +1
+            Room Open Hi-Hat (127/102/0/116/80) +2
+                0918 nacrene
+        49
+            Room Crash High (127/110/0/116/64)
+        50
+            Room Crash High (127/110/0/116/64) +1
+        51
+            Room Crash High (127/110/0/116/64) +2
+        52
+            Room Crash 2 (127/85/0/110/20)
+        53
+            Room Ride Bell (127/85/0/115/30)
+        54
+            Room Ride Bell (127/85/0/115/30) +1
+        55
+            Room Splash (127/110/0/116/84)
+        56
+            Room Splash (127/110/0/116/84) +1
+        57
+            Room Crash Low (127/62/0/116/40)
+                0918 nacrene
+
+Program 83
+    Drum Set
+        36
+            [HG] Taiko Low (127/127/120/116/64)
+        37
+            [HG] Taiko Low (127/127/120/116/64) +1
+        38
+            [HG] Taiko Low (127/127/120/116/64) +2
+        39
+            [HG] Taiko Low (127/127/120/116/64) +3
+        40
+            [HG] Taiko Low (127/127/120/116/64) +4
+        41
+            [HG] Taiko Low (127/127/120/116/64) +5
+        42
+            [HG] Taiko Low (127/127/120/116/64) +6
+        43
+            [HG] Taiko Low (127/127/120/116/64) +7
+        44
+            [HG] Taiko Low (127/127/120/116/64) +8
+        45
+            [HG] Taiko Low (127/127/120/116/64) +9
+        46
+            [HG] Taiko Low (127/127/120/116/64) +10
+        47
+            [HG] Taiko Low (127/127/120/116/64) +11
+        48
+            [HG] Taiko Mid (127/127/120/116/64)
+
+Program 84
+
+Program 85
+
+Program 86
+
+Program 87
+
+Program 88
+    Resonant Synth (127/100/110/126) 67 | 127
+        0909 hall_of_fame
+
+Program 89
+
+Program 90
+
+Program 91
+
+Program 92
+
+Program 93
+
+Program 94
+
+Program 95
+
+Program 96
+
+Program 97
+
+Program 98
+
+Program 99
+
+Program 100
+    PSG Square 50% (126/100/40/127)
+
+Program 101
+
+Program 102
+    Seashore SFX (127/127/127/127)
+        0916 undella_summer
+
+Program 103
+
+Program 104
+
+Program 105
+
+Program 106
+
+Program 107
+
+Program 108
+
+Program 109
+
+Program 110
+
+Program 111
+
+Program 112
+
+Program 113
+
+Program 114
+
+Program 115
+
+Program 116
+
+Program 117
+
+Program 118
+
+Program 119
+
+Program 120
+
+Program 121
+
+Program 122
+    PSG Noise (126/127/127/127)
+        0909 hall_of_fame
+
+Program 123
+
+Program 124
+
+Program 125
+
+Program 126
+
+Program 127
+
+
+
+Songs eligible for Soundlist voicegroup
+*only one of those marked with an asterisk
+
+0904 evolution_intro (uses 009)*
+0906 cycling
+0908 underwater (uses 056)
+0912 accumula
+0914 lacunosa
+0915 undella_winter (uses 054)
+0919 castelia
+0933 route4
+0947 driftveil_drawbridge (uses 009; 055)*
