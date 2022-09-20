@@ -1549,3 +1549,9 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+
+// New key items
+static const u8 sGBPlayerDesc[] = _(
+    "Listen to nostalgic\n"
+    "songs with the use\n"
+    "of a single switch.");
