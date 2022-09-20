@@ -215,7 +215,6 @@ Route101_EventScript_Boy::
 	end
 
 Route101_EventScript_RouteSign::
-	giveitem ITEM_GB_PLAYER
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
 
