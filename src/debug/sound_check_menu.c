@@ -576,7 +576,7 @@ static void Task_DrawDriverTestMenu(u8 taskId)
     sMPlayInfo_Cry = NULL;
     sDriverTest_Reverse = 0;
     sDriverTest_Stereo = 1;
-    sSoundTestParams[CRY_TEST_VOICE] = 1;
+    sSoundTestParams[CRY_TEST_VOICE] = 0;
     sSoundTestParams[CRY_TEST_VOLUME] = CRY_VOLUME;
     sSoundTestParams[CRY_TEST_PANPOT] = 0;
     sSoundTestParams[CRY_TEST_PITCH] = 15360;

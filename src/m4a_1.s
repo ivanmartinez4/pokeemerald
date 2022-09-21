@@ -2489,7 +2489,7 @@ _081DDB46:
 	str r0, [sp, 0x14]
 	adds r4, r5, 0
 	adds r4, o_MusicPlayerTrack_ToneData_type
-	ldrb r2, [r4]
+	ldrb r2, [r4, o_ToneData_type]
 	movs r0, TONEDATA_TYPE_RHY | TONEDATA_TYPE_SPL
 	tst r0, r2
 	beq _081DDB98
