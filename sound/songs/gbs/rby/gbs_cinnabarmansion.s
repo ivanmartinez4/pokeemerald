@@ -46,7 +46,7 @@ gbs_CinnabarMansion_Ch1.branch_7ed19:
 gbs_CinnabarMansion_Ch2:
 	gbs_switch 1
 	duty_cycle 2
-
+	pitch_offset 1
 	vibrato 10, 2, 4
 	note_type 12, 12, 2
 

@@ -3,7 +3,6 @@
 	.section .rodata
 	.align 1
 
-
 gbs_getegg_Ch5:
 	gbs_switch 4
 	toggle_sfx
@@ -34,8 +33,6 @@ gbs_getegg_Ch5:
 	note F_, 9
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_getegg_Ch6:
 	gbs_switch 5
 	toggle_sfx
@@ -63,8 +60,6 @@ gbs_getegg_Ch6:
 	note A_, 9
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_getegg_Ch7:
 	gbs_switch 6
 	toggle_sfx
@@ -82,8 +77,6 @@ gbs_getegg_Ch7:
 	note A_, 9
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_getegg_Ch8:
 	gbs_switch 7
 	toggle_sfx
@@ -94,8 +87,6 @@ gbs_getegg_Ch8:
 	rest 16
 	rest 3
 	sound_ret
-
-	toggle_sfx @ unused
 
 	.align 4
 	.global gbs_getegg_Header

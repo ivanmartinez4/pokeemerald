@@ -656,7 +656,6 @@ static void LoadWavePattern(struct GBSTrack *track, int patternID)
 {
     if (!IsM4AUsingCGBChannel(CGBCHANNEL_WAVE))
     {
-        int i;
         struct SoundInfo *soundInfo = SOUND_INFO_PTR;
         vu8 *control = (vu8 *)REG_ADDR_NR30;
         vu8 *length = (vu8 *)REG_ADDR_NR31;

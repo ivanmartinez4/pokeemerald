@@ -3,7 +3,6 @@
 	.section .rodata
 	.align 1
 
-
 gbs_postcredits_Ch1:
 	gbs_switch 0
 	tempo 271
