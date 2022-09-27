@@ -5,6 +5,7 @@
 #include "battle_util.h"
 #include "berry.h"
 #include "data.h"
+#include "debug.h"
 #include "decoration.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -175,7 +176,6 @@ static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, 
 static void SetSpriteDataForNormalStep(struct Sprite *, u8, u8);
 static void InitSpriteForFigure8Anim(struct Sprite *);
 static bool8 AnimateSpriteInFigure8(struct Sprite *);
-u8 GetDirectionToFace(s16 x1, s16 y1, s16 x2, s16 y2);
 static void FollowerSetGraphics(struct ObjectEvent *, u16, u8, bool8);
 static void ObjectEventSetGraphics(struct ObjectEvent *, const struct ObjectEventGraphicsInfo *);
 static void SpriteCB_VirtualObject(struct Sprite *);
@@ -5490,6 +5490,12 @@ static u8 GetCollisionInDirection(struct ObjectEvent *objectEvent, u8 direction)
 u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
 {
     u8 direction = dir;
+
+#if DEBUG_SYSTEM_ENABLE == TRUE
+    if (FlagGet(DEBUG_FLAG_NO_COLLISION))
+        return COLLISION_NONE;
+#endif
+
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
     else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))

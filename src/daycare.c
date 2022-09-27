@@ -261,7 +261,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
         CalculateMonStats(&pokemon);
         species = newSpecies;
     }
-    
+
     if (GetMonData(&pokemon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
         experience = GetMonData(&pokemon, MON_DATA_EXP) + daycareMon->steps;
@@ -820,12 +820,12 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         eggSpecies = SPECIES_NIDORAN_M;
     else if (eggSpecies == SPECIES_ILLUMISE && daycare->offspringPersonality & EGG_GENDER_MALE)
         eggSpecies = SPECIES_VOLBEAT;
-    #if P_NIDORAN_M_DITTO_BREED >= GEN_5
-        else if (eggSpecies == SPECIES_NIDORAN_M && !(daycare->offspringPersonality & EGG_GENDER_MALE))
-            eggSpecies = SPECIES_NIDORAN_F;
-        else if (eggSpecies == SPECIES_VOLBEAT && !(daycare->offspringPersonality & EGG_GENDER_MALE))
-            eggSpecies = SPECIES_ILLUMISE;
-    #endif
+#if P_NIDORAN_M_DITTO_BREED >= GEN_5
+    else if (eggSpecies == SPECIES_NIDORAN_M && !(daycare->offspringPersonality & EGG_GENDER_MALE))
+        eggSpecies = SPECIES_NIDORAN_F;
+    else if (eggSpecies == SPECIES_VOLBEAT && !(daycare->offspringPersonality & EGG_GENDER_MALE))
+        eggSpecies = SPECIES_ILLUMISE;
+#endif
     else if (eggSpecies == SPECIES_MANAPHY)
         eggSpecies = SPECIES_PHIONE;
     else if (eggSpecies == SPECIES_SINISTEA_ANTIQUE)
@@ -1359,7 +1359,7 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
             return 88;
         }
     }
-    
+
     return score;
 }
 
