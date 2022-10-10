@@ -110,145 +110,6 @@ static void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 pale
         LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, paletteSlot * 0x10, 0x20);
 }
 
-static void AssignSpriteAnimsTable(bool8 isTrainer)
-{
-    if (!isTrainer)
-        sCreatingSpriteTemplate.anims = gAnims_MonPic;
-    else
-        sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
-}
-
-static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
-{
-    u8 i;
-    u8 *framePics;
-    struct SpriteFrameImage *images;
-    int j;
-    u8 spriteId;
-
-    for (i = 0; i < PICS_COUNT; i ++)
-    {
-        if (!sSpritePics[i].active)
-            break;
-    }
-    if (i == PICS_COUNT)
-        return 0xFFFF;
-
-    framePics = Alloc(4 * 0x800);
-    if (!framePics)
-        return 0xFFFF;
-
-    images = Alloc(4 * sizeof(struct SpriteFrameImage));
-    if (!images)
-    {
-        Free(framePics);
-        return 0xFFFF;
-    }
-    if (DecompressPic(species, personality, isFrontPic, framePics, isTrainer))
-    {
-        // debug trap?
-        return 0xFFFF;
-    }
-    for (j = 0; j < 4; j ++)
-    {
-        images[j].data = framePics + 0x800 * j;
-        images[j].size = 0x800;
-    }
-    sCreatingSpriteTemplate.tileTag = TAG_NONE;
-    sCreatingSpriteTemplate.oam = &sOamData_Normal;
-    AssignSpriteAnimsTable(isTrainer);
-    sCreatingSpriteTemplate.images = images;
-    sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-    sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
-    LoadPicPaletteByTagOrSlot(species, otId, personality, paletteSlot, paletteTag, isTrainer);
-    spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
-    if (paletteTag == TAG_NONE)
-        gSprites[spriteId].oam.paletteNum = paletteSlot;
-    sSpritePics[i].frames = framePics;
-    sSpritePics[i].images = images;
-    sSpritePics[i].paletteTag = paletteTag;
-    sSpritePics[i].spriteId = spriteId;
-    sSpritePics[i].active = TRUE;
-    return spriteId;
-}
-
-u16 CreateMonPicSprite_Affine(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
-{
-    u8 *framePics;
-    struct SpriteFrameImage *images;
-    int j;
-    u8 i;
-    u8 spriteId;
-    u8 type;
-
-    for (i = 0; i < PICS_COUNT; i++)
-    {
-        if (!sSpritePics[i].active)
-            break;
-    }
-    if (i == PICS_COUNT)
-        return 0xFFFF;
-
-    framePics = Alloc(4 * MON_PIC_SIZE);
-    if (!framePics)
-        return 0xFFFF;
-
-    if (flags & F_MON_PIC_NO_AFFINE)
-    {
-        flags &= ~F_MON_PIC_NO_AFFINE;
-        type = MON_PIC_AFFINE_NONE;
-    }
-    else
-    {
-        type = flags;
-    }
-    images = Alloc(4 * sizeof(struct SpriteFrameImage));
-    if (!images)
-    {
-        Free(framePics);
-        return 0xFFFF;
-    }
-    if (DecompressPic(species, personality, flags, framePics, FALSE))
-    {
-        // debug trap?
-        return 0xFFFF;
-    }
-    for (j = 0; j < 4; j ++)
-    {
-        images[j].data = framePics + MON_PIC_SIZE * j;
-        images[j].size = MON_PIC_SIZE;
-    }
-    sCreatingSpriteTemplate.tileTag = TAG_NONE;
-    sCreatingSpriteTemplate.anims = gMonFrontAnimsPtrTable[species];
-    sCreatingSpriteTemplate.images = images;
-    if (type == MON_PIC_AFFINE_FRONT)
-    {
-        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpriteOpponentSide;
-        sCreatingSpriteTemplate.oam = &sOamData_Affine;
-    }
-    else if (type == MON_PIC_AFFINE_BACK)
-    {
-        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpritePlayerSide;
-        sCreatingSpriteTemplate.oam = &sOamData_Affine;
-    }
-    else // MON_PIC_AFFINE_NONE
-    {
-        sCreatingSpriteTemplate.oam = &sOamData_Normal;
-        sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-    }
-    sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
-    LoadPicPaletteByTagOrSlot(species, otId, personality, paletteSlot, paletteTag, FALSE);
-    spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
-    if (paletteTag == TAG_NONE)
-        gSprites[spriteId].oam.paletteNum = paletteSlot;
-    sSpritePics[i].frames = framePics;
-    sSpritePics[i].images = images;
-    sSpritePics[i].paletteTag = paletteTag;
-    sSpritePics[i].spriteId = spriteId;
-    sSpritePics[i].active = TRUE;
-    return spriteId;
-}
-
 static u16 FreeAndDestroyPicSpriteInternal(u16 spriteId)
 {
     u8 i;
@@ -298,9 +159,81 @@ static u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8
     return 0xFFFF;
 }
 
-u16 CreateMonPicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
+u16 CreateMonPicSprite(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
 {
-    return CreatePicSprite(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE);
+    u8 *framePics;
+    struct SpriteFrameImage *images;
+    int j;
+    u32 i;
+    u8 spriteId;
+    u8 type;
+
+    for (i = 0; i < PICS_COUNT; i++)
+    {
+        if (!sSpritePics[i].active)
+            break;
+    }
+    if (i == PICS_COUNT)
+        return 0xFFFF;
+
+    framePics = Alloc(4 * MON_PIC_SIZE);
+    if (!framePics)
+        return 0xFFFF;
+
+    if (flags & F_MON_PIC_NO_AFFINE)
+    {
+        flags &= ~F_MON_PIC_NO_AFFINE;
+        type = MON_PIC_AFFINE_NONE;
+    }
+    else
+    {
+        type = flags;
+    }
+    images = Alloc(4 * sizeof(struct SpriteFrameImage));
+    if (!images)
+    {
+        Free(framePics);
+        return 0xFFFF;
+    }
+    LoadSpecialPokePic(&gMonFrontPicTable[species], framePics, species, personality, flags);
+    for (j = 0; j < 4; j++)
+    {
+        images[j].data = framePics + MON_PIC_SIZE * j;
+        images[j].size = MON_PIC_SIZE;
+    }
+    sCreatingSpriteTemplate.tileTag = TAG_NONE;
+    sCreatingSpriteTemplate.anims = gMonFrontAnimsPtrTable[species];
+    sCreatingSpriteTemplate.images = images;
+    if (type == MON_PIC_AFFINE_FRONT)
+    {
+        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpriteOpponentSide;
+        sCreatingSpriteTemplate.oam = &sOamData_Affine;
+    }
+    else if (type == MON_PIC_AFFINE_BACK)
+    {
+        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpritePlayerSide;
+        sCreatingSpriteTemplate.oam = &sOamData_Affine;
+    }
+    else // MON_PIC_AFFINE_NONE
+    {
+        sCreatingSpriteTemplate.oam = &sOamData_Normal;
+        sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    }
+    sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
+    sCreatingSpriteTemplate.paletteTag = paletteTag;
+    if (paletteTag == TAG_NONE)
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
+    else
+        LoadCompressedSpritePalette(GetMonSpritePalStructFromOtIdPersonality(species, otId, personality));
+    spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
+    if (paletteTag == TAG_NONE)
+        gSprites[spriteId].oam.paletteNum = paletteSlot;
+    sSpritePics[i].frames = framePics;
+    sSpritePics[i].images = images;
+    sSpritePics[i].paletteTag = paletteTag;
+    sSpritePics[i].spriteId = spriteId;
+    sSpritePics[i].active = TRUE;
+    return spriteId;
 }
 
 u16 FreeAndDestroyMonPicSprite(u16 spriteId)
@@ -320,9 +253,58 @@ u16 CreateTrainerCardMonIconSprite(u16 species, u32 otId, u32 personality, bool8
     return CreateTrainerCardSprite(species, otId, personality, isFrontPic, destX, destY, paletteSlot, windowId, FALSE);
 }
 
-u16 CreateTrainerPicSprite(u16 species, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
+u16 CreateTrainerPicSprite(u16 trainerPicId, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
 {
-    return CreatePicSprite(species, 0, 0, isFrontPic, x, y, paletteSlot, paletteTag, TRUE);
+    u32 i;
+    u8 *framePics;
+    struct SpriteFrameImage *images;
+    int j;
+    u8 spriteId;
+
+    for (i = 0; i < PICS_COUNT; i++)
+    {
+        if (!sSpritePics[i].active)
+            break;
+    }
+    if (i == PICS_COUNT)
+        return 0xFFFF;
+
+    framePics = Alloc(4 * 0x800);
+    if (!framePics)
+        return 0xFFFF;
+
+    images = Alloc(4 * sizeof(struct SpriteFrameImage));
+    if (!images)
+    {
+        Free(framePics);
+        return 0xFFFF;
+    }
+    LZ77UnCompWram(gTrainerFrontPicTable[trainerPicId].data, framePics);
+    for (j = 0; j < 4; j++)
+    {
+        images[j].data = framePics + 0x800 * j;
+        images[j].size = 0x800;
+    }
+    sCreatingSpriteTemplate.tileTag = TAG_NONE;
+    sCreatingSpriteTemplate.oam = &sOamData_Normal;
+    sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
+    sCreatingSpriteTemplate.images = images;
+    sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
+    sCreatingSpriteTemplate.paletteTag = paletteTag;
+    if (paletteTag == TAG_NONE)
+        LoadCompressedPalette(gTrainerFrontPicPaletteTable[trainerPicId].data, 0x100 + paletteSlot * 0x10, 0x20);
+    else
+        LoadCompressedSpritePalette(&gTrainerFrontPicPaletteTable[trainerPicId]);
+    spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
+    if (paletteTag == TAG_NONE)
+        gSprites[spriteId].oam.paletteNum = paletteSlot;
+    sSpritePics[i].frames = framePics;
+    sSpritePics[i].images = images;
+    sSpritePics[i].paletteTag = paletteTag;
+    sSpritePics[i].spriteId = spriteId;
+    sSpritePics[i].active = TRUE;
+    return spriteId;
 }
 
 u16 FreeAndDestroyTrainerPicSprite(u16 spriteId)
