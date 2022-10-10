@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_healpokemon
 	.align 1
 
 gbs_healpokemon_Ch1:
@@ -53,8 +54,7 @@ gbs_healpokemon_Ch3:
 	sound_ret
 
 	.align 4
-	.global gbs_healpokemon_Header
-gbs_healpokemon_Header:
+gbs_healpokemon:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

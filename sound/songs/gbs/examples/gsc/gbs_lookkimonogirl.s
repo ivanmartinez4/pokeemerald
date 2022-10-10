@@ -1,8 +1,8 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lookkimonogirl
 	.align 1
-
 
 gbs_lookkimonogirl_Ch1:
 	gbs_switch 0
@@ -267,8 +267,7 @@ gbs_lookkimonogirl_Ch3.mainloop:
 	sound_loop 0, gbs_lookkimonogirl_Ch3.mainloop
 
 	.align 4
-	.global gbs_lookkimonogirl_Header
-gbs_lookkimonogirl_Header:
+gbs_lookkimonogirl:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

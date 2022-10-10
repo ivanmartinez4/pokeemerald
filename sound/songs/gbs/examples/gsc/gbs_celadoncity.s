@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_celadoncity
 	.align 1
 
 gbs_celadoncity_Ch1:
@@ -392,8 +393,7 @@ gbs_celadoncity_Ch3.sub2:
 	sound_ret
 
 	.align 4
-	.global gbs_celadoncity_Header
-gbs_celadoncity_Header:
+gbs_celadoncity:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

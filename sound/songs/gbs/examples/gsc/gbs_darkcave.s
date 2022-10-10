@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_darkcave
 	.align 1
 
 gbs_darkcave_Ch1:
@@ -489,8 +490,7 @@ gbs_darkcave_Ch4.mainloop:
 	sound_loop 0, gbs_darkcave_Ch4.mainloop
 
 	.align 4
-	.global gbs_darkcave_Header
-gbs_darkcave_Header:
+gbs_darkcave:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

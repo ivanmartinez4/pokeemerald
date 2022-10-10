@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_wildpokemonvictory
 	.align 1
 
 gbs_wildpokemonvictory_Ch1:
@@ -188,8 +189,7 @@ gbs_wildpokemonvictory_Ch3.sub1:
 	sound_ret
 
 	.align 4
-	.global gbs_wildpokemonvictory_Header
-gbs_wildpokemonvictory_Header:
+gbs_wildpokemonvictory:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

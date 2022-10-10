@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_gettm
 	.align 1
 
 gbs_gettm_Ch5:
@@ -27,8 +28,6 @@ gbs_gettm_Ch5:
 	note Fs, 8
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_gettm_Ch6:
 	gbs_switch 5
 	toggle_sfx
@@ -49,8 +48,6 @@ gbs_gettm_Ch6:
 	volume_envelope 11, 5
 	note D_, 8
 	sound_ret
-
-	toggle_sfx @ unused
 
 gbs_gettm_Ch7:
 	gbs_switch 6
@@ -81,8 +78,6 @@ gbs_gettm_Ch7:
 	note A_, 16
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_gettm_Ch8:
 	gbs_switch 7
 	toggle_sfx
@@ -101,11 +96,8 @@ gbs_gettm_Ch8:
 	note B_, 16
 	sound_ret
 
-	toggle_sfx @ unused
-
 	.align 4
-	.global gbs_gettm_Header
-gbs_gettm_Header:
+gbs_gettm:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

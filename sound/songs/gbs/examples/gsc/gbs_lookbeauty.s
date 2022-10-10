@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lookbeauty
 	.align 1
 
 gbs_lookbeauty_Ch1:
@@ -328,8 +329,7 @@ gbs_lookbeauty_Ch4.sub1:
 	sound_ret
 
 	.align 4
-	.global gbs_lookbeauty_Header
-gbs_lookbeauty_Header:
+gbs_lookbeauty:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

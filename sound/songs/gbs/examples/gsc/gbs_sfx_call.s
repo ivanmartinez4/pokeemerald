@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_sfx_call
 	.align 1
 
 gbs_sfx_call_Ch5:
@@ -16,8 +17,7 @@ gbs_sfx_call_Ch5:
 	sound_ret
 
 	.align 4
-	.global gbs_sfx_call_Header
-gbs_sfx_call_Header:
+gbs_sfx_call:
 	.byte 1	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 5	@ Priority

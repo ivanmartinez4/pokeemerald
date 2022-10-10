@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_unioncave
 	.align 1
 
 gbs_unioncave_Ch1:
@@ -260,11 +261,8 @@ gbs_unioncave_Ch4.mainloop:
 	rest 8
 	sound_loop 0, gbs_unioncave_Ch4.mainloop
 
-	sound_loop 0, gbs_unioncave_Ch4.mainloop @ unused
-
 	.align 4
-	.global gbs_unioncave_Header
-gbs_unioncave_Header:
+gbs_unioncave:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

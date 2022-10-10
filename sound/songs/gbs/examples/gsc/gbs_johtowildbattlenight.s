@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_johtowildbattlenight
 	.align 1
 
 gbs_johtowildbattlenight_Ch1:
@@ -31,8 +32,7 @@ gbs_johtowildbattlenight_Ch3:
 	sound_loop 0, gbs_johtowildbattle_Ch3.body
 
 	.align 4
-	.global gbs_johtowildbattlenight_Header
-gbs_johtowildbattlenight_Header:
+gbs_johtowildbattlenight:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1251,6 +1251,7 @@ SECTIONS {
         sound/songs/gbs/gsc/gbs_getbadge.o(.rodata);
         sound/songs/gbs/gsc/gbs_item.o(.rodata);
         sound/songs/gbs/gsc/gbs_gettm.o(.rodata);
+        sound/songs/gbs/rse/gbs_oceanicmuseum.o(.rodata);
         sound/songs/gbs/rby/gbs_cinnabarmansion.o(.rodata);
         sound/songs/gbs/rby/gbs_trainerbattle.o(.rodata);
         sound/songs/gbs/gsc/gbs_lakeofrage.o(.rodata);

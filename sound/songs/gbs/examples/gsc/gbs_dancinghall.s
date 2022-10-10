@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_dancinghall
 	.align 1
 
 gbs_dancinghall_Ch1:
@@ -306,8 +307,7 @@ gbs_dancinghall_Ch3.mainloop:
 	sound_loop 0, gbs_dancinghall_Ch3.mainloop
 
 	.align 4
-	.global gbs_dancinghall_Header
-gbs_dancinghall_Header:
+gbs_dancinghall:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

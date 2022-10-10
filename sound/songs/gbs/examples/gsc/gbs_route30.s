@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_route30
 	.align 1
 
 gbs_route30_Ch1:
@@ -672,8 +673,7 @@ gbs_route30_Ch4.sub5:
 	sound_ret
 
 	.align 4
-	.global gbs_route30_Header
-gbs_route30_Header:
+gbs_route30:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

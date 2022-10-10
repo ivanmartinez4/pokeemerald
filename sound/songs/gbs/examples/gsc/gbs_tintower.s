@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_tintower
 	.align 1
 
 gbs_tintower_Ch1:
@@ -294,8 +295,7 @@ gbs_tintower_Ch4.mainloop:
 	sound_loop 0, gbs_tintower_Ch4.mainloop
 
 	.align 4
-	.global gbs_tintower_Header
-gbs_tintower_Header:
+gbs_tintower:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

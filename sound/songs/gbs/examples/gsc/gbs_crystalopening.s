@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_crystalopening
 	.align 1
 
 gbs_crystalopening_Ch1:
@@ -362,8 +363,7 @@ gbs_crystalopening_Ch4:
 	sound_ret
 
 	.align 4
-	.global gbs_crystalopening_Header
-gbs_crystalopening_Header:
+gbs_crystalopening:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

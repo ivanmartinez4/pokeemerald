@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_ruinsofalphradio
 	.align 1
 
 gbs_ruinsofalphradio_Ch1:
@@ -76,8 +77,7 @@ gbs_ruinsofalphradio_Ch3.mainloop:
 	sound_loop 0, gbs_ruinsofalphradio_Ch3.mainloop
 
 	.align 4
-	.global gbs_ruinsofalphradio_Header
-gbs_ruinsofalphradio_Header:
+gbs_ruinsofalphradio:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

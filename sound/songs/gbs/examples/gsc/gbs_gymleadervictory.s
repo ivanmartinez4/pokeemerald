@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_gymleadervictory
 	.align 1
 
 gbs_gymleadervictory_Ch1:
@@ -425,8 +426,7 @@ gbs_gymleadervictory_Ch4.sub1loop1:
 	sound_ret
 
 	.align 4
-	.global gbs_gymleadervictory_Header
-gbs_gymleadervictory_Header:
+gbs_gymleadervictory:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

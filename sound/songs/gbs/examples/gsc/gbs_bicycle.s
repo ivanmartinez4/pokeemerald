@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_bicycle
 	.align 1
 
 gbs_bicycle_Ch1:
@@ -517,8 +518,7 @@ gbs_bicycle_Ch4.loop1:
 	sound_loop 0, gbs_bicycle_Ch4.mainloop
 
 	.align 4
-	.global gbs_bicycle_Header
-gbs_bicycle_Header:
+gbs_bicycle:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

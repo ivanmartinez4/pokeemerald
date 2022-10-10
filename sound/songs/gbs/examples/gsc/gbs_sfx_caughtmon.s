@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_sfx_caughtmon
 	.align 1
 
 gbs_sfx_caughtmon_Ch5:
@@ -79,8 +80,7 @@ gbs_sfx_caughtmon_Ch8:
 	sound_ret
 
 	.align 4
-	.global gbs_sfx_caughtmon_Header
-gbs_sfx_caughtmon_Header:
+gbs_sfx_caughtmon:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_pallettown
 	.align 1
 
 gbs_pallettown_Ch1:
@@ -360,8 +361,7 @@ gbs_pallettown_Ch3.mainloop:
 	sound_loop 0, gbs_pallettown_Ch3.mainloop
 
 	.align 4
-	.global gbs_pallettown_Header
-gbs_pallettown_Header:
+gbs_pallettown:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

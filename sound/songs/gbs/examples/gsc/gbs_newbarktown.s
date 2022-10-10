@@ -1,8 +1,8 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_newbarktown
 	.align 1
-
 
 gbs_newbarktown_Ch1:
 	gbs_switch 0
@@ -326,8 +326,7 @@ gbs_newbarktown_Ch3.mainloop:
 	sound_loop 0, gbs_newbarktown_Ch3.mainloop
 
 	.align 4
-	.global gbs_newbarktown_Header
-gbs_newbarktown_Header:
+gbs_newbarktown:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

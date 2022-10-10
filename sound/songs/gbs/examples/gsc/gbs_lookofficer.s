@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lookofficer
 	.align 1
 
 gbs_lookofficer_Ch1:
@@ -141,8 +142,7 @@ gbs_lookofficer_Ch3.mainloop:
 	sound_loop 0, gbs_lookofficer_Ch3.mainloop
 
 	.align 4
-	.global gbs_lookofficer_Header
-gbs_lookofficer_Header:
+gbs_lookofficer:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

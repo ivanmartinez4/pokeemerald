@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_aftertherivalfight
 	.align 1
 
 gbs_aftertherivalfight_Ch1:
@@ -67,8 +68,7 @@ gbs_aftertherivalfight_Ch4:
 	sound_loop 0, gbs_lookrival_Ch4.mainloop
 
 	.align 4
-	.global gbs_aftertherivalfight_Header
-gbs_aftertherivalfight_Header:
+gbs_aftertherivalfight:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

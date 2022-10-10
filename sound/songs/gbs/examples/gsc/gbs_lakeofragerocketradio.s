@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lakeofragerocketradio
 	.align 1
 
 gbs_lakeofragerocketradio_Ch1:
@@ -38,8 +39,7 @@ gbs_lakeofragerocketradio_Ch3:
 	sound_loop 0, gbs_lakeofragerocketradio_Ch1.mainloop
 
 	.align 4
-	.global gbs_lakeofragerocketradio_Header
-gbs_lakeofragerocketradio_Header:
+gbs_lakeofragerocketradio:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

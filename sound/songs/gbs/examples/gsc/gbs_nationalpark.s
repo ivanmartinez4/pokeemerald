@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_nationalpark
 	.align 1
 
 gbs_nationalpark_Ch1:
@@ -661,8 +662,7 @@ gbs_nationalpark_Ch4.loop2:
 	sound_loop 0, gbs_nationalpark_Ch4.mainloop
 
 	.align 4
-	.global gbs_nationalpark_Header
-gbs_nationalpark_Header:
+gbs_nationalpark:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

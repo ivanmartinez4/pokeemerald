@@ -19,8 +19,8 @@ struct MusicPlayerInfo gMPlayInfo_BGM;
 struct MusicPlayerInfo gMPlayInfo_SE1;
 struct MusicPlayerInfo gMPlayInfo_SE2;
 struct MusicPlayerInfo gMPlayInfo_SE3;
-u8 gMPlayMemAccArea[0x10];
 u8 gUsedCGBChannels;
+u8 gMPlayMemAccArea[0x10];
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
 {
@@ -627,8 +627,8 @@ void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader
         mplayInfo->tempoI = 150;
         mplayInfo->tempoU = 0x100;
         mplayInfo->tempoC = 0;
-        mplayInfo->fadeOI = 0;
         mplayInfo->gbsTempo = 0x100;
+        mplayInfo->fadeOI = 0;
 
         // Restore the master volume of the GB channels in case GBS changed it.
         REG_NR50 = 0x77;

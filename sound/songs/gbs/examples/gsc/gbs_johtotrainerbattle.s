@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_johtotrainerbattle
 	.align 1
 
 gbs_johtotrainerbattle_Ch1:
@@ -1337,8 +1338,7 @@ gbs_johtotrainerbattle_Ch3.sub7:
 	sound_ret
 
 	.align 4
-	.global gbs_johtotrainerbattle_Header
-gbs_johtotrainerbattle_Header:
+gbs_johtotrainerbattle:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

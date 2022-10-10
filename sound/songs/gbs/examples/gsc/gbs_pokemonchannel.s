@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_pokemonchannel
 	.align 1
 
 gbs_pokemonchannel_Ch1:
@@ -234,8 +235,7 @@ gbs_pokemonchannel_Ch4.loop1:
 	sound_ret
 
 	.align 4
-	.global gbs_pokemonchannel_Header
-gbs_pokemonchannel_Header:
+gbs_pokemonchannel:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

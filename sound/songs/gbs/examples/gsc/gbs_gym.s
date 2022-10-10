@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_gym
 	.align 1
 
 gbs_gym_Ch1:
@@ -569,8 +570,7 @@ gbs_gym_Ch4.loop2:
 	sound_loop 0, gbs_gym_Ch4.mainloop
 
 	.align 4
-	.global gbs_gym_Header
-gbs_gym_Header:
+gbs_gym:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_levelup
 	.align 1
 
 gbs_levelup_Ch5:
@@ -59,8 +60,7 @@ gbs_levelup_Ch8:
 	sound_ret
 
 	.align 4
-	.global gbs_levelup_Header
-gbs_levelup_Header:
+gbs_levelup:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

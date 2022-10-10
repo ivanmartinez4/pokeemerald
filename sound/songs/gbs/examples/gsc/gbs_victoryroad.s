@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_victoryroad
 	.align 1
 
 gbs_victoryroad_Ch1:
@@ -202,8 +203,7 @@ gbs_victoryroad_Ch4.mainloop:
 	sound_loop 0, gbs_victoryroad_Ch4.mainloop
 
 	.align 4
-	.global gbs_victoryroad_Header
-gbs_victoryroad_Header:
+gbs_victoryroad:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_contestresults
 	.align 1
 
 gbs_contestresults_Ch1:
@@ -176,8 +177,7 @@ gbs_contestresults_Ch4.mainloop:
 	sound_loop 0, gbs_contestresults_Ch4.mainloop
 
 	.align 4
-	.global gbs_contestresults_Header
-gbs_contestresults_Header:
+gbs_contestresults:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

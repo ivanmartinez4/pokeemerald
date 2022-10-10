@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_route2
 	.align 1
 
 gbs_route2_Ch1:
@@ -518,8 +519,7 @@ gbs_route2_Ch4.loop5:
 	sound_loop 0, gbs_route2_Ch4.mainloop
 
 	.align 4
-	.global gbs_route2_Header
-gbs_route2_Header:
+gbs_route2:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

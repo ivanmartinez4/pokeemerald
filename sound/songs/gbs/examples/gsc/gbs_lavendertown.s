@@ -1,8 +1,8 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lavendertown
 	.align 1
-
 
 gbs_lavendertown_Ch1:
 	gbs_switch 0
@@ -516,8 +516,7 @@ gbs_lavendertown_Ch3.mainloop:
 	sound_loop 0, gbs_lavendertown_Ch3.mainloop
 
 	.align 4
-	.global gbs_lavendertown_Header
-gbs_lavendertown_Header:
+gbs_lavendertown:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

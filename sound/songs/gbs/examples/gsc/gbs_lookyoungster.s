@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lookyoungster
 	.align 1
 
 gbs_lookyoungster_Ch1:
@@ -59,8 +60,6 @@ gbs_lookyoungster_Ch1.mainloop:
 	rest 1
 	rest 16
 	sound_loop 0, gbs_lookyoungster_Ch1.mainloop
-
-	sound_ret @ unused
 
 gbs_lookyoungster_Ch2:
 	gbs_switch 1
@@ -158,8 +157,6 @@ gbs_lookyoungster_Ch2.mainloop:
 	note C_, 1
 	rest 1
 	sound_loop 0, gbs_lookyoungster_Ch2.mainloop
-
-	sound_ret @ unused
 
 gbs_lookyoungster_Ch3:
 	gbs_switch 2
@@ -295,11 +292,8 @@ gbs_lookyoungster_Ch3.mainloop:
 	rest 1
 	sound_loop 0, gbs_lookyoungster_Ch3.mainloop
 
-	sound_ret @ unused
-
 	.align 4
-	.global gbs_lookyoungster_Header
-gbs_lookyoungster_Header:
+gbs_lookyoungster:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

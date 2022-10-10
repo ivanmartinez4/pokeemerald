@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lookmysticalman
 	.align 1
 
 gbs_lookmysticalman_Ch1:
@@ -612,8 +613,7 @@ gbs_lookmysticalman_Ch4.sub3:
 	sound_ret
 
 	.align 4
-	.global gbs_lookmysticalman_Header
-gbs_lookmysticalman_Header:
+gbs_lookmysticalman:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

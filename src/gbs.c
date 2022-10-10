@@ -36,7 +36,9 @@ static u16 CalculateNoteLength(u8 noteUnitLength, u16 tempo, u8 length, u16 prev
 static u16 CalculatePitch(u8 note, s8 keyShift, u8 octave);
 static void ClearCGBChannel(struct GBSTrack *track);
 
-#include "data/gbs.h"
+#include "data/gbs/note_frequency_table.h"
+#include "data/gbs/wave_samples.h"
+#include "data/gbs/drum_noise_data.h"
 
 static bool32 GBSTrack_Update(struct MusicPlayerInfo *info, struct GBSTrack *track)
 {
@@ -439,10 +441,9 @@ static void ProcessNoteCommand(u8 commandID, u16 tempo, struct GBSTrack *track)
         if (commandID & 0xF0)
         {
             u32 engineSet = track->dutyCycle;
-            const u8 *const *noiseGroup = sNoiseDataGroupTable[engineSet];
-            const u8 *noiseData = NULL;
-            
-            noiseData = noiseGroup[(commandID & 0xF0) >> 4];
+            const u8 *const *noiseGroup = sDrumkitDataTable[engineSet];
+            const u8 *noiseData = noiseGroup[(commandID & 0xF0) >> 4];
+
             track->noiseSamplePointer = noiseData;
             track->noiseSampleCountdown = 0;
         }
@@ -466,7 +467,7 @@ static void ProcessNoteCommand(u8 commandID, u16 tempo, struct GBSTrack *track)
                 if (track->pitch < track->pitchBendTarget)
                 {
                     // BUG: If lower bytes carry, then upper bytes are miscalculated
-                    s32 carryCheck = (s32)(track->pitchBendTarget & 0xFF) - (s32)(track->pitch & 0xFF);
+                    s32 carryCheck = (s16)(track->pitchBendTarget) - (s16)(track->pitch);
                     if (carryCheck < 0)
                         distance = 0x200;
                     
@@ -476,7 +477,7 @@ static void ProcessNoteCommand(u8 commandID, u16 tempo, struct GBSTrack *track)
                 else
                 {
                     // BUG: If lower bytes carry, then upper bytes are miscalculated
-                    s32 carryCheck = (s32)(track->pitch & 0xFF) - (s32)(track->pitchBendTarget & 0xFF);
+                    s32 carryCheck = (s16)(track->pitch) - (s16)(track->pitchBendTarget);
                     if (carryCheck < 0)
                         distance = 0x200;
                     
@@ -551,9 +552,9 @@ static void UpdateCGBTone1(struct GBSTrack *track, u16 pitch)
             // Original engine chooses to clamp calculation at nearest multiple of 0x100
             // Because of this, it only writes the lower byte if noteVibratoOverride is set
             // Either we replicate both behaviors exactly or just store both bytes
-            //*frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
+            *frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
 
-            *frequencyControl = pitch;
+            //*frequencyControl = pitch;
             track->noteDutyOverride = TRUE;
         }
 
@@ -585,9 +586,9 @@ static void UpdateCGBTone2(struct GBSTrack *track, u16 pitch)
             // Original engine chooses to clamp calculation at nearest multiple of 0x100
             // Because of this, it only writes the lower byte if noteVibratoOverride is set
             // Either we replicate both behaviors exactly or just store both bytes
-            //control[2] = (control[2] & 0xFF00) | (pitch & 0xFF);
+            *frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
 
-            *frequencyControl = pitch;
+            //*frequencyControl = pitch;
             track->noteDutyOverride = TRUE;
         }
 
@@ -615,8 +616,8 @@ static void UpdateCGBWave(struct GBSTrack *track, u16 pitch)
         // Original engine chooses to clamp calculation at nearest multiple of 0x100
         // Because of this, it only writes the lower byte if noteVibratoOverride is set
         // Either we replicate both behaviors exactly or just store both bytes
-        //control[2] = (control[2] & 0xFF00) | (pitch & 0xFF);
-        *frequencyControl = pitch;
+        *frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
+        //*frequencyControl = pitch;
     }
 }
 
@@ -664,11 +665,11 @@ static void LoadWavePattern(struct GBSTrack *track, int patternID)
         *length = 0x3F;
         *control = 0x40; // Stop channel and choose other wave bank so we can write into the first one
 
-        if (patternID < ARRAY_COUNT(sWaveTrackPatterns) && *soundInfo->cgbChans[CGBCHANNEL_WAVE].currentPointer != (u32)sWaveTrackPatterns[patternID])
+        if (patternID < ARRAY_COUNT(sWaveTrackPatterns) && (u32)soundInfo->cgbChans[CGBCHANNEL_WAVE].currentPointer != (u32)sWaveTrackPatterns[patternID])
         {
             u32* mainPattern = (u32 *)(REG_ADDR_WAVE_RAM0);
             memcpy(mainPattern, sWaveTrackPatterns[patternID], sizeof(sWaveTrackPatterns[patternID]));
-            *soundInfo->cgbChans[CGBCHANNEL_WAVE].currentPointer = (u32)sWaveTrackPatterns[patternID];
+            (u32)soundInfo->cgbChans[CGBCHANNEL_WAVE].currentPointer = (u32)sWaveTrackPatterns[patternID];
         }
 
         *velocity = track->velocity << 5;
@@ -729,7 +730,6 @@ void ply_gbs_switch(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
     u8 *cmdPtrBackup = track->cmdPtr;
     u8 gbChannel = *cmdPtrBackup++;
-    bool32 isGBSAlreadyRunning = FALSE;
 
     if (gbChannel < 8)
     {

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_getegg
 	.align 1
 
 gbs_getegg_Ch5:
@@ -89,8 +90,7 @@ gbs_getegg_Ch8:
 	sound_ret
 
 	.align 4
-	.global gbs_getegg_Header
-gbs_getegg_Header:
+gbs_getegg:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

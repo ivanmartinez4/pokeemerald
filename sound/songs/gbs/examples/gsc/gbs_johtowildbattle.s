@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_johtowildbattle
 	.align 1
 
 gbs_johtowildbattle_Ch1:
@@ -592,8 +593,7 @@ gbs_johtowildbattle_Ch3.sub1loop1:
 	sound_ret
 
 	.align 4
-	.global gbs_johtowildbattle_Header
-gbs_johtowildbattle_Header:
+gbs_johtowildbattle:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

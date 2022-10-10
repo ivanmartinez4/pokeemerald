@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_pokeflutechannel
 	.align 1
 
 gbs_pokeflutechannel_Ch1:
@@ -230,8 +231,7 @@ gbs_pokeflutechannel_Ch3.sub1:
 	sound_ret
 
 	.align 4
-	.global gbs_pokeflutechannel_Header
-gbs_pokeflutechannel_Header:
+gbs_pokeflutechannel:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

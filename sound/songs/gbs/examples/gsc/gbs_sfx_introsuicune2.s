@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_sfx_introsuicune2
 	.align 1
 
 gbs_sfx_introsuicune2_Ch8:
@@ -24,8 +25,7 @@ gbs_sfx_introsuicune2_Ch8:
 	sound_ret
 
 	.align 4
-	.global gbs_sfx_introsuicune2_Header
-gbs_sfx_introsuicune2_Header:
+gbs_sfx_introsuicune2:
 	.byte 1	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

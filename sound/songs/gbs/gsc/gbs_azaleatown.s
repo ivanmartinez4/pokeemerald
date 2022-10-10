@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_azaleatown
 	.align 1
 
 gbs_azaleatown_Ch1:
@@ -656,8 +657,7 @@ gbs_azaleatown_Ch4.mainloop:
 	sound_loop 0, gbs_azaleatown_Ch4.mainloop
 
 	.align 4
-	.global gbs_azaleatown_Header
-gbs_azaleatown_Header:
+gbs_azaleatown:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_looklass
 	.align 1
 
 gbs_looklass_Ch1:
@@ -117,8 +118,7 @@ gbs_looklass_Ch4.mainloop:
 	sound_loop 0, gbs_looklass_Ch4.mainloop
 
 	.align 4
-	.global gbs_looklass_Header
-gbs_looklass_Header:
+gbs_looklass:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

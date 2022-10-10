@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_mobileadaptermenu
 	.align 1
 
 gbs_mobileadaptermenu_Ch1:
@@ -275,8 +276,7 @@ gbs_mobileadaptermenu_Ch3.sub2:
 	sound_ret
 
 	.align 4
-	.global gbs_mobileadaptermenu_Header
-gbs_mobileadaptermenu_Header:
+gbs_mobileadaptermenu:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_magnettrain
 	.align 1
 
 gbs_magnettrain_Ch1:
@@ -248,21 +249,6 @@ gbs_magnettrain_Ch4:
 	drum_note 12, 16
 	sound_ret
 
-gbs_magnettrain_Ch4.sub1: @ unreferenced:
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	sound_ret
-
 gbs_magnettrain_Ch4.sub2:
 	drum_note 9, 2
 	drum_note 8, 2
@@ -283,8 +269,7 @@ gbs_magnettrain_Ch4.sub2:
 	sound_ret
 
 	.align 4
-	.global gbs_magnettrain_Header
-gbs_magnettrain_Header:
+gbs_magnettrain:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

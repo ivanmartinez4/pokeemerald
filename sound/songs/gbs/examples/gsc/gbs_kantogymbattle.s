@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_kantogymbattle
 	.align 1
 
 gbs_kantogymbattle_Ch1:
@@ -614,8 +615,7 @@ gbs_kantogymbattle_Ch3.loop13:
 	sound_loop 0, gbs_kantogymbattle_Ch3.mainloop
 
 	.align 4
-	.global gbs_kantogymbattle_Header
-gbs_kantogymbattle_Header:
+gbs_kantogymbattle:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

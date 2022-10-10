@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_getbadge
 	.align 1
 
 gbs_getbadge_Ch5:
@@ -22,8 +23,6 @@ gbs_getbadge_Ch5:
 	note A_, 16
 	rest 6
 	sound_ret
-
-	toggle_sfx @ unused
 
 gbs_getbadge_Ch5.sub1:
 	rest 5
@@ -95,8 +94,6 @@ gbs_getbadge_Ch6:
 	rest 6
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_getbadge_Ch7:
 	gbs_switch 6
 	toggle_sfx
@@ -135,8 +132,6 @@ gbs_getbadge_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_getbadge_Ch8:
 	gbs_switch 7
 	toggle_sfx
@@ -162,11 +157,8 @@ gbs_getbadge_Ch8.loop1:
 	rest 6
 	sound_ret
 
-	toggle_sfx @ unused
-
 	.align 4
-	.global gbs_getbadge_Header
-gbs_getbadge_Header:
+gbs_getbadge:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_MewBattle
 	.align 1
 
 @ Pokémon Emerald - Battle! Vs. Mew (R/B/Y version)
@@ -71,7 +72,7 @@ gbs_MewBattle_Ch1:
 	note Ds, 10
 	note Cs, 10
  
-gbs_MewBattle_Ch1.branch_230e0:
+gbs_MewBattle_branch_230e0:
 	note_type 12, 11, 3
 	note Cs, 1
 	note D_, 1
@@ -307,7 +308,7 @@ gbs_MewBattle_Ch1.branch_230e0:
 	note Ds, 6
 	note_type 12, 10, 7
 	note Cs, 8
-	sound_loop 0, gbs_MewBattle_Ch1.branch_230e0
+	sound_loop 0, gbs_MewBattle_branch_230e0
  
  
 gbs_MewBattle_Ch2:
@@ -412,7 +413,7 @@ gbs_MewBattle_Ch2:
 	note_type 12, 11, 7
 	note G_, 10
  
-gbs_MewBattle_Ch2.branch_23225:
+gbs_MewBattle_branch_23225:
 	octave 4
 	note_type 12, 12, 5
 	note G_, 6
@@ -608,7 +609,7 @@ gbs_MewBattle_Ch2.branch_23225:
 	note Cs, 1
 	note_type 12, 12, 7
 	note F_, 8
-	sound_loop 0, gbs_MewBattle_Ch2.branch_23225
+	sound_loop 0, gbs_MewBattle_branch_23225
  
 gbs_MewBattle_Ch3:
 	gbs_switch 2
@@ -647,7 +648,7 @@ gbs_MewBattle_Ch3:
 	note As, 2
 	note B_, 2
  
-gbs_MewBattle_Ch3.branch_232b5:
+gbs_MewBattle_branch_232b5:
 	octave 4
 	note C_, 2
 	note G_, 2
@@ -679,9 +680,9 @@ gbs_MewBattle_Ch3.branch_232b5:
 	note As, 2
 	note Gs, 2
 	note F_, 2
-	sound_loop 2, gbs_MewBattle_Ch3.branch_232b5
+	sound_loop 2, gbs_MewBattle_branch_232b5
  
-gbs_MewBattle_Ch3.branch_232d8:
+gbs_MewBattle_branch_232d8:
 	note C_, 2
 	note G_, 2
 	note C_, 2
@@ -884,11 +885,10 @@ gbs_MewBattle_Ch3.branch_232d8:
 	note Gs, 2
 	note Cs, 2
 	note Gs, 2
-	sound_loop 0, gbs_MewBattle_Ch3.branch_232d8
+	sound_loop 0, gbs_MewBattle_branch_232d8
 
 	.align 4
-	.global gbs_MewBattle_Header
-gbs_MewBattle_Header:
+gbs_MewBattle:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

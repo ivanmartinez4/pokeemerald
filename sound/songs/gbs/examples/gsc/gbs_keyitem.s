@@ -1,8 +1,8 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_keyitem
 	.align 1
-
 
 gbs_keyitem_Ch5:
 	gbs_switch 4
@@ -68,8 +68,7 @@ gbs_keyitem_Ch8:
 	sound_ret
 
 	.align 4
-	.global gbs_keyitem_Header
-gbs_keyitem_Header:
+gbs_keyitem:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

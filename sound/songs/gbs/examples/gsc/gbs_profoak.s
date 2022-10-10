@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_profoak
 	.align 1
 
 gbs_profoak_Ch1:
@@ -314,8 +315,7 @@ gbs_profoak_Ch3.sub4:
 	sound_ret
 
 	.align 4
-	.global gbs_profoak_Header
-gbs_profoak_Header:
+gbs_profoak:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

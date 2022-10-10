@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_printer
 	.align 1
 
 gbs_printer_Ch3:
@@ -322,8 +323,7 @@ gbs_printer_Ch3.mainloop:
 	sound_loop 0, gbs_printer_Ch3.mainloop
 
 	.align 4
-	.global gbs_printer_Header
-gbs_printer_Header:
+gbs_printer:
 	.byte 1	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_registerphonenumber
 	.align 1
 
 gbs_registerphonenumber_Ch5:
@@ -27,8 +28,6 @@ gbs_registerphonenumber_Ch5:
 	note C_, 2
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_registerphonenumber_Ch6:
 	gbs_switch 5
 	toggle_sfx
@@ -51,8 +50,6 @@ gbs_registerphonenumber_Ch6:
 	note Gs, 2
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_registerphonenumber_Ch7:
 	gbs_switch 6
 	toggle_sfx
@@ -72,8 +69,6 @@ gbs_registerphonenumber_Ch7:
 	note Gs, 2
 	sound_ret
 
-	toggle_sfx @ unused
-
 gbs_registerphonenumber_Ch8:
 	gbs_switch 7
 	toggle_sfx
@@ -84,11 +79,8 @@ gbs_registerphonenumber_Ch8:
 	rest 8
 	sound_ret
 
-	toggle_sfx @ unused
-
 	.align 4
-	.global gbs_registerphonenumber_Header
-gbs_registerphonenumber_Header:
+gbs_registerphonenumber:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

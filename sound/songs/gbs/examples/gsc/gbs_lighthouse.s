@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lighthouse
 	.align 1
 
 gbs_lighthouse_Ch1:
@@ -312,8 +313,7 @@ gbs_lighthouse_Ch4.mainloop:
 	sound_loop 0, gbs_lighthouse_Ch4.mainloop
 
 	.align 4
-	.global gbs_lighthouse_Header
-gbs_lighthouse_Header:
+gbs_lighthouse:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

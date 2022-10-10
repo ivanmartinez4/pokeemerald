@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_successfulcapture
 	.align 1
 
 gbs_successfulcapture_Ch1:
@@ -25,8 +26,7 @@ gbs_successfulcapture_Ch3:
 	sound_jump gbs_wildpokemonvictory_Ch3.body
 
 	.align 4
-	.global gbs_successfulcapture_Header
-gbs_successfulcapture_Header:
+gbs_successfulcapture:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

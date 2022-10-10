@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_sprouttower
 	.align 1
 
 gbs_sprouttower_Ch1:
@@ -245,8 +246,7 @@ gbs_sprouttower_Ch4.mainloop:
 	sound_loop 0, gbs_sprouttower_Ch4.mainloop
 
 	.align 4
-	.global gbs_sprouttower_Header
-gbs_sprouttower_Header:
+gbs_sprouttower:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

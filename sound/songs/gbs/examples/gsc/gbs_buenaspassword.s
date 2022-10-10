@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_buenaspassword
 	.align 1
 
 gbs_buenaspassword_Ch1:
@@ -636,8 +637,7 @@ gbs_buenaspassword_Ch4.sub2:
 	sound_ret
 
 	.align 4
-	.global gbs_buenaspassword_Header
-gbs_buenaspassword_Header:
+gbs_buenaspassword:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

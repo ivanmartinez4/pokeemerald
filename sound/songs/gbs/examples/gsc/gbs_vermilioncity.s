@@ -1,8 +1,8 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_vermilioncity
 	.align 1
-
 
 gbs_vermilioncity_Ch1:
 	gbs_switch 0
@@ -339,8 +339,7 @@ gbs_vermilioncity_Ch3.sub2:
 	sound_ret
 
 	.align 4
-	.global gbs_vermilioncity_Header
-gbs_vermilioncity_Header:
+gbs_vermilioncity:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_mainmenu
 	.align 1
 
 gbs_mainmenu_Ch1:
@@ -148,8 +149,7 @@ gbs_mainmenu_Ch4.mainloop:
 	sound_loop 0, gbs_mainmenu_Ch4.mainloop
 
 	.align 4
-	.global gbs_mainmenu_Header
-gbs_mainmenu_Header:
+gbs_mainmenu:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

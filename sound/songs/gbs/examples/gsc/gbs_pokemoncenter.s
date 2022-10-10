@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_pokemoncenter
 	.align 1
 
 gbs_pokemoncenter_Ch1:
@@ -407,8 +408,7 @@ gbs_pokemoncenter_Ch4.mainloop:
 	sound_loop 0, gbs_pokemoncenter_Ch4.mainloop
 
 	.align 4
-	.global gbs_pokemoncenter_Header
-gbs_pokemoncenter_Header:
+gbs_pokemoncenter:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_rockethideout
 	.align 1
 
 gbs_rockethideout_Ch1:
@@ -312,8 +313,7 @@ gbs_rockethideout_Ch4.sub1:
 	sound_ret
 
 	.align 4
-	.global gbs_rockethideout_Header
-gbs_rockethideout_Header:
+gbs_rockethideout:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

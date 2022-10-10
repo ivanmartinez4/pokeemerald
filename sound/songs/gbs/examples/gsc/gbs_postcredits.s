@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_postcredits
 	.align 1
 
 gbs_postcredits_Ch1:
@@ -265,8 +266,7 @@ gbs_postcredits_Ch2.mainloop:
 	sound_loop 0, gbs_postcredits_Ch2.mainloop
 
 	.align 4
-	.global gbs_postcredits_Header
-gbs_postcredits_Header:
+gbs_postcredits:
 	.byte 2	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

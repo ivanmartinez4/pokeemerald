@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_evolutionintro
 	.align 1
 
 gbs_evolutionintro_Ch1:
@@ -35,8 +36,7 @@ gbs_evolutionintro_Ch2:
 	sound_ret
 
 	.align 4
-	.global gbs_evolutionintro_Header
-gbs_evolutionintro_Header:
+gbs_evolutionintro:
 	.byte 2	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_goldsilveropening
 	.align 1
 
 gbs_goldsilveropening_Ch1:
@@ -618,8 +619,7 @@ gbs_goldsilveropening_Ch3:
 	sound_ret
 
 	.align 4
-	.global gbs_goldsilveropening_Header
-gbs_goldsilveropening_Header:
+gbs_goldsilveropening:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

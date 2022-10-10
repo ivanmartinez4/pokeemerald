@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_sfx_intropichu
 	.align 1
 
 gbs_sfx_intropichu_Ch5:
@@ -14,8 +15,7 @@ gbs_sfx_intropichu_Ch5:
 	sound_ret
 
 	.align 4
-	.global gbs_sfx_intropichu_Header
-gbs_sfx_intropichu_Header:
+gbs_sfx_intropichu:
 	.byte 1	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

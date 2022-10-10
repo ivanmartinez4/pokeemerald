@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_gamecorner
 	.align 1
 
 gbs_gamecorner_Ch1:
@@ -809,8 +810,7 @@ gbs_gamecorner_Ch4.sub2:
 	sound_ret
 
 	.align 4
-	.global gbs_gamecorner_Header
-gbs_gamecorner_Header:
+gbs_gamecorner:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_mtmoonsquare
 	.align 1
 
 gbs_mtmoonsquare_Ch1:
@@ -110,8 +111,7 @@ gbs_mtmoonsquare_Ch2.loop4:
 	sound_loop 0, gbs_mtmoonsquare_Ch2.mainloop
 
 	.align 4
-	.global gbs_mtmoonsquare_Header
-gbs_mtmoonsquare_Header:
+gbs_mtmoonsquare:
 	.byte 2	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

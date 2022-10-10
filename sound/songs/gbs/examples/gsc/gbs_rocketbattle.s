@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_rocketbattle
 	.align 1
 
 gbs_rocketbattle_Ch1:
@@ -1033,8 +1034,7 @@ gbs_rocketbattle_Ch3.sub6:
 	sound_ret
 
 	.align 4
-	.global gbs_rocketbattle_Header
-gbs_rocketbattle_Header:
+gbs_rocketbattle:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

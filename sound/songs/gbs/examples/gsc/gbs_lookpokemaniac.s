@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_lookpokemaniac
 	.align 1
 
 gbs_lookpokemaniac_Ch1:
@@ -164,8 +165,7 @@ gbs_lookpokemaniac_Ch3.sub1:
 	sound_ret
 
 	.align 4
-	.global gbs_lookpokemaniac_Header
-gbs_lookpokemaniac_Header:
+gbs_lookpokemaniac:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

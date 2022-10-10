@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_suicunebattle
 	.align 1
 
 gbs_suicunebattle_Ch1:
@@ -2059,8 +2060,7 @@ gbs_suicunebattle_Ch3.mainloop:
 	sound_loop 0, gbs_suicunebattle_Ch3.mainloop
 
 	.align 4
-	.global gbs_suicunebattle_Header
-gbs_suicunebattle_Header:
+gbs_suicunebattle:
 	.byte 3	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

@@ -1,16 +1,17 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_CinnabarMansion
 	.align 1
 
 gbs_CinnabarMansion_Ch1:
 	gbs_switch 0
 	tempo 144
-	volume 7, 6
+	volume 7, 7
 	vibrato 11, 2, 5
 	duty_cycle 2
 
-gbs_CinnabarMansion_Ch1.branch_7ed19:
+gbs_CinnabarMansion_branch_7ed19:
 	note_type 12, 6, 2
 	octave 5
 	note E_, 1
@@ -31,7 +32,7 @@ gbs_CinnabarMansion_Ch1.branch_7ed19:
 	octave 5
 	note B_, 1
 	rest 2
-	sound_loop 14, gbs_CinnabarMansion_Ch1.branch_7ed19
+	sound_loop 14, gbs_CinnabarMansion_branch_7ed19
 	note_type 12, 10, 5
 	rest 16
 	rest 16
@@ -41,7 +42,8 @@ gbs_CinnabarMansion_Ch1.branch_7ed19:
 	octave 5
 	note B_, 1
 	note B_, 2
-	sound_loop 0, gbs_CinnabarMansion_Ch1.branch_7ed19
+	sound_loop 0, gbs_CinnabarMansion_branch_7ed19
+
 
 gbs_CinnabarMansion_Ch2:
 	gbs_switch 1
@@ -50,17 +52,17 @@ gbs_CinnabarMansion_Ch2:
 	vibrato 10, 2, 4
 	note_type 12, 12, 2
 
-gbs_CinnabarMansion_Ch2.branch_7ed48:
+gbs_CinnabarMansion_branch_7ed48:
 	rest 16
 	rest 16
-	sound_loop 4, gbs_CinnabarMansion_Ch2.branch_7ed48
+	sound_loop 4, gbs_CinnabarMansion_branch_7ed48
 
-gbs_CinnabarMansion_Ch2.branch_7ed4e:
+gbs_CinnabarMansion_branch_7ed4e:
 	note_type 12, 12, 2
 
-gbs_CinnabarMansion_Ch2.branch_7ed50:
-	sound_call gbs_CinnabarMansion_Ch2.branch_7ed6c
-	sound_loop 3, gbs_CinnabarMansion_Ch2.branch_7ed50
+gbs_CinnabarMansion_branch_7ed50:
+	sound_call gbs_CinnabarMansion_branch_7ed6c
+	sound_loop 3, gbs_CinnabarMansion_branch_7ed50
 	octave 3
 	note E_, 4
 	note Ds, 4
@@ -78,9 +80,9 @@ gbs_CinnabarMansion_Ch2.branch_7ed50:
 	note Gs, 4
 	note G_, 4
 	note Ds, 4
-	sound_loop 0, gbs_CinnabarMansion_Ch2.branch_7ed4e
+	sound_loop 0, gbs_CinnabarMansion_branch_7ed4e
 
-gbs_CinnabarMansion_Ch2.branch_7ed6c:
+gbs_CinnabarMansion_branch_7ed6c:
 	octave 3
 	note E_, 4
 	note Ds, 4
@@ -100,11 +102,12 @@ gbs_CinnabarMansion_Ch2.branch_7ed6c:
 	note As, 4
 	sound_ret
 
+
 gbs_CinnabarMansion_Ch3:
 	gbs_switch 2
 	note_type 12, 1, 1
 
-gbs_CinnabarMansion_Ch3.branch_7ed80:
+gbs_CinnabarMansion_branch_7ed80:
 	octave 2
 	note B_, 2
 	rest 2
@@ -140,13 +143,14 @@ gbs_CinnabarMansion_Ch3.branch_7ed80:
 	rest 2
 	note Ds, 2
 	rest 2
-	sound_loop 8, gbs_CinnabarMansion_Ch3.branch_7ed80
+	sound_loop 8, gbs_CinnabarMansion_branch_7ed80
 	note E_, 16
 	note Ds, 16
 	note G_, 16
 	note Gs, 8
 	note Ds, 8
-	sound_loop 0, gbs_CinnabarMansion_Ch3.branch_7ed80
+	sound_loop 0, gbs_CinnabarMansion_branch_7ed80
+
 
 gbs_CinnabarMansion_Ch4:
 	gbs_switch 3
@@ -157,7 +161,7 @@ gbs_CinnabarMansion_Ch4:
 	rest 16
 	rest 16
 
-gbs_CinnabarMansion_Ch4.branch_7edb5:
+gbs_CinnabarMansion_branch_7edb5:
 	drum_note 5, 2
 	drum_note 5, 2
 	drum_note 6, 4
@@ -176,11 +180,10 @@ gbs_CinnabarMansion_Ch4.branch_7edb5:
 	rest 10
 	rest 8
 	drum_note 7, 8
-	sound_loop 0, gbs_CinnabarMansion_Ch4.branch_7edb5
+	sound_loop 0, gbs_CinnabarMansion_branch_7edb5
 
 	.align 4
-	.global gbs_CinnabarMansion_Header
-gbs_CinnabarMansion_Header:
+gbs_CinnabarMansion:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority

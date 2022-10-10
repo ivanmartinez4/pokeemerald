@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 
 	.section .rodata
+	.global gbs_ssaqua
 	.align 1
 
 gbs_ssaqua_Ch1:
@@ -1175,8 +1176,7 @@ gbs_ssaqua_Ch4.sub3:
 	sound_ret
 
 	.align 4
-	.global gbs_ssaqua_Header
-gbs_ssaqua_Header:
+gbs_ssaqua:
 	.byte 4	@ NumTrks
 	.byte 0	@ NumBlks
 	.byte 0	@ Priority
