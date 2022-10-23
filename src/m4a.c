@@ -1,5 +1,7 @@
 #include <string.h>
 #include "gba/m4a_internal.h"
+#include "event_data.h"
+#include "constants/flags.h"
 
 extern const u8 gCgb3Vol[];
 
@@ -121,7 +123,7 @@ static const struct Song *GetSong(int songID, bool32 gbsEnabled)
     return &gSongTable[songID];
 }
 
-void m4aSongNumStart(u16 n, bool32 gbsEnabled)
+void m4aSongNumStart_GBS(u16 n, bool32 gbsEnabled)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *song = GetSong(n, gbsEnabled);
@@ -130,7 +132,12 @@ void m4aSongNumStart(u16 n, bool32 gbsEnabled)
     MPlayStart(mplay->info, song->header);
 }
 
-void m4aSongNumStartOrChange(u16 n, bool32 gbsEnabled)
+void m4aSongNumStart(u16 n)
+{
+    m4aSongNumStart_GBS(n, FlagGet(FLAG_SYS_GBS_ENABLED));
+}
+
+void m4aSongNumStartOrChange_GBS(u16 n, bool32 gbsEnabled)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *song = GetSong(n, gbsEnabled);
@@ -150,6 +157,11 @@ void m4aSongNumStartOrChange(u16 n, bool32 gbsEnabled)
     }
 }
 
+void m4aSongNumStartOrChange(u16 n, bool32 gbsEnabled)
+{
+    m4aSongNumStartOrChange_GBS(n, FlagGet(FLAG_SYS_GBS_ENABLED));
+}
+
 void m4aSongNumStartOrContinue(u16 n, bool32 gbsEnabled)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
@@ -164,7 +176,7 @@ void m4aSongNumStartOrContinue(u16 n, bool32 gbsEnabled)
         MPlayContinue(mplay->info);
 }
 
-void m4aSongNumStop(u16 n, bool32 gbsEnabled)
+void m4aSongNumStop_GBS(u16 n, bool32 gbsEnabled)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *song = GetSong(n, gbsEnabled);
@@ -172,6 +184,11 @@ void m4aSongNumStop(u16 n, bool32 gbsEnabled)
 
     if (mplay->info->songHeader == song->header)
         m4aMPlayStop(mplay->info);
+}
+
+void m4aSongNumStop(u16 n)
+{
+    m4aSongNumStop_GBS(n, FlagGet(FLAG_SYS_GBS_ENABLED));
 }
 
 void m4aSongNumContinue(u16 n, bool32 gbsEnabled)

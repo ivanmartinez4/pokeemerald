@@ -324,19 +324,19 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
             {
                 if (gTasks[taskId].tSeIndex)
                 {
-                    m4aSongNumStop(gTasks[taskId].tSeIndexOld, gTasks[taskId].tGBSounds);
-                    m4aSongNumStart(gTasks[taskId].tSeIndex, gTasks[taskId].tGBSounds);
+                    m4aSongNumStop_GBS(gTasks[taskId].tSeIndexOld, gTasks[taskId].tGBSounds);
+                    m4aSongNumStart_GBS(gTasks[taskId].tSeIndex, gTasks[taskId].tGBSounds);
                     gTasks[taskId].tSeIndexOld = gTasks[taskId].tSeIndex;
                 }
                 else
                 {
-                    m4aSongNumStop(gTasks[taskId].tSeIndexOld, gTasks[taskId].tGBSounds);
+                    m4aSongNumStop_GBS(gTasks[taskId].tSeIndexOld, gTasks[taskId].tGBSounds);
                     gTasks[taskId].tSeIndexOld = 0;
                 }
             }
             else if (gTasks[taskId].tSeIndex)
             {
-                m4aSongNumStart(gTasks[taskId].tSeIndex, gTasks[taskId].tGBSounds);
+                m4aSongNumStart_GBS(gTasks[taskId].tSeIndex, gTasks[taskId].tGBSounds);
                 gTasks[taskId].tSeIndexOld = gTasks[taskId].tSeIndex;
             }
         }
@@ -346,26 +346,26 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
             {
                 if (gTasks[taskId].tBgmIndex)
                 {
-                    m4aSongNumStop(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
-                    m4aSongNumStart(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
+                    m4aSongNumStop_GBS(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
+                    m4aSongNumStart_GBS(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
                     gTasks[taskId].tBgmIndexOld = gTasks[taskId].tBgmIndex;
                 }
                 else
                 {
-                    m4aSongNumStop(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
+                    m4aSongNumStop_GBS(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
                     gTasks[taskId].tBgmIndexOld = 0;
                 }
             }
             else if (gTasks[taskId].tBgmIndex)
             {
-                m4aSongNumStart(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
+                m4aSongNumStart_GBS(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
                 gTasks[taskId].tBgmIndexOld = gTasks[taskId].tBgmIndex;
             }
         }
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        m4aSongNumStart(SE_SELECT, FALSE);
+        m4aSongNumStart(SE_SELECT);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_ExitToTitleScreen;
     }
@@ -416,8 +416,8 @@ static bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
         gTasks[taskId].tGBSounds = !gTasks[taskId].tGBSounds;
         if (gTasks[taskId].tBgmIndex && gTasks[taskId].tBgmIndexOld)
         {
-            m4aSongNumStop(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1), !gTasks[taskId].tGBSounds);
-            m4aSongNumStart(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
+            m4aSongNumStop_GBS(gTasks[taskId].tBgmIndex + (MUS_LITTLEROOT_TEST - 1), !gTasks[taskId].tGBSounds);
+            m4aSongNumStart_GBS(gTasks[taskId].tBgmIndexOld + (MUS_LITTLEROOT_TEST - 1), gTasks[taskId].tGBSounds);
         }
     }
     else if (JOY_HELD(SELECT_BUTTON))

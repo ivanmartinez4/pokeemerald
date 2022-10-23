@@ -173,14 +173,13 @@ bool8 IsNotWaitingForBGMStop(void)
 void PlayFanfareByFanfareNum(u8 fanfareNum)
 {
     u16 songNum;
-    bool32 isGBSEnabled = FlagGet(FLAG_SYS_GBS_ENABLED);
     m4aMPlayStop(&gMPlayInfo_BGM);
     songNum = sFanfares[fanfareNum].songNum;
-    if (isGBSEnabled)
+    if (FlagGet(FLAG_SYS_GBS_ENABLED))
         sFanfareCounter = sFanfares[fanfareNum].durationGBS;
     else
         sFanfareCounter = sFanfares[fanfareNum].duration;
-    m4aSongNumStart(songNum, isGBSEnabled);
+    m4aSongNumStart(songNum);
 }
 
 bool8 WaitFanfare(bool8 stop)
@@ -195,7 +194,7 @@ bool8 WaitFanfare(bool8 stop)
         if (!stop)
             m4aMPlayContinue(&gMPlayInfo_BGM);
         else
-            m4aSongNumStart(MUS_DUMMY, FALSE);
+            m4aSongNumStart(MUS_DUMMY);
 
         return TRUE;
     }
@@ -248,16 +247,14 @@ static void CreateFanfareTask(void)
 
 void FadeInNewBGM(u16 songNum, u8 speed)
 {
-    bool32 isGBSEnabled;
     if (gDisableMusic)
         songNum = 0;
     if (songNum == MUS_NONE)
         songNum = 0;
-    isGBSEnabled = FlagGet(FLAG_SYS_GBS_ENABLED);
-    m4aSongNumStart(songNum, isGBSEnabled);
+    m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_BGM);
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0);
-    m4aSongNumStop(songNum, isGBSEnabled);
+    m4aSongNumStop(songNum);
     m4aMPlayFadeIn(&gMPlayInfo_BGM, speed);
 }
 
@@ -559,17 +556,17 @@ void PlayBGM(u16 songNum)
         songNum = 0;
     if (songNum == MUS_NONE)
         songNum = 0;
-    m4aSongNumStart(songNum, FlagGet(FLAG_SYS_GBS_ENABLED));
+    m4aSongNumStart(songNum);
 }
 
 void PlaySE(u16 songNum)
 {
-    m4aSongNumStart(songNum, FlagGet(FLAG_SYS_GBS_ENABLED));
+    m4aSongNumStart(songNum);
 }
 
 void PlaySE12WithPanning(u16 songNum, s8 pan)
 {
-    m4aSongNumStart(songNum, FlagGet(FLAG_SYS_GBS_ENABLED));
+    m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE1);
     m4aMPlayImmInit(&gMPlayInfo_SE2);
     m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
@@ -578,14 +575,14 @@ void PlaySE12WithPanning(u16 songNum, s8 pan)
 
 void PlaySE1WithPanning(u16 songNum, s8 pan)
 {
-    m4aSongNumStart(songNum, FlagGet(FLAG_SYS_GBS_ENABLED));
+    m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE1);
     m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
 }
 
 void PlaySE2WithPanning(u16 songNum, s8 pan)
 {
-    m4aSongNumStart(songNum, FlagGet(FLAG_SYS_GBS_ENABLED));
+    m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE2);
     m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, pan);
 }

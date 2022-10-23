@@ -854,7 +854,7 @@ static void SetLinkBattleEndCallbacks(void)
     {
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            m4aSongNumStop(SE_LOW_HEALTH, FALSE);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(CB2_InitEndLinkBattle);
@@ -867,7 +867,7 @@ static void SetLinkBattleEndCallbacks(void)
     {
         if (IsLinkTaskFinished())
         {
-            m4aSongNumStop(SE_LOW_HEALTH, FALSE);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(CB2_InitEndLinkBattle);
@@ -897,7 +897,7 @@ void SetBattleEndCallbacks(void)
         }
         else
         {
-            m4aSongNumStop(SE_LOW_HEALTH, FALSE);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);
@@ -1238,7 +1238,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
             u16 species;
             s32 expOnNextLvl;
 
-            m4aSongNumStop(SE_EXP, FALSE);
+            m4aSongNumStop(SE_EXP);
             level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
             currExp = GetMonData(&gPlayerParty[monId], MON_DATA_EXP);
             species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);

@@ -552,9 +552,9 @@ static void UpdateCGBTone1(struct GBSTrack *track, u16 pitch)
             // Original engine chooses to clamp calculation at nearest multiple of 0x100
             // Because of this, it only writes the lower byte if noteVibratoOverride is set
             // Either we replicate both behaviors exactly or just store both bytes
-            *frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
+            //*frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
 
-            //*frequencyControl = pitch;
+            *frequencyControl = pitch;
             track->noteDutyOverride = TRUE;
         }
 
@@ -586,9 +586,9 @@ static void UpdateCGBTone2(struct GBSTrack *track, u16 pitch)
             // Original engine chooses to clamp calculation at nearest multiple of 0x100
             // Because of this, it only writes the lower byte if noteVibratoOverride is set
             // Either we replicate both behaviors exactly or just store both bytes
-            *frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
+            //*frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
 
-            //*frequencyControl = pitch;
+            *frequencyControl = pitch;
             track->noteDutyOverride = TRUE;
         }
 
@@ -616,8 +616,8 @@ static void UpdateCGBWave(struct GBSTrack *track, u16 pitch)
         // Original engine chooses to clamp calculation at nearest multiple of 0x100
         // Because of this, it only writes the lower byte if noteVibratoOverride is set
         // Either we replicate both behaviors exactly or just store both bytes
-        *frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
-        //*frequencyControl = pitch;
+        //*frequencyControl = (*frequencyControl & 0xFF00) | (pitch & 0xFF);
+        *frequencyControl = pitch;
     }
 }
 

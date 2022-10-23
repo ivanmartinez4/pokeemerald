@@ -1101,7 +1101,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_INTRO_SOUND:
         if (IsCryFinished())
         {
-            m4aSongNumStop(MUS_EVOLUTION, FlagGet(FLAG_SYS_GBS_ENABLED));
+            m4aSongNumStop(MUS_EVOLUTION);
             PlaySE(MUS_EVOLUTION_INTRO);
             gTasks[taskId].tState++;
         }
