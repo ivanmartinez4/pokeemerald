@@ -3,8 +3,8 @@ voicegroup230:: @
 	voice_directsound 60, 0, DirectSoundWaveData_dp_whistle_c5_16, 255, 246, 78, 197	@ 127/ 90/ 70/118/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_reverscyn_16, 255, 0, 255, 16	@ 127/127/127/126/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_org5_c3_16, 255, 172, 235, 178	@ 127/122/122/120/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_puresquare_37, 240, 233, 191, 212	@ 120/110/110/115/ 64
-	voice_directsound 60, 0, DirectSoundWaveData_puresquare_12, 240, 233, 191, 212	@ 120/110/110/115/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_puresquare_37, 188, 233, 191, 212	@ 120/110/110/115/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_puresquare_12, 188, 233, 191, 212	@ 120/110/110/115/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 197, 255, 178	@ 127/120/127/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitminor60, 255, 197, 255, 178	@ 127/120/127/120/ 64
 	voice_keysplit_all voicegroup232				@ synth kick+snare

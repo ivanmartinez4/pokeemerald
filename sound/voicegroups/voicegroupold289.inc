@@ -33,7 +33,7 @@ voicegroup289:: @ used in: intro_1; evolution_intro; evolution; undella_winter; 
 	voice_keysplit voicegroupInst23, KeySplitTable60	@ strings 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 240, 242, 255, 208	@ 120/100/127/116/ 64	@ 50+ not used
+	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 188, 242, 255, 208	@ 120/100/127/116/ 64	@ 50+ not used
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst28, KeySplitTable111	@ harp 1

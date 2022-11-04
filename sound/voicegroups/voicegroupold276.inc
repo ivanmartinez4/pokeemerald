@@ -33,7 +33,7 @@ voicegroup276:: @ used in: title; black_city
 	voice_keysplit voicegroupInst23, KeySplitTable60	@ strings 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 240, 242, 255, 208	@ 120/100/127/116/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_hg_021cellog2, 188, 242, 255, 208	@ 120/100/127/116/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_keysplit voicegroupInst55, KeySplitTable67	@ flute 2 ||| 75
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy

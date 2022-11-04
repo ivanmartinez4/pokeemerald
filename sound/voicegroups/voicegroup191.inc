@@ -74,7 +74,7 @@ voicegroup191:: @ DPPt main
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sy_clarinet_c3_16, 255, 242, 159, 216	@ 127/100/100/114/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_puresquare_50, 255, 242, 101, 178	@ 124/100/ 80/120/ 64
 	voice_keysplit voicegroup226, KeySplitTable33	@ flute
-	voice_directsound 60, 0, DirectSoundWaveData_dp_woodpat_c4_16, 240, 246, 78, 149	@ 120/ 90/ 70/122/ 64
+	voice_directsound 60, 0, DirectSoundWaveData_dp_woodpat_c4_16, 188, 246, 78, 149	@ 120/ 90/ 70/122/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_basschoir36, 255, 197, 255, 178	@ 127/120/127/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_tenorchoir48, 255, 197, 255, 178	@ 127/120/127/120/ 64
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sopranochoir60, 255, 197, 255, 178	@ 127/120/127/120/ 64
