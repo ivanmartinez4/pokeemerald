@@ -325,6 +325,9 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
     }
 };
 
+/*  v-- Origin
+[0  +  ][1     ]   64x8
+*/
 static const struct Subsprite sHealthBar_Subsprites_Player[] =
 {
     {
