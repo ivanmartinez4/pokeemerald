@@ -30,7 +30,8 @@ build/
 .DS_Store
 *.ddump
 .idea/
-porymap.project.cfg
+porymap.*.cfg
+prefabs.json
 .vscode/
 *.a
 .fuse_hidden*
@@ -42,3 +43,5 @@ porymap.project.cfg
 *.diff
 *.sym
 *.js
+agbcc/
+/*.zip

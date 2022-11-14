@@ -1387,6 +1387,7 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 static void RemoveObjectEvent(struct ObjectEvent *objectEvent)
 {
     objectEvent->active = FALSE;
+    objectEvent->extra.asU16 = 0; // zero potential species info
     RemoveObjectEventInternal(objectEvent);
 }
 
@@ -1600,7 +1601,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     bool8 shiny;
     u8 paletteNum;
 
-    spriteTemplate = malloc(sizeof(struct SpriteTemplate));
+    spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
     if (graphicsId == OBJ_EVENT_GFX_OW_MON && GetFollowerInfo(&species, &form, &shiny)) {
         const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, form);
         spriteTemplate->tileTag = graphicsInfo->tileTag;
@@ -1622,7 +1623,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
         LoadObjectEventPalette(spriteTemplate->paletteTag);
 
     spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
-    free(spriteTemplate);
+    Free(spriteTemplate);
 
     if (spriteId != MAX_SPRITES && subspriteTables != NULL)
     {
