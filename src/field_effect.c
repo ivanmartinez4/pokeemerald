@@ -927,7 +927,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
     // force load unique tag here to avoid collision with follower pokemon
     u8 paletteSlot = AllocSpritePalette(FLDEFF_PAL_TAG_FIELD_MOVE_MON);
-    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, MON_PIC_NO_AFFINE_FRONT, x, y, paletteSlot, TAG_NONE);
+    u16 spriteId = CreateMonPicSprite(species, otId, personality, MON_PIC_NO_AFFINE_FRONT, x, y, paletteSlot, TAG_NONE);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_FIELD_MOVE_MON) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;

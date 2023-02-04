@@ -110,31 +110,6 @@ static void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 pale
         LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
-static u16 FreeAndDestroyPicSpriteInternal(u16 spriteId)
-{
-    u8 i;
-    u8 *framePics;
-    struct SpriteFrameImage *images;
-
-    for (i = 0; i < PICS_COUNT; i ++)
-    {
-        if (sSpritePics[i].spriteId == spriteId)
-            break;
-    }
-    if (i == PICS_COUNT)
-        return 0xFFFF;
-
-    framePics = sSpritePics[i].frames;
-    images = sSpritePics[i].images;
-    if (sSpritePics[i].paletteTag != TAG_NONE)
-        FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
-    DestroySprite(&gSprites[spriteId]);
-    Free(framePics);
-    Free(images);
-    sSpritePics[i] = sDummyPicData;
-    return 0;
-}
-
 static u16 LoadPicSpriteInWindow(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
     if (DecompressPic(species, personality, isFrontPic, (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))

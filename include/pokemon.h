@@ -89,6 +89,7 @@ enum {
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
     MON_DATA_RIBBONS,
+    MON_DATA_NATURE,
 };
 
 struct PokemonSubstruct0
