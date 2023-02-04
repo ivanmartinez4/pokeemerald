@@ -1419,7 +1419,7 @@ static void NamingScreen_CreateMonIcon(void)
     u8 index;
 
     LoadMonIconPalettes();
-    spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality, 1);
+    spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality);
     index = IndexOfSpritePaletteTag(56000); // POKE_ICON_BASE_PAL_TAG
     if (index < 16) {
       u32 otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);

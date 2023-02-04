@@ -3875,10 +3875,7 @@ static void Task_ChangeScreen(u8 taskId)
         maxMonIndex = sStorage->summaryMaxPos;
         mode = sStorage->summaryScreenMode;
         FreePokeStorageData();
-        if (mode == SUMMARY_MODE_NORMAL && boxMons == &sSavedMovingMon.box)
-            ShowPokemonSummaryScreenHandleDeoxys(mode, boxMons, monIndex, maxMonIndex, CB2_ReturnToPokeStorage);
-        else
-            ShowPokemonSummaryScreen(mode, boxMons, monIndex, maxMonIndex, CB2_ReturnToPokeStorage);
+        ShowPokemonSummaryScreen(mode, boxMons, monIndex, maxMonIndex, CB2_ReturnToPokeStorage);
         break;
     case SCREEN_CHANGE_NAME_BOX:
         FreePokeStorageData();
@@ -5355,7 +5352,7 @@ static u16 TryLoadMonIconTiles(u16 species)
     sStorage->iconSpeciesList[i] = species;
     sStorage->numIconsPerSpecies[i]++;
     offset = 16 * i;
-    CpuFastCopy(GetMonIconTiles(species, TRUE), (void *)(OBJ_VRAM0) + offset * TILE_SIZE_4BPP, 0x200);
+    CpuFastCopy(GetMonIconTiles(species), (void *)(OBJ_VRAM0) + offset * TILE_SIZE_4BPP, 0x200);
 
     return offset;
 }
@@ -8723,7 +8720,7 @@ static void MultiMove_SetIconToBg(u8 x, u8 y)
 
     if (species != SPECIES_NONE)
     {
-        const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
+        const u8 *iconGfx = GetMonIconPtr(species, personality);
         // u8 index = GetValidMonIconPalIndex(species) + 8;
         u8 index = 0 + 8;
 
