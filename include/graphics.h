@@ -3851,6 +3851,10 @@ extern const u32 gItemIconPalette_MagmaEmblem[];
 extern const u32 gItemIcon_OldSeaMap[];
 extern const u32 gItemIconPalette_OldSeaMap[];
 
+// New key items
+extern const u32 gItemIcon_GBPlayer[];
+extern const u32 gItemIconPalette_GBPlayer[];
+
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 

@@ -1,3 +1,5 @@
+#include "constants/songs.h"
+
 	.align 2
 
 gSongTable::
@@ -615,3 +617,20 @@ gSongTable::
 	.align 2
 dummy_song_header:
 	.byte 0, 0, 0, 0
+
+	.align 2
+gGBSSongTable::
+	song_gbs MUS_GSC_ROUTE38,			gbs_route37,			0, 0
+	song_gbs MUS_C_COMM_CENTER,			gbs_mobilecenter,		0, 0
+	song_gbs MUS_GSC_PEWTER,			gbs_viridiancity,		0, 0
+	song_gbs MUS_C_VS_LEGEND_BEAST,		gbs_suicunebattle,		0, 0
+	song_gbs MUS_OBTAIN_BADGE,			gbs_getbadge,			2, 2
+	song_gbs MUS_OBTAIN_ITEM,			gbs_item,				2, 2
+	song_gbs MUS_OBTAIN_TMHM,			gbs_gettm,				2, 2
+	song_gbs MUS_OCEANIC_MUSEUM,		gbs_OceanicMuseum,		0, 0
+	song_gbs MUS_RG_POKE_MANSION,		gbs_CinnabarMansion,	0, 0
+	song_gbs MUS_RG_VS_TRAINER,			gbs_TrainerBattle,		0, 0
+	song_gbs MUS_RG_SEVII_ROUTE,		gbs_lakeofrage,			0, 0
+	song_gbs MUS_RG_SEVII_45,			gbs_azaleatown,			0, 0
+	song_gbs MUS_RG_SEVII_67,			gbs_violetcity,			0, 0
+	.4byte 0xFFFFFFFF

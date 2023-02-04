@@ -203,7 +203,7 @@
 	struct_field o_MusicPlayerInfo_fadeOI, 2
 	struct_field o_MusicPlayerInfo_fadeOC, 2
 	struct_field o_MusicPlayerInfo_fadeOV, 2
-	struct_field o_MusicPlayerInfo_padding, 2
+	struct_field o_MusicPlayerInfo_gbsTempo, 2
 	struct_field o_MusicPlayerInfo_tracks, 4
 	struct_field o_MusicPlayerInfo_tone, 4
 	struct_field o_MusicPlayerInfo_ident, 4

@@ -7,11 +7,14 @@
 #include "pokemon.h"
 #include "constants/songs.h"
 #include "task.h"
+#include "constants/flags.h"
+#include "event_data.h"
 
 struct Fanfare
 {
     u16 songNum;
     u16 duration;
+    u16 durationGBS;
 };
 
 EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
@@ -34,24 +37,24 @@ static void Task_DuckBGMForPokemonCry(u8 taskId);
 static void RestoreBGMVolumeAfterPokemonCry(void);
 
 static const struct Fanfare sFanfares[] = {
-    [FANFARE_LEVEL_UP]            = { MUS_LEVEL_UP,             80 },
-    [FANFARE_OBTAIN_ITEM]         = { MUS_OBTAIN_ITEM,         160 },
-    [FANFARE_EVOLVED]             = { MUS_EVOLVED,             220 },
-    [FANFARE_OBTAIN_TMHM]         = { MUS_OBTAIN_TMHM,         220 },
-    [FANFARE_HEAL]                = { MUS_HEAL,                160 },
-    [FANFARE_OBTAIN_BADGE]        = { MUS_OBTAIN_BADGE,        340 },
-    [FANFARE_MOVE_DELETED]        = { MUS_MOVE_DELETED,        180 },
-    [FANFARE_OBTAIN_BERRY]        = { MUS_OBTAIN_BERRY,        120 },
-    [FANFARE_AWAKEN_LEGEND]       = { MUS_AWAKEN_LEGEND,       710 },
-    [FANFARE_SLOTS_JACKPOT]       = { MUS_SLOTS_JACKPOT,       250 },
-    [FANFARE_SLOTS_WIN]           = { MUS_SLOTS_WIN,           150 },
-    [FANFARE_TOO_BAD]             = { MUS_TOO_BAD,             160 },
-    [FANFARE_RG_POKE_FLUTE]       = { MUS_RG_POKE_FLUTE,       450 },
-    [FANFARE_RG_OBTAIN_KEY_ITEM]  = { MUS_RG_OBTAIN_KEY_ITEM,  170 },
-    [FANFARE_RG_DEX_RATING]       = { MUS_RG_DEX_RATING,       196 },
-    [FANFARE_OBTAIN_B_POINTS]     = { MUS_OBTAIN_B_POINTS,     313 },
-    [FANFARE_OBTAIN_SYMBOL]       = { MUS_OBTAIN_SYMBOL,       318 },
-    [FANFARE_REGISTER_MATCH_CALL] = { MUS_REGISTER_MATCH_CALL, 135 },
+    [FANFARE_LEVEL_UP]            = { MUS_LEVEL_UP,             80,  80 },
+    [FANFARE_OBTAIN_ITEM]         = { MUS_OBTAIN_ITEM,         160, 140 },
+    [FANFARE_EVOLVED]             = { MUS_EVOLVED,             220, 220 },
+    [FANFARE_OBTAIN_TMHM]         = { MUS_OBTAIN_TMHM,         220, 180 },
+    [FANFARE_HEAL]                = { MUS_HEAL,                160, 160 },
+    [FANFARE_OBTAIN_BADGE]        = { MUS_OBTAIN_BADGE,        340, 250 },
+    [FANFARE_MOVE_DELETED]        = { MUS_MOVE_DELETED,        180, 180 },
+    [FANFARE_OBTAIN_BERRY]        = { MUS_OBTAIN_BERRY,        120, 120 },
+    [FANFARE_AWAKEN_LEGEND]       = { MUS_AWAKEN_LEGEND,       710, 710 },
+    [FANFARE_SLOTS_JACKPOT]       = { MUS_SLOTS_JACKPOT,       250, 250 },
+    [FANFARE_SLOTS_WIN]           = { MUS_SLOTS_WIN,           150, 150 },
+    [FANFARE_TOO_BAD]             = { MUS_TOO_BAD,             160, 160 },
+    [FANFARE_RG_POKE_FLUTE]       = { MUS_RG_POKE_FLUTE,       450, 450 },
+    [FANFARE_RG_OBTAIN_KEY_ITEM]  = { MUS_RG_OBTAIN_KEY_ITEM,  170, 170 },
+    [FANFARE_RG_DEX_RATING]       = { MUS_RG_DEX_RATING,       196, 196 },
+    [FANFARE_OBTAIN_B_POINTS]     = { MUS_OBTAIN_B_POINTS,     313, 313 },
+    [FANFARE_OBTAIN_SYMBOL]       = { MUS_OBTAIN_SYMBOL,       318, 318 },
+    [FANFARE_REGISTER_MATCH_CALL] = { MUS_REGISTER_MATCH_CALL, 135, 135 },
 };
 
 void InitMapMusic(void)
@@ -156,16 +159,6 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sMapMusicFadeInSpeed = fadeInSpeed;
 }
 
-// Unused
-static void FadeInNewMapMusic(u16 songNum, u8 speed)
-{
-    FadeInNewBGM(songNum, speed);
-    sCurrentMapMusic = songNum;
-    sNextMapMusic = 0;
-    sMapMusicState = 2;
-    sMapMusicFadeInSpeed = 0;
-}
-
 bool8 IsNotWaitingForBGMStop(void)
 {
     if (sMapMusicState == 6)
@@ -182,7 +175,10 @@ void PlayFanfareByFanfareNum(u8 fanfareNum)
     u16 songNum;
     m4aMPlayStop(&gMPlayInfo_BGM);
     songNum = sFanfares[fanfareNum].songNum;
-    sFanfareCounter = sFanfares[fanfareNum].duration;
+    if (FlagGet(FLAG_SYS_GBS_ENABLED))
+        sFanfareCounter = sFanfares[fanfareNum].durationGBS;
+    else
+        sFanfareCounter = sFanfares[fanfareNum].duration;
     m4aSongNumStart(songNum);
 }
 
@@ -204,16 +200,10 @@ bool8 WaitFanfare(bool8 stop)
     }
 }
 
-// Unused
-void StopFanfareByFanfareNum(u8 fanfareNum)
-{
-    m4aSongNumStop(sFanfares[fanfareNum].songNum);
-}
-
 void PlayFanfare(u16 songNum)
 {
-    s32 i;
-    for (i = 0; (u32)i < ARRAY_COUNT(sFanfares); i++)
+    int i;
+    for (i = 0; i < ARRAY_COUNT(sFanfares); i++)
     {
         if (sFanfares[i].songNum == songNum)
         {
