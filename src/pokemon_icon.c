@@ -7,7 +7,7 @@
 
 #define POKE_ICON_BASE_PAL_TAG 56000
 
-#define INVALID_ICON_SPECIES SPECIES_OLD_UNOWN_J // Oddly specific, used when an icon should be a ?. Any of the 'old unown' would work
+#define INVALID_ICON_SPECIES SPECIES_NONE // Oddly specific, used when an icon should be a ?.
 
 struct MonIconSpriteTemplate
 {
@@ -225,7 +225,6 @@ const u8 *const gMonIconTable[] =
     [SPECIES_MURKROW] = gMonIcon_Murkrow,
     [SPECIES_SLOWKING] = gMonIcon_Slowking,
     [SPECIES_MISDREAVUS] = gMonIcon_Misdreavus,
-    [SPECIES_UNOWN] = gMonIcon_UnownA,
     [SPECIES_WOBBUFFET] = gMonIcon_Wobbuffet,
     [SPECIES_GIRAFARIG] = gMonIcon_Girafarig,
     [SPECIES_PINECO] = gMonIcon_Pineco,
@@ -276,31 +275,6 @@ const u8 *const gMonIconTable[] =
     [SPECIES_LUGIA] = gMonIcon_Lugia,
     [SPECIES_HO_OH] = gMonIcon_HoOh,
     [SPECIES_CELEBI] = gMonIcon_Celebi,
-    [SPECIES_OLD_UNOWN_B] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_C] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_D] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_E] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_F] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_G] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_H] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_I] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_J] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_K] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_L] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_M] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_N] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_O] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_P] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_Q] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_R] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_S] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_T] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_U] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_V] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_W] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_X] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_Y] = gMonIcon_QuestionMark,
-    [SPECIES_OLD_UNOWN_Z] = gMonIcon_QuestionMark,
     [SPECIES_TREECKO] = gMonIcon_Treecko,
     [SPECIES_GROVYLE] = gMonIcon_Grovyle,
     [SPECIES_SCEPTILE] = gMonIcon_Sceptile,
@@ -437,33 +411,6 @@ const u8 *const gMonIconTable[] =
     [SPECIES_DEOXYS] = gMonIcon_Deoxys,
     [SPECIES_CHIMECHO] = gMonIcon_Chimecho,
     [SPECIES_EGG] = gMonIcon_Egg,
-    [SPECIES_UNOWN_B] = gMonIcon_UnownB,
-    [SPECIES_UNOWN_C] = gMonIcon_UnownC,
-    [SPECIES_UNOWN_D] = gMonIcon_UnownD,
-    [SPECIES_UNOWN_E] = gMonIcon_UnownE,
-    [SPECIES_UNOWN_F] = gMonIcon_UnownF,
-    [SPECIES_UNOWN_G] = gMonIcon_UnownG,
-    [SPECIES_UNOWN_H] = gMonIcon_UnownH,
-    [SPECIES_UNOWN_I] = gMonIcon_UnownI,
-    [SPECIES_UNOWN_J] = gMonIcon_UnownJ,
-    [SPECIES_UNOWN_K] = gMonIcon_UnownK,
-    [SPECIES_UNOWN_L] = gMonIcon_UnownL,
-    [SPECIES_UNOWN_M] = gMonIcon_UnownM,
-    [SPECIES_UNOWN_N] = gMonIcon_UnownN,
-    [SPECIES_UNOWN_O] = gMonIcon_UnownO,
-    [SPECIES_UNOWN_P] = gMonIcon_UnownP,
-    [SPECIES_UNOWN_Q] = gMonIcon_UnownQ,
-    [SPECIES_UNOWN_R] = gMonIcon_UnownR,
-    [SPECIES_UNOWN_S] = gMonIcon_UnownS,
-    [SPECIES_UNOWN_T] = gMonIcon_UnownT,
-    [SPECIES_UNOWN_U] = gMonIcon_UnownU,
-    [SPECIES_UNOWN_V] = gMonIcon_UnownV,
-    [SPECIES_UNOWN_W] = gMonIcon_UnownW,
-    [SPECIES_UNOWN_X] = gMonIcon_UnownX,
-    [SPECIES_UNOWN_Y] = gMonIcon_UnownY,
-    [SPECIES_UNOWN_Z] = gMonIcon_UnownZ,
-    [SPECIES_UNOWN_EMARK] = gMonIcon_UnownExclamationMark,
-    [SPECIES_UNOWN_QMARK] = gMonIcon_UnownQuestionMark,
 };
 
 const u8 gMonIconPaletteIndices[] =
@@ -669,7 +616,6 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_MURKROW] = 2,
     [SPECIES_SLOWKING] = 0,
     [SPECIES_MISDREAVUS] = 0,
-    [SPECIES_UNOWN] = 0,
     [SPECIES_WOBBUFFET] = 0,
     [SPECIES_GIRAFARIG] = 1,
     [SPECIES_PINECO] = 0,
@@ -720,31 +666,6 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_LUGIA] = 0,
     [SPECIES_HO_OH] = 1,
     [SPECIES_CELEBI] = 1,
-    [SPECIES_OLD_UNOWN_B] = 0,
-    [SPECIES_OLD_UNOWN_C] = 0,
-    [SPECIES_OLD_UNOWN_D] = 0,
-    [SPECIES_OLD_UNOWN_E] = 0,
-    [SPECIES_OLD_UNOWN_F] = 0,
-    [SPECIES_OLD_UNOWN_G] = 0,
-    [SPECIES_OLD_UNOWN_H] = 0,
-    [SPECIES_OLD_UNOWN_I] = 0,
-    [SPECIES_OLD_UNOWN_J] = 0,
-    [SPECIES_OLD_UNOWN_K] = 0,
-    [SPECIES_OLD_UNOWN_L] = 0,
-    [SPECIES_OLD_UNOWN_M] = 0,
-    [SPECIES_OLD_UNOWN_N] = 0,
-    [SPECIES_OLD_UNOWN_O] = 0,
-    [SPECIES_OLD_UNOWN_P] = 0,
-    [SPECIES_OLD_UNOWN_Q] = 0,
-    [SPECIES_OLD_UNOWN_R] = 0,
-    [SPECIES_OLD_UNOWN_S] = 0,
-    [SPECIES_OLD_UNOWN_T] = 0,
-    [SPECIES_OLD_UNOWN_U] = 0,
-    [SPECIES_OLD_UNOWN_V] = 0,
-    [SPECIES_OLD_UNOWN_W] = 0,
-    [SPECIES_OLD_UNOWN_X] = 0,
-    [SPECIES_OLD_UNOWN_Y] = 0,
-    [SPECIES_OLD_UNOWN_Z] = 0,
     [SPECIES_TREECKO] = 1,
     [SPECIES_GROVYLE] = 0,
     [SPECIES_SCEPTILE] = 1,
@@ -881,33 +802,6 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_DEOXYS] = 0,
     [SPECIES_CHIMECHO] = 0,
     [SPECIES_EGG] = 1,
-    [SPECIES_UNOWN_B] = 0,
-    [SPECIES_UNOWN_C] = 0,
-    [SPECIES_UNOWN_D] = 0,
-    [SPECIES_UNOWN_E] = 0,
-    [SPECIES_UNOWN_F] = 0,
-    [SPECIES_UNOWN_G] = 0,
-    [SPECIES_UNOWN_H] = 0,
-    [SPECIES_UNOWN_I] = 0,
-    [SPECIES_UNOWN_J] = 0,
-    [SPECIES_UNOWN_K] = 0,
-    [SPECIES_UNOWN_L] = 0,
-    [SPECIES_UNOWN_M] = 0,
-    [SPECIES_UNOWN_N] = 0,
-    [SPECIES_UNOWN_O] = 0,
-    [SPECIES_UNOWN_P] = 0,
-    [SPECIES_UNOWN_Q] = 0,
-    [SPECIES_UNOWN_R] = 0,
-    [SPECIES_UNOWN_S] = 0,
-    [SPECIES_UNOWN_T] = 0,
-    [SPECIES_UNOWN_U] = 0,
-    [SPECIES_UNOWN_V] = 0,
-    [SPECIES_UNOWN_W] = 0,
-    [SPECIES_UNOWN_X] = 0,
-    [SPECIES_UNOWN_Y] = 0,
-    [SPECIES_UNOWN_Z] = 0,
-    [SPECIES_UNOWN_EMARK] = 0,
-    [SPECIES_UNOWN_QMARK] = 0,
 };
 
 const struct SpritePalette gMonIconPaletteTable[] =
@@ -1086,61 +980,21 @@ u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s1
     return spriteId;
 }
 
-u16 GetIconSpecies(u16 species, u32 personality)
+u16 GetIconSpecies(u16 species)
 {
     u16 result;
 
-    if (species == SPECIES_UNOWN)
-    {
-        u16 letter = GetUnownLetterByPersonality(personality);
-        if (letter == 0)
-            letter = SPECIES_UNOWN;
-        else
-            letter += (SPECIES_UNOWN_B - 1);
-        result = letter;
-    }
+    if (species > NUM_SPECIES)
+        result = INVALID_ICON_SPECIES;
     else
-    {
-        if (species > NUM_SPECIES)
-            result = INVALID_ICON_SPECIES;
-        else
-            result = species;
-    }
+        result = species;
 
     return result;
 }
 
-u16 GetUnownLetterByPersonality(u32 personality)
-{
-    if (!personality)
-        return 0;
-    else
-        return GET_UNOWN_LETTER(personality);
-}
-
-u16 GetIconSpeciesNoPersonality(u16 species)
-{
-    u16 value;
-
-    if (MailSpeciesToSpecies(species, &value) == SPECIES_UNOWN)
-    {
-        if (value == 0)
-            value += SPECIES_UNOWN;
-        else
-            value += (SPECIES_UNOWN_B - 1);
-        return value;
-    }
-    else
-    {
-        if (species > NUM_SPECIES)
-            species = INVALID_ICON_SPECIES;
-        return GetIconSpecies(species, 0);
-    }
-}
-
 const u8 *GetMonIconPtr(u16 species, u32 personality)
 {
-    return GetMonIconTiles(GetIconSpecies(species, personality));
+    return GetMonIconTiles(GetIconSpecies(species));
 }
 
 void FreeAndDestroyMonIconSprite(struct Sprite *sprite)

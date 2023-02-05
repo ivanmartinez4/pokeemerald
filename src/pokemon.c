@@ -74,21 +74,6 @@ EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GF
 
 #include "data/battle_moves.h"
 
-// Used in an unreferenced function in RS.
-// Unreferenced here and in FRLG.
-struct CombinedMove
-{
-    u16 move1;
-    u16 move2;
-    u16 newMove;
-};
-
-static const struct CombinedMove sCombinedMoves[2] =
-{
-    {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE},
-    {0xFFFF, 0xFFFF, 0xFFFF}
-};
-
 // NOTE: The order of the elements in the 3 arrays below is irrelevant.
 // To reorder the pokedex, see the values in include/constants/pokedex.h.
 
@@ -299,7 +284,6 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(MURKROW),
     SPECIES_TO_HOENN(SLOWKING),
     SPECIES_TO_HOENN(MISDREAVUS),
-    SPECIES_TO_HOENN(UNOWN),
     SPECIES_TO_HOENN(WOBBUFFET),
     SPECIES_TO_HOENN(GIRAFARIG),
     SPECIES_TO_HOENN(PINECO),
@@ -350,31 +334,6 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(LUGIA),
     SPECIES_TO_HOENN(HO_OH),
     SPECIES_TO_HOENN(CELEBI),
-    SPECIES_TO_HOENN(OLD_UNOWN_B),
-    SPECIES_TO_HOENN(OLD_UNOWN_C),
-    SPECIES_TO_HOENN(OLD_UNOWN_D),
-    SPECIES_TO_HOENN(OLD_UNOWN_E),
-    SPECIES_TO_HOENN(OLD_UNOWN_F),
-    SPECIES_TO_HOENN(OLD_UNOWN_G),
-    SPECIES_TO_HOENN(OLD_UNOWN_H),
-    SPECIES_TO_HOENN(OLD_UNOWN_I),
-    SPECIES_TO_HOENN(OLD_UNOWN_J),
-    SPECIES_TO_HOENN(OLD_UNOWN_K),
-    SPECIES_TO_HOENN(OLD_UNOWN_L),
-    SPECIES_TO_HOENN(OLD_UNOWN_M),
-    SPECIES_TO_HOENN(OLD_UNOWN_N),
-    SPECIES_TO_HOENN(OLD_UNOWN_O),
-    SPECIES_TO_HOENN(OLD_UNOWN_P),
-    SPECIES_TO_HOENN(OLD_UNOWN_Q),
-    SPECIES_TO_HOENN(OLD_UNOWN_R),
-    SPECIES_TO_HOENN(OLD_UNOWN_S),
-    SPECIES_TO_HOENN(OLD_UNOWN_T),
-    SPECIES_TO_HOENN(OLD_UNOWN_U),
-    SPECIES_TO_HOENN(OLD_UNOWN_V),
-    SPECIES_TO_HOENN(OLD_UNOWN_W),
-    SPECIES_TO_HOENN(OLD_UNOWN_X),
-    SPECIES_TO_HOENN(OLD_UNOWN_Y),
-    SPECIES_TO_HOENN(OLD_UNOWN_Z),
     SPECIES_TO_HOENN(TREECKO),
     SPECIES_TO_HOENN(GROVYLE),
     SPECIES_TO_HOENN(SCEPTILE),
@@ -715,7 +674,6 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(MURKROW),
     SPECIES_TO_NATIONAL(SLOWKING),
     SPECIES_TO_NATIONAL(MISDREAVUS),
-    SPECIES_TO_NATIONAL(UNOWN),
     SPECIES_TO_NATIONAL(WOBBUFFET),
     SPECIES_TO_NATIONAL(GIRAFARIG),
     SPECIES_TO_NATIONAL(PINECO),
@@ -766,31 +724,6 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(LUGIA),
     SPECIES_TO_NATIONAL(HO_OH),
     SPECIES_TO_NATIONAL(CELEBI),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_B),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_C),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_D),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_E),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_F),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_G),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_H),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_I),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_J),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_K),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_L),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_M),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_N),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_O),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_P),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_Q),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_R),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_S),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_T),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_U),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_V),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_W),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_X),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_Y),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_Z),
     SPECIES_TO_NATIONAL(TREECKO),
     SPECIES_TO_NATIONAL(GROVYLE),
     SPECIES_TO_NATIONAL(SCEPTILE),
@@ -1276,7 +1209,6 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
     HOENN_TO_NATIONAL(MURKROW),
     HOENN_TO_NATIONAL(SLOWKING),
     HOENN_TO_NATIONAL(MISDREAVUS),
-    HOENN_TO_NATIONAL(UNOWN),
     HOENN_TO_NATIONAL(PINECO),
     HOENN_TO_NATIONAL(FORRETRESS),
     HOENN_TO_NATIONAL(DUNSPARCE),
@@ -1317,31 +1249,6 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
     HOENN_TO_NATIONAL(LUGIA),
     HOENN_TO_NATIONAL(HO_OH),
     HOENN_TO_NATIONAL(CELEBI),
-    HOENN_TO_NATIONAL(OLD_UNOWN_B),
-    HOENN_TO_NATIONAL(OLD_UNOWN_C),
-    HOENN_TO_NATIONAL(OLD_UNOWN_D),
-    HOENN_TO_NATIONAL(OLD_UNOWN_E),
-    HOENN_TO_NATIONAL(OLD_UNOWN_F),
-    HOENN_TO_NATIONAL(OLD_UNOWN_G),
-    HOENN_TO_NATIONAL(OLD_UNOWN_H),
-    HOENN_TO_NATIONAL(OLD_UNOWN_I),
-    HOENN_TO_NATIONAL(OLD_UNOWN_J),
-    HOENN_TO_NATIONAL(OLD_UNOWN_K),
-    HOENN_TO_NATIONAL(OLD_UNOWN_L),
-    HOENN_TO_NATIONAL(OLD_UNOWN_M),
-    HOENN_TO_NATIONAL(OLD_UNOWN_N),
-    HOENN_TO_NATIONAL(OLD_UNOWN_O),
-    HOENN_TO_NATIONAL(OLD_UNOWN_P),
-    HOENN_TO_NATIONAL(OLD_UNOWN_Q),
-    HOENN_TO_NATIONAL(OLD_UNOWN_R),
-    HOENN_TO_NATIONAL(OLD_UNOWN_S),
-    HOENN_TO_NATIONAL(OLD_UNOWN_T),
-    HOENN_TO_NATIONAL(OLD_UNOWN_U),
-    HOENN_TO_NATIONAL(OLD_UNOWN_V),
-    HOENN_TO_NATIONAL(OLD_UNOWN_W),
-    HOENN_TO_NATIONAL(OLD_UNOWN_X),
-    HOENN_TO_NATIONAL(OLD_UNOWN_Y),
-    HOENN_TO_NATIONAL(OLD_UNOWN_Z),
 };
 
 const struct SpindaSpot gSpindaSpotGraphics[] =
@@ -1386,7 +1293,6 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 
 #include "data/pokemon/tmhm_learnsets.h"
 #include "data/pokemon/trainer_class_lookups.h"
-#include "data/pokemon/cry_ids.h"
 #include "data/pokemon/experience_tables.h"
 #include "data/pokemon/species_info.h"
 #include "data/pokemon/level_up_learnsets.h"
@@ -1597,7 +1503,6 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_MURKROW - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_SLOWKING - 1]    = ANIM_SHRINK_GROW,
     [SPECIES_MISDREAVUS - 1]  = ANIM_V_SLIDE_WOBBLE,
-    [SPECIES_UNOWN - 1]       = ANIM_ZIGZAG_FAST,
     [SPECIES_WOBBUFFET - 1]   = ANIM_DEEP_V_SQUISH_AND_BOUNCE,
     [SPECIES_GIRAFARIG - 1]   = ANIM_V_JUMPS_BIG,
     [SPECIES_PINECO - 1]      = ANIM_SWING_CONCAVE,
@@ -2298,24 +2203,10 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
 }
 
-void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
+void CreateMonWithGenderNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature)
 {
     u32 personality;
 
-    if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
-    {
-        u16 actualLetter;
-
-        do
-        {
-            personality = Random32();
-            actualLetter = GET_UNOWN_LETTER(personality);
-        }
-        while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(species, personality)
-            || actualLetter != unownLetter - 1);
-    }
-    else
     {
         do
         {
@@ -3900,9 +3791,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (substruct3->worldRibbon << 26);
         }
         break;
-    case MON_DATA_NATURE:
-        return boxMon->personality % 25;
-        break;
     default:
         break;
     }
@@ -3954,10 +3842,6 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         SET8(mon->mail);
         break;
     case MON_DATA_SPECIES2:
-        break;
-    case MON_DATA_NATURE: // Calculate stats after settings
-        SetBoxMonData(&mon->box, field, data);
-        CalculateMonStats(mon);
         break;
     default:
         SetBoxMonData(&mon->box, field, data);
@@ -4224,81 +4108,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         substruct3->spAttackIV = (ivs >> 20) & MAX_IV_MASK;
         substruct3->spDefenseIV = (ivs >> 25) & MAX_IV_MASK;
         break;
-    }
-    case MON_DATA_NATURE:
-    {
-      u32 pid = boxMon->personality;
-      u32 otId = boxMon->otId;
-      s8 diff = (data[0] % 25) - (pid % 25); // difference between new nature and current nature, [-24,24]
-      bool8 preserveShiny = FALSE;
-      bool8 preserveLetter = FALSE;
-      u16 shinyValue = HIHALF(pid) ^ LOHALF(pid);
-      s32 tweak;
-      u32 pidTemp;
-      // See https://bulbapedia.bulbagarden.net/wiki/Personality_value#Nature
-      // Goal here is to preserve as much of the PID as possible
-      // To preserve gender & substruct order, we add/subtract multiples of 5376 that is 0 % 256, 0 % 24, 1 % 25
-      // i.e, to increase the nature by n % 25, we add n*5376 % 19200 (LCM of 24, 25, 256) to the pid
-      // Ability number is determined by parity and so adding multiples of 5376 preserves it
-      // TODO: For genderless pokemon, 576/600 can be used instead of 5376/19200
-      if (diff == 0) // No change
-        break;
-      else if (diff < 0)
-        diff = 25+diff;
-      tweak = (diff*5376) % 19200;
-      pidTemp = pid + tweak;
-      // If the pokemon is shiny or if changing the PID would make it shiny, preserve its shiny value
-      if (IsShinyOtIdPersonality(otId, pid) || IsShinyOtIdPersonality(otId, pidTemp))
-        preserveShiny = TRUE;
-      if (substruct0->species == SPECIES_UNOWN) // Preserve Unown letter
-        preserveLetter = TRUE;
-      if (preserveShiny && preserveLetter) { // honestly though, how many shiny Unown are out there ?
-        while (pidTemp > pid) {
-          if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-            if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-              break;
-          pidTemp += 19200;
-        }
-      } else if (preserveShiny) {
-        while (pidTemp > pid) {
-          if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-            break;
-          pidTemp += 19200;
-        }
-      } else if (preserveLetter) {
-        while (pidTemp > pid) {
-          if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-            break;
-          pidTemp += 19200;
-        }
-      }
-      if (pidTemp < pid) { // overflow; search backwards
-        tweak -= 19200;
-        pidTemp = pid + tweak;
-        if (preserveShiny && preserveLetter) {
-          while (pidTemp < pid) {
-            if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-              if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-                break;
-            pidTemp -= 19200;
-          }
-        } else if (preserveShiny) {
-          while (pidTemp < pid) {
-            if ((HIHALF(pidTemp) ^ LOHALF(pidTemp) ^ shinyValue) < SHINY_ODDS)
-              break;
-            pidTemp -= 19200;
-          }
-        } else if (preserveLetter) {
-          while (pidTemp < pid) {
-            if (GET_UNOWN_LETTER(pidTemp) == GET_UNOWN_LETTER(pid))
-              break;
-            pidTemp -= 19200;
-          }
-        }
-      }
-      if (pid % 24 == pidTemp % 24 || pid % 256 == pidTemp % 256)
-        boxMon->personality = pidTemp;
-      break;
     }
     default:
         break;
@@ -5592,17 +5401,6 @@ u16 HoennToNationalOrder(u16 hoennNum)
     return sHoennToNationalOrder[hoennNum - 1];
 }
 
-u16 SpeciesToCryId(u16 species)
-{
-    if (species <= SPECIES_CELEBI - 1)
-        return species;
-
-    if (species < SPECIES_TREECKO - 1)
-        return SPECIES_UNOWN - 1;
-
-    return gSpeciesIdToCryId[species - (SPECIES_TREECKO - 1)];
-}
-
 // Spots can be drawn on Spinda's color indexes 1, 2, or 3
 #define FIRST_SPOT_COLOR 1
 #define LAST_SPOT_COLOR  3
@@ -6819,8 +6617,6 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
     {
         GetSetPokedexFlag(nationalNum, caseId);
-        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
-            gSaveBlock2Ptr->pokedex.unownPersonality = personality;
         if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_SPINDA)
             gSaveBlock2Ptr->pokedex.spindaPersonality = personality;
     }
@@ -6844,8 +6640,7 @@ bool8 HasTwoFramesAnimation(u16 species)
 {
     return (species != SPECIES_CASTFORM
          && species != SPECIES_DEOXYS
-         && species != SPECIES_SPINDA
-         && species != SPECIES_UNOWN);
+         && species != SPECIES_SPINDA);
 }
 
 static bool8 ShouldSkipFriendshipChange(void)

@@ -1722,10 +1722,6 @@ struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or
 static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species, u8 form) {
   const struct ObjectEventGraphicsInfo *graphicsInfo;
   switch (species) {
-    case SPECIES_UNOWN: // Letters >A are defined as species >= NUM_SPECIES, so are not contiguous with A
-      form %= NUM_UNOWN_FORMS;
-      graphicsInfo = &gPokemonObjectGraphics[form ? SPECIES_UNOWN_B + form - 1 : species];
-      break;
     case SPECIES_CASTFORM: // Sunny, rainy, snowy forms stored separately
       graphicsInfo = &gCastformObjectGraphics[form % NUM_CASTFORM_FORMS];
       break;
@@ -1836,9 +1832,6 @@ static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
     *form = 0; // default
     switch (*species)
     {
-    case SPECIES_UNOWN:
-        *form = GET_UNOWN_LETTER(mon->box.personality);
-        break;
     case SPECIES_CASTFORM: // form is based on overworld weather
         *form = GetOverworldCastformForm();
         break;

@@ -473,7 +473,7 @@ void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
         sMailRead->layout = &sMailLayouts_Tall[sMailRead->mailType];
         break;
     }
-    species = MailSpeciesToSpecies(mail->species, buffer);
+    species = MailSpeciesToSpecies(mail->species);
     if (species > SPECIES_NONE && species < NUM_SPECIES)
     {
         switch (sMailRead->mailType)
@@ -601,7 +601,7 @@ static bool8 MailReadBuildGraphics(void)
             gPaletteFade.bufferTransferDisabled = TRUE;
             break;
         case 17:
-            icon = GetIconSpeciesNoPersonality(sMailRead->mail->species);
+            icon = GetIconSpecies(sMailRead->mail->species);
             switch (sMailRead->iconType)
             {
             case ICON_TYPE_BEAD:
@@ -745,7 +745,7 @@ static void CB2_ExitMailReadFreeVars(void)
         {
         case ICON_TYPE_BEAD:
         case ICON_TYPE_DREAM:
-            FreeMonIconPalette(GetIconSpeciesNoPersonality(sMailRead->mail->species));
+            FreeMonIconPalette(GetIconSpecies(sMailRead->mail->species));
             FreeAndDestroyMonIconSprite(&gSprites[sMailRead->monIconSpriteId]);
         }
         memset(sMailRead, 0, sizeof(*sMailRead));

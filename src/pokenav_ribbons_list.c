@@ -227,14 +227,6 @@ static s32 GetRibbonsMonListCount(void)
     return list->monList->listCount;
 }
 
-//unused
-static s32 GetMonRibbonSelectedMonData(void)
-{
-    struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
-    s32 idx = PokenavList_GetSelectedIndex();
-    return list->monList->monData[idx].data;
-}
-
 static s32 GetRibbonListMenuCurrIndex(void)
 {
     struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);

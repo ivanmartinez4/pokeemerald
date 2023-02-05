@@ -1187,10 +1187,6 @@ Cry_Misdreavus::
 	.incbin "sound/direct_sound_samples/cries/misdreavus.bin"
 
 	.align 2
-Cry_Unown::
-	.incbin "sound/direct_sound_samples/cries/unown.bin"
-
-	.align 2
 Cry_Wobbuffet::
 	.incbin "sound/direct_sound_samples/cries/wobbuffet.bin"
 
@@ -1447,20 +1443,12 @@ Cry_Altaria::
 	.incbin "sound/direct_sound_samples/cries/altaria.bin"
 
 	.align 2
-Cry_Unused265::
-	.incbin "sound/direct_sound_samples/cries/unused_265.bin"
-
-	.align 2
 Cry_Taillow::
 	.incbin "sound/direct_sound_samples/cries/taillow.bin"
 
 	.align 2
 Cry_Swellow::
 	.incbin "sound/direct_sound_samples/cries/swellow.bin"
-
-	.align 2
-Cry_Unused268::
-	.incbin "sound/direct_sound_samples/cries/unused_268.bin"
 
 	.align 2
 Cry_Spinda::

@@ -490,7 +490,7 @@ static void CreateCardSprites(void)
     // Create icon sprite
     if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
     {
-        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0);
+        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpecies(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0);
         gSprites[sWonderCardData->monIconSpriteId].oam.priority = 2;
     }
 
@@ -505,7 +505,7 @@ static void CreateCardSprites(void)
             sWonderCardData->stampSpriteIds[i][1] = SPRITE_NONE;
             sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_StampShadow, 216 - 32 * i, 144, 8);
             if (sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i] != SPECIES_NONE)
-                sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i]),
+                sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpecies(sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i]),
                                                                                SpriteCallbackDummy,
                                                                                216 - 32 * i,
                                                                                136, 0);

@@ -6,8 +6,6 @@
 #include "text.h"
 #include "international_string_util.h"
 
-#define UNOWN_OFFSET 30000
-
 void ClearAllMail(void)
 {
     u8 i;
@@ -69,7 +67,7 @@ u8 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
 
             species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
             personality = GetBoxMonData(&mon->box, MON_DATA_PERSONALITY);
-            gSaveBlock1Ptr->mail[id].species = SpeciesToMailSpecies(species, personality);
+            gSaveBlock1Ptr->mail[id].species = SpeciesToMailSpecies(species);
             gSaveBlock1Ptr->mail[id].itemId = itemId;
             SetMonData(mon, MON_DATA_MAIL, &id);
             SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
@@ -80,31 +78,16 @@ u8 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
     return MAIL_NONE;
 }
 
-u16 SpeciesToMailSpecies(u16 species, u32 personality)
+u16 SpeciesToMailSpecies(u16 species)
 {
-    if (species == SPECIES_UNOWN)
-    {
-        u32 species = GetUnownLetterByPersonality(personality) + UNOWN_OFFSET;
-        return species;
-    }
-
     return species;
 }
 
-u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
+u16 MailSpeciesToSpecies(u16 mailSpecies)
 {
     u16 result;
-
-    if (mailSpecies >= UNOWN_OFFSET && mailSpecies < UNOWN_OFFSET + NUM_UNOWN_FORMS)
-    {
-        result = SPECIES_UNOWN;
-        *buffer = mailSpecies - UNOWN_OFFSET;
-    }
-    else
-    {
-        result = mailSpecies;
-    }
-
+    result = mailSpecies;
+    
     return result;
 }
 
