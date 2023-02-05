@@ -20,10 +20,6 @@ CableClub_Text_RecordCornerUsingLinkCable::
 	.string "You can use the RECORD CORNER with\n"
 	.string "others using a GBA Game Link cable.$"
 
-@ Unused
-CableClub_Text_CloseThisMenu:
-	.string "Close this menu.$"
-
 CableClub_Text_NeedTwoMonsForDoubleBattle:
 	.string "For a DOUBLE BATTLE, you must\n"
 	.string "have at least two POKéMON.$"
@@ -53,11 +49,6 @@ gText_ConfirmStartLinkWithXPlayers::
 gText_AwaitingLinkup::
 	.string "Awaiting linkup…\n"
 	.string "… … B Button: Cancel$"
-
-@ Unused
-CableClub_Text_OkayToSaveProgress::
-	.string "Your progress must be saved before\n"
-	.string "linking. Is it okay to save?$"
 
 CableClub_Text_PleaseEnter:
 	.string "Please enter.$"
@@ -177,14 +168,6 @@ CableClub_Text_ParticipantsStepUpToCounter:
 	.string "Participants are asked to step up\n"
 	.string "to the reception counter.$"
 
-@ Unused
-CableClub_Text_Hello:
-	.string "Hello!$"
-
-@ Unused
-CableClub_Text_PleaseWait:
-	.string "Please wait.$"
-
 CableClub_Text_YouMayTradeHere::
 	.string "You may trade your POKéMON here\n"
 	.string "with another TRAINER.$"
@@ -201,21 +184,8 @@ CableClub_Text_CanMixRecords::
 	.string "The records of two to four players\n"
 	.string "can be mixed together.$"
 
-@ Unused
-CableClub_Text_GuideToVariousServices:
-	.string "A guide to the WIRELESS CLUB's\n"
-	.string "various services.$"
-
 CableClub_Text_CancelSelectedItem::
 	.string "Cancels the selected MENU item.$"
-
-@ Unused
-CableClub_Text_WhichBattleMode:
-	.string "Which battle mode would you like?$"
-
-@ Unused
-CableClub_Text_ReturnsToPreviousStep:
-	.string "Returns to the previous step.$"
 
 CableClub_Text_NeedBerryForBerryCrush:
 	.string "To use the BERRY CRUSH service,\n"

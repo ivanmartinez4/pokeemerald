@@ -191,47 +191,6 @@ gText_TemporarilyStopCrowdExcited::
 	.string "Temporarily stops the\n"
 	.string "crowd from growing excited.$"
 
-@ Unused move names
-
-gText_RainDance::
-	.string "RAIN DANCE$"
-
-gText_Rage::
-	.string "RAGE$"
-
-gText_FocusEnergy::
-	.string "FOCUS ENERGY$"
-
-gText_Hypnosis::
-	.string "HYPNOSIS$"
-
-gText_Softboiled::
-	.string "SOFTBOILED$"
-
-gText_HornAttack::
-	.string "HORN ATTACK$"
-
-gText_SwordsDance::
-	.string "SWORDS DANCE$"
-
-gText_Conversion::
-	.string "CONVERSION$"
-
-gText_SunnyDay::
-	.string "SUNNY DAY$"
-
-gText_Rest2::
-	.string "REST$"
-
-gText_Vicegrip::
-	.string "VICEGRIP$"
-
-gText_DefenseCurl::
-	.string "DEFENSE CURL$"
-
-gText_LockOn::
-	.string "LOCK-ON$"
-
 @ Contest type names
 
 gContestMoveTypeCoolText::
@@ -269,54 +228,6 @@ gText_AllOutOfAppealTime::
 	.string "We're all out of\n"
 	.string "Appeal Time!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
-@ Unused appeal result texts
-
-gText_ButAppealWasJammed::
-	.string "But the appeal was\n"
-	.string "jammed.$"
-
-gText_FollowedAnotherMonsLead::
-	.string "It followed another\n"
-	.string "POKéMON's lead.$"
-
-gText_ButItMessedUp::
-	.string "But it messed up.$"
-
-gText_WentBetterThanUsual::
-	.string "It went better than\n"
-	.string "usual.$"
-
-gText_JudgeLookedAwayForSomeReason::
-	.string "The JUDGE looked away\n"
-	.string "for some reason.$"
-
-gText_WorkedHardToBuildOnPastMistakes::
-	.string "It worked hard to build on\n"
-	.string "past mistakes.$"
-
-gText_CantMakeAnyMoreMoves::
-	.string "It can't make any more\n"
-	.string "moves.$"
-
-gText_WorkedFrighteninglyWell::
-	.string "It worked frighteningly\n"
-	.string "well.$"
-
-gText_WorkedHardAsStandoutMon::
-	.string "It worked as hard as the\n"
-	.string "standout POKéMON.$"
-
-gText_JudgedLookedOnExpectantly::
-	.string "The JUDGE looked on\n"
-	.string "expectantly.$"
-
-gText_WorkedRatherWell::
-	.string "It worked rather well.$"
-
-gText_WorkedLittleBetterThanUsual::
-	.string "It worked a little better\n"
-	.string "than usual.$"
-
 @ Round result texts
 
 gText_MonFailedToStandOutAtAll::
@@ -342,11 +253,6 @@ gText_MonCommandedTotalAttention::
 gText_MonHasntMadeItsAppeal::
 	.string "{STR_VAR_1} hasn't made\n"
 	.string "its appeal.{PAUSE_UNTIL_PRESS}$"
-
-@ Unused
-gText_AnticipationSwelledForMonsAppealNext2::
-	.string "Anticipation swelled for\n"
-	.string "{STR_VAR_1}'s appeal next.$"
 
 gText_EmptyContestString::
 	.string "$"
@@ -748,10 +654,6 @@ gText_Contest_Smartness::
 
 gText_Contest_Toughness::
 	.string "toughness$"
-
-@ Unused
-gText_Tension::
-	.string "TENSION$"
 
 gText_CoolMove::
 	.string "COOL Move$"

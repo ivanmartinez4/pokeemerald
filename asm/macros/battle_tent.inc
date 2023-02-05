@@ -52,14 +52,6 @@
 	special CallFallarborTentFunction
 	.endm
 
-	@ Unused. Set the prize item to be given
-	.macro fallarbortent_setprize unusedArg:req, itemId:req
-	setvar VAR_0x8004, FALLARBOR_TENT_FUNC_SET_PRIZE
-	setvar VAR_0x8005, \unusedArg
-	setvar VAR_0x8006, \itemId
-	special CallFallarborTentFunction
-	.endm
-
 	@ Save the game and set the challenge status
 	.macro fallarbortent_save challengeStatus:req
 	setvar VAR_0x8004, FALLARBOR_TENT_FUNC_SAVE
@@ -97,14 +89,6 @@
 	@ Get the current prize item id
 	.macro slateporttent_getprize
 	setvar VAR_0x8004, SLATEPORT_TENT_FUNC_GET_PRIZE
-	special CallSlateportTentFunction
-	.endm
-
-	@ Unused. Set the prize item to be given
-	.macro slateporttent_setprize unusedArg:req, itemId:req
-	setvar VAR_0x8004, SLATEPORT_TENT_FUNC_SET_PRIZE
-	setvar VAR_0x8005, \unusedArg
-	setvar VAR_0x8006, \itemId
 	special CallSlateportTentFunction
 	.endm
 

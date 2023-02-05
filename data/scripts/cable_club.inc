@@ -367,12 +367,6 @@ CableClub_EventScript_EnterColosseum::
 	waitstate
 	end
 
-@ Unused
-CableClub_EventScript_PlayerApproachLinkRoomRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomRight
-	waitmovement 0
-	return
-
 CableClub_EventScript_WarpTo4PColosseum::
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_4P, 5, 8
@@ -567,13 +561,6 @@ MossdeepCity_GameCorner_1F_EventScript_AbortMinigame::
 	release
 	end
 
-@ Unused
-CableClub_EventScript_CableClubWarp::
-	special SetCableClubWarp
-	special DoCableClubWarp
-	waitstate
-	end
-
 CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants::
 	special CloseLink
 	msgbox CableClub_Text_IncorrectNumberOfParticipants, MSGBOX_DEFAULT
@@ -635,11 +622,6 @@ Movement_PlayerApproachLinkRoomLeft:
 
 Movement_PlayerEnterLinkRoom:
 	walk_up
-	step_end
-
-@ Unused
-Movement_PlayerFaceAttendantLeft:
-	face_left
 	step_end
 
 Movement_PlayerFaceAttendantRight:

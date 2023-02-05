@@ -119,14 +119,6 @@ AI_AvoidStartle_Encourage:
 AI_AvoidStartle_End:
 	end
 
-@ Unused
-AI_PreferMostAppealingMove:
-	if_most_appealing_move AI_PreferMostAppealingMove_Encourage
-	end
-AI_PreferMostAppealingMove_Encourage:
-	score +10
-	end
-
 @ Discourages using the same move multiple times if it would get boring
 AI_CheckBoring:
 	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_CheckBoring_NotBoring
@@ -316,19 +308,6 @@ AI_CGM_RepetitionNotBoring:
 	if_user_order_not_eq MON_4, AI_CGM_End
 	if_random_less_than 50, AI_CGM_End
 	score +15
-	end
-
-AI_CGM_Unused:
-	if_last_appeal AI_CGM_Unused_LastAppeal
-	if_random_less_than 220, AI_CGM_Unused_Discourage
-	score +10
-	end
-AI_CGM_Unused_LastAppeal:
-	if_random_less_than 20, AI_CGM_End
-	score +15
-	end
-AI_CGM_Unused_Discourage:
-	score -20
 	end
 
 @ Enourages improving condition, esp if user has moves better with good condition or on 1st appeal

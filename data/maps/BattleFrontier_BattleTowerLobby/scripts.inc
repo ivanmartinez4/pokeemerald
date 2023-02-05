@@ -651,16 +651,6 @@ BattleFrontier_BattleTowerLobby_Movement_PlayerEnterElevator:
 	set_invisible
 	step_end
 
-@ Unused
-BattleFrontier_BattleTowerLobby_Movement_UnusedEnterElevator:
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	set_invisible
-	step_end
-
 BattleFrontier_BattleTowerLobby_EventScript_BufferModeText::
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleTowerLobby_EventScript_BufferTextSingle
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleTowerLobby_EventScript_BufferTextDouble
@@ -922,10 +912,6 @@ BattleFrontier_BattleTowerLobby_EventScript_RulesMultiLink::
 BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 	releaseall
 	end
-
-@ Unused
-BattleFrontier_BattleTowerLobby_Text_DirectYouToBattleRoom:
-	.string "I'll direct you to your BATTLE ROOM now.$"
 
 BattleFrontier_BattleTowerLobby_Text_DidntSaveBeforeQuitting:
 	.string "Excuse me!\p"
