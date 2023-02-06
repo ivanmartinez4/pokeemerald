@@ -206,11 +206,6 @@ CableClub_Text_UnionRoomAdapterNotConnected:
 	.string "Adapter is not connected properly.\p"
 	.string "Please do come again.$"
 
-@ Unused
-CableClub_Text_OhExcuseMe:
-	.string "Oh…\n"
-	.string "Excuse me!$"
-
 CableClub_Text_PlayerIsWaiting:
 	.string "It appears as if {STR_VAR_1} is playing\n"
 	.string "right now.\l"
@@ -272,11 +267,6 @@ MossdeepCity_GameCorner_1F_Text_AllGoodToGo:
 	.string "Okay, you're all good to go.\n"
 	.string "Don't let the others beat you!$"
 
-@ Unused
-MossdeepCity_GameCorner_1F_Text_LeavingDoComeAgain:
-	.string "Are you leaving now?\n"
-	.string "Do come again!$"
-
 MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon:
 	.string "It doesn't look like you have any\n"
 	.string "POKéMON that you can enter…\p"
@@ -295,11 +285,6 @@ MossdeepCity_GameCorner_1F_Text_ShortJumpingPokemonAllowed:
 MossdeepCity_GameCorner_1F_Text_OnlyDodrioAllowed:
 	.string "DODRIO BERRY-PICKING is a game that \n"
 	.string "only DODRIO may enter.$"
-
-@ Unused
-MossdeepCity_GameCorner_1F_Text_RetryPlease:
-	.string "Could you retry this from the start\n"
-	.string "again, please?$"
 
 CableClub_Text_WelcomeWhichDirectCornerRoom:
 	.string "Welcome to the POKéMON WIRELESS\n"

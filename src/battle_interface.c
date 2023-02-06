@@ -318,152 +318,6 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
     }
 };
 
-/*   v-- Origin
-[0   +         ][1     ]
-[              ][      ]
-[              ][      ]
-[______________][______]   96x40
-[2     ][3     ][4     ]
-*/
-static const struct Subsprite sUnused_Subsprites_0[] =
-{
-    {
-        .x = -16,
-        .y = 0,
-        .shape = SPRITE_SHAPE(64x32),
-        .size = SPRITE_SIZE(64x32),
-        .tileOffset = 0,
-        .priority = 1
-    },
-    {
-        .x = 48,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x32),
-        .size = SPRITE_SIZE(32x32),
-        .tileOffset = 32,
-        .priority = 1
-    },
-    {
-        .x = -16,
-        .y = 32,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 48,
-        .priority = 1
-    },
-    {
-        .x = 16,
-        .y = 32,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 52,
-        .priority = 1
-    },
-    {
-        .x = 48,
-        .y = 32,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 56,
-        .priority = 1
-    }
-};
-
-// This subsprite table has the same layout as above, but offset by 64 base tiles.
-static const struct Subsprite sUnused_Subsprites_2[] =
-{
-    {
-        .x = -16,
-        .y = 0,
-        .shape = SPRITE_SHAPE(64x32),
-        .size = SPRITE_SIZE(64x32),
-        .tileOffset = 64,
-        .priority = 1
-    },
-    {
-        .x = 48,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x32),
-        .size = SPRITE_SIZE(32x32),
-        .tileOffset = 96,
-        .priority = 1
-    },
-    {
-        .x = -16,
-        .y = 32,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 112,
-        .priority = 1
-    },
-    {
-        .x = 16,
-        .y = 32,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 116,
-        .priority = 1
-    },
-    {
-        .x = 48,
-        .y = 32,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 120,
-        .priority = 1
-    }
-};
-
-/*   v-- Origin
-[0   +         ][1     ]
-[              ][      ]
-[              ][      ]
-[              ][      ]   96x32
-*/
-static const struct Subsprite sUnused_Subsprites_1[] =
-{
-    {
-        .x = -16,
-        .y = 0,
-        .shape = SPRITE_SHAPE(64x32),
-        .size = SPRITE_SIZE(64x32),
-        .tileOffset = 0,
-        .priority = 1
-    },
-    {
-        .x = 48,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x32),
-        .size = SPRITE_SIZE(32x32),
-        .tileOffset = 32,
-        .priority = 1
-    }
-};
-
-// Same as above
-static const struct Subsprite sUnused_Subsprites_3[] =
-{
-    {
-        .x = -16,
-        .y = 0,
-        .shape = SPRITE_SHAPE(64x32),
-        .size = SPRITE_SIZE(64x32),
-        .tileOffset = 0,
-        .priority = 1
-    },
-    {
-        .x = 48,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x32),
-        .size = SPRITE_SIZE(32x32),
-        .tileOffset = 32,
-        .priority = 1
-    }
-};
-
-/*  v-- Origin
-[0  +  ][1     ]   64x8
-*/
 static const struct Subsprite sHealthBar_Subsprites_Player[] =
 {
     {
@@ -514,14 +368,6 @@ static const struct Subsprite sHealthBar_Subsprites_Opponent[] =
         .tileOffset = 8,
         .priority = 1
     }
-};
-
-static const struct SubspriteTable sUnused_SubspriteTable[] =
-{
-    {ARRAY_COUNT(sUnused_Subsprites_0), sUnused_Subsprites_0},
-    {ARRAY_COUNT(sUnused_Subsprites_1), sUnused_Subsprites_1},
-    {ARRAY_COUNT(sUnused_Subsprites_2), sUnused_Subsprites_2},
-    {ARRAY_COUNT(sUnused_Subsprites_3), sUnused_Subsprites_3}
 };
 
 static const struct SubspriteTable sHealthBar_SubspriteTables[] =
@@ -654,24 +500,6 @@ static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
     &gHealthboxElementsGfxTable[HEALTHBOX_GFX_STATUS_BALL], 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
 };
 
-// unused oam data
-static const struct OamData sOamData_Unused64x32 =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(64x32),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(64x32),
-    .tileNum = 0,
-    .priority = 1,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-
 static const struct OamData sOamData_StatusSummaryBalls =
 {
     .y = 0,
@@ -764,11 +592,6 @@ static const struct WindowTemplate sHealthboxWindowTemplate = {
     .baseBlock = 0
 };
 
-static s32 DummiedOutFunction(s16 unused1, s16 unused2, s32 unused3)
-{
-    return 9;
-}
-
 static void Debug_DrawNumber(s16 number, u16 *dest, bool8 unk)
 {
     s8 i, j;
@@ -836,14 +659,6 @@ static void Debug_DrawNumber(s16 number, u16 *dest, bool8 unk)
             }
         }
     }
-}
-
-// Unused
-static void Debug_DrawNumberPair(s16 number1, s16 number2, u16 *dest)
-{
-    dest[4] = 0x1E;
-    Debug_DrawNumber(number2, dest, FALSE);
-    Debug_DrawNumber(number1, dest + 5, TRUE);
 }
 
 // Because the healthbox is too large to fit into one sprite, it is divided into two sprites.
@@ -2182,7 +1997,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
             maxHp = GetMonData(mon, MON_DATA_MAX_HP);
             currHp = GetMonData(mon, MON_DATA_HP);
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxHp, currHp, 0);
-            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR, 0);
+            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR);
         }
         isDoubles = IsDoubleBattle();
         if (!isDoubles && (elementId == HEALTHBOX_EXP_BAR || elementId == HEALTHBOX_ALL))
@@ -2200,7 +2015,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
             currExpBarValue = exp - currLevelExp;
             maxExpBarValue = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLevelExp;
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxExpBarValue, currExpBarValue, isDoubles);
-            MoveBattleBar(battlerId, healthboxSpriteId, EXP_BAR, 0);
+            MoveBattleBar(battlerId, healthboxSpriteId, EXP_BAR);
         }
         if (elementId == HEALTHBOX_NICK || elementId == HEALTHBOX_ALL)
             UpdateNickInHealthbox(healthboxSpriteId, mon);
@@ -2221,7 +2036,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
             maxHp = GetMonData(mon, MON_DATA_MAX_HP);
             currHp = GetMonData(mon, MON_DATA_HP);
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxHp, currHp, 0);
-            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR, 0);
+            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR);
         }
         if (elementId == HEALTHBOX_NICK || elementId == HEALTHBOX_ALL)
             UpdateNickInHealthbox(healthboxSpriteId, mon);
@@ -2233,7 +2048,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 #define B_EXPBAR_PIXELS 64
 #define B_HEALTHBAR_PIXELS 48
 
-s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
+s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar)
 {
     s32 currentBarValue;
 
@@ -2454,28 +2269,6 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     }
 
     return filledPixels;
-}
-
-// Unused
-// These two functions seem as if they were made for testing the health bar.
-static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *dest, s32 unused)
-{
-    s16 ret, var;
-
-    ret = CalcNewBarValue(barInfo->maxValue,
-                    barInfo->oldValue,
-                    barInfo->receivedValue,
-                    currValue, B_HEALTHBAR_PIXELS / 8, 1);
-    Debug_TestHealthBar_Helper(barInfo, currValue, dest);
-
-    if (barInfo->maxValue < B_HEALTHBAR_PIXELS)
-        var = *currValue >> 8;
-    else
-        var = *currValue;
-
-    DummiedOutFunction(barInfo->maxValue, var, unused);
-
-    return ret;
 }
 
 static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, s32 *currValue, u16 *dest)

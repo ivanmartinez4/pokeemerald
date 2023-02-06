@@ -42,12 +42,6 @@ CableClub_EventScript_DistributeEonTicket::
 	release
 	end
 
-@ Unused?
-CableClub_EventScript_MysteryGiftThankYou2::
-	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_DEFAULT
-	release
-	end
-
 CableClub_OnWarp:
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
@@ -247,11 +241,6 @@ CableClub_EventScript_WelcomeToCableClub::
 	message CableClub_Text_WelcomeWhichCableClubService
 	waitmessage
 	delay 28
-	goto CableClub_EventScript_SelectCableClubRoom
-	end
-
-CableClub_EventScript_UnusedWelcomeToCableClub::
-	msgbox CableClub_Text_WhichService, MSGBOX_DEFAULT
 	goto CableClub_EventScript_SelectCableClubRoom
 	end
 
@@ -593,11 +582,6 @@ Movement_AttendantFaceDown:
 	face_down
 	step_end
 
-@ Unused
-Movement_AttendantFaceRight:
-	face_right
-	step_end
-
 Movement_AttendantFaceLeft:
 	face_left
 	step_end
@@ -605,13 +589,6 @@ Movement_AttendantFaceLeft:
 Movement_PlayerExitLinkRoom:
 	walk_down
 	walk_down
-	step_end
-
-@ Functionally unused
-Movement_PlayerApproachLinkRoomRight:
-	walk_right
-	walk_up
-	walk_up
 	step_end
 
 Movement_PlayerApproachLinkRoomLeft:

@@ -2432,11 +2432,6 @@ bool8 GiveMonArtistRibbon(void)
     }
 }
 
-bool8 IsContestDebugActive(void)
-{
-    return FALSE; // gUnknown_0203856C in pokeruby
-}
-
 void ShowContestEntryMonPic(void)
 {
     const struct CompressedSpritePalette *palette;

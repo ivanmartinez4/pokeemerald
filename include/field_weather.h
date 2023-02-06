@@ -93,12 +93,10 @@ struct Weather
     u8 fogHSpritesCreated;
     // Ash
     u16 ashBaseSpritesX;
-    u16 ashUnused;
     u8 ashSpritesCreated;
     // Sandstorm
     u32 sandstormXOffset;
     u32 sandstormYOffset;
-    u16 sandstormUnused;
     u16 sandstormBaseSpritesX;
     u16 sandstormPosY;
     u16 sandstormWaveIndex;
@@ -132,7 +130,6 @@ struct Weather
     s16 droughtLastBrightnessStage;
     s16 droughtTimer;
     s16 droughtState;
-    u8 droughtUnused[9];
     s8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
 };
@@ -154,7 +151,6 @@ void ApplyWeatherColorMapIfIdle_Gradual(u8 colorMapIndex, u8 targetColorMapIndex
 void FadeScreen(u8 mode, s8 delay);
 bool8 IsWeatherNotFadingIn(void);
 void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog);
-void ApplyWeatherColorMapToPal(u8 paletteIndex);
 void ApplyWeatherColorMapToPals(u8 startPalIndex, u8 numPalettes);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
 void ResetDroughtWeatherPaletteLoading(void);

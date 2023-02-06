@@ -95,7 +95,6 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom::
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom
-	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS, BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom
 	return
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom::
@@ -104,12 +103,6 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom::
 	return
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom::
-	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
-	waitstate
-	return
-
-@ Unnecessary duplicate of the above
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom::
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
 	waitstate
 	return
