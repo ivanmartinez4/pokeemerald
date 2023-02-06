@@ -424,14 +424,14 @@ static void InitTradeMenu(void)
         LoadUserWindowBorderGfx_(0, 20, BG_PLTT_ID(12));
         LoadUserWindowBorderGfx(2, 1, BG_PLTT_ID(14));
         // LoadMonIconPalettes();
-        sTradeMenuData->bufferPartyState = 0;
+        sTradeMenu->bufferPartyState = 0;
         sTradeMenu->callbackId = CB_MAIN_MENU;
-        sTradeMenuData->neverRead_70 = 0;
-        sTradeMenuData->drawPartyState[TRADE_PLAYER] = 0;
-        sTradeMenuData->drawPartyState[TRADE_PARTNER] = 0;
+        sTradeMenu->neverRead_70 = 0;
+        sTradeMenu->drawSelectedMonState[TRADE_PLAYER] = 0;
+        sTradeMenu->drawSelectedMonState[TRADE_PARTNER] = 0;
         sTradeMenu->playerConfirmStatus = STATUS_NONE;
         sTradeMenu->partnerConfirmStatus = STATUS_NONE;
-        sTradeMenuData->timer = 0;
+        sTradeMenu->timer = 0;
     }
 }
 
@@ -576,7 +576,7 @@ static void CB2_CreateTradeMenu(void)
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
 
-            gSprites[sTradeMenuData->partySpriteIds[TRADE_PLAYER][i]].oam.paletteNum = index;
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PLAYER][i]].oam.paletteNum = index;
         }
 
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PARTNER]; i++)
@@ -592,7 +592,7 @@ static void CB2_CreateTradeMenu(void)
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
-            gSprites[sTradeMenuData->partySpriteIds[TRADE_PARTNER][i]].oam.paletteNum = index;
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PARTNER][i]].oam.paletteNum = index;
         }
         gMain.state++;
         break;
@@ -776,7 +776,7 @@ static void CB2_ReturnToTradeMenu(void)
                                                          (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
-            gSprites[sTradeMenuData->partySpriteIds[TRADE_PLAYER][i]].oam.paletteNum = index;
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PLAYER][i]].oam.paletteNum = index;
         }
 
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PARTNER]; i++)
@@ -792,7 +792,7 @@ static void CB2_ReturnToTradeMenu(void)
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
-            gSprites[sTradeMenuData->partySpriteIds[TRADE_PARTNER][i]].oam.paletteNum = index;
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PARTNER][i]].oam.paletteNum = index;
         }
         gMain.state++;
         break;
@@ -3824,7 +3824,7 @@ static bool8 DoTradeAnim_Cable(void)
     case STATE_POKEBALL_ARRIVE_WAIT:
         if (gSprites[sTradeAnim->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
-            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[sTradeAnim->monSpecies[TRADE_PARTNER]],
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[sTradeAnim->monSpecies[TRADE_PARTNER]],
                                         gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
                                         sTradeAnim->monSpecies[TRADE_PARTNER],
                                         sTradeAnim->monPersonalities[TRADE_PARTNER]);
@@ -4321,7 +4321,7 @@ static bool8 DoTradeAnim_Wireless(void)
     case STATE_POKEBALL_ARRIVE_WAIT:
         if (gSprites[sTradeAnim->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
-            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[sTradeAnim->monSpecies[TRADE_PARTNER]],
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[sTradeAnim->monSpecies[TRADE_PARTNER]],
                                         gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
                                         sTradeAnim->monSpecies[TRADE_PARTNER],
                                         sTradeAnim->monPersonalities[TRADE_PARTNER]);
