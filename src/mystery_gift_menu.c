@@ -48,13 +48,8 @@ static const u32 sTextboxBorder_Gfx[] = INCBIN_U32("graphics/interface/mystery_g
 struct MysteryGiftTaskData
 {
     u16 var; // Multipurpose
-    u16 unused1;
-    u16 unused2;
-    u16 unused3;
     u8 state;
     u8 textState;
-    u8 unused4;
-    u8 unused5;
     bool8 isWonderNews;
     bool8 sourceIsFriend;
     u8 msgId;
@@ -347,13 +342,6 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
-static const u8 *const sUnusedMenuTexts[] = {
-    gText_VarietyOfEventsImportedWireless,
-    gText_WonderCardsInPossession,
-    gText_ReadNewsThatArrived,
-    gText_ReturnToTitle
-};
-
 ALIGNED(2) static const u8 sTextColors_TopMenu[]      = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
 ALIGNED(2) static const u8 sTextColors_TopMenu_Copy[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
 ALIGNED(2) static const u8 sMG_Ereader_TextColor_2[]  = { TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY };
@@ -476,24 +464,7 @@ void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void)
 
 void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 useCancel)
 {
-    const u8 * header;
-    const u8 * options;
-    FillWindowPixelBuffer(0, 0);
-    if (!isEReader)
-    {
-        header = gText_MysteryGift;
-        options = !useCancel ? gText_PickOKExit : gText_PickOKCancel;
-    }
-    else
-    {
-        header = gJPText_MysteryGift;
-        options = gJPText_DecideStop;
-    }
 
-    AddTextPrinterParameterized4(0, FONT_NORMAL, 4, 1, 0, 0, sTextColors_TopMenu, TEXT_SKIP_DRAW, header);
-    AddTextPrinterParameterized4(0, FONT_SMALL, GetStringRightAlignXOffset(FONT_SMALL, options, 0xDE), 1, 0, 0, sTextColors_TopMenu, TEXT_SKIP_DRAW, options);
-    CopyWindowToVram(0, COPYWIN_GFX);
-    PutWindowTilemap(0);
 }
 
 void MG_DrawTextBorder(u8 windowId)
@@ -588,24 +559,6 @@ static void ShowDownArrow(void)
     DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
 }
 
-// Unused
-static bool32 HideDownArrowAndWaitButton(u8 * textState)
-{
-    switch (*textState)
-    {
-    case 0:
-        HideDownArrow();
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
-            (*textState)++;
-        break;
-    case 1:
-        ShowDownArrow();
-        *textState = 0;
-        return TRUE;
-    }
-    return FALSE;
-}
-
 static bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
 {
     if (*counter == 0)
@@ -623,7 +576,7 @@ static bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
     }
 }
 
-static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
+static u32 MysteryGift_HandleThreeOptionMenu(u8 whichMenu)
 {
     struct ListMenuTemplate listMenuTemplate = sListMenuTemplate_ThreeOptions;
     struct WindowTemplate windowTemplate = sWindowTemplate_ThreeOptions;
@@ -1079,7 +1032,6 @@ enum {
     MG_STATE_CLIENT_ERROR,
     MG_STATE_SAVE_LOAD_GIFT,
     MG_STATE_LOAD_GIFT,
-    MG_STATE_UNUSED,
     MG_STATE_HANDLE_GIFT_INPUT,
     MG_STATE_HANDLE_GIFT_SELECT,
     MG_STATE_ASK_TOSS,
@@ -1106,14 +1058,9 @@ static void CreateMysteryGiftTask(void)
     struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
     data->state = MG_STATE_TO_MAIN_MENU;
     data->textState = 0;
-    data->unused4 = 0;
-    data->unused5 = 0;
     data->isWonderNews = 0;
     data->sourceIsFriend = 0;
     data->var = 0;
-    data->unused1 = 0;
-    data->unused2 = 0;
-    data->unused3 = 0;
     data->msgId = 0;
     data->clientMsg = AllocZeroed(CLIENT_MAX_MSG_SIZE);
 }
@@ -1131,7 +1078,7 @@ static void Task_MysteryGift(u8 taskId)
         break;
     case MG_STATE_MAIN_MENU:
         // Main Mystery Gift menu, player can select Wonder Cards or News (or exit)
-        switch (MysteryGift_HandleThreeOptionMenu(&data->textState, &data->var, FALSE))
+        switch (MysteryGift_HandleThreeOptionMenu(FALSE))
         {
         case 0: // "Wonder Cards"
             data->isWonderNews = FALSE;
@@ -1183,7 +1130,7 @@ static void Task_MysteryGift(u8 taskId)
         break;
     case MG_STATE_SOURCE_PROMPT_INPUT:
         // Choose where to access the Wonder Card/News from
-        switch (MysteryGift_HandleThreeOptionMenu(&data->textState, &data->var, TRUE))
+        switch (MysteryGift_HandleThreeOptionMenu(TRUE))
         {
         case 0: // "Wireless Communication"
             ClearTextWindow();

@@ -97,12 +97,9 @@ enum {
 // IDs for how to resolve variables in the above messages
 enum {
     MSG_VAR_NONE,
-    MSG_VAR_MON_NAME_1,
-    MSG_VAR_MON_NAME_2, // Unused
-    MSG_VAR_MON_NAME_3, // Unused
+    MSG_VAR_MON_NAME,
     MSG_VAR_RELEASE_MON_1,
-    MSG_VAR_RELEASE_MON_2, // Unused
-    MSG_VAR_RELEASE_MON_3,
+    MSG_VAR_RELEASE_MON_2,
     MSG_VAR_ITEM_NAME,
 };
 
@@ -155,8 +152,6 @@ enum {
 enum {
     INPUT_NONE,
     INPUT_MOVE_CURSOR,
-    INPUT_2, // Unused
-    INPUT_3, // Unused
     INPUT_CLOSE_BOX,
     INPUT_SHOW_PARTY,
     INPUT_HIDE_PARTY,
@@ -218,9 +213,6 @@ enum {
     PALTAG_MON_ICON_0 = 56000, // 0xDAC0
     PALTAG_MON_ICON_1, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_2, // Used implicitly in CreateMonIconSprite
-    PALTAG_3, // Unused
-    PALTAG_4, // Unused
-    PALTAG_5, // Unused
     PALTAG_DISPLAY_MON,
     PALTAG_MISC_1,
     PALTAG_MARKING_COMBO,
@@ -260,12 +252,8 @@ enum {
     GFXTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
     GFXTAG_CHOOSE_BOX_MENU,
     GFXTAG_CHOOSE_BOX_MENU_SIDES, // Used implicitly in LoadChooseBoxMenuGfx
-    GFXTAG_12, // Unused
     GFXTAG_MARKING_MENU,
-    GFXTAG_14, // Unused
-    GFXTAG_15, // Unused
     GFXTAG_MARKING_COMBO,
-    GFXTAG_17, // Unused
     GFXTAG_MON_ICON,
 };
 
@@ -296,8 +284,6 @@ enum {
     ITEM_CB_TO_MON,
     ITEM_CB_SWAP_TO_HAND,
     ITEM_CB_SWAP_TO_MON,
-    ITEM_CB_UNUSED_1,
-    ITEM_CB_UNUSED_2,
     ITEM_CB_HIDE_PARTY,
 };
 
@@ -372,35 +358,15 @@ struct StorageMenu
     int textId;
 };
 
-struct UnkUtilData
-{
-    const u8 *src;
-    u8 *dest;
-    u16 size;
-    u16 unk;
-    u16 height;
-    void (*func)(struct UnkUtilData *data);
-};
-
-struct UnkUtil
-{
-    struct UnkUtilData *data;
-    u8 numActive;
-    u8 max;
-};
-
 struct ChooseBoxMenu
 {
     struct Sprite *menuSprite;
     struct Sprite *menuSideSprites[4];
-    u32 unused1[3];
     struct Sprite *arrowSprites[2];
-    u8 unused2[0x214];
     bool32 loadedPalette;
     u16 tileTag;
     u16 paletteTag;
     u8 curBox;
-    u8 unused3;
     u8 subpriority;
 };
 
@@ -421,12 +387,8 @@ struct PokemonStorageSystemData
     u8 screenChangeType;
     bool8 isReopening;
     u8 taskId;
-    struct UnkUtil unkUtil;
-    struct UnkUtilData unkUtilData[8];
     u16 partyMenuTilemapBuffer[0x108];
-    u16 partyMenuUnused1; // Never read
     u16 partyMenuY;
-    u8 partyMenuUnused2; // Unused
     u8 partyMenuMoveTimer;
     u8 showPartyMenuState;
     bool8 closeBoxFlashing;
@@ -437,18 +399,9 @@ struct PokemonStorageSystemData
     s16 scrollSpeed;
     u16 scrollTimer;
     u8 wallpaperOffset;
-    u8 scrollUnused1; // Never read
-    u8 scrollToBoxIdUnused; // Never read
-    u16 scrollUnused2; // Never read
-    s16 scrollDirectionUnused; // Never read.
-    u16 scrollUnused3; // Never read
-    u16 scrollUnused4; // Never read
-    u16 scrollUnused5; // Never read
-    u16 scrollUnused6; // Never read
     u8 filler1[22];
     u8 boxTitleTiles[1024];
     u8 boxTitleCycleId;
-    u8 wallpaperLoadState; // Written to, but never read.
     u8 wallpaperLoadBoxId;
     s8 wallpaperLoadDir;
     u16 boxTitlePal[16];
@@ -458,13 +411,11 @@ struct PokemonStorageSystemData
     struct Sprite *nextBoxTitleSprites[2];
     struct Sprite *arrowSprites[2];
     u32 wallpaperPalBits;
-    u8 filler2[27]; // Unused, was 80
     u16 chooseBoxSwapPal[16]; // Holds dynamic palette to swap into choose box gfx
     u16 markingsSwapPal[16]; // Used to store dynamic palette to swap into markings combo
     u16 swapInPal[16];
     void *swapInPalDst;
     s8 transferWholePlttFrames; // if >0, number of frames to transfer whole palette buffer
-    u16 unkUnused1; // Never read.
     s16 wallpaperSetId;
     s16 wallpaperId;
     u16 wallpaperTilemap[360];
@@ -490,14 +441,11 @@ struct PokemonStorageSystemData
     s16 iconScrollSpeed;
     u16 iconScrollNumIncoming;
     u8 iconScrollCurColumn;
-    s8 iconScrollDirection; // Unnecessary duplicate of scrollDirection
     u8 iconScrollState;
-    u8 iconScrollToBoxId; // Unused duplicate of scrollToBoxId
     struct WindowTemplate menuWindow;
     struct StorageMenu menuItems[7];
     u8 menuItemsCount;
     u8 menuWidth;
-    u8 menuUnusedField; // Never read.
     u16 menuWindowId;
     struct Sprite *cursorSprite;
     struct Sprite *cursorShadowSprite;
@@ -519,7 +467,6 @@ struct PokemonStorageSystemData
     u32 displayMonPersonality;
     u16 displayMonSpecies;
     u16 displayMonItemId;
-    u16 displayUnusedVar;
     bool8 setMosaic;
     u8 displayMonMarkings;
     u8 displayMonLevel;
@@ -565,7 +512,6 @@ struct PokemonStorageSystemData
     struct ItemIcon itemIcons[MAX_ITEM_ICONS];
     u16 movingItemId;
     u16 itemInfoWindowOffset;
-    u8 unkUnused2; // Unused
     u16 displayMonPalOffset;
     u16 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
@@ -893,10 +839,6 @@ static void TilemapUtil_Update(u8);
 static void TilemapUtil_DrawPrev(u8);
 static void TilemapUtil_Draw(u8);
 
-// Unknown utility
-static void UnkUtil_Init(struct UnkUtil *, struct UnkUtilData *, u32);
-static void UnkUtil_Run(void);
-
 struct {
     const u8 *text;
     const u8 *desc;
@@ -961,12 +903,10 @@ static const union AffineAnimCmd sAffineAnim_ChooseBoxMenu[] =
 static const u8 sChooseBoxMenu_TextColors[] = {TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
 static const u8 sText_OutOf30[] = _("/30");
 
-static const u16 sChooseBoxMenu_Pal[]        = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
 static const u8 sChooseBoxMenuCenter_Gfx[]   = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
 static const u8 sChooseBoxMenuSides_Gfx[]    = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
 static const u32 sScrollingBg_Gfx[]          = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
 static const u32 sScrollingBg_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
-static const u16 sDisplayMenu_Pal[]          = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal"); // Unused
 static const u32 sDisplayMenu_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/display_menu.bin.lz");
 static const u16 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data.bin");
 // sInterface_Pal - parts of the display frame, "PkmnData"'s normal color, Close Box
@@ -979,7 +919,6 @@ static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_stor
 static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
 static const u16 sWaveform_Pal[]             = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
 static const u32 sWaveform_Gfx[]             = INCBIN_U32("graphics/pokemon_storage/waveform.4bpp");
-static const u16 sUnused_Pal[]               = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
 static const u16 sTextWindows_Pal[]          = INCBIN_U16("graphics/pokemon_storage/text_windows.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] =
@@ -1083,14 +1022,14 @@ static const struct StorageMessage sMessages[] =
     [MSG_WHAT_YOU_DO]          = {gText_WhatDoYouWantToDo,       MSG_VAR_NONE},
     [MSG_PICK_A_THEME]         = {gText_PleasePickATheme,        MSG_VAR_NONE},
     [MSG_PICK_A_WALLPAPER]     = {gText_PickTheWallpaper,        MSG_VAR_NONE},
-    [MSG_IS_SELECTED]          = {gText_PkmnIsSelected,          MSG_VAR_MON_NAME_1},
+    [MSG_IS_SELECTED]          = {gText_PkmnIsSelected,          MSG_VAR_MON_NAME},
     [MSG_JUMP_TO_WHICH_BOX]    = {gText_JumpToWhichBox,          MSG_VAR_NONE},
     [MSG_DEPOSIT_IN_WHICH_BOX] = {gText_DepositInWhichBox,       MSG_VAR_NONE},
-    [MSG_WAS_DEPOSITED]        = {gText_PkmnWasDeposited,        MSG_VAR_MON_NAME_1},
+    [MSG_WAS_DEPOSITED]        = {gText_PkmnWasDeposited,        MSG_VAR_MON_NAME},
     [MSG_BOX_IS_FULL]          = {gText_BoxIsFull2,              MSG_VAR_NONE},
     [MSG_RELEASE_POKE]         = {gText_ReleaseThisPokemon,      MSG_VAR_NONE},
     [MSG_WAS_RELEASED]         = {gText_PkmnWasReleased,         MSG_VAR_RELEASE_MON_1},
-    [MSG_BYE_BYE]              = {gText_ByeByePkmn,              MSG_VAR_RELEASE_MON_3},
+    [MSG_BYE_BYE]              = {gText_ByeByePkmn,              MSG_VAR_RELEASE_MON_2},
     [MSG_MARK_POKE]            = {gText_MarkYourPkmn,            MSG_VAR_NONE},
     [MSG_LAST_POKE]            = {gText_ThatsYourLastPkmn,       MSG_VAR_NONE},
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,          MSG_VAR_NONE},
@@ -1098,7 +1037,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_WHICH_ONE_WILL_TAKE]  = {gText_WhichOneWillYouTake,     MSG_VAR_NONE},
     [MSG_CANT_RELEASE_EGG]     = {gText_YouCantReleaseAnEgg,     MSG_VAR_NONE},
     [MSG_CONTINUE_BOX]         = {gText_ContinueBoxOperations,   MSG_VAR_NONE},
-    [MSG_CAME_BACK]            = {gText_PkmnCameBack,            MSG_VAR_MON_NAME_1},
+    [MSG_CAME_BACK]            = {gText_PkmnCameBack,            MSG_VAR_MON_NAME},
     [MSG_WORRIED]              = {gText_WasItWorriedAboutYou,    MSG_VAR_NONE},
     [MSG_SURPRISE]             = {gText_FourEllipsesExclamation, MSG_VAR_NONE},
     [MSG_PLEASE_REMOVE_MAIL]   = {gText_PleaseRemoveTheMail,     MSG_VAR_NONE},
@@ -1254,8 +1193,6 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
 
 #include "data/wallpapers.h"
 
-static const u16 sUnusedColor = RGB(26, 29, 8);
-
 static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFXTAG_ARROW};
 
 static const struct OamData sOamData_BoxTitle =
@@ -1378,10 +1315,6 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
             dst += 0x100;
         }
     }
-
-    // Never used. bytesToBuffer is always passed <= 6, so remainingBytes is always <= 0 here
-    if (remainingBytes > 0)
-        CpuFill16((zero2 << 4) | zero2, dst, (u32)(remainingBytes) * 0x100);
 
     RemoveWindow(windowId);
 }
@@ -1694,21 +1627,13 @@ void ResetPokemonStorageSystem(void)
 
 static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal)
 {
-    // Because loadPal is always false, the below palette is never used.
-    // The Choose Box menu instead uses the palette indicated by palTag, which is always PALTAG_MISC_1 (sHandCursor_Pal)
-    struct SpritePalette palette =
-    {
-        sChooseBoxMenu_Pal, palTag
-    };
+    // The Choose Box menu uses the palette indicated by palTag, which is always PALTAG_MISC_1 (sHandCursor_Pal)
     struct SpriteSheet sheets[] =
     {
         {sChooseBoxMenuCenter_Gfx, 0x800, tileTag},
         {sChooseBoxMenuSides_Gfx,  0x180, tileTag + 1},
         {}
     };
-
-    if (loadPal) // Always false
-        LoadSpritePalette(&palette);
 
     CpuFastCopy(sHandCursor_Pal, sStorage->chooseBoxSwapPal, 32);
 
@@ -1922,7 +1847,6 @@ static void VBlankCB_PokeStorage(void)
     }
     LoadOam();
     ProcessSpriteCopyRequests();
-    UnkUtil_Run();
     // Instead of transferring the entire palette buffer, transfer bg and non-dynamic palettes
     if (sPaletteSwapBuffer && !gPaletteFade.bufferTransferDisabled && !gPaletteFade.active && !sStorage->transferWholePlttFrames) {
       RequestDma3Copy(gPlttBufferFaded, (void*)PLTT, 32*17, 0);
@@ -2018,7 +1942,6 @@ static void ResetForPokeStorage(void)
     FreeAllSpritePalettes();
     ClearDma3Requests();
     gReservedSpriteTileCount = 0x280;
-    UnkUtil_Init(&sStorage->unkUtil, sStorage->unkUtilData, ARRAY_COUNT(sStorage->unkUtilData));
     gKeyRepeatStartDelay = 20;
     ClearScheduledBgCopiesToVram();
     TilemapUtil_Init(TILEMAPID_COUNT);
@@ -4105,7 +4028,6 @@ static void InitSupplementalTilemaps(void)
 
 static void SetUpShowPartyMenu(void)
 {
-    sStorage->partyMenuUnused1 = 20;
     sStorage->partyMenuY = 2;
     sStorage->partyMenuMoveTimer = 0;
     CreatePartyMonsSprites(FALSE);
@@ -4116,7 +4038,6 @@ static bool8 ShowPartyMenu(void)
     if (sStorage->partyMenuMoveTimer == 20)
         return FALSE;
 
-    sStorage->partyMenuUnused1--;
     sStorage->partyMenuY++;
     TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, 1);
     TilemapUtil_Update(TILEMAPID_PARTY_MENU);
@@ -4144,7 +4065,6 @@ static bool8 ShowPartyMenu(void)
 
 static void SetUpHidePartyMenu(void)
 {
-    sStorage->partyMenuUnused1 = 0;
     sStorage->partyMenuY = 22;
     sStorage->partyMenuMoveTimer = 0;
     // Set moving sprite palette to currently displayed pokemon
@@ -4158,7 +4078,6 @@ static bool8 HidePartyMenu(void)
 {
     if (sStorage->partyMenuMoveTimer != 20)
     {
-        sStorage->partyMenuUnused1++;
         sStorage->partyMenuY--;
         TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, -1);
         TilemapUtil_Update(TILEMAPID_PARTY_MENU);
@@ -4338,14 +4257,11 @@ static void PrintMessage(u8 id)
     {
     case MSG_VAR_NONE:
         break;
-    case MSG_VAR_MON_NAME_1:
-    case MSG_VAR_MON_NAME_2:
-    case MSG_VAR_MON_NAME_3:
+    case MSG_VAR_MON_NAME:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sStorage->displayMonName);
         break;
     case MSG_VAR_RELEASE_MON_1:
     case MSG_VAR_RELEASE_MON_2:
-    case MSG_VAR_RELEASE_MON_3:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sStorage->releaseMonName);
         break;
     case MSG_VAR_ITEM_NAME:
@@ -4488,7 +4404,6 @@ static void InitMonIconFields(void)
         sStorage->boxMonsSprites[i] = NULL;
 
     sStorage->movingMonSprite = NULL;
-    sStorage->unkUnused1 = 0;
 }
 
 static u8 GetMonIconPriorityByCursorPos(void)
@@ -4746,8 +4661,8 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
 static void InitBoxMonIconScroll(u8 boxId, s8 direction)
 {
     sStorage->iconScrollState = 0;
-    sStorage->iconScrollToBoxId = boxId;
-    sStorage->iconScrollDirection = direction;
+    sStorage->scrollToBoxId = boxId;
+    sStorage->scrollDirection = direction;
     sStorage->iconScrollDistance = 32;
     sStorage->iconScrollSpeed = -(6 * direction);
     sStorage->iconScrollNumIncoming = 0;
@@ -4774,7 +4689,7 @@ static bool8 UpdateBoxMonIconScroll(void)
         {
             // A column of icons has gone offscreen, destroy them
             DestroyBoxMonIconsInColumn(sStorage->iconScrollCurColumn);
-            sStorage->iconScrollPos += sStorage->iconScrollDirection * 24;
+            sStorage->iconScrollPos += sStorage->scrollDirection * 24;
             sStorage->iconScrollState++;
         }
         break;
@@ -4783,8 +4698,8 @@ static bool8 UpdateBoxMonIconScroll(void)
         sStorage->iconScrollPos += sStorage->iconScrollSpeed;
         sStorage->iconScrollNumIncoming += CreateBoxMonIconsInColumn(sStorage->iconScrollCurColumn, sStorage->iconScrollDistance, sStorage->iconScrollSpeed);
 
-        if ((sStorage->iconScrollDirection > 0 && sStorage->iconScrollCurColumn == IN_BOX_COLUMNS - 1)
-         || (sStorage->iconScrollDirection < 0 && sStorage->iconScrollCurColumn == 0))
+        if ((sStorage->scrollDirection > 0 && sStorage->iconScrollCurColumn == IN_BOX_COLUMNS - 1)
+         || (sStorage->scrollDirection < 0 && sStorage->iconScrollCurColumn == 0))
         {
             // Scroll has reached final column
             sStorage->iconScrollState++;
@@ -4792,7 +4707,7 @@ static bool8 UpdateBoxMonIconScroll(void)
         else
         {
             // Continue scrolling
-            sStorage->iconScrollCurColumn += sStorage->iconScrollDirection;
+            sStorage->iconScrollCurColumn += sStorage->scrollDirection;
             sStorage->iconScrollState = 0;
         }
         break;
@@ -5384,16 +5299,7 @@ static void SetUpScrollToBox(u8 boxId)
     s8 direction = DetermineBoxScrollDirection(boxId);
 
     sStorage->scrollSpeed = (direction > 0) ? 6 : -6;
-    sStorage->scrollUnused1 = (direction > 0) ? 1 : 2;
     sStorage->scrollTimer = 32;
-    sStorage->scrollToBoxIdUnused = boxId;
-    sStorage->scrollUnused2 = (direction <= 0) ? 5 : 0;
-    sStorage->scrollDirectionUnused = direction;
-
-    sStorage->scrollUnused3 = (direction > 0) ? 264 : 56;
-    sStorage->scrollUnused4 = (direction <= 0) ? 5 : 0;
-    sStorage->scrollUnused5 = 0;
-    sStorage->scrollUnused6 = 2;
     sStorage->scrollToBoxId = boxId;
     sStorage->scrollDirection = direction;
     sStorage->scrollState = 0;
@@ -5503,7 +5409,6 @@ static void LoadWallpaperGfx(u8 boxId, s8 direction)
     void *iconGfx;
     u32 tilesSize, iconSize;
 
-    sStorage->wallpaperLoadState = 0;
     sStorage->wallpaperLoadBoxId = boxId;
     sStorage->wallpaperLoadDir = direction;
     if (sStorage->wallpaperLoadDir != 0)
@@ -8190,7 +8095,6 @@ static void AddMenu(void)
     PrintMenuTable(sStorage->menuWindowId, sStorage->menuItemsCount, (void *)sStorage->menuItems);
     InitMenuInUpperLeftCornerNormal(sStorage->menuWindowId, sStorage->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
-    sStorage->menuUnusedField = 0;
 }
 
 // Called after AddMenu to determine whether or not the handler callback should
@@ -9937,15 +9841,15 @@ struct TilemapUtil_RectData
 
 struct TilemapUtil
 {
-    struct TilemapUtil_RectData prev; // Only read in unused function
+    struct TilemapUtil_RectData prev;
     struct TilemapUtil_RectData cur;
-    const void *savedTilemap; // Only written in unused function
+    const void *savedTilemap;
     const void *tilemap;
     u16 altWidth;
-    u16 altHeight; // Never read
+    u16 altHeight;
     u16 width;
-    u16 height; // Never read
-    u16 rowSize; // Never read
+    u16 height;
+    u16 rowSize;
     u8 tileSize;
     u8 bg;
     bool8 active;
@@ -10022,16 +9926,6 @@ static void TilemapUtil_SetMap(u8 id, u8 bg, const void *tilemap, u16 width, u16
     sTilemapUtil[id].cur.destX = 0;
     sTilemapUtil[id].cur.destY = 0;
     sTilemapUtil[id].prev = sTilemapUtil[id].cur;
-    sTilemapUtil[id].active = TRUE;
-}
-
-// Unused
-static void TilemapUtil_SetSavedMap(u8 id, const void *tilemap)
-{
-    if (id >= sNumTilemapUtilIds)
-        return;
-
-    sTilemapUtil[id].savedTilemap = tilemap;
     sTilemapUtil[id].active = TRUE;
 }
 
@@ -10138,40 +10032,5 @@ static void TilemapUtil_Draw(u8 id)
                                   sTilemapUtil[id].cur.width,
                                   1);
         tiles += adder;
-    }
-}
-
-
-//------------------------------------------------------------------------------
-//  SECTION: UnkUtil
-//
-//  Some data transfer utility that goes functionally unused.
-//  It gets initialized with UnkUtil_Init, and run every vblank in Pokémon
-//  Storage with UnkUtil_Run, but neither of the Add functions are ever used,
-//  so UnkUtil_Run performs no actions.
-//------------------------------------------------------------------------------
-
-
-EWRAM_DATA static struct UnkUtil *sUnkUtil = NULL;
-
-static void UnkUtil_Init(struct UnkUtil *util, struct UnkUtilData *data, u32 max)
-{
-    sUnkUtil = util;
-    util->data = data;
-    util->max = max;
-    util->numActive = 0;
-}
-
-static void UnkUtil_Run(void)
-{
-    u16 i;
-    if (sUnkUtil->numActive)
-    {
-        for (i = 0; i < sUnkUtil->numActive; i++)
-        {
-            struct UnkUtilData *data = &sUnkUtil->data[i];
-            data->func(data);
-        }
-        sUnkUtil->numActive = 0;
     }
 }

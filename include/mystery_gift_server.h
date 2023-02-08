@@ -8,7 +8,6 @@
 enum {
     SVR_RET_INIT,
     SVR_RET_ACTIVE,
-    SVR_RET_UNUSED,
     SVR_RET_END
 };
 
@@ -76,7 +75,6 @@ struct MysteryGiftServerCmd
 
 struct MysteryGiftServer
 {
-    u32 unused;
     u32 param;
     u32 funcId;
     u32 cmdidx;

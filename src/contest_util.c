@@ -2067,20 +2067,6 @@ void BufferContestantMonNickname(void)
     StringCopy(gStringVar3, gContestMons[gSpecialVar_0x8006].nickname);
 }
 
-// Unused script special
-void GetContestMonConditionRanking(void)
-{
-    u8 i, rank;
-
-    for (i = 0, rank = 0; i < CONTESTANT_COUNT; i++)
-    {
-        if (gContestMonRound1Points[gSpecialVar_0x8006] < gContestMonRound1Points[i])
-            rank++;
-    }
-
-    gSpecialVar_0x8004 = rank;
-}
-
 void GetContestMonCondition(void)
 {
     gSpecialVar_0x8004 = gContestMonRound1Points[gSpecialVar_0x8006];

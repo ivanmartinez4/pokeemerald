@@ -271,42 +271,6 @@ bool8 BeginTimeOfDayPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 ta
     }
 }
 
-// Unused
-static bool8 BeginPlttFade(u32 selectedPalettes, u8 delay, u8 startY, u8 targetY, u16 blendColor)
-{
-    ReadPlttIntoBuffers();
-    return BeginNormalPaletteFade(selectedPalettes, delay, startY, targetY, blendColor);
-}
-
-// Unused
-static void PaletteStruct_Run(u8 a1, u32 *unkFlags)
-{
-    u8 i;
-
-    for (i = 0; i < NUM_PALETTE_STRUCTS; i++)
-    {
-        struct PaletteStruct *palstruct = &sPaletteStructs[i];
-        if (palstruct->active)
-        {
-            if (palstruct->template->pst_field_8_0 == a1)
-            {
-                if (palstruct->srcIndex == palstruct->template->srcCount)
-                {
-                    PaletteStruct_TryEnd(palstruct);
-                    if (!palstruct->active)
-                        continue;
-                }
-                if (palstruct->countdown1 == 0)
-                    PaletteStruct_Copy(palstruct, unkFlags);
-                else
-                    palstruct->countdown1--;
-
-                PaletteStruct_Blend(palstruct, unkFlags);
-            }
-        }
-    }
-}
-
 static void PaletteStruct_Copy(struct PaletteStruct *palStruct, u32 *unkFlags)
 {
     s32 srcIndex;
@@ -450,20 +414,6 @@ void ResetPaletteFadeControl(void)
     gPaletteFade.softwareFadeFinishingCounter = 0;
     gPaletteFade.objPaletteToggle = 0;
     gPaletteFade.deltaY = 2;
-}
-
-static void PaletteStruct_SetUnusedFlag(u16 id)
-{
-    u8 paletteNum = PaletteStruct_GetPalNum(id);
-    if (paletteNum != NUM_PALETTE_STRUCTS)
-        sPaletteStructs[paletteNum].flag = TRUE;
-}
-
-static void PaletteStruct_ClearUnusedFlag(u16 id)
-{
-    u8 paletteNum = PaletteStruct_GetPalNum(id);
-    if (paletteNum != NUM_PALETTE_STRUCTS)
-        sPaletteStructs[paletteNum].flag = FALSE;
 }
 
 static u8 PaletteStruct_GetPalNum(u16 id)
@@ -1445,34 +1395,6 @@ void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTa
     gTasks[taskId].tColor = color;
     gTasks[taskId].tId = id;
     gTasks[taskId].func(taskId);
-}
-
-// Unused
-static bool32 IsBlendPalettesGraduallyTaskActive(u8 id)
-{
-    int i;
-
-    for (i = 0; i < NUM_TASKS; i++)
-        if ((gTasks[i].isActive == TRUE)
-         && (gTasks[i].func == Task_BlendPalettesGradually)
-         && (gTasks[i].tId == id))
-            return TRUE;
-
-    return FALSE;
-}
-
-// Unused
-static void DestroyBlendPalettesGraduallyTask(void)
-{
-    u8 taskId;
-
-    while (1)
-    {
-        taskId = FindTaskIdByFunc(Task_BlendPalettesGradually);
-        if (taskId == TASK_NONE)
-            break;
-        DestroyTask(taskId);
-    }
 }
 
 static void Task_BlendPalettesGradually(u8 taskId)

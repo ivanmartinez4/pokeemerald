@@ -382,16 +382,6 @@ const u16 gBallOpenFadeColors[] =
     [BALL_TIMER] = RGB(29, 30, 30),
     [BALL_LUXURY] = RGB(31, 17, 10),
     [BALL_PREMIER] = RGB(31, 9, 10),
-
-    // Garbage data
-    RGB(0, 0, 0),
-    RGB(1, 16, 0),
-    RGB(3, 0, 1),
-    RGB(1, 8, 0),
-    RGB(0, 8, 0),
-    RGB(3, 8, 1),
-    RGB(6, 8, 1),
-    RGB(4, 0, 0),
 };
 
 const struct SpriteTemplate gPokeblockSpriteTemplate =
@@ -413,18 +403,6 @@ static const union AnimCmd sAnim_SafariRock[] =
 
 static const union AnimCmd *const sAnims_SafariRock[] = {
     sAnim_SafariRock,
-};
-
-// Unused, leftover from FRLG
-static const struct SpriteTemplate sSafariRockSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_SafariRock,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_PokeBlock_Throw,
 };
 
 extern const struct SpriteTemplate gWishStarSpriteTemplate;

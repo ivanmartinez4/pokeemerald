@@ -57,8 +57,6 @@
 #define LINKCMD_BLENDER_SEND_KEYS       0x4444
 #define LINKCMD_BLENDER_SCORE_BEST      0x4523
 #define LINKCMD_BLENDER_SCORE_GOOD      0x5432
-#define LINKCMD_DUMMY_1                 0x5555
-#define LINKCMD_DUMMY_2                 0x5566
 #define LINKCMD_READY_CLOSE_LINK        0x5FFF
 #define LINKCMD_SEND_EMPTY              0x6666
 #define LINKCMD_SEND_0xEE               0x7777
@@ -266,7 +264,7 @@ u32 GetLinkPlayerTrainerId(u8);
 void ResetLinkPlayers(void);
 u8 GetMultiplayerId(void);
 u8 BitmaskAllOtherLinkPlayers(void);
-bool8 SendBlock(u8, const void *, u16);
+bool8 SendBlock(const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
@@ -331,7 +329,6 @@ extern u16 gLinkSavedIme;
 extern struct LinkPlayer gLocalLinkPlayer;
 
 bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
-bool32 LinkDummy_Return2(void);
 void SetLocalLinkPlayerId(u8);
 u8 GetSavedPlayerCount(void);
 bool8 SendBlockRequest(u8 type);

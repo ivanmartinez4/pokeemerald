@@ -1895,7 +1895,7 @@ static void Task_PlayerExchangeUpdate(u8 taskId)
         for (i = 0; i < RFU_CHILD_MAX; i++)
             sio->linkPlayerIdx[i] = gRfu.linkPlayerIdx[i];
         memcpy(sio->linkPlayers, gLinkPlayers, sizeof(gLinkPlayers));
-        if (SendBlock(0, gBlockSendBuffer, 0xa0))
+        if (SendBlock(gBlockSendBuffer, 0xa0))
             gTasks[taskId].tState++;
         break;
     case 5:
@@ -1934,7 +1934,7 @@ static void Task_PlayerExchangeChat(u8 taskId)
         if (gRfu.playerCount)
         {
             LocalLinkPlayerToBlock();
-            SendBlock(0, gBlockSendBuffer, sizeof(struct LinkPlayerBlock));
+            SendBlock(gBlockSendBuffer, sizeof(struct LinkPlayerBlock));
             gTasks[taskId].tState++;
         }
         break;

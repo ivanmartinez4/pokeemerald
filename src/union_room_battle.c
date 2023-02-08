@@ -159,7 +159,7 @@ void CB2_UnionRoomBattle(void)
             {
                 gBlockSendBuffer[0] = ACTIVITY_ACCEPT | IN_UNION_ROOM;
             }
-            SendBlock(0, gBlockSendBuffer, 0x20);
+            SendBlock(gBlockSendBuffer, 0x20);
             gMain.state++;
         }
         break;

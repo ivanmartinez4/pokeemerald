@@ -877,7 +877,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             tState = 2;
         break;
     case 2:
-        SendBlock(0, &gLocalLinkPlayer, sizeof(gLocalLinkPlayer));
+        SendBlock(&gLocalLinkPlayer, sizeof(gLocalLinkPlayer));
         tState = 3;
         break;
     case 3:

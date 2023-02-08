@@ -2376,7 +2376,7 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame *game, u8 *args)
         // Send player's chosen berry to partners
         memset(game->sendCmd, 0, sizeof(game->sendCmd));
         game->sendCmd[0] = game->players[game->localId].berryId;
-        SendBlock(0, game->sendCmd, 2);
+        SendBlock(game->sendCmd, 2);
         break;
     case 3:
         if (!IsLinkTaskFinished())
@@ -3001,7 +3001,7 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame *game, u8 *args)
         if (game->players[game->localId].timePressingA > game->timer)
             game->players[game->localId].timePressingA = game->timer;
         game->sendCmd[0] = game->players[game->localId].timePressingA;
-        SendBlock(0, game->sendCmd, 2);
+        SendBlock(game->sendCmd, 2);
         break;
     case 1:
         if (!IsLinkTaskFinished())
@@ -3148,7 +3148,7 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame *game, u8 *args)
                 }
             }
         }
-        SendBlock(0, &game->results, sizeof(game->results));
+        SendBlock(&game->results, sizeof(game->results));
         break;
     case 5:
         if (!IsLinkTaskFinished())
@@ -3323,7 +3323,7 @@ static u32 Cmd_CommunicatePlayAgainResponses(struct BerryCrushGame *game, u8 *ar
         // Send player's Yes/No response to partners
         game->sendCmd[0] = game->playAgainState;
         game->recvCmd[0] = 0;
-        SendBlock(0, game->sendCmd, sizeof(u16));
+        SendBlock(game->sendCmd, sizeof(u16));
         break;
     case 2:
         if (!IsLinkTaskFinished())

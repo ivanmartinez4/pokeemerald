@@ -1030,7 +1030,7 @@ static void InitResults_Leader(void)
     switch (sGame->state)
     {
     case 0:
-        if (SendBlock(0, sGame->berryResults, sizeof(sGame->berryResults)))
+        if (SendBlock(sGame->berryResults, sizeof(sGame->berryResults)))
         {
             sGame->playersReceived = 0;
             sGame->state++;
@@ -1069,7 +1069,7 @@ static void InitResults_Member(void)
 
     switch (sGame->state) {
     case 0:
-        if (SendBlock(0, sGame->berryResults[sGame->timer], sizeof(sGame->berryResults))) {
+        if (SendBlock(sGame->berryResults[sGame->timer], sizeof(sGame->berryResults))) {
             sGame->playersReceived = 0;
             sGame->state++;
         }
@@ -1125,7 +1125,7 @@ static void DoResults(void)
         break;
     case 2:
         playAgainState = GetPlayAgainState();
-        if (SendBlock(0, &playAgainState, sizeof(playAgainState)))
+        if (SendBlock(&playAgainState, sizeof(playAgainState)))
             sGame->state++;
         break;
     case 3:
@@ -1201,7 +1201,7 @@ static void AskPlayAgain(void)
         break;
     case 5:
         playAgainState = GetPlayAgainState();
-        if (SendBlock(0, &playAgainState, sizeof(playAgainState)))
+        if (SendBlock(&playAgainState, sizeof(playAgainState)))
         {
             sGame->playersReceived = 0;
             sGame->state++;
@@ -1408,7 +1408,7 @@ static void Task_CommunicateMonInfo(u8 taskId)
     switch (tState)
     {
     case 0:
-        if (SendBlock(0, &sGame->monInfo[sGame->multiplayerId].isShiny, sizeof(sGame->monInfo[sGame->multiplayerId].isShiny)))
+        if (SendBlock(&sGame->monInfo[sGame->multiplayerId].isShiny, sizeof(sGame->monInfo[sGame->multiplayerId].isShiny)))
         {
             sGame->playersReceived = 0;
             tState++;
@@ -2974,73 +2974,8 @@ static void PrintRecordsText(u8 windowId, s32 width)
     PutWindowTilemap(windowId);
 }
 
-// Debug functions?
-static const u16 sDebug_BerryResults[MAX_RFU_PLAYERS][4] =
-{
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = 0,
-        [BERRY_GOLD]   = 90,
-        [BERRY_MISSED] = MAX_BERRIES
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = MAX_BERRIES,
-        [BERRY_GOLD]   = 70,
-        [BERRY_MISSED] = MAX_BERRIES
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = 0,
-        [BERRY_GOLD]   = MAX_BERRIES,
-        [BERRY_MISSED] = 0
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = MAX_BERRIES,
-        [BERRY_GOLD]   = 60,
-        [BERRY_MISSED] = 0
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = MAX_BERRIES,
-        [BERRY_GOLD]   = MAX_BERRIES,
-        [BERRY_MISSED] = 0
-    },
-};
-
-static const u8 sJPText_Vowels[] = _("あいうえおかき");
 static const u8 sText_Letters[] = _("ABCDEFG");
 static const u8 sText_Digits[] = _("0123456");
-
-static const u8 *const sDebug_PlayerNames[] =
-{
-    sJPText_Vowels,
-    sJPText_Vowels,
-    sJPText_Vowels,
-    sText_Letters,
-    sText_Digits
-};
-
-static void Debug_UpdateNumPlayers(void)
-{
-    sGame->numPlayers = GetLinkPlayerCount();
-}
-
-static void Debug_SetPlayerNamesAndResults(void)
-{
-    u8 i, playerId;
-
-    for (playerId = sGame->numPlayers; playerId < ARRAY_COUNT(sDebug_PlayerNames); playerId++)
-        StringCopy(gLinkPlayers[playerId].name, sDebug_PlayerNames[playerId]);
-
-    sGame->numPlayers = MAX_RFU_PLAYERS;
-    for (i = 0; i < NUM_BERRY_TYPES; i++)
-    {
-        for (playerId = 0; playerId < sGame->numPlayers; playerId++)
-            sGame->berryResults[playerId][i] = sDebug_BerryResults[playerId][i];
-    }
-}
 
 struct ReadyToStartPacket
 {

@@ -10,7 +10,7 @@
 #define INGAME_TRADE_HORSEA 2
 #define INGAME_TRADE_MEOWTH 3
 
-// Return values for CanTradeSelectedMon and CanSpinTradeMon
+// Return values for CanTradeSelectedMon
 #define CAN_TRADE_MON              0
 #define CANT_TRADE_LAST_MON        1
 #define CANT_TRADE_NATIONAL        2

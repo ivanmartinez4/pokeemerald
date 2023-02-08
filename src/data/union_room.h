@@ -3,40 +3,8 @@ ALIGNED(4) static const u8 sText_Colon[] = _(":");
 ALIGNED(4) static const u8 sText_ID[] = _("{ID}");
 ALIGNED(4) static const u8 sText_PleaseStartOver[] = _("Please start over from the beginning.");
 ALIGNED(4) static const u8 sText_WirelessSearchCanceled[] = _("The WIRELESS COMMUNICATION\nSYSTEM search has been canceled.");
-ALIGNED(4) static const u8 sText_AwaitingCommunucation2[] = _("Awaiting communication\nfrom another player."); // Unused
 ALIGNED(4) static const u8 sText_AwaitingCommunication[] = _("{STR_VAR_1}! Awaiting\ncommunication from another player.");
 ALIGNED(4) static const u8 sText_AwaitingLinkPressStart[] = _("{STR_VAR_1}! Awaiting link!\nPress START when everyone's ready.");
-ALIGNED(4) static const u8 sJPText_SingleBattle[] = _("シングルバトルを かいさいする");
-ALIGNED(4) static const u8 sJPText_DoubleBattle[] = _("ダブルバトルを かいさいする");
-ALIGNED(4) static const u8 sJPText_MultiBattle[] = _("マルチバトルを かいさいする");
-ALIGNED(4) static const u8 sJPText_TradePokemon[] = _("ポケモンこうかんを かいさいする");
-ALIGNED(4) static const u8 sJPText_Chat[] = _("チャットを かいさいする");
-ALIGNED(4) static const u8 sJPText_DistWonderCard[] = _("ふしぎなカードをくばる");
-ALIGNED(4) static const u8 sJPText_DistWonderNews[] = _("ふしぎなニュースをくばる");
-ALIGNED(4) static const u8 sJPText_DistMysteryEvent[] = _("ふしぎなできごとを かいさいする"); // Unused
-ALIGNED(4) static const u8 sJPText_HoldPokemonJump[] = _("なわとびを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldBerryCrush[] = _("きのみマッシャーを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldBerryPicking[] = _("きのみどりを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldSpinTrade[] = _("ぐるぐるこうかんを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldSpinShop[] = _("ぐるぐるショップを かいさいする");
-
-// Unused
-static const u8 *const sJPLinkGroupActionTexts[] = {
-    sJPText_SingleBattle,
-    sJPText_DoubleBattle,
-    sJPText_MultiBattle,
-    sJPText_TradePokemon,
-    sJPText_Chat,
-    sJPText_DistWonderCard,
-    sJPText_DistWonderNews,
-    sJPText_DistWonderCard,
-    sJPText_HoldPokemonJump,
-    sJPText_HoldBerryCrush,
-    sJPText_HoldBerryPicking,
-    sJPText_HoldBerryPicking,
-    sJPText_HoldSpinTrade,
-    sJPText_HoldSpinShop
-};
 
 static const u8 sText_1PlayerNeeded[] = _("1 player\nneeded.");
 static const u8 sText_2PlayersNeeded[] = _("2 players\nneeded.");
@@ -86,7 +54,6 @@ static const u8 *const sPlayersNeededOrModeTexts[][5] = {
 };
 
 ALIGNED(4) static const u8 sText_BButtonCancel[] = _("{B_BUTTON}CANCEL");
-ALIGNED(4) static const u8 sJPText_SearchingForParticipants[] = _("ため\nさんかしゃ ぼしゅうちゅう です！"); // Unused, may have been cut off
 ALIGNED(4) static const u8 sText_PlayerContactedYouForXAccept[] = _("{STR_VAR_2} contacted you for\n{STR_VAR_1}. Accept?");
 ALIGNED(4) static const u8 sText_PlayerContactedYouShareX[] = _("{STR_VAR_2} contacted you.\nWill you share {STR_VAR_1}?");
 ALIGNED(4) static const u8 sText_PlayerContactedYouAddToMembers[] = _("{STR_VAR_2} contacted you.\nAdd to the members?");
@@ -596,14 +563,11 @@ static const u8 *const sLinkGroupActivityNameTexts[] = {
     [ACTIVITY_BATTLE_MULTI]      = sText_MultiBattle,
     [ACTIVITY_TRADE]             = sText_PokemonTrades,
     [ACTIVITY_CHAT]              = sText_Chat,
-    [ACTIVITY_WONDER_CARD_DUP]   = sText_WonderCards,
-    [ACTIVITY_WONDER_NEWS_DUP]   = sText_WonderNews,
     [ACTIVITY_CARD]              = sText_Cards,
     [ACTIVITY_POKEMON_JUMP]      = sText_PokemonJump,
     [ACTIVITY_BERRY_CRUSH]       = sText_BerryCrush,
     [ACTIVITY_BERRY_PICK]        = sText_BerryPicking,
     [ACTIVITY_SEARCH]            = sText_Search,
-    [ACTIVITY_SPIN_TRADE]        = sText_EmptyString,
     [ACTIVITY_BATTLE_TOWER_OPEN] = sText_BattleTowerOpenLv,
     [ACTIVITY_RECORD_CORNER]     = sText_RecordCorner,
     [ACTIVITY_BERRY_BLENDER]     = sText_BerryBlender,
@@ -1049,7 +1013,6 @@ ALIGNED(4) static const u8 sAcceptedActivityIds_Unk11[]           = {
     ACTIVITY_BERRY_PICK,
     ACTIVITY_WONDER_CARD,
     ACTIVITY_WONDER_NEWS,
-    ACTIVITY_SPIN_TRADE,
     0xff
 };
 ALIGNED(4) static const u8 sAcceptedActivityIds_RecordCorner[]    = {ACTIVITY_RECORD_CORNER, 0xff};

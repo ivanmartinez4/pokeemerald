@@ -326,7 +326,6 @@ extern const u8 gText_YesNo[];
 // main menu/birch speech text
 extern const u8 gText_SaveFileErased[];
 extern const u8 gText_SaveFileCorrupted[];
-extern const u8 gJPText_No1MSubCircuit[];
 extern const u8 gText_BatteryRunDry[];
 extern const u8 gText_MainMenuNewGame[];
 extern const u8 gText_MainMenuOption[];
@@ -465,8 +464,6 @@ extern const u8 gText_MailTakenFromPkmn[];
 extern const u8 gText_NoMoreThanVar1Pkmn[];
 extern const u8 gText_PkmnCantBeTradedNow[];
 extern const u8 gText_EggCantBeTradedNow[];
-extern const u8 gText_OnlyPkmnForBattle[];
-extern const u8 gJPText_AreYouSureYouWantToSpinTradeMon[];
 extern const u8 gText_PauseUntilPress[];
 extern const u8 gText_CantUseUntilNewBadge[];
 extern const u8 gText_ReturnToHealingSpot[];
@@ -1298,10 +1295,6 @@ extern const u8 gText_ExpertTagMatch[];
 extern const u8 gText_TimeBoard[];
 extern const u8 gText_TimeCleared[];
 extern const u8 gText_XMinYDotZSec[];
-extern const u8 gText_TrainerHill1F[];
-extern const u8 gText_TrainerHill2F[];
-extern const u8 gText_TrainerHill3F[];
-extern const u8 gText_TrainerHill4F[];
 
 // Cable Club multichoice text
 extern const u8 CableClub_Text_TradeUsingLinkCable[];
@@ -2732,21 +2725,6 @@ extern const u8 gText_UnionRoomChatKeyboard_Emoji8[];
 extern const u8 gText_UnionRoomChatKeyboard_Emoji9[];
 extern const u8 gText_UnionRoomChatKeyboard_Emoji10[];
 
-// E-Reader
-extern const u8 gJPText_ReceiveMysteryGiftWithEReader[];
-extern const u8 gJPText_SelectConnectFromEReaderMenu[];
-extern const u8 gJPText_SelectConnectWithGBA[];
-extern const u8 gJPText_LinkIsIncorrect[];
-extern const u8 gJPText_CardReadingHasBeenHalted[];
-extern const u8 gJPText_Connecting[];
-extern const u8 gJPText_ConnectionErrorCheckLink[];
-extern const u8 gJPText_ConnectionErrorTryAgain[];
-extern const u8 gJPText_AllowEReaderToLoadCard[];
-extern const u8 gJPText_ConnectionComplete[];
-extern const u8 gJPText_NewTrainerHasComeToHoenn[];
-extern const u8 gJPText_PleaseWaitAMoment[];
-extern const u8 gJPText_WriteErrorUnableToSaveData[];
-
 // Berry Powder Menu
 extern const u8 gText_Powder[];
 
@@ -2768,8 +2746,6 @@ extern const u8 gText_ByeBye[];
 extern const u8 gText_MysteryGift[];
 extern const u8 gText_PickOKCancel[];
 extern const u8 gText_PickOKExit[];
-extern const u8 gJPText_MysteryGift[];
-extern const u8 gJPText_DecideStop[];
 extern const u8 gText_WonderCards[];
 extern const u8 gText_WonderNews[];
 extern const u8 gText_Exit3[];
@@ -2779,10 +2755,6 @@ extern const u8 gText_Cancel2[];
 extern const u8 gText_Receive[];
 extern const u8 gText_Send[];
 extern const u8 gText_Toss[];
-extern const u8 gText_VarietyOfEventsImportedWireless[];
-extern const u8 gText_WonderCardsInPossession[];
-extern const u8 gText_ReadNewsThatArrived[];
-extern const u8 gText_ReturnToTitle[];
 extern const u8 gText_WhatToDoWithCards[];
 extern const u8 gText_WhatToDoWithNews[];
 extern const u8 gText_IfThrowAwayCardEventWontHappen[];

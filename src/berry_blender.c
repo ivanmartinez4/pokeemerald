@@ -2562,14 +2562,14 @@ static void CB2_EndBlenderGame(void)
                         sBerryBlender->gameBlock.scores[i][j] = sBerryBlender->scores[i][j];
                 }
 
-                if (SendBlock(0, &sBerryBlender->gameBlock, sizeof(sBerryBlender->gameBlock)))
+                if (SendBlock(&sBerryBlender->gameBlock, sizeof(sBerryBlender->gameBlock)))
                     sBerryBlender->gameEndState++;
             }
             else
             {
                 sBerryBlender->smallBlock.time = sBerryBlender->gameFrameTime;
                 sBerryBlender->smallBlock.maxRPM = sBerryBlender->maxRPM;
-                if (SendBlock(0, &sBerryBlender->smallBlock, sizeof(sBerryBlender->smallBlock) + 32))
+                if (SendBlock(&sBerryBlender->smallBlock, sizeof(sBerryBlender->smallBlock) + 32))
                     sBerryBlender->gameEndState++;
             }
         }

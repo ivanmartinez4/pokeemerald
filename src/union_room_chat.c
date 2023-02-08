@@ -1017,7 +1017,7 @@ static void Chat_Join(void)
     case 1:
         if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
-            if (SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+            if (SendBlock(sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
                 sChat->funcState++;
         }
         break;
@@ -1224,7 +1224,7 @@ static void Chat_AskQuitChatting(void)
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
         {
             if (!sChat->multiplayerId)
                 sChat->funcState = 6;
@@ -1275,7 +1275,7 @@ static void Chat_Exit(void)
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
             sChat->funcState++;
         break;
     case 4:
@@ -1402,7 +1402,7 @@ static void Chat_SendMessage(void)
         sChat->funcState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() == TRUE && !Rfu_IsPlayerExchangeActive() && SendBlock(sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
             sChat->funcState++;
         break;
     case 2:

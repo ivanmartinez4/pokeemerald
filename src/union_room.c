@@ -1100,7 +1100,6 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             case ACTIVITY_POKEMON_JUMP:
             case ACTIVITY_BERRY_CRUSH:
             case ACTIVITY_BERRY_PICK:
-            case ACTIVITY_SPIN_TRADE:
             case ACTIVITY_BATTLE_TOWER:
             case ACTIVITY_BATTLE_TOWER_OPEN:
             case ACTIVITY_RECORD_CORNER:
@@ -1481,7 +1480,7 @@ static void Task_StartUnionRoomTrade(u8 taskId)
     {
     case 0:
         gTasks[taskId].data[0]++;
-        SendBlock(0, &gPlayerParty[monId], sizeof(struct Pokemon));
+        SendBlock(&gPlayerParty[monId], sizeof(struct Pokemon));
         break;
     case 1:
         if (GetBlockReceivedStatus() == 3)
@@ -1494,7 +1493,7 @@ static void Task_StartUnionRoomTrade(u8 taskId)
         break;
     case 2:
         memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, sizeof(struct Mail) * PARTY_SIZE + 4);
-        if (SendBlock(0, gBlockSendBuffer, sizeof(struct Mail) * PARTY_SIZE + 4))
+        if (SendBlock(gBlockSendBuffer, sizeof(struct Mail) * PARTY_SIZE + 4))
             gTasks[taskId].data[0]++;
         break;
     case 3:
@@ -1651,7 +1650,6 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
     case ACTIVITY_BERRY_PICK:
-    case ACTIVITY_SPIN_TRADE:
     case ACTIVITY_RECORD_CORNER:
         SaveLinkTrainerNames();
         break;
@@ -1793,7 +1791,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
     case 2:
         if (!gPaletteFade.active)
         {
-            if (gPlayerCurrActivity == ACTIVITY_29)
+            if (gPlayerCurrActivity == ACTIVITY_26)
             {
                 DestroyTask(taskId);
                 SetMainCallback2(CB2_StartCreateTradeMenu);
@@ -1813,7 +1811,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
         }
         break;
     case 4:
-        if (SendBlock(0, gBlockSendBuffer, 0xE))
+        if (SendBlock(gBlockSendBuffer, 0xE))
             data[0] = 5;
         break;
     case 5:

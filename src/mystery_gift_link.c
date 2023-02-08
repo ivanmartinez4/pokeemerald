@@ -173,7 +173,7 @@ static bool32 MGL_Send(struct MysteryGiftLink * link)
             header.crc = CalcCRC16WithTable(link->sendBuffer, link->sendSize);
             link->sendCRC = header.crc;
             link->sendCounter = 0;
-            SendBlock(0, &header, sizeof(header));
+            SendBlock(&header, sizeof(header));
             link->state++;
         }
         break;
@@ -187,13 +187,13 @@ static bool32 MGL_Send(struct MysteryGiftLink * link)
                 blocksize = 252 * link->sendCounter;
                 if (link->sendSize - blocksize <= 252)
                 {
-                    SendBlock(0, link->sendBuffer + blocksize, link->sendSize - blocksize);
+                    SendBlock(link->sendBuffer + blocksize, link->sendSize - blocksize);
                     link->sendCounter++;
                     link->state++;
                 }
                 else
                 {
-                    SendBlock(0, link->sendBuffer + blocksize, 252);
+                    SendBlock(link->sendBuffer + blocksize, 252);
                     link->sendCounter++;
                 }
             }

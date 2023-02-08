@@ -58,7 +58,6 @@ enum {
     CB_SHOW_MON_SUMMARY,
     CB_CONFIRM_TRADE_PROMPT,
     CB_CANCEL_TRADE_PROMPT,
-    CB_READY_WAIT, // Unused in Emerald, equivalent to CB_IDLE
     CB_SET_SELECTED_MONS,
     CB_PRINT_IS_THIS_OKAY,
     CB_HANDLE_TRADE_CANCELED,
@@ -68,7 +67,6 @@ enum {
     CB_EXIT_CANCELED_TRADE,
     CB_START_LINK_TRADE,
     CB_INIT_CONFIRM_TRADE_PROMPT,
-    CB_UNUSED_CLOSE_MSG,
     CB_WAIT_TO_START_RFU_TRADE,
     CB_PARTNER_MON_INVALID,
     CB_IDLE = 100,
@@ -88,8 +86,7 @@ enum {
 enum {
     MSG_STANDBY,
     MSG_CANCELED,
-    MSG_ONLY_MON1,
-    MSG_ONLY_MON2,
+    MSG_ONLY_MON,
     MSG_WAITING_FOR_FRIEND,
     MSG_FRIEND_WANTS_TO_TRADE,
     MSG_MON_CANT_BE_TRADED,
@@ -101,10 +98,7 @@ enum {
 enum {
     QUEUE_SEND_DATA,
     QUEUE_STANDBY,
-    QUEUE_ONLY_MON1,
-    QUEUE_ONLY_MON2,
-    QUEUE_UNUSED1, // Presumably intended for MSG_WAITING_FOR_FRIEND
-    QUEUE_UNUSED2, // Presumably intended for MSG_FRIEND_WANTS_TO_TRADE
+    QUEUE_ONLY_MON,
     QUEUE_MON_CANT_BE_TRADED,
     QUEUE_EGG_CANT_BE_TRADED,
     QUEUE_FRIENDS_MON_CANT_BE_TRADED,
@@ -282,7 +276,7 @@ static u32 GetNumQueuedActions(void);
 static void DoQueuedActions(void);
 static void PrintTradeMessage(u8);
 static bool8 LoadUISpriteGfx(void);
-static void DrawBottomRowText(const u8 *, u8 *, u8);
+static void DrawBottomRowText(const u8 *, u8 *);
 static void ComputePartyTradeableFlags(u8);
 static void ComputePartyHPBarLevels(u8);
 static void SetTradePartyHPBarSprites(void);
@@ -322,14 +316,14 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 static bool8 SendLinkData(const void *linkData, u32 size)
 {
-    if (gPlayerCurrActivity == ACTIVITY_29)
+    if (gPlayerCurrActivity == ACTIVITY_26)
     {
         rfu_NI_setSendData(lman.acceptSlot_flag, 84, linkData, size);
         return TRUE;
     }
     else
     {
-        return SendBlock(0, linkData, size);
+        return SendBlock(linkData, size);
     }
 }
 
@@ -340,7 +334,7 @@ static void RequestLinkData(u8 type)
 
 static bool32 IsLinkTradeTaskFinished(void)
 {
-    if (gPlayerCurrActivity == ACTIVITY_29)
+    if (gPlayerCurrActivity == ACTIVITY_26)
     {
         if (gRfuSlotStatusNI[Rfu_GetIndexOfNewestChild(lman.acceptSlot_flag)]->send.state == 0)
             return TRUE;
@@ -376,13 +370,13 @@ static void TradeResetReceivedFlag(u32 who)
 
 static bool32 IsWirelessTrade(void)
 {
-    if (gWirelessCommType && gPlayerCurrActivity == ACTIVITY_29)
+    if (gWirelessCommType && gPlayerCurrActivity == ACTIVITY_26)
         return TRUE;
     else
         return FALSE;
 }
 
-static void SetTradeLinkStandbyCallback(u8 unused)
+static void SetTradeLinkStandbyCallback(void)
 {
     SetLinkStandbyCallback();
 }
@@ -610,7 +604,7 @@ static void CB2_CreateTradeMenu(void)
         id = GetMultiplayerId();
         DrawTextWindowAndBufferTiles(gLinkPlayers[id ^ 1].name, sMenuTextTileBuffers[GFXTAG_PARTNER_NAME_L], 0, 0, 3);
         DrawTextWindowAndBufferTiles(sActionTexts[TEXT_CANCEL], sMenuTextTileBuffers[GFXTAG_CANCEL_L], 0, 0, 2);
-        DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], sMenuTextTileBuffers[GFXTAG_CHOOSE_PKMN_L], 24);
+        DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], sMenuTextTileBuffers[GFXTAG_CHOOSE_PKMN_L]);
         gMain.state++;
         sTradeMenu->timer = 0;
         break;
@@ -810,7 +804,7 @@ static void CB2_ReturnToTradeMenu(void)
         id = GetMultiplayerId();
         DrawTextWindowAndBufferTiles(gLinkPlayers[id ^ 1].name, sMenuTextTileBuffers[GFXTAG_PARTNER_NAME_L], 0, 0, 3);
         DrawTextWindowAndBufferTiles(sActionTexts[TEXT_CANCEL], sMenuTextTileBuffers[GFXTAG_CANCEL_L], 0, 0, 2);
-        DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], sMenuTextTileBuffers[GFXTAG_CHOOSE_PKMN_L], 24);
+        DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], sMenuTextTileBuffers[GFXTAG_CHOOSE_PKMN_L]);
         gMain.state++;
         sTradeMenu->timer = 0;
         break;
@@ -1213,7 +1207,7 @@ static bool8 BufferTradeParties(void)
 
 static void PrintIsThisTradeOkay(void)
 {
-    DrawBottomRowText(sText_IsThisTradeOkay, (void *)(OBJ_VRAM0 + (sTradeMenu->bottomTextTileStart * 32)), 24);
+    DrawBottomRowText(sText_IsThisTradeOkay, (void *)(OBJ_VRAM0 + (sTradeMenu->bottomTextTileStart * 32)));
 }
 
 static void Leader_ReadLinkBuffer(u8 mpId, u8 status)
@@ -1505,7 +1499,7 @@ static void CB_ProcessMenuInput(void)
             // Selected Cancel
             CreateYesNoMenu(&sTradeYesNoWindowTemplate, 1, 14, 0);
             sTradeMenu->callbackId = CB_CANCEL_TRADE_PROMPT;
-            DrawBottomRowText(sActionTexts[TEXT_CANCEL_TRADE], (void *)(OBJ_VRAM0 + sTradeMenu->bottomTextTileStart * 32), 24);
+            DrawBottomRowText(sActionTexts[TEXT_CANCEL_TRADE], (void *)(OBJ_VRAM0 + sTradeMenu->bottomTextTileStart * 32));
         }
     }
 }
@@ -1515,7 +1509,7 @@ static void RedrawChooseAPokemonWindow(void)
     PrintTradePartnerPartyNicknames();
     sTradeMenu->callbackId = CB_MAIN_MENU;
     gSprites[sTradeMenu->cursorSpriteId].invisible = FALSE;
-    DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], (void *)(OBJ_VRAM0 + sTradeMenu->bottomTextTileStart * 32), 24);
+    DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], (void *)(OBJ_VRAM0 + sTradeMenu->bottomTextTileStart * 32));
 }
 
 static void CB_ProcessSelectedMonInput(void)
@@ -1540,7 +1534,7 @@ static void CB_ProcessSelectedMonInput(void)
             gSprites[sTradeMenu->cursorSpriteId].invisible = TRUE;
             break;
         case CANT_TRADE_LAST_MON:
-            QueueAction(QUEUE_DELAY_MSG, QUEUE_ONLY_MON2);
+            QueueAction(QUEUE_DELAY_MSG, QUEUE_ONLY_MON);
             sTradeMenu->callbackId = CB_HANDLE_TRADE_CANCELED;
             break;
         case CANT_TRADE_NATIONAL:
@@ -1555,15 +1549,6 @@ static void CB_ProcessSelectedMonInput(void)
             break;
         }
         break;
-    }
-}
-
-static void CB_ChooseMonAfterButtonPress(void)
-{
-    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        RedrawChooseAPokemonWindow();
     }
 }
 
@@ -1628,7 +1613,7 @@ static bool32 CheckMonsBeforeTrade(void)
                                                 sTradeMenu->partnerCursorPosition))
     {
     case PLAYER_MON_INVALID:
-        QueueAction(QUEUE_DELAY_MSG, QUEUE_ONLY_MON2);
+        QueueAction(QUEUE_DELAY_MSG, QUEUE_ONLY_MON);
         SetLinkData(LINKCMD_READY_CANCEL_TRADE, 0);
         break;
     case BOTH_MONS_VALID:
@@ -1853,9 +1838,6 @@ static void RunTradeMenuCallback(void)
         break;
     case CB_INIT_CONFIRM_TRADE_PROMPT:
         CB_InitConfirmTradePrompt();
-        break;
-    case CB_UNUSED_CLOSE_MSG:
-        CB_ChooseMonAfterButtonPress();
         break;
     case CB_WAIT_TO_START_RFU_TRADE:
         CB_WaitToStartRfuTrade();
@@ -2145,7 +2127,7 @@ static void RedrawPartyWindow(u8 whichParty)
     PrintPartyLevelsAndGenders(whichParty);
     PrintPartyNicknames(whichParty);
     ShowTradePartyMonIcons(whichParty);
-    DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], (void *)(OBJ_VRAM0 + (sTradeMenu->bottomTextTileStart * 32)), 24);
+    DrawBottomRowText(sActionTexts[TEXT_CHOOSE_MON], (void *)(OBJ_VRAM0 + (sTradeMenu->bottomTextTileStart * 32)));
     sTradeMenu->drawSelectedMonState[whichParty] = 0;
 }
 
@@ -2213,13 +2195,8 @@ static void DoQueuedActions(void)
                 case QUEUE_STANDBY:
                     PrintTradeMessage(MSG_STANDBY);
                     break;
-                case QUEUE_ONLY_MON1:
-                    PrintTradeMessage(MSG_ONLY_MON1);
-                    break;
-                case QUEUE_ONLY_MON2:
-                case QUEUE_UNUSED1:
-                case QUEUE_UNUSED2:
-                    PrintTradeMessage(MSG_ONLY_MON2);
+                case QUEUE_ONLY_MON:
+                    PrintTradeMessage(MSG_ONLY_MON);
                     break;
                 case QUEUE_MON_CANT_BE_TRADED:
                     PrintTradeMessage(MSG_MON_CANT_BE_TRADED);
@@ -2302,7 +2279,7 @@ static bool8 LoadUISpriteGfx(void)
     return FALSE;
 }
 
-static void DrawBottomRowText(const u8 *str, u8 *dest, u8 unused)
+static void DrawBottomRowText(const u8 *str, u8 *dest)
 {
     DrawTextWindowAndBufferTiles(str, dest, 0, 0, 6);
 }
@@ -2601,70 +2578,6 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
         return CAN_REGISTER_MON;
 
     return CANT_REGISTER_MON;
-}
-
-// Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade
-// Unlike later generations, this version of Spin Trade isnt only for Eggs
-int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
-{
-    int i, version, versions, canTradeAnyMon, numMonsLeft;
-    int speciesArray[PARTY_SIZE];
-
-    // Make Eggs not count for numMonsLeft
-    for (i = 0; i < gPlayerPartyCount; i++)
-    {
-        speciesArray[i] = GetMonData(&mon[i], MON_DATA_SPECIES2);
-        if (speciesArray[i] == SPECIES_EGG)
-            speciesArray[i] = SPECIES_NONE;
-    }
-
-    versions = 0;
-    canTradeAnyMon = TRUE;
-    for (i = 0; i < GetLinkPlayerCount(); i++)
-    {
-        version = gLinkPlayers[i].version & 0xFF;
-        if (version == VERSION_FIRE_RED ||
-            version == VERSION_LEAF_GREEN)
-            versions = 0;
-        else
-            versions |= 1;
-    }
-
-    for (i = 0; i < GetLinkPlayerCount(); i++)
-    {
-        struct LinkPlayer *player = &gLinkPlayers[i];
-
-        // Does player not have National Dex
-        do
-        {
-            if (!(player->progressFlags & 0xF))
-                canTradeAnyMon = FALSE;
-
-            if (versions && (player->progressFlags / 16))
-                canTradeAnyMon = FALSE;
-        } while (0);
-    }
-
-    if (canTradeAnyMon == FALSE)
-    {
-        if (!IsSpeciesInHoennDex(speciesArray[monIdx]))
-            return CANT_TRADE_NATIONAL;
-
-        if (speciesArray[monIdx] == SPECIES_NONE)
-            return CANT_TRADE_EGG_YET;
-    }
-
-    numMonsLeft = 0;
-    for (i = 0; i < gPlayerPartyCount; i++)
-    {
-        if (monIdx != i)
-            numMonsLeft += speciesArray[i];
-    }
-
-    if (!numMonsLeft)
-        return CANT_TRADE_LAST_MON;
-    else
-        return CAN_TRADE_MON;
 }
 
 static void SpriteCB_LinkMonGlow(struct Sprite *sprite)
@@ -3156,7 +3069,7 @@ static void HandleLinkDataSend(void)
     case 1:
         if (IsLinkTaskFinished())
         {
-            SendBlock(BitmaskAllOtherLinkPlayers(), sTradeAnim->linkData, sizeof(sTradeAnim->linkData));
+            SendBlock(sTradeAnim->linkData, sizeof(sTradeAnim->linkData));
             sTradeAnim->scheduleLinkTransfer++;
         }
         // fallthrough
@@ -3423,7 +3336,6 @@ enum {
     STATE_LINK_MON_ARRIVED_DELAY,
     STATE_MOVE_GBA_TO_CENTER,
     STATE_GBA_FLASH_RECV,
-    STATE_UNUSED,
     STATE_GBA_STOP_FLASH_RECV,
     STATE_GBA_ZOOM_IN,
     STATE_FADE_OUT_TO_NEW_MON,
@@ -4682,7 +4594,7 @@ static void CB2_WaitTradeComplete(void)
             && sTradeAnim->partnerFinishStatus == STATUS_READY)
         {
             sTradeAnim->linkData[0] = LINKCMD_CONFIRM_FINISH_TRADE;
-            SendBlock(BitmaskAllOtherLinkPlayers(), sTradeAnim->linkData, sizeof(sTradeAnim->linkData));
+            SendBlock(sTradeAnim->linkData, sizeof(sTradeAnim->linkData));
             sTradeAnim->playerFinishStatus = STATUS_CANCEL;
             sTradeAnim->partnerFinishStatus = STATUS_CANCEL;
         }
@@ -4703,7 +4615,7 @@ static void CB2_SaveAndEndTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        SetTradeLinkStandbyCallback(0);
+        SetTradeLinkStandbyCallback();
         gMain.state = 100;
         sTradeAnim->timer = 0;
         break;
@@ -4771,7 +4683,7 @@ static void CB2_SaveAndEndTrade(void)
     case 41:
         if (sTradeAnim->timer == 0)
         {
-            SetTradeLinkStandbyCallback(1);
+            SetTradeLinkStandbyCallback();
             gMain.state = 42;
         }
         else
@@ -4790,7 +4702,7 @@ static void CB2_SaveAndEndTrade(void)
         if (++sTradeAnim->timer > 60)
         {
             gMain.state++;
-            SetTradeLinkStandbyCallback(2);
+            SetTradeLinkStandbyCallback();
         }
         break;
     case 6:
@@ -4811,7 +4723,7 @@ static void CB2_SaveAndEndTrade(void)
         if (IsBGMStopped() == TRUE)
         {
             if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
-                SetTradeLinkStandbyCallback(3);
+                SetTradeLinkStandbyCallback();
             else
                 SetCloseLinkCallback();
             gMain.state++;
@@ -5018,7 +4930,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        SetTradeLinkStandbyCallback(0);
+        SetTradeLinkStandbyCallback();
         gMain.state = 2;
         sTradeAnim->timer = 0;
         break;
@@ -5066,7 +4978,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     case 7:
         if (sTradeAnim->timer == 0)
         {
-            SetTradeLinkStandbyCallback(1);
+            SetTradeLinkStandbyCallback();
             gMain.state = 8;
         }
         else
@@ -5085,7 +4997,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
         if (++sTradeAnim->timer > 60)
         {
             gMain.state++;
-            SetTradeLinkStandbyCallback(2);
+            SetTradeLinkStandbyCallback();
         }
         break;
     case 10:
@@ -5099,7 +5011,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     case 11:
         if (!gPaletteFade.active && IsBGMStopped() == TRUE)
         {
-            SetTradeLinkStandbyCallback(3);
+            SetTradeLinkStandbyCallback();
             gMain.state = 12;
         }
         break;

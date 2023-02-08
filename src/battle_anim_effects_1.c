@@ -3811,39 +3811,6 @@ static void AnimSlice_Step(struct Sprite *sprite)
     }
 }
 
-static void UnusedFlickerAnim(struct Sprite *sprite)
-{
-    if (sprite->data[2] > 1)
-    {
-        if (sprite->data[3] & 1)
-        {
-            sprite->invisible = FALSE;
-            gSprites[sprite->data[0]].invisible = FALSE;
-            gSprites[sprite->data[1]].invisible = FALSE;
-        }
-        else
-        {
-            sprite->invisible = TRUE;
-            gSprites[sprite->data[0]].invisible = TRUE;
-            gSprites[sprite->data[1]].invisible = TRUE;
-        }
-
-        sprite->data[2] = 0;
-        sprite->data[3]++;
-    }
-    else
-    {
-        sprite->data[2]++;
-    }
-
-    if (sprite->data[3] == 10)
-    {
-        DestroySprite(&gSprites[sprite->data[0]]);
-        DestroySprite(&gSprites[sprite->data[1]]);
-        DestroyAnimSprite(sprite);
-    }
-}
-
 static void AnimCirclingMusicNote(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[2];
