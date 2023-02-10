@@ -1468,12 +1468,6 @@ static void DrawTossNumberWindow(u8 windowId)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-// Unused
-static u8 GetMenuActionWindowId(u8 windowArrayId)
-{
-    return gPyramidBagMenu->windowIds[windowArrayId];
-}
-
 static u8 OpenMenuActionWindowById(u8 windowArrayId)
 {
     u8 *windowId = &gPyramidBagMenu->windowIds[windowArrayId];

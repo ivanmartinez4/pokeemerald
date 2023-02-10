@@ -757,15 +757,6 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
     return FALSE;
 }
 
-// Functionally unused
-void ShowBattlePyramidStartMenu(void)
-{
-    ClearDialogWindowAndFrameToTransparent(0, FALSE);
-    ScriptUnfreezeObjectEvents();
-    CreateStartMenuTask(Task_ShowStartMenu);
-    LockPlayerFieldControls();
-}
-
 static bool8 StartMenuBattlePyramidBagCallback(void)
 {
     if (!gPaletteFade.active)

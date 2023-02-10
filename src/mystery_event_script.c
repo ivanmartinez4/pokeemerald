@@ -117,8 +117,7 @@ static bool32 IsRecordMixingGiftValid(void)
     struct RecordMixingGiftData *data = &gSaveBlock1Ptr->recordMixingGift.data;
     int checksum = CalcRecordMixingGiftChecksum();
 
-    if (data->unk0 == 0
-        || data->quantity == 0
+    if (data->quantity == 0
         || data->itemId == 0
         || checksum == 0
         || checksum != gSaveBlock1Ptr->recordMixingGift.checksum)
@@ -140,7 +139,6 @@ static void SetRecordMixingGift(u8 unk, u8 quantity, u16 itemId)
     }
     else
     {
-        gSaveBlock1Ptr->recordMixingGift.data.unk0 = unk;
         gSaveBlock1Ptr->recordMixingGift.data.quantity = quantity;
         gSaveBlock1Ptr->recordMixingGift.data.itemId = itemId;
         gSaveBlock1Ptr->recordMixingGift.checksum = CalcRecordMixingGiftChecksum();

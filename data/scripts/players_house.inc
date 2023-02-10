@@ -59,6 +59,8 @@ LittlerootTown_MaysHouse_2F_EventScript_WallClock::
 
 PlayersHouse_2F_EventScript_WallClock::
 	goto_if_set FLAG_SET_WALL_CLOCK, PlayersHouse_2F_EventScript_CheckWallClock
+	msgbox PlayersHouse_2F_Text_TomaParaQueEscuchesMusica, MSGBOX_DEFAULT
+	giveitem ITEM_GB_PLAYER
 	msgbox PlayersHouse_2F_Text_ClockIsStopped, MSGBOX_DEFAULT
 	call PlayersHouse_2F_EventScript_SetWallClock
 	delay 30

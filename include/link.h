@@ -117,9 +117,7 @@ struct LinkStatus
     u32 playerCount:3;
     u32 master:1;
     u32 connEstablished:1;
-    u32 unused_7:1;
     u32 receivedNothing:1;
-    u32 unused_9:7;
     u32 errors:7;
 };
 

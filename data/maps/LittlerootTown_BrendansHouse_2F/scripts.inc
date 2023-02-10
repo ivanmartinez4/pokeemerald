@@ -269,6 +269,9 @@ PlayersHouse_2F_Text_ClockIsStopped:
 	.string "The clock is stopped…\p"
 	.string "Better set it and start it!$"
 
+PlayersHouse_2F_Text_TomaParaQueEscuchesMusica:
+	.string "Toma, para que escuches música.$"
+
 PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
 	.string "MOM: {PLAYER}, how do you like your\n"
 	.string "new room?\p"

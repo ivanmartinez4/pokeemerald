@@ -15,7 +15,6 @@ enum {
     MON_DATA_OT_NAME,
     MON_DATA_MARKINGS,
     MON_DATA_CHECKSUM,
-    MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_SPECIES,
     MON_DATA_HELD_ITEM,
     MON_DATA_MOVE1,
@@ -84,7 +83,6 @@ enum {
     MON_DATA_NATIONAL_RIBBON,
     MON_DATA_EARTH_RIBBON,
     MON_DATA_WORLD_RIBBON,
-    MON_DATA_UNUSED_RIBBONS,
     MON_DATA_EVENT_LEGAL,
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
@@ -159,7 +157,6 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 nationalRibbon:1;
  /* 0x0B */ u32 earthRibbon:1;
  /* 0x0B */ u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- /* 0x0B */ u32 unusedRibbons:4; // discarded in Gen 4
  /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
 };
 
@@ -190,11 +187,9 @@ struct BoxPokemon
     u8 isBadEgg:1;
     u8 hasSpecies:1;
     u8 isEgg:1;
-    u8 unused:5;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
     u16 checksum;
-    u16 unknown;
 
     union
     {
@@ -265,7 +260,6 @@ struct BattlePokemon
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
-    /*0x23*/ u8 unknown;
     /*0x24*/ u8 pp[MAX_MON_MOVES];
     /*0x28*/ u16 hp;
     /*0x2A*/ u8 level;

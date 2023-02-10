@@ -14,7 +14,7 @@ struct Item
     u8 holdEffectParam;
     const u8 *description;
     u8 importance;
-    bool8 registrability; // unused
+    bool8 registrability; // to use
     u8 pocket;
     u8 type;
     ItemUseFunc fieldUseFunc;
@@ -32,8 +32,6 @@ struct BagPocket
 extern const struct Item gItems[];
 extern struct BagPocket gBagPockets[];
 
-void ApplyNewEncryptionKeyToBagItems(u32 newKey);
-void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
 void SetBagItemsPointers(void);
 void CopyItemName(u16 itemId, u8 *dst);
 void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity);

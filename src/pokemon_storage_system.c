@@ -399,7 +399,7 @@ struct PokemonStorageSystemData
     s16 scrollSpeed;
     u16 scrollTimer;
     u8 wallpaperOffset;
-    u8 filler1[22];
+    u8 filler;
     u8 boxTitleTiles[1024];
     u8 boxTitleCycleId;
     u8 wallpaperLoadBoxId;

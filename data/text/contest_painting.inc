@@ -17,21 +17,6 @@ gContestRankMaster::
 gContestLink::
 	.string "LINK$"
 
-gContestCoolness::
-	.string "COOLNESS$"
-
-gContestBeauty::
-	.string "BEAUTY$"
-
-gContestCuteness::
-	.string "CUTENESS$"
-
-gContestSmartness::
-	.string "SMARTNESS$"
-
-gContestToughness::
-	.string "TOUGHNESS$"
-
 gContestPaintingCool1::
 	.string "Nonstop supercool--\n"
 	.string "the inestimable {STR_VAR_1}$"

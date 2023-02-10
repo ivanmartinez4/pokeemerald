@@ -556,14 +556,6 @@ static const struct SubspriteTable sSubspriteTable_NextTurn[] =
     }
 };
 
-// Unused
-static const struct CompressedSpriteSheet sSpriteSheet_Faces =
-{
-    .data = gContestFaces_Gfx,
-    .size = 0x180,
-    .tag = TAG_FACES_GFX
-};
-
 static const struct OamData sOam_Faces =
 {
     .y = 0,
@@ -576,18 +568,6 @@ static const struct OamData sOam_Faces =
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-};
-
-// Unused
-static const struct SpriteTemplate sSpriteTemplate_Faces =
-{
-    .tileTag = TAG_FACES_GFX,
-    .paletteTag = TAG_CONTEST_SYMBOLS_PAL,
-    .oam = &sOam_Faces,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_ApplauseMeter =
@@ -1090,10 +1070,6 @@ static void InitContestResources(void)
     eContest = (struct Contest){};
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContest.unk[i] = 0xFF;
-    }
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-    {
         eContestantStatus[i] = (struct ContestantStatus){};
     }
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -1132,7 +1108,6 @@ static void AllocContestResources(void)
     gContestResources->gfxState = AllocZeroed(sizeof(struct ContestGraphicsState) * CONTESTANT_COUNT);
     gContestResources->moveAnim = AllocZeroed(sizeof(struct ContestMoveAnimData));
     gContestResources->tv = AllocZeroed(sizeof(struct ContestTV) * CONTESTANT_COUNT);
-    gContestResources->unused = AllocZeroed(sizeof(struct ContestUnused));
     gContestResources->contestBgTilemaps[0] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[1] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[2] = AllocZeroed(0x1000);
@@ -1154,7 +1129,6 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->gfxState);
     FREE_AND_SET_NULL(gContestResources->moveAnim);
     FREE_AND_SET_NULL(gContestResources->tv);
-    FREE_AND_SET_NULL(gContestResources->unused);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[0]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[1]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[2]);
@@ -1710,7 +1684,6 @@ static void Task_AppealSetup(u8 taskId)
     if (++gTasks[taskId].data[0] > 19)
     {
         eContest.turnNumber = 0;
-        eContest.unusedRng = gRngValue;
         if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && IsPlayerLinkLeader())
         {
             s32 i;
@@ -3154,7 +3127,6 @@ static void SwapMoveDescAndContestTilemaps(void)
     CpuCopy16(gContestResources->contestBgTilemaps[2], gContestResources->contestBgTilemaps[2] + 0x500, 32 * 20);
 }
 
-// Functionally unused
 static u16 GetMoveEffectSymbolTileOffset(u16 move, u8 contestant)
 {
     u16 offset;
@@ -3242,7 +3214,6 @@ static void DrawMoveEffectSymbol(u16 move, u8 contestant)
     }
 }
 
-// Unused
 static void DrawMoveEffectSymbols(void)
 {
     s32 i;
@@ -4212,25 +4183,6 @@ static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
     ResetBlendForContestantBoxBlink();
 }
 
-// Unused.
-static void ContestDebugTogglePointTotal(void)
-{
-    if(eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL)
-        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
-    else
-        eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL;
-
-    if(eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
-    {
-        DrawContestantWindowText();
-        SwapMoveDescAndContestTilemaps();
-    }
-    else
-    {
-        ContestDebugDoPrint();
-    }
-}
-
 static void ContestDebugDoPrint(void)
 {
     u8 i;
@@ -4867,19 +4819,6 @@ static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
     }
 }
 
-// Unused.
-static void HideApplauseMeterNoAnim(void)
-{
-    gSprites[eContest.applauseMeterSpriteId].x2 = 0;
-    gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
-}
-
-// Unused.
-static void ShowApplauseMeterNoAnim(void)
-{
-    gSprites[eContest.applauseMeterSpriteId].invisible = TRUE;
-}
-
 #define tDelay  data[10]
 #define tFrame  data[11]
 #define tCycles data[12]
@@ -5409,7 +5348,6 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
     printerTemplate.currentY = 1;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.unk = 0;
     printerTemplate.fgColor = 15;
     printerTemplate.bgColor = 0;
     printerTemplate.shadowColor = 8;
@@ -5432,7 +5370,6 @@ void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s3
     printerTemplate.currentY = y;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.unk = 0;
     printerTemplate.fgColor = 15;
     printerTemplate.bgColor = 0;
     printerTemplate.shadowColor = 8;
@@ -5456,7 +5393,6 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     printerTemplate.currentY = 1;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.unk = 0;
     printerTemplate.fgColor = 1;
     printerTemplate.bgColor = 0;
     printerTemplate.shadowColor = 8;
@@ -5911,32 +5847,6 @@ static void SetConestLiveUpdateTVData(void)
     ContestLiveUpdates_SetWinnerAppealFlag(winnerFlag);
     ContestLiveUpdates_SetWinnerMoveUsed(gContestResources->tv[winner].move);
     ContestLiveUpdates_SetLoserData(loserFlag, loser);
-}
-
-// Unused
-void ContestDebugToggleBitfields(bool8 loserFlags)
-{
-    if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
-    {
-        if (!loserFlags)
-            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS;
-        else
-            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS;
-    }
-    else
-    {
-        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
-    }
-
-    if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
-    {
-        DrawContestantWindowText();
-        SwapMoveDescAndContestTilemaps();
-    }
-    else
-    {
-        ContestDebugPrintBitStrings();
-    }
 }
 
 static void ContestDebugPrintBitStrings(void)

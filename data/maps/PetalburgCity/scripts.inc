@@ -229,7 +229,7 @@ PetalburgCity_EventScript_GymSign::
 	end
 
 PetalburgCity_EventScript_CitySign::
-	msgbox PetalburgCity_Text_CitySign, MSGBOX_SIGN
+	goto EventScript_CheckSavefileSizes
 	end
 
 PetalburgCity_EventScript_Gentleman::
@@ -734,10 +734,6 @@ PetalburgCity_Text_GymSign:
 	.string "PETALBURG CITY POKéMON GYM\n"
 	.string "LEADER: NORMAN\l"
 	.string "“A man in pursuit of power!”$"
-
-PetalburgCity_Text_CitySign:
-	.string "PETALBURG CITY\n"
-	.string "“Where people mingle with nature.”$"
 
 PetalburgCity_Text_WallyHouseSign:
 	.string "WALLY'S HOUSE$"

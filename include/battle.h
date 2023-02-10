@@ -72,7 +72,6 @@ struct DisableStruct
     u8 disableTimer:4;
     u8 disableTimerStartValue:4;
     u8 encoredMovePos;
-    u8 filler_D; // Unused field.
     u8 encoreTimer:4;
     u8 encoreTimerStartValue:4;
     u8 perishSongTimer:4;
@@ -87,10 +86,8 @@ struct DisableStruct
     u8 battlerPreventingEscape;
     u8 battlerWithSureHit;
     u8 isFirstTurn;
-    u8 filler_17; // Unused field.
     u8 truantCounter:1;
     u8 truantSwitchInHack:1;
-    u8 filler_18_2:2; // Unused field.
     u8 mimickedMoves:4;
     u8 rechargeTimer;
 };
@@ -349,12 +346,10 @@ struct BattleStruct
 {
     u8 turnEffectsTracker;
     u8 turnEffectsBattlerId;
-    u8 unused_0;
     u8 turnCountersTracker;
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
-    u8 unused_1;
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
@@ -375,7 +370,6 @@ struct BattleStruct
     u8 battlerPartyOrders[MAX_BATTLERS_COUNT][PARTY_SIZE / 2];
     u8 runTries;
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
-    u8 unused_2;
     u8 safariGoNearCounter;
     u8 safariPkblThrowCounter;
     u8 safariEscapeFactor;
@@ -385,12 +379,9 @@ struct BattleStruct
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
-    u8 unused_3[3];
     u8 prevSelectedPartySlot;
-    u8 unused_4[2];
     u8 stringMoveType;
     u8 expGetterBattlerId;
-    u8 unused_5;
     u8 absentBattlerFlags;
     u8 palaceFlags; // First 4 bits are "is < 50% HP and not asleep" for each battler, last 4 bits are selected moves to pass to AI
     u8 field_93; // related to choosing pokemon?
@@ -416,7 +407,6 @@ struct BattleStruct
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;
     u8 turnSideTracker;
-    u8 unused_6[3];
     u8 givenExpMons; // Bits for enemy party's pokemon that gave exp to player's party.
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2]; // a 3-D array [target][attacker][byte]
     u16 castformPalette[NUM_CASTFORM_FORMS][16];
@@ -430,7 +420,6 @@ struct BattleStruct
     u8 atkCancellerTracker;
     struct BattleTvMovePoints tvMovePoints;
     struct BattleTv tv;
-    u8 unused_7[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     s8 arenaMindPoints[2];
     s8 arenaSkillPoints[2];
@@ -594,9 +583,7 @@ struct MonSpritesGfx
     } sprites;
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
     struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];
-    u8 unusedArr[0x80];
     u8 *barFontGfx;
-    void *unusedPtr;
     u16 *buffer;
 };
 

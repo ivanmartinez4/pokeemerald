@@ -66,9 +66,6 @@ struct GFRomHeader
     u32 playerGenderOffset;
     u32 frontierStatusOffset;
     u32 frontierStatusOffset2;
-    u32 externalEventFlagsOffset;
-    u32 externalEventDataOffset;
-    u32 unk18;
     const struct SpeciesInfo * speciesInfo;
     const u8 (* abilityNames)[];
     const u8 * const * abilityDescriptions;
@@ -76,7 +73,6 @@ struct GFRomHeader
     const struct BattleMove * moves;
     const struct CompressedSpriteSheet * ballGfx;
     const struct CompressedSpritePalette * ballPalettes;
-    u32 gcnLinkFlagsOffset;
     u32 gameClearFlag;
     u32 ribbonFlag;
     u8 bagCountItems;
@@ -90,7 +86,6 @@ struct GFRomHeader
     u32 enigmaBerryOffset;
     u32 enigmaBerrySize;
     const u8 * moveDescriptions;
-    u32 unk20;
 };
 
 // This seems to need to be in the text section for some reason.
@@ -147,9 +142,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .playerGenderOffset = offsetof(struct SaveBlock2, playerGender),
     .frontierStatusOffset = offsetof(struct SaveBlock2, frontier.challengeStatus),
     .frontierStatusOffset2 = offsetof(struct SaveBlock2, frontier.challengeStatus),
-    .externalEventFlagsOffset = offsetof(struct SaveBlock1, externalEventFlags),
-    .externalEventDataOffset = offsetof(struct SaveBlock1, externalEventData),
-    .unk18 = 0x00000000,
     .speciesInfo = gSpeciesInfo,
     .abilityNames = gAbilityNames,
     .abilityDescriptions = gAbilityDescriptionPointers,
@@ -157,7 +149,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .moves = gBattleMoves,
     .ballGfx = gBallSpriteSheets,
     .ballPalettes = gBallSpritePalettes,
-    .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),
     .gameClearFlag = FLAG_SYS_GAME_CLEAR,
     .ribbonFlag = FLAG_SYS_RIBBON_GET,
     .bagCountItems = BAG_ITEMS_COUNT,
@@ -171,5 +162,4 @@ static const struct GFRomHeader sGFRomHeader = {
     .enigmaBerryOffset = offsetof(struct SaveBlock1, enigmaBerry),
     .enigmaBerrySize = sizeof(struct EnigmaBerry),
     .moveDescriptions = NULL,
-    .unk20 = 0x00000000, // 0xFFFFFFFF in FRLG
 };

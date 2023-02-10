@@ -303,7 +303,6 @@ struct RouletteSlot
 
 static EWRAM_DATA struct Roulette
 {
-    u8 unk0; // Never read
     u8 shroomishShadowTimer;
     u8 partySpeciesFlags;
     bool8 useTaillow:5;
@@ -2026,7 +2025,6 @@ static void StartTaskAfterDelayOrInput(u8 taskId, TaskFunc task, u16 delay, u16 
 static void ResetBallDataForNewSpin(u8 taskId)
 {
     u8 i = 0;
-    sRoulette->unk0 = FALSE;
     sRoulette->ballRolling = FALSE;
     sRoulette->ballStuck = FALSE;
     sRoulette->ballUnstuck = FALSE;

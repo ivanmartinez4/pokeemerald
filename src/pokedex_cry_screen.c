@@ -42,7 +42,6 @@ struct PokedexCryScreen
     u8 cryState;
     u8 playhead;
     u8 waveformPreviousY;
-    u16 unk; // Never read
     u8 playStartPos;
     u16 species;
     u8 cryOverrideCountdown;
@@ -239,7 +238,6 @@ bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u8 windowId)
             sCryWaveformWindowTiledata = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
         }
 
-        sDexCryScreen->unk = window->unk0;
         sDexCryScreen->playStartPos = window->yPos;
         sDexCryScreen->cryOverrideCountdown = 0;
         sDexCryScreen->cryRepeatDelay = 0;

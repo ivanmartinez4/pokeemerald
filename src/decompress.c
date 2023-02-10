@@ -91,11 +91,6 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }
 
-void Unused_LZDecompressWramIndirect(const void **src, void *dest)
-{
-    LZ77UnCompWram(*src, dest);
-}
-
 static void StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
 {
     /*

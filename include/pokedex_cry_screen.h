@@ -3,8 +3,6 @@
 
 struct CryScreenWindow
 {
-    u16 unk0; // Assigned to val that's never read
-    u8 unk2;  // Never read
     u8 paletteNo;
     u8 xPos;
     u8 yPos;

@@ -11,7 +11,6 @@
 static const struct TrainerHillChallenge sChallenge_Normal =
 {
     .numTrainers = NUM_TRAINER_HILL_TRAINERS,
-    .unused1 = 2,
     .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x00051E05
 };
@@ -1127,7 +1126,6 @@ static const struct TrainerHillFloor sFloors_Normal[] =
 static const struct TrainerHillChallenge sChallenge_Variety =
 {
     .numTrainers = NUM_TRAINER_HILL_TRAINERS,
-    .unused1 = 1,
     .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x00054C15
 };
@@ -2135,7 +2133,6 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
 static const struct TrainerHillChallenge sChallenge_Unique =
 {
     .numTrainers = NUM_TRAINER_HILL_TRAINERS,
-    .unused1 = 3,
     .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x000652F3
 };
@@ -3242,7 +3239,6 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
 static const struct TrainerHillChallenge sChallenge_Expert =
 {
     .numTrainers = NUM_TRAINER_HILL_TRAINERS,
-    .unused1 = 1,
     .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x00061F3F
 };

@@ -1505,9 +1505,7 @@ void ResetPokedex(void)
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
     gSaveBlock2Ptr->pokedex.order = 0;
     gSaveBlock2Ptr->pokedex.nationalMagic = 0;
-    gSaveBlock2Ptr->pokedex.unknown2 = 0;
     gSaveBlock2Ptr->pokedex.spindaPersonality = 0;
-    gSaveBlock2Ptr->pokedex.unknown3 = 0;
     DisableNationalPokedex();
     for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
@@ -3570,8 +3568,6 @@ static void Task_LoadCryScreen(u8 taskId)
         {
             struct CryScreenWindow waveformWindow;
 
-            waveformWindow.unk0 = 0x4020;
-            waveformWindow.unk2 = 31;
             waveformWindow.paletteNo = 8;
             waveformWindow.yPos = 30;
             waveformWindow.xPos = 12;

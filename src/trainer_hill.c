@@ -273,7 +273,6 @@ void ResetTrainerHillResults(void)
     s32 i;
 
     gSaveBlock2Ptr->frontier.savedGame = 0;
-    gSaveBlock2Ptr->frontier.unk_EF9 = 0;
     gSaveBlock1Ptr->trainerHill.bestTime = 0;
     for (i = 0; i < NUM_TRAINER_HILL_MODES; i++)
         SetTimerValue(&gSaveBlock1Ptr->trainerHillTimes[i], HILL_MAX_TIME);
@@ -392,7 +391,6 @@ static void TrainerHillStartChallenge(void)
     else
         gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 0;
 
-    gSaveBlock1Ptr->trainerHill.unk_3D6C = 0;
     SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
     gSaveBlock1Ptr->trainerHill.timer = 0;
     gSaveBlock1Ptr->trainerHill.spokeToOwner = 0;
@@ -427,7 +425,6 @@ static void GiveChallengePrize(void)
     {
         CopyItemName(itemId, gStringVar2);
         gSaveBlock1Ptr->trainerHill.receivedPrize = TRUE;
-        gSaveBlock2Ptr->frontier.unk_EF9 = 0;
         gSpecialVar_Result = 0;
     }
     else
@@ -602,8 +599,6 @@ void PrintOnTrainerHillRecordsWindow(void)
     FreeDataStruct();
 }
 
-// Leftover from Fire Red / Leaf Green as in these games,
-// the timer had to be xored by the encryption key in Sav2.
 static u32 GetTimerValue(u32 *src)
 {
     return *src;
