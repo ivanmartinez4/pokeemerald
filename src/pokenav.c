@@ -20,7 +20,6 @@ struct PokenavResources
     u32 currentMenuIndex;
     u16 mode;
     u16 conditionSearchId;
-    bool32 hasAnyRibbons;
     void *substructPtrs[POKENAV_SUBSTRUCT_COUNT];
 };
 
@@ -38,7 +37,6 @@ struct PokenavCallbacks
 static u32 GetCurrentMenuCB(void);
 static u32 IsActiveMenuLoopTaskActive_(void);
 static bool32 SetActivePokenavMenu(u32);
-static bool32 AnyMonHasRibbon(void);
 static void InitPokenavResources(struct PokenavResources *);
 static void InitKeys_(void);
 static void FreePokenavResources(void);
@@ -94,16 +92,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
     [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMatchCall,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
         .callback = GetMenuHandlerCallback,
         .open = OpenPokenavMenuNotInitial,
         .createLoopTask = CreateMenuHandlerLoopedTask,
@@ -170,37 +158,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .isLoopTaskActive = IsMatchCallLoopedTaskActive,
         .free1 = FreeMatchCallSubstruct1,
         .free2 = FreeMatchCallSubstruct2,
-    },
-    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MonRibbonList,
-        .callback = GetRibbonsMonListCallback,
-        .open = OpenRibbonsMonList,
-        .createLoopTask = CreateRibbonsMonListLoopedTask,
-        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList,
-        .free2 = FreeRibbonsMonMenu,
-    },
-    [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RibbonsSummaryMenu,
-        .callback = GetRibbonsSummaryMenuCallback,
-        .open = OpenRibbonsSummaryMenu,
-        .createLoopTask = CreateRibbonsSummaryLoopedTask,
-        .isLoopTaskActive = IsRibbonsSummaryLoopedTaskActive,
-        .free1 = FreeRibbonsSummaryScreen1,
-        .free2 = FreeRibbonsSummaryScreen2,
-    },
-    [POKENAV_RIBBONS_RETURN_TO_MON_LIST - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RibbonsMonListFromSummary,
-        .callback = GetRibbonsMonListCallback,
-        .open = OpenRibbonsMonListFromRibbonsSummary,
-        .createLoopTask = CreateRibbonsMonListLoopedTask,
-        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList,
-        .free2 = FreeRibbonsMonMenu,
-    },
+    }
 };
 
 EWRAM_DATA u8 gNextLoopedTaskId = 0;
@@ -381,37 +339,7 @@ static void InitPokenavResources(struct PokenavResources *resources)
 
     resources->mode = POKENAV_MODE_NORMAL;
     resources->currentMenuIndex = 0;
-    resources->hasAnyRibbons = AnyMonHasRibbon();
     resources->currentMenuCb1 = NULL;
-}
-
-static bool32 AnyMonHasRibbon(void)
-{
-    int i, j;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i],  MON_DATA_SANITY_HAS_SPECIES)
-            && !GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG)
-            && GetMonData(&gPlayerParty[i], MON_DATA_RIBBON_COUNT) != 0)
-        {
-            return TRUE;
-        }
-    }
-
-    for (j = 0; j < TOTAL_BOXES_COUNT; j++)
-    {
-        for (i = 0; i < IN_BOX_COUNT; i++)
-        {
-            if (CheckBoxMonSanityAt(j, i)
-                && GetBoxMonDataAt(j, i, MON_DATA_RIBBON_COUNT) != 0)
-            {
-                return TRUE;
-            }
-        }
-    }
-
-    return FALSE;
 }
 
 static void CB2_Pokenav(void)
@@ -582,9 +510,4 @@ void SetSelectedConditionSearch(u32 cursorPos)
 u32 GetSelectedConditionSearch(void)
 {
     return gPokenavResources->conditionSearchId;
-}
-
-bool32 CanViewRibbonsMenu(void)
-{
-    return gPokenavResources->hasAnyRibbons;
 }

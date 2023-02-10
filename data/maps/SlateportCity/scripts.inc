@@ -158,31 +158,8 @@ SlateportCity_Pokemart_EnergyGuru:
 	release
 	end
 
-SlateportCity_EventScript_EffortRibbonWoman::
-	lock
-	faceplayer
-	bufferleadmonspeciesname STR_VAR_1
-	msgbox SlateportCity_Text_OhYourPokemon, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, LeadMonHasEffortRibbon
-	call_if_eq VAR_RESULT, TRUE, SlateportCity_EventScript_MonHasEffortRibbon
-	specialvar VAR_RESULT, Special_AreLeadMonEVsMaxedOut
-	call_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_MonEVsNotMaxed
-	msgbox SlateportCity_Text_PleaseGiveItThisEffortRibbon, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
-	message SlateportCity_Text_ReceivedEffortRibbon
-	waitfanfare
-	msgbox SlateportCity_Text_PutEffortRibbonOnMon, MSGBOX_DEFAULT
-	special GiveLeadMonEffortRibbon
-	release
-	end
-
 SlateportCity_EventScript_MonEVsNotMaxed::
 	msgbox SlateportCity_Text_GoForItLittleHarder, MSGBOX_DEFAULT
-	release
-	end
-
-SlateportCity_EventScript_MonHasEffortRibbon::
-	msgbox SlateportCity_Text_EffortRibbonLooksGoodOnIt, MSGBOX_DEFAULT
 	release
 	end
 
@@ -953,26 +930,10 @@ SlateportCity_Text_OhYourPokemon:
 	.string "Oh?\n"
 	.string "Your {STR_VAR_1}…$"
 
-SlateportCity_Text_PleaseGiveItThisEffortRibbon:
-	.string "Went for it stupendously!\p"
-	.string "As its reward, please give it this\n"
-	.string "EFFORT RIBBON.$"
-
-SlateportCity_Text_ReceivedEffortRibbon:
-	.string "{PLAYER} received the EFFORT RIBBON.$"
-
-SlateportCity_Text_PutEffortRibbonOnMon:
-	.string "{PLAYER} put the EFFORT RIBBON\n"
-	.string "on {STR_VAR_1}.$"
-
 SlateportCity_Text_GoForItLittleHarder:
 	.string "You have to go for it a little harder.\p"
 	.string "If you do, I'll give your POKéMON\n"
 	.string "something nice.$"
-
-SlateportCity_Text_EffortRibbonLooksGoodOnIt:
-	.string "Oh! Your {STR_VAR_1}, that EFFORT\n"
-	.string "RIBBON looks good on it!$"
 
 SlateportCity_Text_WonderIfLighthouseStartlesPokemon:
 	.string "The light of the lighthouse reaches\n"

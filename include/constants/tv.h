@@ -79,9 +79,6 @@
 #define PLAYERS_HOUSE_TV_LATI  1
 #define PLAYERS_HOUSE_TV_MOVIE 2
 
-// Number of ribbons to put Spot the Cuties on air
-#define NUM_CUTIES_RIBBONS  4
-
 // TV Show states for Secret Base Secrets
 #define SBSECRETS_STATE_INTRO                   0
 #define SBSECRETS_STATE_DO_NEXT1                1
@@ -225,21 +222,7 @@
 
 // TV Show states for Spot the Cuties
 #define SPOTCUTIES_STATE_INTRO            0
-#define SPOTCUTIES_STATE_RIBBONS_LOW      1
-#define SPOTCUTIES_STATE_RIBBONS_MID      2
-#define SPOTCUTIES_STATE_RIBBONS_HIGH     3
-#define SPOTCUTIES_STATE_RIBBON_INTRO     4
-#define SPOTCUTIES_STATE_RIBBON_CHAMPION  5
-#define SPOTCUTIES_STATE_RIBBON_COOL      6
-#define SPOTCUTIES_STATE_RIBBON_BEAUTY    7
-#define SPOTCUTIES_STATE_RIBBON_CUTE      8
-#define SPOTCUTIES_STATE_RIBBON_SMART     9
-#define SPOTCUTIES_STATE_RIBBON_TOUGH    10
-#define SPOTCUTIES_STATE_RIBBON_WINNING  11
-#define SPOTCUTIES_STATE_RIBBON_VICTORY  12
-#define SPOTCUTIES_STATE_RIBBON_ARTIST   13
-#define SPOTCUTIES_STATE_RIBBON_EFFORT   14
-#define SPOTCUTIES_STATE_OUTRO           15
+#define SPOTCUTIES_STATE_OUTRO            1
 
 // TV Show states for Trend Watcher
 #define TRENDWATCHER_STATE_INTRO           0

@@ -1408,7 +1408,7 @@
 #define FLAG_SYS_UNUSED_0x38                        (SYSTEM_FLAGS + 0x38)
 #define FLAG_SYS_UNUSED_0x39                        (SYSTEM_FLAGS + 0x39)
 #define FLAG_SYS_SHOAL_TIDE                         (SYSTEM_FLAGS + 0x3A)
-#define FLAG_SYS_RIBBON_GET                         (SYSTEM_FLAGS + 0x3B)
+#define FLAG_SYS_UNUSED_0x3B                        (SYSTEM_FLAGS + 0x3B)
 
 #define FLAG_LANDMARK_FLOWER_SHOP                   (SYSTEM_FLAGS + 0x3C)
 #define FLAG_LANDMARK_MR_BRINEY_HOUSE               (SYSTEM_FLAGS + 0x3D)

@@ -10,7 +10,6 @@ gMysteryEventScriptCmdTable::
 	.4byte MEScrCmd_runscript           @ 0x05
 	.4byte MEScrCmd_initramscript       @ 0x06
 	.4byte MEScrCmd_setenigmaberry      @ 0x07
-	.4byte MEScrCmd_giveribbon          @ 0x08
 	.4byte MEScrCmd_givenationaldex     @ 0x09
 	.4byte MEScrCmd_addrareword         @ 0x0a
 	.4byte MEScrCmd_setrecordmixinggift @ 0x0b

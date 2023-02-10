@@ -307,7 +307,6 @@ extern u8 gContestLinkLeaderIndex;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 extern u8 gNumLinkContestPlayers;
-extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
 extern struct ContestWinner gCurContestWinner;
 extern u8 gCurContestWinnerIsForArtist;

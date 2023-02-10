@@ -321,7 +321,6 @@ static const u32 sWallpaperIcon_Footprint[]    = INCBIN_U32("graphics/pokemon_st
 static const u32 sWallpaperIcon_BigAsterisk[]  = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/big_asterisk.4bpp.lz");
 static const u32 sWallpaperIcon_Circle[]       = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/circle.4bpp.lz");
 static const u32 sWallpaperIcon_Koffing[]      = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/koffing.4bpp.lz");
-static const u32 sWallpaperIcon_Ribbon[]       = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/ribbon.4bpp.lz");
 static const u32 sWallpaperIcon_FourCircles[]  = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/four_circles.4bpp.lz");
 static const u32 sWallpaperIcon_Lotad[]        = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/lotad.4bpp.lz");
 static const u32 sWallpaperIcon_Crystal[]      = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/crystal.4bpp.lz");
@@ -342,7 +341,6 @@ static const struct Wallpaper sWaldaWallpapers[] =
     WALLPAPER_ENTRY_G(Horizontal),
     WALLPAPER_ENTRY(Diagonal),
     WALLPAPER_ENTRY(Block),
-    WALLPAPER_ENTRY_G(Ribbon),
     WALLPAPER_ENTRY(Pokecenter2),
     WALLPAPER_ENTRY(Frame),
     WALLPAPER_ENTRY(Blank),
@@ -372,7 +370,6 @@ static const u32 *const sWaldaWallpaperIcons[] =
     sWallpaperIcon_BigAsterisk,
     sWallpaperIcon_Circle,
     sWallpaperIcon_Koffing,
-    sWallpaperIcon_Ribbon,
     gWallpaperIcon_Bolt,
     sWallpaperIcon_FourCircles,
     sWallpaperIcon_Lotad,

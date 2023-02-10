@@ -1028,12 +1028,6 @@ static const struct Story sStorytellerStories[] = {
         MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory
     },
     {
-        GAME_STAT_RECEIVED_RIBBONS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction,
-        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory
-    },
-    {
         GAME_STAT_JUMPED_DOWN_LEDGES, 1,
         MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle,
         MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedAction,

@@ -143,7 +143,6 @@ static void UpdatePokeNewsCountdown(u16);
 static void ResolveWorldOfMastersShow(u16);
 static void ResolveNumberOneShow(u16);
 static void TryPutFishingAdviceOnAir(void);
-static u8 MonDataIdxToRibbon(u8);
 static void TryPutNumberOneOnAir(u8);
 static bool8 ShouldApplyPokeNewsEffect(u8);
 static void TryPutWorldOfMastersOnAir(void);
@@ -592,20 +591,6 @@ static const u8 *const sTVTrainerFanClubTextGroup[] = {
 
 static const u8 *const sTVCutiesTextGroup[] = {
     [SPOTCUTIES_STATE_INTRO]           = TVSpotTheCuties_Text_Intro,
-    [SPOTCUTIES_STATE_RIBBONS_LOW]     = TVSpotTheCuties_Text_RibbonsLow,
-    [SPOTCUTIES_STATE_RIBBONS_MID]     = TVSpotTheCuties_Text_RibbonsMid,
-    [SPOTCUTIES_STATE_RIBBONS_HIGH]    = TVSpotTheCuties_Text_RibbonsHigh,
-    [SPOTCUTIES_STATE_RIBBON_INTRO]    = TVSpotTheCuties_Text_RibbonIntro,
-    [SPOTCUTIES_STATE_RIBBON_CHAMPION] = TVSpotTheCuties_Text_RibbonChampion,
-    [SPOTCUTIES_STATE_RIBBON_COOL]     = TVSpotTheCuties_Text_RibbonCool,
-    [SPOTCUTIES_STATE_RIBBON_BEAUTY]   = TVSpotTheCuties_Text_RibbonBeauty,
-    [SPOTCUTIES_STATE_RIBBON_CUTE]     = TVSpotTheCuties_Text_RibbonCute,
-    [SPOTCUTIES_STATE_RIBBON_SMART]    = TVSpotTheCuties_Text_RibbonSmart,
-    [SPOTCUTIES_STATE_RIBBON_TOUGH]    = TVSpotTheCuties_Text_RibbonTough,
-    [SPOTCUTIES_STATE_RIBBON_WINNING]  = TVSpotTheCuties_Text_RibbonWinning,
-    [SPOTCUTIES_STATE_RIBBON_VICTORY]  = TVSpotTheCuties_Text_RibbonVictory,
-    [SPOTCUTIES_STATE_RIBBON_ARTIST]   = TVSpotTheCuties_Text_RibbonArtist,
-    [SPOTCUTIES_STATE_RIBBON_EFFORT]   = TVSpotTheCuties_Text_RibbonEffort,
     [SPOTCUTIES_STATE_OUTRO]           = TVSpotTheCuties_Text_Outro
 };
 
@@ -2234,77 +2219,6 @@ void TryPutSafariFanClubOnAir(u8 monsCaught, u8 pokeblocksUsed)
         StorePlayerIdInRecordMixShow(show);
         show->safariFanClub.language = gGameLanguage;
     }
-}
-
-void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
-{
-    TVShow *show;
-
-    sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && IsRecordMixShowAlreadySpawned(TVSHOW_CUTIES, FALSE) != TRUE)
-    {
-        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-        show->cuties.kind = TVSHOW_CUTIES;
-        show->cuties.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
-        StringCopy(show->cuties.playerName, gSaveBlock2Ptr->playerName);
-        GetMonData(pokemon, MON_DATA_NICKNAME, show->cuties.nickname);
-        StripExtCtrlCodes(show->cuties.nickname);
-        show->cuties.nRibbons = GetRibbonCount(pokemon);
-        show->cuties.selectedRibbon = MonDataIdxToRibbon(ribbonMonDataIdx);
-        StorePlayerIdInRecordMixShow(show);
-        show->cuties.language = gGameLanguage;
-        if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
-            show->cuties.pokemonNameLanguage = LANGUAGE_JAPANESE;
-        else
-            show->cuties.pokemonNameLanguage = GetMonData(pokemon, MON_DATA_LANGUAGE);
-    }
-}
-
-u8 GetRibbonCount(struct Pokemon *pokemon)
-{
-    u8 nRibbons;
-
-    nRibbons = 0;
-    nRibbons += GetMonData(pokemon, MON_DATA_COOL_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_BEAUTY_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_CUTE_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_SMART_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_TOUGH_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_CHAMPION_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_WINNING_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_MARINE_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_LAND_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_SKY_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_COUNTRY_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_NATIONAL_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_EARTH_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_WORLD_RIBBON);
-    return nRibbons;
-}
-
-static u8 MonDataIdxToRibbon(u8 monDataIdx)
-{
-    if (monDataIdx == MON_DATA_CHAMPION_RIBBON) return CHAMPION_RIBBON;
-    if (monDataIdx == MON_DATA_COOL_RIBBON)     return COOL_RIBBON_NORMAL;
-    if (monDataIdx == MON_DATA_BEAUTY_RIBBON)   return BEAUTY_RIBBON_NORMAL;
-    if (monDataIdx == MON_DATA_CUTE_RIBBON)     return CUTE_RIBBON_NORMAL;
-    if (monDataIdx == MON_DATA_SMART_RIBBON)    return SMART_RIBBON_NORMAL;
-    if (monDataIdx == MON_DATA_TOUGH_RIBBON)    return TOUGH_RIBBON_NORMAL;
-    if (monDataIdx == MON_DATA_WINNING_RIBBON)  return WINNING_RIBBON;
-    if (monDataIdx == MON_DATA_VICTORY_RIBBON)  return VICTORY_RIBBON;
-    if (monDataIdx == MON_DATA_ARTIST_RIBBON)   return ARTIST_RIBBON;
-    if (monDataIdx == MON_DATA_EFFORT_RIBBON)   return EFFORT_RIBBON;
-    if (monDataIdx == MON_DATA_MARINE_RIBBON)   return MARINE_RIBBON;
-    if (monDataIdx == MON_DATA_LAND_RIBBON)     return LAND_RIBBON;
-    if (monDataIdx == MON_DATA_SKY_RIBBON)      return SKY_RIBBON;
-    if (monDataIdx == MON_DATA_COUNTRY_RIBBON)  return COUNTRY_RIBBON;
-    if (monDataIdx == MON_DATA_NATIONAL_RIBBON) return NATIONAL_RIBBON;
-    if (monDataIdx == MON_DATA_EARTH_RIBBON)    return EARTH_RIBBON;
-    if (monDataIdx == MON_DATA_WORLD_RIBBON)    return WORLD_RIBBON;
-    return CHAMPION_RIBBON;
 }
 
 void TryPutTrainerFanClubOnAir(void)
@@ -6136,89 +6050,6 @@ static void DoTVShowSpotTheCuties(void)
     case SPOTCUTIES_STATE_INTRO:
         TVShowConvertInternationalString(gStringVar1, show->cuties.playerName, show->cuties.language);
         TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
-
-        // Comments following the intro depend on how many ribbons the pokemon has
-        if (show->cuties.nRibbons < 10)
-            sTVShowState = SPOTCUTIES_STATE_RIBBONS_LOW;
-        else if (show->cuties.nRibbons < 20)
-            sTVShowState = SPOTCUTIES_STATE_RIBBONS_MID;
-        else
-            sTVShowState = SPOTCUTIES_STATE_RIBBONS_HIGH;
-        break;
-    case SPOTCUTIES_STATE_RIBBONS_LOW:
-    case SPOTCUTIES_STATE_RIBBONS_MID:
-    case SPOTCUTIES_STATE_RIBBONS_HIGH:
-        TVShowConvertInternationalString(gStringVar1, show->cuties.playerName, show->cuties.language);
-        TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
-        ConvertIntToDecimalString(2, show->cuties.nRibbons);
-        sTVShowState = SPOTCUTIES_STATE_RIBBON_INTRO;
-        break;
-    case SPOTCUTIES_STATE_RIBBON_INTRO:
-        TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
-        switch (show->cuties.selectedRibbon)
-        {
-        case CHAMPION_RIBBON:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_CHAMPION;
-            break;
-        case COOL_RIBBON_NORMAL:
-        case COOL_RIBBON_SUPER:
-        case COOL_RIBBON_HYPER:
-        case COOL_RIBBON_MASTER:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_COOL;
-            break;
-        case BEAUTY_RIBBON_NORMAL:
-        case BEAUTY_RIBBON_SUPER:
-        case BEAUTY_RIBBON_HYPER:
-        case BEAUTY_RIBBON_MASTER:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_BEAUTY;
-            break;
-        case CUTE_RIBBON_NORMAL:
-        case CUTE_RIBBON_SUPER:
-        case CUTE_RIBBON_HYPER:
-        case CUTE_RIBBON_MASTER:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_CUTE;
-            break;
-        case SMART_RIBBON_NORMAL:
-        case SMART_RIBBON_SUPER:
-        case SMART_RIBBON_HYPER:
-        case SMART_RIBBON_MASTER:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_SMART;
-            break;
-        case TOUGH_RIBBON_NORMAL:
-        case TOUGH_RIBBON_SUPER:
-        case TOUGH_RIBBON_HYPER:
-        case TOUGH_RIBBON_MASTER:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_TOUGH;
-            break;
-        case WINNING_RIBBON:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_WINNING;
-            break;
-        case VICTORY_RIBBON:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_VICTORY;
-            break;
-        case ARTIST_RIBBON:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_ARTIST;
-            break;
-        case EFFORT_RIBBON:
-            sTVShowState = SPOTCUTIES_STATE_RIBBON_EFFORT;
-            break;
-        // No comment is made for any of the gift ribbons.
-        // If the show is created for a gift ribbon
-        // then this state will repeat indefinitely
-        }
-        break;
-    case SPOTCUTIES_STATE_RIBBON_CHAMPION:
-    case SPOTCUTIES_STATE_RIBBON_COOL:
-    case SPOTCUTIES_STATE_RIBBON_BEAUTY:
-    case SPOTCUTIES_STATE_RIBBON_CUTE:
-    case SPOTCUTIES_STATE_RIBBON_SMART:
-    case SPOTCUTIES_STATE_RIBBON_TOUGH:
-    case SPOTCUTIES_STATE_RIBBON_WINNING:
-    case SPOTCUTIES_STATE_RIBBON_VICTORY:
-    case SPOTCUTIES_STATE_RIBBON_ARTIST:
-    case SPOTCUTIES_STATE_RIBBON_EFFORT:
-        TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
-        sTVShowState = SPOTCUTIES_STATE_OUTRO;
         break;
     case SPOTCUTIES_STATE_OUTRO:
         TVShowDone();

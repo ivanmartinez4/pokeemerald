@@ -195,7 +195,6 @@ static EWRAM_DATA struct {
     u8 partnerCursorPosition;
     u16 linkData[20];
     u8 timer;
-    u8 giftRibbons[GIFT_RIBBONS_COUNT];
     u8 filler_B4[0x81C];
     struct {
         bool8 active;
@@ -280,7 +279,6 @@ static void DrawBottomRowText(const u8 *, u8 *);
 static void ComputePartyTradeableFlags(u8);
 static void ComputePartyHPBarLevels(u8);
 static void SetTradePartyHPBarSprites(void);
-static void SaveTradeGiftRibbons(void);
 static u32 CanTradeSelectedMon(struct Pokemon *, int, int);
 static void SpriteCB_LinkMonGlow(struct Sprite *);
 static void SpriteCB_LinkMonShadow(struct Sprite *);
@@ -306,7 +304,6 @@ static void CB2_WaitTradeComplete(void);
 static void CB2_SaveAndEndTrade(void);
 static void CB2_FreeTradeAnim(void);
 static void Task_InGameTrade(u8);
-static void CheckPartnersMonForRibbons(void);
 static void Task_AnimateWirelessSignal(u8);
 static void Task_OpenCenterWhiteColumn(u8);
 static void Task_CloseCenterWhiteColumn(u8);
@@ -543,11 +540,7 @@ static void CB2_CreateTradeMenu(void)
         }
         break;
     case 6:
-        if (BufferTradeParties())
-        {
-            SaveTradeGiftRibbons();
             gMain.state++;
-        }
         break;
     case 7:
         CalculateEnemyPartyCount();
@@ -1154,7 +1147,6 @@ static bool8 BufferTradeParties(void)
         }
         break;
     case 17:
-        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, sizeof(sTradeMenu->giftRibbons));
         sTradeMenu->bufferPartyState++;
         break;
     case 19:
@@ -1165,7 +1157,6 @@ static bool8 BufferTradeParties(void)
     case 20:
         if (_GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(sTradeMenu->giftRibbons, gBlockRecvBuffer[id ^ 1], sizeof(sTradeMenu->giftRibbons));
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
@@ -2369,20 +2360,6 @@ static void SetTradePartyHPBarSprites(void)
     }
 }
 
-static void SaveTradeGiftRibbons(void)
-{
-    int i;
-
-    for (i = 0; i < (int)ARRAY_COUNT(sTradeMenu->giftRibbons); i++)
-    {
-        if (gSaveBlock1Ptr->giftRibbons[i] == 0 && sTradeMenu->giftRibbons[i] != 0)
-        {
-            if (sTradeMenu->giftRibbons[i] < 64)
-                gSaveBlock1Ptr->giftRibbons[i] = sTradeMenu->giftRibbons[i];
-        }
-    }
-}
-
 static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int monIdx)
 {
     int i, numMonsLeft;
@@ -3350,7 +3327,6 @@ enum {
     STATE_NEW_MON_MSG,
     STATE_TAKE_CARE_OF_MON,
     STATE_AFTER_NEW_MON_DELAY,
-    STATE_CHECK_RIBBONS,
     STATE_END_LINK_TRADE,
     STATE_TRY_EVOLUTION,
     STATE_FADE_OUT_END,
@@ -3791,10 +3767,6 @@ static bool8 DoTradeAnim_Cable(void)
     case STATE_AFTER_NEW_MON_DELAY:
         if (++sTradeAnim->timer == 60)
             sTradeAnim->state++;
-        break;
-    case STATE_CHECK_RIBBONS:
-        CheckPartnersMonForRibbons();
-        sTradeAnim->state++;
         break;
     case STATE_END_LINK_TRADE:
         if (sTradeAnim->isLinkTrade)
@@ -4288,10 +4260,6 @@ static bool8 DoTradeAnim_Wireless(void)
     case STATE_AFTER_NEW_MON_DELAY:
         if (++sTradeAnim->timer == 60)
             sTradeAnim->state++;
-        break;
-    case STATE_CHECK_RIBBONS:
-        CheckPartnersMonForRibbons();
-        sTradeAnim->state++;
         break;
     case STATE_END_LINK_TRADE:
         if (sTradeAnim->isLinkTrade)
@@ -4789,17 +4757,6 @@ static void Task_InGameTrade(u8 taskId)
         gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
-}
-
-static void CheckPartnersMonForRibbons(void)
-{
-    u8 i;
-    u8 numRibbons = 0;
-    for (i = 0; i < (MON_DATA_WORLD_RIBBON - MON_DATA_CHAMPION_RIBBON); i++)
-        numRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_CHAMPION_RIBBON + i);
-
-    if (numRibbons != 0)
-        FlagSet(FLAG_SYS_RIBBON_GET);
 }
 
 void LoadTradeAnimGfx(void)

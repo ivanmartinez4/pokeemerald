@@ -74,7 +74,6 @@ struct GFRomHeader
     const struct CompressedSpriteSheet * ballGfx;
     const struct CompressedSpritePalette * ballPalettes;
     u32 gameClearFlag;
-    u32 ribbonFlag;
     u8 bagCountItems;
     u8 bagCountKeyItems;
     u8 bagCountPokeballs;
@@ -82,7 +81,6 @@ struct GFRomHeader
     u8 bagCountBerries;
     u8 pcItemsCount;
     u32 pcItemsOffset;
-    u32 giftRibbonsOffset;
     u32 enigmaBerryOffset;
     u32 enigmaBerrySize;
     const u8 * moveDescriptions;
@@ -150,7 +148,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .ballGfx = gBallSpriteSheets,
     .ballPalettes = gBallSpritePalettes,
     .gameClearFlag = FLAG_SYS_GAME_CLEAR,
-    .ribbonFlag = FLAG_SYS_RIBBON_GET,
     .bagCountItems = BAG_ITEMS_COUNT,
     .bagCountKeyItems = BAG_KEYITEMS_COUNT,
     .bagCountPokeballs = BAG_POKEBALLS_COUNT,
@@ -158,7 +155,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .bagCountBerries = BAG_BERRIES_COUNT,
     .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
-    .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
     .enigmaBerryOffset = offsetof(struct SaveBlock1, enigmaBerry),
     .enigmaBerrySize = sizeof(struct EnigmaBerry),
     .moveDescriptions = NULL,

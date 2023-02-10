@@ -58,7 +58,6 @@ static u32 LoopedTask_OpenConditionMenu(s32);
 static u32 LoopedTask_ReturnToMainMenu(s32);
 static u32 LoopedTask_OpenConditionSearchMenu(s32);
 static u32 LoopedTask_ReturnToConditionMenu(s32);
-static u32 LoopedTask_SelectRibbonsNoWinners(s32);
 static u32 LoopedTask_ReShowDescription(s32);
 static u32 LoopedTask_OpenPokenavFeature(s32);
 static void LoadPokenavOptionPalettes(void);
@@ -82,7 +81,6 @@ static void SpriteCB_BlinkingBlueLight(struct Sprite *);
 static void DestroyRematchBlueLightSprite(void);
 static void AddOptionDescriptionWindow(void);
 static void PrintCurrentOptionDescription(void);
-static void PrintNoRibbonWinners(void);
 static bool32 IsDma3ManagerBusyWithBgCopy_(void);
 static void CreateMovingBgDotsTask(void);
 static void DestroyMovingDotsBgTask(void);
@@ -144,7 +142,6 @@ static const LoopedTask sMenuHandlerLoopTaskFuncs[] =
     [POKENAV_MENU_FUNC_RETURN_TO_MAIN]        = LoopedTask_ReturnToMainMenu,
     [POKENAV_MENU_FUNC_OPEN_CONDITION_SEARCH] = LoopedTask_OpenConditionSearchMenu,
     [POKENAV_MENU_FUNC_RETURN_TO_CONDITION]   = LoopedTask_ReturnToConditionMenu,
-    [POKENAV_MENU_FUNC_NO_RIBBON_WINNERS]     = LoopedTask_SelectRibbonsNoWinners,
     [POKENAV_MENU_FUNC_RESHOW_DESCRIPTION]    = LoopedTask_ReShowDescription,
     [POKENAV_MENU_FUNC_OPEN_FEATURE]          = LoopedTask_OpenPokenavFeature
 };
@@ -178,7 +175,6 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
 static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Party[]     = {0x0A0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Search[]    = {0x0C0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
@@ -214,18 +210,6 @@ struct
             sOptionsLabelGfx_RegionMap,
             sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_MatchCall,
-            sOptionsLabelGfx_SwitchOff
-        }
-    },
-    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] =
-    {
-        .yStart = 42,
-        .deltaY = 20,
-        .gfx = {
-            sOptionsLabelGfx_RegionMap,
-            sOptionsLabelGfx_Condition,
-            sOptionsLabelGfx_MatchCall,
-            sOptionsLabelGfx_Ribbons,
             sOptionsLabelGfx_SwitchOff
         }
     },
@@ -270,7 +254,6 @@ static const u8 *const sPageDescriptions[] =
     [POKENAV_MENUITEM_MAP]                     = gText_CheckMapOfHoenn,
     [POKENAV_MENUITEM_CONDITION]               = gText_CheckPokemonInDetail,
     [POKENAV_MENUITEM_MATCH_CALL]              = gText_CallRegisteredTrainer,
-    [POKENAV_MENUITEM_RIBBONS]                 = gText_CheckObtainedRibbons,
     [POKENAV_MENUITEM_SWITCH_OFF]              = gText_PutAwayPokenav,
     [POKENAV_MENUITEM_CONDITION_PARTY]         = gText_CheckPartyPokemonInDetail,
     [POKENAV_MENUITEM_CONDITION_SEARCH]        = gText_CheckAllPokemonInDetail,
@@ -707,22 +690,6 @@ static u32 LoopedTask_ReturnToConditionMenu(s32 state)
         if (IsTaskActive_UpdateBgDotsPalette())
             return LT_PAUSE;
         InitMenuOptionGlow();
-        break;
-    }
-    return LT_FINISH;
-}
-
-static u32 LoopedTask_SelectRibbonsNoWinners(s32 state)
-{
-    switch (state)
-    {
-    case 0:
-        PlaySE(SE_FAILURE);
-        PrintNoRibbonWinners();
-        return LT_INC_AND_PAUSE;
-    case 1:
-        if (IsDma3ManagerBusyWithBgCopy())
-            return LT_PAUSE;
         break;
     }
     return LT_FINISH;
@@ -1225,17 +1192,6 @@ static void PrintCurrentOptionDescription(void)
     u32 width = GetStringWidth(FONT_NORMAL, desc, -1);
     FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
     AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors, 0, desc);
-}
-
-// Printed when Ribbons is selected if no PC/party mons have ribbons
-// Can occur by obtaining a mon with a ribbon and then releasing all ribbon winners
-static void PrintNoRibbonWinners(void)
-{
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    const u8 * s = gText_NoRibbonWinners;
-    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
-    FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(void)

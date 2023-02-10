@@ -982,7 +982,6 @@ extern const u8 gText_EggFromTraveler[];
 extern const u8 gText_EggFromHotSprings[];
 extern const u8 gText_OddEggFoundByCouple[];
 extern const u8 gText_None[];
-extern const u8 gText_RibbonsVar1[];
 extern const u8 gText_OneDash[];
 extern const u8 gText_TwoDashes[];
 
@@ -1044,9 +1043,6 @@ extern const u8 gText_PokenavCondition_MarkingButtons[];
 extern const u8 gText_PokenavMatchCall_TrainerListButtons[];
 extern const u8 gText_PokenavMatchCall_CallMenuButtons[];
 extern const u8 gText_PokenavMatchCall_CheckTrainerButtons[];
-extern const u8 gText_PokenavRibbons_MonListButtons[];
-extern const u8 gText_PokenavRibbons_RibbonListButtons[];
-extern const u8 gText_PokenavRibbons_RibbonCheckButtons[];
 extern const u8 gText_Number2[];
 
 extern const u8 gText_Petalburg[];
@@ -2888,7 +2884,6 @@ extern const u8 gText_Cancel6[];
 extern const u8 gText_CheckMapOfHoenn[];
 extern const u8 gText_CheckPokemonInDetail[];
 extern const u8 gText_CallRegisteredTrainer[];
-extern const u8 gText_CheckObtainedRibbons[];
 extern const u8 gText_PutAwayPokenav[];
 extern const u8 gText_CheckPartyPokemonInDetail[];
 extern const u8 gText_CheckAllPokemonInDetail[];
@@ -2899,11 +2894,9 @@ extern const u8 gText_FindCutePokemon[];
 extern const u8 gText_FindSmartPokemon[];
 extern const u8 gText_FindToughPokemon[];
 extern const u8 gText_ReturnToConditionMenu[];
-extern const u8 gText_NoRibbonWinners[];
 
 // Pokenav
 extern const u8 gText_NumberIndex[];
-extern const u8 gText_RibbonsF700[];
 
 // use_pokeblock
 extern const u8 gText_Coolness[];

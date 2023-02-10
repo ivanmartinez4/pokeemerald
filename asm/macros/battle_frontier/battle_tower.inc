@@ -33,12 +33,6 @@
 	special CallBattleTowerFunc
 	.endm
 
-	@ Try to award ribbons for completing 56th straight Battle Tower win. VAR_RESULT is TRUE if ribbons were awarded.
-	.macro tower_giveribbons
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_GIVE_RIBBONS
-	special CallBattleTowerFunc
-	.endm
-
 	@ Save the game and set the challenge status
 	.macro tower_save challengeStatus:req
 	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE

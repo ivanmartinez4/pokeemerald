@@ -65,24 +65,11 @@ BattleFrontier_BattleTowerLobby_EventScript_QuitWithoutSaving::
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_WonChallenge::
-	lock
-	faceplayer
-	frontier_isbrain
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleTowerLobby_EventScript_DefeatedMaiden
-	message BattleFrontier_BattleTowerLobby_Text_CongratsBeatenSeven
-	waitmessage
-	goto BattleFrontier_BattleTowerLobby_EventScript_GiveRibbons
+    end
 
 BattleFrontier_BattleTowerLobby_EventScript_DefeatedMaiden::
 	msgbox BattleFrontier_BattleTowerLobby_Text_CongratsDefeatedMaiden, MSGBOX_DEFAULT
-BattleFrontier_BattleTowerLobby_EventScript_GiveRibbons::
-	tower_giveribbons
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleTowerLobby_EventScript_GiveBattlePoints
-	message BattleFrontier_BattleTowerLobby_Text_HereAreSomeRibbons
-	waitmessage
-	playfanfare MUS_OBTAIN_ITEM
-	waitfanfare
-	msgbox BattleFrontier_BattleTowerLobby_Text_PutRibbonOnMons, MSGBOX_DEFAULT
+
 BattleFrontier_BattleTowerLobby_EventScript_GiveBattlePoints::
 	msgbox BattleFrontier_BattleTowerLobby_Text_AwardYouTheseBattlePoints, MSGBOX_DEFAULT
 	frontier_givepoints
@@ -952,15 +939,6 @@ BattleFrontier_BattleTowerLobby_Text_AboutToFace50thTrainer:
 	.string "TRAINERS in a row, your POKéMON will\l"
 	.string "receive a commemorative RIBBON.\p"
 	.string "Good luck!$"
-
-BattleFrontier_BattleTowerLobby_Text_HereAreSomeRibbons:
-	.string "Here are some RIBBONS for beating\n"
-	.string "seven tough TRAINERS in a row.\p"
-	.string "{PLAYER} received some RIBBONS!$"
-
-BattleFrontier_BattleTowerLobby_Text_PutRibbonOnMons:
-	.string "{PLAYER} put the RIBBONS on\n"
-	.string "the challenger POKéMON.$"
 
 BattleFrontier_BattleTowerLobby_Text_DescribeFeelingsAboutBattleTower:
 	.string "Excuse me, do you have a moment?\p"

@@ -350,7 +350,6 @@ EWRAM_DATA u8 gContestLinkLeaderIndex = 0;
 EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 EWRAM_DATA u8 gNumLinkContestPlayers = 0;
-EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
 static EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
@@ -2931,44 +2930,7 @@ void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame)
 
 u8 GetContestEntryEligibility(struct Pokemon *pkmn)
 {
-    u8 ribbon;
-    u8 eligibility;
 
-    if (GetMonData(pkmn, MON_DATA_IS_EGG))
-        return CANT_ENTER_CONTEST_EGG;
-    if (GetMonData(pkmn, MON_DATA_HP) == 0)
-        return CANT_ENTER_CONTEST_FAINTED;
-    switch (gSpecialVar_ContestCategory)
-    {
-    case CONTEST_CATEGORY_COOL:
-        ribbon = GetMonData(pkmn, MON_DATA_COOL_RIBBON);
-        break;
-    case CONTEST_CATEGORY_BEAUTY:
-        ribbon = GetMonData(pkmn, MON_DATA_BEAUTY_RIBBON);
-        break;
-    case CONTEST_CATEGORY_CUTE:
-        ribbon = GetMonData(pkmn, MON_DATA_CUTE_RIBBON);
-        break;
-    case CONTEST_CATEGORY_SMART:
-        ribbon = GetMonData(pkmn, MON_DATA_SMART_RIBBON);
-        break;
-    case CONTEST_CATEGORY_TOUGH:
-        ribbon = GetMonData(pkmn, MON_DATA_TOUGH_RIBBON);
-        break;
-    default:
-        return CANT_ENTER_CONTEST;
-    }
-
-    // Couldn't get this to match any other way.
-    // Returns 2, 1, or 0 respectively if ribbon's rank is above, equal, or below
-    // the current contest rank.
-    if (ribbon > gSpecialVar_ContestRank)
-        eligibility = CAN_ENTER_CONTEST_HIGH_RANK;
-    else if (ribbon >= gSpecialVar_ContestRank)
-        eligibility = CAN_ENTER_CONTEST_EQUAL_RANK;
-    else
-        eligibility = CANT_ENTER_CONTEST;
-    return eligibility;
 }
 
 static void DrawContestantWindowText(void)

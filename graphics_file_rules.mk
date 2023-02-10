@@ -529,9 +529,6 @@ $(WALLPAPERGFXDIR)/diagonal/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $
 $(WALLPAPERGFXDIR)/block/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/block/bg.4bpp
 	@cat $^ >$@
 
-$(WALLPAPERGFXDIR)/ribbon/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/ribbon/bg.4bpp
-	@cat $^ >$@
-
 $(WALLPAPERGFXDIR)/pokecenter2/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame1.4bpp $(WALLPAPERGFXDIR)/pokecenter2/bg.4bpp
 	@cat $^ >$@
 
@@ -575,7 +572,6 @@ $(BATTRANSGFXDIR)/frontier_logo_center.4bpp: %.4bpp: %.png
 $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/party.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/search.4bpp \

@@ -672,20 +672,6 @@ MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory::
 	.string "{STR_VAR_3} must love inspecting\n"
 	.string "POKéMON in a POKéDEX!$"
 
-MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle::
-	.string "The RIBBON Collector$"
-
-MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction::
-	.string "Received RIBBONS$"
-
-MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory::
-	.string "This is a tale of a TRAINER\n"
-	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER received RIBBONS\n"
-	.string "{STR_VAR_1} times!\p"
-	.string "{STR_VAR_3} must be a TRAINER who\n"
-	.string "loves to collect RIBBONS!$"
-
 MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle::
 	.string "The Ledge-Jumping TRAINER$"
 

@@ -19,7 +19,6 @@ const u8 gEasyChatWord_Blend[] = _("BLEND");
 const u8 gEasyChatWord_POKEBLOCK[] = _("{POKEBLOCK}");
 const u8 gEasyChatWord_Master[] = _("MASTER");
 const u8 gEasyChatWord_Rank[] = _("RANK");
-const u8 gEasyChatWord_Ribbon[] = _("RIBBON");
 const u8 gEasyChatWord_Crush[] = _("CRUSH");
 const u8 gEasyChatWord_Direct[] = _("DIRECT");
 const u8 gEasyChatWord_Tower[] = _("TOWER");
@@ -153,12 +152,6 @@ const struct EasyChatWordInfo gEasyChatGroup_Events[] = {
     {
         .text = gEasyChatWord_Rank,
         .alphabeticalOrder = 21,
-        .enabled = TRUE,
-    },
-    [EC_INDEX(EC_WORD_RIBBON)] =
-    {
-        .text = gEasyChatWord_Ribbon,
-        .alphabeticalOrder = 26,
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_CRUSH)] =

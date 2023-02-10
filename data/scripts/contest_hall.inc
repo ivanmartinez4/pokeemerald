@@ -1114,12 +1114,6 @@ ContestHall_EventScript_GivePrizeIfWinner::
 	return
 
 ContestHall_EventScript_GiveContestPrizes::
-	specialvar VAR_RESULT, HasMonWonThisContestBefore
-	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_ReceiveContestRibbon
-	goto_if_eq VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_GiveLuxuryBall
-	lockall
-	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
-	releaseall
 	return
 
 ContestHall_EventScript_NoRoomForLuxuryBall::
@@ -1135,20 +1129,6 @@ ContestHall_EventScript_GiveLuxuryBall::
 	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_NoRoomForLuxuryBall
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
-	releaseall
-	return
-
-ContestHall_EventScript_ReceiveContestRibbon::
-	special GiveMonContestRibbon
-	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	setflag FLAG_SYS_RIBBON_GET
-	lockall
-	msgbox ContestHall_Text_ConferRibbonAsPrize, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox ContestHall_Text_ReceivedRibbon, MSGBOX_DEFAULT
-	waitfanfare
-	special BufferContestWinnerMonName
-	msgbox ContestHall_Text_PutRibbonOnMon, MSGBOX_DEFAULT
 	releaseall
 	return
 
@@ -1548,17 +1528,6 @@ ContestHall_Text_CongratsPleaseCompeteAgain:
 ContestHall_Text_AcceptYourPrize:
 	.string "MC: Here you are!\n"
 	.string "Please accept your prize!$"
-
-ContestHall_Text_ConferRibbonAsPrize:
-	.string "We confer on you this RIBBON\n"
-	.string "as your prize!$"
-
-ContestHall_Text_ReceivedRibbon:
-	.string "{PLAYER} received a RIBBON.$"
-
-ContestHall_Text_PutRibbonOnMon:
-	.string "{PLAYER} put the RIBBON on\n"
-	.string "{STR_VAR_1}.$"
 
 ContestHall_Text_PickUpPrizeAtCounterLater:
 	.string "Please pick up your prize at\n"

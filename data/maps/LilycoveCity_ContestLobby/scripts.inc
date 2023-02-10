@@ -61,8 +61,6 @@ LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum::
 	closemessage
 	special SaveMuseumContestPainting
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	specialvar VAR_RESULT, GiveMonArtistRibbon
-	call_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon
 	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistExit
 	waitmovement 0
 	removeobject LOCALID_ARTIST
@@ -82,25 +80,6 @@ LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePainting::
 	removeobject LOCALID_ARTIST
 	releaseall
 	end
-
-LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon::
-	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	special BufferContestWinnerMonName
-	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistBeginToExit
-	waitmovement 0
-	playse SE_PIN
-	applymovement LOCALID_ARTIST, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistReturnToPlayer
-	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_TakeMementoOfPainting, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox LilycoveCity_ContestLobby_Text_ReceivedARibbon, MSGBOX_DEFAULT
-	waitfanfare
-	msgbox LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon, MSGBOX_DEFAULT
-	msgbox LilycoveCity_ContestLobby_Text_OkaySeeYou, MSGBOX_DEFAULT
-	closemessage
-	return
 
 LilycoveCity_ContestLobby_EventScript_UpdateMuseumPatrons::
 	specialvar VAR_0x8004, CountPlayerMuseumPaintings
@@ -229,8 +208,6 @@ LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink::
 	closemessage
 	special SaveMuseumContestPainting
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	specialvar VAR_RESULT, GiveMonArtistRibbon
-	call_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_ReceivedLinkArtistRibbon
 	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistExit
 	waitmovement 0
 	removeobject LOCALID_ARTIST_LINK
@@ -250,26 +227,6 @@ LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePaintingLink::
 	removeobject LOCALID_ARTIST_LINK
 	releaseall
 	end
-
-LilycoveCity_ContestLobby_EventScript_ReceivedLinkArtistRibbon::
-	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	setflag FLAG_SYS_RIBBON_GET
-	special BufferContestWinnerMonName
-	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistBeginExit
-	waitmovement 0
-	playse SE_PIN
-	applymovement LOCALID_ARTIST_LINK, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistReturnToPlayer
-	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_TakeMementoOfPainting, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox LilycoveCity_ContestLobby_Text_ReceivedARibbon, MSGBOX_DEFAULT
-	waitfanfare
-	msgbox LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon, MSGBOX_DEFAULT
-	msgbox LilycoveCity_ContestLobby_Text_OkaySeeYou, MSGBOX_DEFAULT
-	closemessage
-	return
 
 LilycoveCity_ContestLobby_Movement_LinkArtistApproachPlayer:
 	walk_down
@@ -1009,13 +966,6 @@ LilycoveCity_ContestLobby_Text_TakeMementoOfPainting:
 	.string "Oh, that's right!\p"
 	.string "As a memento of me painting your\n"
 	.string "POKéMON, please take this.$"
-
-LilycoveCity_ContestLobby_Text_ReceivedARibbon:
-	.string "{PLAYER} received a RIBBON.$"
-
-LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon:
-	.string "{PLAYER} put the RIBBON on\n"
-	.string "{STR_VAR_1}.$"
 
 LilycoveCity_ContestLobby_Text_OkaySeeYou:
 	.string "Okay, see you!$"

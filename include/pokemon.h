@@ -55,11 +55,6 @@ enum {
     MON_DATA_TOUGH,
     MON_DATA_SHEEN,
     MON_DATA_OT_GENDER,
-    MON_DATA_COOL_RIBBON,
-    MON_DATA_BEAUTY_RIBBON,
-    MON_DATA_CUTE_RIBBON,
-    MON_DATA_SMART_RIBBON,
-    MON_DATA_TOUGH_RIBBON,
     MON_DATA_STATUS,
     MON_DATA_LEVEL,
     MON_DATA_HP,
@@ -72,22 +67,8 @@ enum {
     MON_DATA_MAIL,
     MON_DATA_SPECIES2,
     MON_DATA_IVS,
-    MON_DATA_CHAMPION_RIBBON,
-    MON_DATA_WINNING_RIBBON,
-    MON_DATA_VICTORY_RIBBON,
-    MON_DATA_ARTIST_RIBBON,
-    MON_DATA_EFFORT_RIBBON,
-    MON_DATA_MARINE_RIBBON,
-    MON_DATA_LAND_RIBBON,
-    MON_DATA_SKY_RIBBON,
-    MON_DATA_COUNTRY_RIBBON,
-    MON_DATA_NATIONAL_RIBBON,
-    MON_DATA_EARTH_RIBBON,
-    MON_DATA_WORLD_RIBBON,
     MON_DATA_EVENT_LEGAL,
     MON_DATA_KNOWN_MOVES,
-    MON_DATA_RIBBON_COUNT,
-    MON_DATA_RIBBONS,
 };
 
 struct PokemonSubstruct0
@@ -140,24 +121,6 @@ struct PokemonSubstruct3
  /* 0x06 */ u32 spDefenseIV:5;
  /* 0x07 */ u32 isEgg:1;
  /* 0x07 */ u32 abilityNum:1;
-
- /* 0x08 */ u32 coolRibbon:3;
- /* 0x08 */ u32 beautyRibbon:3;
- /* 0x08 */ u32 cuteRibbon:3;
- /* 0x09 */ u32 smartRibbon:3;
- /* 0x09 */ u32 toughRibbon:3;
- /* 0x09 */ u32 championRibbon:1;
- /* 0x0A */ u32 winningRibbon:1;
- /* 0x0A */ u32 victoryRibbon:1;
- /* 0x0A */ u32 artistRibbon:1;
- /* 0x0A */ u32 effortRibbon:1;
- /* 0x0A */ u32 marineRibbon:1; // never distributed
- /* 0x0A */ u32 landRibbon:1; // never distributed
- /* 0x0A */ u32 skyRibbon:1; // never distributed
- /* 0x0A */ u32 countryRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- /* 0x0B */ u32 nationalRibbon:1;
- /* 0x0B */ u32 earthRibbon:1;
- /* 0x0B */ u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
  /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
 };
 

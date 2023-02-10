@@ -3657,57 +3657,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_ABILITY_NUM:
         retVal = substruct3->abilityNum;
         break;
-    case MON_DATA_COOL_RIBBON:
-        retVal = substruct3->coolRibbon;
-        break;
-    case MON_DATA_BEAUTY_RIBBON:
-        retVal = substruct3->beautyRibbon;
-        break;
-    case MON_DATA_CUTE_RIBBON:
-        retVal = substruct3->cuteRibbon;
-        break;
-    case MON_DATA_SMART_RIBBON:
-        retVal = substruct3->smartRibbon;
-        break;
-    case MON_DATA_TOUGH_RIBBON:
-        retVal = substruct3->toughRibbon;
-        break;
-    case MON_DATA_CHAMPION_RIBBON:
-        retVal = substruct3->championRibbon;
-        break;
-    case MON_DATA_WINNING_RIBBON:
-        retVal = substruct3->winningRibbon;
-        break;
-    case MON_DATA_VICTORY_RIBBON:
-        retVal = substruct3->victoryRibbon;
-        break;
-    case MON_DATA_ARTIST_RIBBON:
-        retVal = substruct3->artistRibbon;
-        break;
-    case MON_DATA_EFFORT_RIBBON:
-        retVal = substruct3->effortRibbon;
-        break;
-    case MON_DATA_MARINE_RIBBON:
-        retVal = substruct3->marineRibbon;
-        break;
-    case MON_DATA_LAND_RIBBON:
-        retVal = substruct3->landRibbon;
-        break;
-    case MON_DATA_SKY_RIBBON:
-        retVal = substruct3->skyRibbon;
-        break;
-    case MON_DATA_COUNTRY_RIBBON:
-        retVal = substruct3->countryRibbon;
-        break;
-    case MON_DATA_NATIONAL_RIBBON:
-        retVal = substruct3->nationalRibbon;
-        break;
-    case MON_DATA_EARTH_RIBBON:
-        retVal = substruct3->earthRibbon;
-        break;
-    case MON_DATA_WORLD_RIBBON:
-        retVal = substruct3->worldRibbon;
-        break;
     case MON_DATA_EVENT_LEGAL:
         retVal = substruct3->eventLegal;
         break;
@@ -3740,52 +3689,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                     retVal |= gBitTable[i];
                 i++;
             }
-        }
-        break;
-    case MON_DATA_RIBBON_COUNT:
-        retVal = 0;
-        if (substruct0->species && !substruct3->isEgg)
-        {
-            retVal += substruct3->coolRibbon;
-            retVal += substruct3->beautyRibbon;
-            retVal += substruct3->cuteRibbon;
-            retVal += substruct3->smartRibbon;
-            retVal += substruct3->toughRibbon;
-            retVal += substruct3->championRibbon;
-            retVal += substruct3->winningRibbon;
-            retVal += substruct3->victoryRibbon;
-            retVal += substruct3->artistRibbon;
-            retVal += substruct3->effortRibbon;
-            retVal += substruct3->marineRibbon;
-            retVal += substruct3->landRibbon;
-            retVal += substruct3->skyRibbon;
-            retVal += substruct3->countryRibbon;
-            retVal += substruct3->nationalRibbon;
-            retVal += substruct3->earthRibbon;
-            retVal += substruct3->worldRibbon;
-        }
-        break;
-    case MON_DATA_RIBBONS:
-        retVal = 0;
-        if (substruct0->species && !substruct3->isEgg)
-        {
-            retVal = substruct3->championRibbon
-                | (substruct3->coolRibbon << 1)
-                | (substruct3->beautyRibbon << 4)
-                | (substruct3->cuteRibbon << 7)
-                | (substruct3->smartRibbon << 10)
-                | (substruct3->toughRibbon << 13)
-                | (substruct3->winningRibbon << 16)
-                | (substruct3->victoryRibbon << 17)
-                | (substruct3->artistRibbon << 18)
-                | (substruct3->effortRibbon << 19)
-                | (substruct3->marineRibbon << 20)
-                | (substruct3->landRibbon << 21)
-                | (substruct3->skyRibbon << 22)
-                | (substruct3->countryRibbon << 23)
-                | (substruct3->nationalRibbon << 24)
-                | (substruct3->earthRibbon << 25)
-                | (substruct3->worldRibbon << 26);
         }
         break;
     default:
@@ -4037,57 +3940,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     case MON_DATA_ABILITY_NUM:
         SET8(substruct3->abilityNum);
-        break;
-    case MON_DATA_COOL_RIBBON:
-        SET8(substruct3->coolRibbon);
-        break;
-    case MON_DATA_BEAUTY_RIBBON:
-        SET8(substruct3->beautyRibbon);
-        break;
-    case MON_DATA_CUTE_RIBBON:
-        SET8(substruct3->cuteRibbon);
-        break;
-    case MON_DATA_SMART_RIBBON:
-        SET8(substruct3->smartRibbon);
-        break;
-    case MON_DATA_TOUGH_RIBBON:
-        SET8(substruct3->toughRibbon);
-        break;
-    case MON_DATA_CHAMPION_RIBBON:
-        SET8(substruct3->championRibbon);
-        break;
-    case MON_DATA_WINNING_RIBBON:
-        SET8(substruct3->winningRibbon);
-        break;
-    case MON_DATA_VICTORY_RIBBON:
-        SET8(substruct3->victoryRibbon);
-        break;
-    case MON_DATA_ARTIST_RIBBON:
-        SET8(substruct3->artistRibbon);
-        break;
-    case MON_DATA_EFFORT_RIBBON:
-        SET8(substruct3->effortRibbon);
-        break;
-    case MON_DATA_MARINE_RIBBON:
-        SET8(substruct3->marineRibbon);
-        break;
-    case MON_DATA_LAND_RIBBON:
-        SET8(substruct3->landRibbon);
-        break;
-    case MON_DATA_SKY_RIBBON:
-        SET8(substruct3->skyRibbon);
-        break;
-    case MON_DATA_COUNTRY_RIBBON:
-        SET8(substruct3->countryRibbon);
-        break;
-    case MON_DATA_NATIONAL_RIBBON:
-        SET8(substruct3->nationalRibbon);
-        break;
-    case MON_DATA_EARTH_RIBBON:
-        SET8(substruct3->earthRibbon);
-        break;
-    case MON_DATA_WORLD_RIBBON:
-        SET8(substruct3->worldRibbon);
         break;
     case MON_DATA_EVENT_LEGAL:
         SET8(substruct3->eventLegal);

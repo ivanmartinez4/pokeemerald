@@ -94,9 +94,6 @@ static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
     [HELPBAR_MC_TRAINER_LIST]      = gText_PokenavMatchCall_TrainerListButtons,
     [HELPBAR_MC_CALL_MENU]         = gText_PokenavMatchCall_CallMenuButtons,
     [HELPBAR_MC_CHECK_PAGE]        = gText_PokenavMatchCall_CheckTrainerButtons,
-    [HELPBAR_RIBBONS_MON_LIST]     = gText_PokenavRibbons_MonListButtons,
-    [HELPBAR_RIBBONS_LIST]         = gText_PokenavRibbons_RibbonListButtons,
-    [HELPBAR_RIBBONS_CHECK]        = gText_PokenavRibbons_RibbonCheckButtons,
 };
 
 static const u8 sHelpBarTextColors[3] =
@@ -140,11 +137,6 @@ static const struct CompressedSpriteSheet sMenuLeftHeaderSpriteSheets[] =
         .data = gPokenavLeftHeaderCondition_Gfx,
         .size = 0x20,
         .tag = 1
-    },
-    [POKENAV_GFX_RIBBONS_MENU] = {
-        .data = gPokenavLeftHeaderRibbons_Gfx,
-        .size = 0x20,
-        .tag = 2
     },
     [POKENAV_GFX_MATCH_CALL_MENU] = {
         .data = gPokenavLeftHeaderMatchCall_Gfx,
