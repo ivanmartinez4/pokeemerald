@@ -7,10 +7,10 @@ Características del juego:
 
 Créditos:
 
--Pret y su equipo.
+-Pret (incluida su wiki).
 
--A rh-hideout, por la pokeemerald-expansion.
+-rh-hideout, por la pokeemerald-expansion.
 
--A aarant, por el sistema DNS, iconos y followers.
+-aarant, por el sistema DNS, iconos y followers.
 
--A ShinyDragonHunter, por el sistema de formas, el sistema de mugshots, y la música de GameBoy.
+-ShinyDragonHunter, por el sistema de formas, el sistema de mugshots, y la música de GameBoy.
