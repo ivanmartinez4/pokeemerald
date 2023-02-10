@@ -43,7 +43,6 @@ CableClub_OnWarp:
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_RECORD_CORNER, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_UNION_ROOM, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_BERRY_CRUSH, CableClub_EventScript_CheckTurnAttendant
-	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, CableClub_EventScript_CheckTurnAttendant
 	.2byte 0
 
 CableClub_EventScript_CheckTurnAttendant::
@@ -60,7 +59,6 @@ CableClub_OnLoad:
 	goto_if_eq VAR_CABLE_CLUB_STATE, USING_RECORD_CORNER, CableClub_EventScript_OnLoadFromRecordCorner
 	goto_if_eq VAR_CABLE_CLUB_STATE, USING_UNION_ROOM, CableClub_EventScript_OnLoadFromUnionRoom
 	goto_if_eq VAR_CABLE_CLUB_STATE, USING_BERRY_CRUSH, CableClub_EventScript_OnLoadFromBerryCrush
-	goto_if_eq VAR_CABLE_CLUB_STATE, USING_MINIGAME, CableClub_EventScript_OnLoadFromGameCorner
 	end
 
 CableClub_EventScript_OnLoadFromColosseum::
@@ -96,23 +94,12 @@ CableClub_OnFrame:
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_RECORD_CORNER, CableClub_EventScript_ExitRecordCorner
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_UNION_ROOM, CableClub_EventScript_ExitUnionRoom
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_BERRY_CRUSH, CableClub_EventScript_ExitLinkRoom
-	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, CableClub_EventScript_ExitMinigameRoom
 	.2byte 0
 
 CableClub_EventScript_ExitLinkRoom::
 	lockall
 	call CableClub_EventScript_CloseLinkAndExitLinkRoom
 	call CableClub_EventScript_CloseDirectCornerBarrier
-	special DrawWholeMapView
-	playse SE_CLICK
-	erasebox 0, 0, 29, 19
-	releaseall
-	end
-
-CableClub_EventScript_ExitMinigameRoom::
-	lockall
-	call CableClub_EventScript_CloseLinkAndExitLinkRoom
-	call EventScript_CloseMossdeepGameCornerBarrier
 	special DrawWholeMapView
 	playse SE_CLICK
 	erasebox 0, 0, 29, 19
@@ -537,12 +524,6 @@ CableClub_EventScript_AbortLink::
 	release
 	end
 
-MossdeepCity_GameCorner_1F_EventScript_AbortMinigame::
-	special CloseLink
-	msgbox MossdeepCity_GameCorner_1F_Text_ComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
 CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants::
 	special CloseLink
 	msgbox CableClub_Text_IncorrectNumberOfParticipants, MSGBOX_DEFAULT
@@ -596,13 +577,6 @@ Movement_PlayerEnterLinkRoom:
 
 Movement_PlayerFaceAttendantRight:
 	face_right
-	step_end
-
-Movement_PlayerEnterMinigameRoom:
-	walk_left
-	walk_up
-	walk_up
-	walk_up
 	step_end
 
 EventScript_CableBoxResults::
@@ -1214,129 +1188,19 @@ CableClub_OnResume:
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_InfoMan2::
-	lock
-	faceplayer
-	message MossdeepCity_GameCorner_1F_Text_DescribeWhichGame
-	waitmessage
-	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, FALSE
-	switch VAR_RESULT
-	case 0, MossdeepCity_GameCorner_1F_EventScript_PokemonJumpInfo
-	case 1, MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingInfo
-	case 2, MossdeepCity_GameCorner_1F_EventScript_MinigameInfoExit
-	case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_MinigameInfoExit
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_PokemonJumpInfo::
-	msgbox MossdeepCity_GameCorner_1F_Text_PokemonJumpInfo, MSGBOX_DEFAULT
-	release
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingInfo::
-	msgbox MossdeepCity_GameCorner_1F_Text_DodrioBerryPickingInfo, MSGBOX_DEFAULT
-	release
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_MinigameInfoExit::
-	msgbox MossdeepCity_GameCorner_1F_Text_TalkToOldManToPlay, MSGBOX_DEFAULT
-	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_OldMan2::
-	lock
-	faceplayer
-	message MossdeepCity_GameCorner_1F_Text_WelcomeCanYouWait
-	waitmessage
-	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	goto_if_eq VAR_RESULT, FALSE, MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected
-	delay 60
-	message MossdeepCity_GameCorner_1F_Text_PlayWhichGame
-	waitmessage
-	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, FALSE
-	switch VAR_RESULT
-	case 0, MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump
-	case 1, MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking
-	case 2, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump::
-	setvar VAR_0x8005, 0
-	special IsPokemonJumpSpeciesInParty
-	goto_if_eq VAR_RESULT, FALSE, MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
-	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
-	fadescreen FADE_TO_BLACK
-	setvar VAR_0x8005, 0
-	special ChooseMonForWirelessMinigame
-	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	call Common_EventScript_SaveGame
-	goto_if_eq VAR_RESULT, 0, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	setvar VAR_0x8004, LINK_GROUP_POKEMON_JUMP
-	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking::
-	setvar VAR_0x8005, 1
-	special IsDodrioInParty
-	goto_if_eq VAR_RESULT, FALSE, MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
-	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
-	fadescreen FADE_TO_BLACK
-	setvar VAR_0x8005, 1
-	special ChooseMonForWirelessMinigame
-	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	call Common_EventScript_SaveGame
-	goto_if_eq VAR_RESULT, 0, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	setvar VAR_0x8004, LINK_GROUP_BERRY_PICKING
-	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader::
-	message CableClub_Text_ChooseGroupLeader
-	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
-	switch VAR_RESULT
-	case 0, MossdeepCity_GameCorner_1F_EventScript_TryJoinLinkGroup
-	case 1, MossdeepCity_GameCorner_1F_EventScript_TryBecomeLinkLeader
-	case 2, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_TryBecomeLinkLeader::
-	call CableClub_EventScript_TryBecomeLinkLeader
-	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom
-	goto_if_eq VAR_RESULT, LINKUP_FAILED, MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
-	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, MossdeepCity_GameCorner_1F_EventScript_TryBecomeLinkLeader
-	release
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_TryJoinLinkGroup::
-	call CableClub_EventScript_TryJoinLinkGroup
-	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom
-	goto_if_eq VAR_RESULT, LINKUP_FAILED, MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
-	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, MossdeepCity_GameCorner_1F_EventScript_TryJoinLinkGroup
-	release
 	return
-
-MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom::
-	messageautoscroll MossdeepCity_GameCorner_1F_Text_AllGoodToGo
-	waitmessage
-	delay 60
-	closemessage
-	copyvar VAR_0x8007, VAR_LAST_TALKED
-	call EventScript_OpenMossdeepGameCornerBarrier
-	special DrawWholeMapView
-	playse SE_CLICK
-	delay 60
-	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
-	waitmovement 0
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterMinigameRoom
-	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, 0
-	release
-	waitstate
-	end
 
 MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected::
 	delay 60
@@ -1345,31 +1209,4 @@ MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected::
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon::
-	msgbox MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	call_if_eq VAR_0x8005, 0, MossdeepCity_GameCorner_1F_EventScript_ExplainPokemonJumpRequirements
-	call_if_eq VAR_0x8005, 1, MossdeepCity_GameCorner_1F_EventScript_ExplainDodrioBerryPickingRequirements
-	goto MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_ExplainPokemonJumpRequirements::
-	msgbox MossdeepCity_GameCorner_1F_Text_ShortJumpingPokemonAllowed, MSGBOX_DEFAULT
-	return
-
-MossdeepCity_GameCorner_1F_EventScript_ExplainDodrioBerryPickingRequirements::
-	msgbox MossdeepCity_GameCorner_1F_Text_OnlyDodrioAllowed, MSGBOX_DEFAULT
-	return
-
-MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords::
-	lockall
-	special ShowPokemonJumpRecords
-	waitstate
-	releaseall
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingRecords::
-	lockall
-	special ShowDodrioBerryPickingRecords
-	waitstate
-	releaseall
 	end

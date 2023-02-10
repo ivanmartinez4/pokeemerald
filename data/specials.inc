@@ -421,15 +421,10 @@ gSpecials::
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
 	def_special WonderNews_GetRewardInfo
-	def_special ChooseMonForWirelessMinigame
 	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
 	def_special ValidateSavedWonderCard
 	def_special HasAtLeastOneBerry
-	def_special IsPokemonJumpSpeciesInParty
-	def_special ShowPokemonJumpRecords
-	def_special IsDodrioInParty
-	def_special ShowDodrioBerryPickingRecords
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater

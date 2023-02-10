@@ -36,7 +36,6 @@
 #include "contest.h"
 #include "item_menu.h"
 #include "pokemon_storage_system.h"
-#include "pokemon_jump.h"
 #include "decoration_inventory.h"
 #include "secret_base.h"
 #include "player_pc.h"
@@ -50,7 +49,6 @@ extern const u8 EventScript_ResetAllMapFlags[];
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
-static void ResetMiniGamesRecords(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -191,7 +189,6 @@ void NewGameInitData(void)
     ResetLotteryCorner();
     WarpToTruck();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
-    ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
     ResetAllApprenticeData();
@@ -202,12 +199,4 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
     FlagClear(FLAG_SYS_GBS_ENABLED);
-}
-
-static void ResetMiniGamesRecords(void)
-{
-    CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
-    SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
-    ResetPokemonJumpRecords();
-    CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }

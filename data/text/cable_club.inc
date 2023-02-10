@@ -216,28 +216,6 @@ MossdeepCity_GameCorner_1F_Text_DescribeWhichGame:
 	.string "if you'd like.\p"
 	.string "Which game should I describe?$"
 
-MossdeepCity_GameCorner_1F_Text_PokemonJumpInfo:
-	.string "“POKéMON JUMP”\p"
-	.string "Make your POKéMON skip the VINE WHIP\n"
-	.string "rope with the A Button.\p"
-	.string "Only mini POKéMON around 28 inches\n"
-	.string "or less may participate.\p"
-	.string "POKéMON that only swim, burrow,\n"
-	.string "or fly are not good at jumping.\p"
-	.string "As a result, those POKéMON may not\n"
-	.string "participate.\p"
-	.string "Good things happen if everyone\n"
-	.string "jumps in time.$"
-
-MossdeepCity_GameCorner_1F_Text_DodrioBerryPickingInfo:
-	.string "“DODRIO BERRY-PICKING”\p"
-	.string "Command DODRIO's three heads to\n"
-	.string "catch falling BERRIES.\p"
-	.string "Press right, up, or left on the\n"
-	.string "{PLUS} Control Pad to move the heads.\p"
-	.string "To play this game, you must have\n"
-	.string "a DODRIO.$"
-
 MossdeepCity_GameCorner_1F_Text_TalkToOldManToPlay:
 	.string "If you want to play a game,\n"
 	.string "please tell the old man beside me.$"

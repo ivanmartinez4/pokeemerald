@@ -46,7 +46,6 @@
 #include "player_pc.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
-#include "pokemon_jump.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
@@ -229,7 +228,6 @@ void (*gItemUseCB)(u8, TaskFunc);
 static void ResetPartyMenu(void);
 static void CB2_InitPartyMenu(void);
 static bool8 ShowPartyMenu(void);
-static void SetPartyMonsAllowedInMinigame(void);
 static void ExitPartyMenu(void);
 static bool8 AllocPartyMenuBg(void);
 static bool8 AllocPartyMenuBgGfx(void);
@@ -250,7 +248,6 @@ static void DrawEmptySlot(u8 windowId);
 static void DisplayPartyPokemonDataForRelearner(u8);
 static void DisplayPartyPokemonDataForContest(u8);
 static void DisplayPartyPokemonDataForChooseHalf(u8);
-static void DisplayPartyPokemonDataForWirelessMinigame(u8);
 static void DisplayPartyPokemonDataForBattlePyramidHeldItem(u8);
 static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8);
 static void DisplayPartyPokemonData(u8);
@@ -261,7 +258,6 @@ static void DisplayPartyPokemonHPCheck(struct Pokemon *, struct PartyMenuBox *, 
 static void DisplayPartyPokemonMaxHPCheck(struct Pokemon *, struct PartyMenuBox *, u8);
 static void DisplayPartyPokemonHPBarCheck(struct Pokemon *, struct PartyMenuBox *);
 static void DisplayPartyPokemonDescriptionText(u8, struct PartyMenuBox *, u8);
-static bool8 IsMonAllowedInMinigame(u8);
 static void DisplayPartyPokemonDataToTeachMove(u8, u16, u8);
 static u8 CanMonLearnTMTutor(struct Pokemon *, u16, u8);
 static void DisplayPartyPokemonBarDetail(u8, const u8 *, u8, const u8 *);
@@ -303,7 +299,6 @@ static void TryTutorSelectedMon(u8);
 static void TryGiveMailToSelectedMon(u8);
 static void TryGiveItemOrMailToSelectedMon(u8);
 static void SwitchSelectedMons(u8);
-static void TryEnterMonForMinigame(u8, u8);
 static void Task_TryCreateSelectionWindow(u8);
 static void FinishTwoMonAction(u8);
 static void CancelParticipationPrompt(u8);
@@ -319,8 +314,6 @@ static void UpdatePartySelectionDoubleLayout(s8 *, s8);
 static s8 GetNewSlotDoubleLayout(s8, s8);
 static void PartyMenuPrintText(const u8 *);
 static void Task_PrintAndWaitForText(u8);
-static bool16 IsMonAllowedInPokemonJump(struct Pokemon *);
-static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *);
 static void Task_CancelParticipationYesNo(u8);
 static void Task_HandleCancelParticipationYesNoInput(u8);
 static bool8 CanLearnTutorMove(u16, u8);
@@ -580,8 +573,6 @@ static bool8 ShowPartyMenu(void)
         gMain.state++;
         break;
     case 6:
-        SetPartyMonsAllowedInMinigame();
-        gMain.state++;
         break;
     case 7:
         if (!AllocPartyMenuBg())
@@ -840,8 +831,6 @@ static void RenderPartyMenuBox(u8 slot)
                 DisplayPartyPokemonDataForContest(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
                 DisplayPartyPokemonDataForChooseHalf(slot);
-            else if (gPartyMenu.menuType == PARTY_MENU_TYPE_MINIGAME)
-                DisplayPartyPokemonDataForWirelessMinigame(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_STORE_PYRAMID_HELD_ITEMS)
                 DisplayPartyPokemonDataForBattlePyramidHeldItem(slot);
             else if (!DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(slot))
@@ -939,14 +928,6 @@ static void DisplayPartyPokemonDataForRelearner(u8 slot)
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NOT_ABLE_2);
     else
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE_2);
-}
-
-static void DisplayPartyPokemonDataForWirelessMinigame(u8 slot)
-{
-    if (IsMonAllowedInMinigame(slot) == TRUE)
-        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE);
-    else
-        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NOT_ABLE);
 }
 
 static void DisplayPartyPokemonDataForBattlePyramidHeldItem(u8 slot)
@@ -1345,12 +1326,6 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             PlaySE(SE_SELECT);
             Task_ClosePartyMenu(taskId);
             break;
-        case PARTY_ACTION_MINIGAME:
-            if (IsSelectedMonNotEgg((u8 *)slotPtr))
-            {
-                TryEnterMonForMinigame(taskId, (u8)*slotPtr);
-            }
-            break;
         default:
         case PARTY_ACTION_ABILITY_PREVENTS:
         case PARTY_ACTION_SWITCHING:
@@ -1382,10 +1357,6 @@ static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
     case PARTY_ACTION_SOFTBOILED:
         PlaySE(SE_SELECT);
         FinishTwoMonAction(taskId);
-        break;
-    case PARTY_ACTION_MINIGAME:
-        PlaySE(SE_SELECT);
-        CancelParticipationPrompt(taskId);
         break;
     default:
         PlaySE(SE_SELECT);
@@ -1929,68 +1900,6 @@ u8 GetMonAilment(struct Pokemon *mon)
     if (CheckPartyPokerus(mon, 0))
         return AILMENT_PKRS;
     return AILMENT_NONE;
-}
-
-static void SetPartyMonsAllowedInMinigame(void)
-{
-    u16 *ptr;
-
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MINIGAME)
-    {
-        u8 i;
-
-        ptr = &gPartyMenu.data1;
-        gPartyMenu.data1 = 0;
-        if (gSpecialVar_0x8005 == 0)
-        {
-            for (i = 0; i < gPlayerPartyCount; i++)
-                *ptr += IsMonAllowedInPokemonJump(&gPlayerParty[i]) << i;
-        }
-        else
-        {
-            for (i = 0; i < gPlayerPartyCount; i++)
-                *ptr += IsMonAllowedInDodrioBerryPicking(&gPlayerParty[i]) << i;
-        }
-    }
-}
-
-static bool16 IsMonAllowedInPokemonJump(struct Pokemon *mon)
-{
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && IsSpeciesAllowedInPokemonJump(GetMonData(mon, MON_DATA_SPECIES)))
-        return TRUE;
-    return FALSE;
-}
-
-
-static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *mon)
-{
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_DODRIO)
-        return TRUE;
-    return FALSE;
-}
-
-static bool8 IsMonAllowedInMinigame(u8 slot)
-{
-    if (!((gPartyMenu.data1 >> slot) & 1))
-        return FALSE;
-    return TRUE;
-}
-
-static void TryEnterMonForMinigame(u8 taskId, u8 slot)
-{
-    if (IsMonAllowedInMinigame(slot) == TRUE)
-    {
-        PlaySE(SE_SELECT);
-        gSpecialVar_0x8004 = slot;
-        Task_ClosePartyMenu(taskId);
-    }
-    else
-    {
-        PlaySE(SE_FAILURE);
-        DisplayPartyMenuMessage(gText_PkmnCantParticipate, FALSE);
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-    }
 }
 
 static void CancelParticipationPrompt(u8 taskId)
@@ -5658,11 +5567,6 @@ void ChooseMonForTradingBoard(u8 menuType, MainCallback callback)
 void ChooseMonForMoveTutor(void)
 {
     InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_MOVE_TUTOR, FALSE, PARTY_MSG_TEACH_WHICH_MON, Task_HandleChooseMonInput, CB2_ReturnToFieldContinueScriptPlayMapMusic);
-}
-
-void ChooseMonForWirelessMinigame(void)
-{
-    InitPartyMenu(PARTY_MENU_TYPE_MINIGAME, PARTY_LAYOUT_SINGLE, PARTY_ACTION_MINIGAME, FALSE, PARTY_MSG_CHOOSE_MON_OR_CANCEL, Task_HandleChooseMonInput, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 static u8 GetPartyLayoutFromBattleType(void)

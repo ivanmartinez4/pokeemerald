@@ -19,7 +19,6 @@
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
-#include "minigame_countdown.h"
 #include "random.h"
 #include "digit_obj_util.h"
 #include "save.h"
@@ -2514,38 +2513,7 @@ static u32 Cmd_DropLid(struct BerryCrushGame *game,  u8 *args)
 
 static u32 Cmd_Countdown(struct BerryCrushGame *game,  u8 *args)
 {
-    switch (game->cmdState)
-    {
-    case 1:
-        if (!IsLinkTaskFinished())
-            return 0;
-        StartMinigameCountdown(TAG_COUNTDOWN, TAG_COUNTDOWN, 120, 80, 0);
-        break;
-    case 2:
-        if (IsMinigameCountdownRunning())
-            return 0;
-        // fallthrough
-    case 0:
-        Rfu_SetLinkStandbyCallback();
-        break;
-    case 3:
-        if (!IsLinkTaskFinished())
-            return 0;
-        game->gfx.counter = 0;
-        game->gfx.vibrationIdx = 0;
-        game->gfx.numVibrations = 0;
-        game->gfx.vibrating = FALSE;
-        game->cmdTimer = 0;
-        if (game->localId == 0)
-            RunOrScheduleCommand(CMD_PLAY_GAME_LEADER, SCHEDULE_CMD, NULL);
-        else
-            RunOrScheduleCommand(CMD_PLAY_GAME_MEMBER, SCHEDULE_CMD, NULL);
-        game->gameState = STATE_PLAYING;
-        game->cmdState = 0;
-        return 0;
-    }
-    game->cmdState++;
-    return 0;
+
 }
 
 // Receive and process data from all players

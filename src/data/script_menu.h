@@ -492,13 +492,6 @@ static const struct MenuAction MultichoiceList_LinkServicesNoRecordBerry[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_WirelessMinigame[] =
-{
-    {gText_PokemonJump},
-    {gText_DodrioBerryPicking},
-    {gText_Exit},
-};
-
 static const struct MenuAction MultichoiceList_LinkLeader[] =
 {
     {gText_JoinGroup},
@@ -813,7 +806,6 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_WIRELESS_NO_BERRY]          = MULTICHOICE(MultichoiceList_LinkServicesNoBerry),
     [MULTI_WIRELESS_NO_RECORD]         = MULTICHOICE(MultichoiceList_LinkServicesNoRecord),
     [MULTI_WIRELESS_ALL_SERVICES]      = MULTICHOICE(MultichoiceList_LinkServicesAll),
-    [MULTI_WIRELESS_MINIGAME]          = MULTICHOICE(MultichoiceList_WirelessMinigame),
     [MULTI_LINK_LEADER]                = MULTICHOICE(MultichoiceList_LinkLeader),
     [MULTI_CONTEST_RANK]               = MULTICHOICE(MultichoiceList_ContestRank),
     [MULTI_FRONTIER_ITEM_CHOOSE]       = MULTICHOICE(MultichoiceList_FrontierItemChoose),

@@ -88,7 +88,7 @@
 #define MULTI_WIRELESS_NO_BERRY            77
 #define MULTI_WIRELESS_NO_RECORD           78
 #define MULTI_WIRELESS_ALL_SERVICES        79
-#define MULTI_WIRELESS_MINIGAME            80
+#define MULTI_TOURNEY_NO_RECORD            80
 #define MULTI_LINK_LEADER                  81
 #define MULTI_CONTEST_RANK                 82
 #define MULTI_FRONTIER_ITEM_CHOOSE         83
@@ -107,7 +107,6 @@
 #define MULTI_BATTLE_ARENA_RULES           96
 #define MULTI_BATTLE_TOWER_RULES           97
 #define MULTI_BATTLE_DOME_RULES            98
-#define MULTI_TOURNEY_NO_RECORD            99
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
