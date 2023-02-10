@@ -573,6 +573,7 @@ static bool8 ShowPartyMenu(void)
         gMain.state++;
         break;
     case 6:
+        gMain.state++;
         break;
     case 7:
         if (!AllocPartyMenuBg())
