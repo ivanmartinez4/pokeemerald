@@ -97,6 +97,7 @@ enum {
 // Dynamic fields for the Pokemon Skills page
 #define PSS_DATA_WINDOW_SKILLS_HELD_ITEM 0
 #define PSS_DATA_WINDOW_SKILLS_STATS_LEFT 1 // HP, Attack, Defense
+#define PSS_DATA_WINDOW_SKILLS_STATS_RIGHT 2 // Sp. Attack, Sp. Defense, Speed
 #define PSS_DATA_WINDOW_EXP 3 // Exp, next level
 
 // Dynamic fields for the Battle Moves and Contest Moves pages.
