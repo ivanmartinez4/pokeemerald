@@ -52,7 +52,6 @@ enum {
 
 enum {
     PACKET_MON_INFO = 1,
-    PACKET_UNUSED,
     PACKET_LEADER_STATE,
     PACKET_MEMBER_STATE,
 };

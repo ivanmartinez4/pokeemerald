@@ -3,10 +3,6 @@ CableClub_OnTransition:
 	end
 
 CableClub_EventScript_HideOrShowMysteryGiftMan::
-	specialvar VAR_RESULT, ShouldDistributeEonTicket
-	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_ShowMysteryGiftMan
-	specialvar VAR_RESULT, ValidateSavedWonderCard
-	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_HideMysteryGiftMan
 	goto CableClub_EventScript_ShowMysteryGiftMan
 	end
 
@@ -19,8 +15,6 @@ CableClub_EventScript_HideMysteryGiftMan::
 	return
 
 CableClub_EventScript_MysteryGiftMan::
-	specialvar VAR_RESULT, ShouldDistributeEonTicket
-	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_DistributeEonTicket
 	goto CableClub_EventScript_TryWonderCardScript
 	end
 
@@ -37,7 +31,6 @@ CableClub_EventScript_DistributeEonTicket::
 	msgbox MysteryGift_Text_TheresATicketForYou, MSGBOX_DEFAULT
 	giveitem ITEM_EON_TICKET
 	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
-	setvar VAR_DISTRIBUTE_EON_TICKET, 0
 	msgbox MysteryGift_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
 	release
 	end

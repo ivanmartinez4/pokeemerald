@@ -5,7 +5,7 @@
 
 struct ApprenticeTrainer
 {
-    u8 name[NUM_LANGUAGES - 1][PLAYER_NAME_LENGTH + 1]; // For all languages except the unused one.
+    u8 name[NUM_LANGUAGES][PLAYER_NAME_LENGTH + 1];
     u16 otId;
     u8 facilityClass;
     u16 species[APPRENTICE_SPECIES_COUNT];

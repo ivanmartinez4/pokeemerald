@@ -100,7 +100,7 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_BRIDGE_OVER_POND_MED_EDGE_2]     = TILE_FLAG_UNUSED,
     [MB_BRIDGE_OVER_POND_HIGH_EDGE_1]    = TILE_FLAG_UNUSED,
     [MB_BRIDGE_OVER_POND_HIGH_EDGE_2]    = TILE_FLAG_UNUSED,
-    [MB_UNUSED_BRIDGE]                   = TILE_FLAG_UNUSED,
+    [MB_UNUSED_7E]                   = TILE_FLAG_UNUSED,
     [MB_BIKE_BRIDGE_OVER_BARRIER]        = TILE_FLAG_UNUSED,
     [MB_SECRET_BASE_SCENERY]             = TILE_FLAG_UNUSED,
     [MB_SECRET_BASE_TRAINER_SPOT]        = TILE_FLAG_UNUSED,
@@ -200,7 +200,6 @@ bool8 MetatileBehavior_IsReflective(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POND_WATER
      || metatileBehavior == MB_PUDDLE
-     || metatileBehavior == MB_UNUSED_SOOTOPOLIS_DEEP_WATER_2
      || metatileBehavior == MB_ICE
      || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
      || metatileBehavior == MB_REFLECTION_UNDER_BRIDGE)
@@ -778,7 +777,6 @@ bool8 MetatileBehavior_IsBridgeOverWater(u8 metatileBehavior)
       || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH)
       || (metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_1
        || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_2
-       || metatileBehavior == MB_UNUSED_BRIDGE
        || metatileBehavior == MB_BIKE_BRIDGE_OVER_BARRIER))
         return TRUE;
     else
@@ -907,15 +905,6 @@ bool8 MetatileBehavior_IsDeepOrOceanWater(u8 metatileBehavior)
     if (metatileBehavior == MB_OCEAN_WATER
      || metatileBehavior == MB_INTERIOR_DEEP_WATER
      || metatileBehavior == MB_DEEP_WATER)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 Unref_MetatileBehavior_IsUnusedSootopolisWater(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_UNUSED_SOOTOPOLIS_DEEP_WATER
-     || metatileBehavior == MB_UNUSED_SOOTOPOLIS_DEEP_WATER_2)
         return TRUE;
     else
         return FALSE;

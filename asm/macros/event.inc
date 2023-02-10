@@ -1395,20 +1395,6 @@
 	.2byte \y
 	.endm
 
-	@ Consumes its parameters and does nothing. It is implemented but unused in Ruby/Sapphire.
-	.macro addelevmenuitem a:req, b:req, c:req, d:req
-	.byte 0xb1
-	.byte \a
-	.2byte \b
-	.2byte \c
-	.2byte \d
-	.endm
-
-	@ Does nothing. It is implemented but unused in Ruby/Sapphire.
-	.macro showelevmenu
-	.byte 0xb2
-	.endm
-
 	@ Gets the number of coins the player has and stores it in the variable 'out'.
 	.macro checkcoins out:req
 	.byte 0xb3

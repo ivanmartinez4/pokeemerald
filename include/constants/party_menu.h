@@ -70,15 +70,13 @@
 #define PARTY_ACTION_USE_ITEM           3
 #define PARTY_ACTION_ABILITY_PREVENTS   4
 #define PARTY_ACTION_GIVE_ITEM          5
-#define PARTY_ACTION_GIVE_PC_ITEM       6   // Unused. Not possible to give non-mail items directly from PC
+#define PARTY_ACTION_MINIGAME           6
 #define PARTY_ACTION_GIVE_MAILBOX_MAIL  7
 #define PARTY_ACTION_SWITCH             8
 #define PARTY_ACTION_SWITCHING          9
 #define PARTY_ACTION_SOFTBOILED         10
 #define PARTY_ACTION_CHOOSE_AND_CLOSE   11
 #define PARTY_ACTION_MOVE_TUTOR         12
-#define PARTY_ACTION_MINIGAME           13
-#define PARTY_ACTION_REUSABLE_ITEM      14  // Unused. The only reusable items are handled separately
 
 // IDs for DisplayPartyMenuStdMessage, to display the message at the bottom of the party menu
 #define PARTY_MSG_CHOOSE_MON                0
@@ -101,13 +99,13 @@
 #define PARTY_MSG_X_MONS_ARE_NEEDED         17
 #define PARTY_MSG_MONS_CANT_BE_SAME         18
 #define PARTY_MSG_NO_SAME_HOLD_ITEMS        19
-#define PARTY_MSG_UNUSED                    20
+#define PARTY_MSG_ALREADY_HOLDING_ONE       20
 #define PARTY_MSG_DO_WHAT_WITH_MON          21
 #define PARTY_MSG_RESTORE_WHICH_MOVE        22
 #define PARTY_MSG_BOOST_PP_WHICH_MOVE       23
 #define PARTY_MSG_DO_WHAT_WITH_ITEM         24
 #define PARTY_MSG_DO_WHAT_WITH_MAIL         25
-#define PARTY_MSG_ALREADY_HOLDING_ONE       26
+
 #define PARTY_MSG_NONE                      127
 
 // IDs for DisplayPartyPokemonDescriptionText, to display a message in the party pokemon's box

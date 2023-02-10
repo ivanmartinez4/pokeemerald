@@ -1,5 +1,3 @@
-@ A large number of the Contest AI commands go unused, so their corresponding macros in this file are similarly unused
-
 @ Add a positive/negative value to the score of the move being evaluated.
 
 	.macro score score:req

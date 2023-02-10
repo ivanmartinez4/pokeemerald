@@ -2169,26 +2169,6 @@ bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
     return FALSE;
 }
 
-// Below two are functions for elevators in RS, do nothing in Emerald
-bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
-{
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    u16 v7 = VarGet(ScriptReadHalfword(ctx));
-    u16 v9 = VarGet(ScriptReadHalfword(ctx));
-
-    //ScriptAddElevatorMenuItem(v3, v5, v7, v9);
-    return FALSE;
-}
-
-bool8 ScrCmd_showelevmenu(struct ScriptContext *ctx)
-{
-    /*ScriptShowElevatorMenu();
-    ScriptContext_Stop();
-    return TRUE;*/
-    return FALSE;
-}
-
 bool8 ScrCmd_checkcoins(struct ScriptContext *ctx)
 {
     u16 *ptr = GetVarPointer(ScriptReadHalfword(ctx));

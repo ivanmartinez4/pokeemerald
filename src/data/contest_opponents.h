@@ -193,24 +193,6 @@ const struct ContestWinner gDefaultContestWinners[] =
         .monName = _("GOOZAN"),
         .trainerName = _("HANA"),
         .contestRank = CONTEST_RANK_HYPER
-    },
-    [CONTEST_WINNER_HALL_UNUSED_1 - 1] = {
-        .personality = 0,
-        .trainerId = 0xFFFF,
-        .species = SPECIES_LOUDRED,
-        .contestCategory = CONTEST_CATEGORY_BEAUTY,
-        .monName = _("LOUDED"),
-        .trainerName = _("BRYANT"),
-        .contestRank = CONTEST_RANK_HYPER
-    },
-    [CONTEST_WINNER_HALL_UNUSED_2 - 1] = {
-        .personality = 0,
-        .trainerId = 0xFFFF,
-        .species = SPECIES_DELCATTY,
-        .contestCategory = CONTEST_CATEGORY_CUTE,
-        .monName = _("KITSY"),
-        .trainerName = _("OMAR"),
-        .contestRank = CONTEST_RANK_MASTER
     }
 };
 

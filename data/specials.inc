@@ -499,7 +499,6 @@ gSpecials::
 	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen
 	def_special SetMewAboveGrass
-	def_special ShouldDistributeEonTicket
 	def_special LinkRetireStatusWithBattleTowerPartner
 	def_special BattleTowerReconnectLink
 	def_special CallTrainerHillFunction

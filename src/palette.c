@@ -24,7 +24,6 @@ struct PaletteStructTemplate
     u16 id;
     u16 *src;
     bool16 pst_field_8_0:1;
-    u16 unused:9;
     u16 size:5;
     u8 time1;
     u8 srcCount:5;

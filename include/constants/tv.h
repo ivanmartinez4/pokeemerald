@@ -165,7 +165,6 @@
 #define SECRET_BASE_USED_SLIDE          (1 << 12)
 #define SECRET_BASE_DECLINED_SLIDE      (1 << 13)
 #define SECRET_BASE_USED_JUMP_MAT       (1 << 14)
-#define SECRET_BASE_UNUSED_FLAG         (1 << 15)
 
 #define NUM_SECRET_BASE_FLAGS  32  // by definition, bitfield of 2 u16s
 
@@ -282,13 +281,9 @@
 #define BRAVOTOWER_STATE_LOST_FINAL            4
 #define BRAVOTOWER_STATE_SATISFIED             5
 #define BRAVOTOWER_STATE_UNSATISFIED           6
-#define BRAVOTOWER_STATE_UNUSED_1              7
-#define BRAVOTOWER_STATE_UNUSED_2              8
-#define BRAVOTOWER_STATE_UNUSED_3              9
-#define BRAVOTOWER_STATE_UNUSED_4             10
-#define BRAVOTOWER_STATE_RESPONSE             11
-#define BRAVOTOWER_STATE_RESPONSE_SATISFIED   12
-#define BRAVOTOWER_STATE_RESPONSE_UNSATISFIED 13
-#define BRAVOTOWER_STATE_OUTRO                14
+#define BRAVOTOWER_STATE_RESPONSE              7
+#define BRAVOTOWER_STATE_RESPONSE_SATISFIED    8
+#define BRAVOTOWER_STATE_RESPONSE_UNSATISFIED  9
+#define BRAVOTOWER_STATE_OUTRO                 10
 
 #endif //GUARD_CONSTANTS_TV_H

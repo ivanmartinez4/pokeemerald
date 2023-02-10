@@ -3548,15 +3548,6 @@ bool32 IsTrainerRegistered(void)
     return FALSE;
 }
 
-// Always returns FALSE
-bool32 ShouldDistributeEonTicket(void)
-{
-    if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
-        return FALSE;
-
-    return TRUE;
-}
-
 #define tState data[0]
 
 void BattleTowerReconnectLink(void)

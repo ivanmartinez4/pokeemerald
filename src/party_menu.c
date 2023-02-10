@@ -153,7 +153,6 @@ enum {
 #define PARTY_PAL_SWITCHING    (1 << 4)
 #define PARTY_PAL_TO_SOFTBOIL  (1 << 5)
 #define PARTY_PAL_NO_MON       (1 << 6)
-#define PARTY_PAL_UNUSED       (1 << 7)
 
 #define MENU_DIR_DOWN     1
 #define MENU_DIR_UP      -1
@@ -222,7 +221,6 @@ static EWRAM_DATA u16 *sSlot1TilemapBuffer = 0; // for switching party slots
 static EWRAM_DATA u16 *sSlot2TilemapBuffer = 0; //
 EWRAM_DATA u8 gSelectedOrderFromParty[MAX_FRONTIER_PARTY_SIZE] = {0};
 static EWRAM_DATA u16 sPartyMenuItemId = 0;
-static EWRAM_DATA u16 sUnused = 0;
 EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
 
 // IWRAM common
@@ -4341,8 +4339,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         if (!IsItemFlute(item))
         {
             PlaySE(SE_USE_ITEM);
-            if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM)
-                RemoveBagItem(item, 1);
+            RemoveBagItem(item, 1);
         }
         else
         {
@@ -5430,10 +5427,7 @@ static void DisplayItemMustBeRemovedFirstMessage(u8 taskId)
 
 static void RemoveItemToGiveFromBag(u16 item)
 {
-    if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM) // Unused, never occurs
-        RemovePCItem(item, 1);
-    else
-        RemoveBagItem(item, 1);
+    RemoveBagItem(item, 1);
 }
 
 // Returns FALSE if there was no space to return the item
