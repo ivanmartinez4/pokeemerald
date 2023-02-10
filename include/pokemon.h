@@ -15,6 +15,7 @@ enum {
     MON_DATA_OT_NAME,
     MON_DATA_MARKINGS,
     MON_DATA_CHECKSUM,
+    MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_SPECIES,
     MON_DATA_HELD_ITEM,
     MON_DATA_MOVE1,
@@ -187,9 +188,11 @@ struct BoxPokemon
     u8 isBadEgg:1;
     u8 hasSpecies:1;
     u8 isEgg:1;
+    u8 unused:5;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
     u16 checksum;
+    u16 unknown;
 
     union
     {
@@ -260,6 +263,7 @@ struct BattlePokemon
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
+    /*0x23*/ u8 unknown;
     /*0x24*/ u8 pp[MAX_MON_MOVES];
     /*0x28*/ u16 hp;
     /*0x2A*/ u8 level;
