@@ -87,7 +87,6 @@ const u8 gEasyChatWord_LiquidOoze[] = _("LIQUID OOZE");
 const u8 gEasyChatWord_ColorChange[] = _("COLOR CHANGE");
 const u8 gEasyChatWord_Soundproof[] = _("SOUNDPROOF");
 const u8 gEasyChatWord_EffectSpore[] = _("EFFECT SPORE");
-const u8 gEasyChatWord_Pkrs[] = _("{PK}RS");
 const u8 gEasyChatWord_Fire[] = _("FIRE");
 const u8 gEasyChatWord_FlameBody[] = _("FLAME BODY");
 const u8 gEasyChatWord_Minus[] = _("MINUS");
@@ -641,12 +640,6 @@ const struct EasyChatWordInfo gEasyChatGroup_Status[] = {
     {
         .text = gEasyChatWord_EffectSpore,
         .alphabeticalOrder = 1,
-        .enabled = TRUE,
-    },
-    [EC_INDEX(EC_WORD_PKRS)] =
-    {
-        .text = gEasyChatWord_Pkrs,
-        .alphabeticalOrder = 67,
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FIRE)] =

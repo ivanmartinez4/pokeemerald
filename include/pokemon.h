@@ -39,10 +39,8 @@ enum {
     MON_DATA_SPDEF_EV,
     MON_DATA_FRIENDSHIP,
     MON_DATA_SMART,
-    MON_DATA_POKERUS,
     MON_DATA_MET_LOCATION,
     MON_DATA_MET_LEVEL,
-    MON_DATA_MET_GAME,
     MON_DATA_POKEBALL,
     MON_DATA_HP_IV,
     MON_DATA_ATK_IV,
@@ -67,79 +65,7 @@ enum {
     MON_DATA_MAIL,
     MON_DATA_SPECIES2,
     MON_DATA_IVS,
-    MON_DATA_EVENT_LEGAL,
     MON_DATA_KNOWN_MOVES,
-};
-
-struct PokemonSubstruct0
-{
-    u16 species;
-    u16 heldItem;
-    u32 experience;
-    u8 ppBonuses;
-    u8 friendship;
-    u16 filler;
-};
-
-struct PokemonSubstruct1
-{
-    /*0x00*/ u16 moves[MAX_MON_MOVES];
-    /*0x08*/ u8 pp[MAX_MON_MOVES];
-}; /* size = 12 */
-
-struct PokemonSubstruct2
-{
-    /*0x00*/ u8 hpEV;
-    /*0x01*/ u8 attackEV;
-    /*0x02*/ u8 defenseEV;
-    /*0x03*/ u8 speedEV;
-    /*0x04*/ u8 spAttackEV;
-    /*0x05*/ u8 spDefenseEV;
-    /*0x06*/ u8 cool;
-    /*0x07*/ u8 beauty;
-    /*0x08*/ u8 cute;
-    /*0x09*/ u8 smart;
-    /*0x0A*/ u8 tough;
-    /*0x0B*/ u8 sheen;
-}; /* size = 12 */
-
-struct PokemonSubstruct3
-{
- /* 0x00 */ u8 pokerus;
- /* 0x01 */ u8 metLocation;
-
- /* 0x02 */ u16 metLevel:7;
- /* 0x02 */ u16 metGame:4;
- /* 0x03 */ u16 pokeball:4;
- /* 0x03 */ u16 otGender:1;
-
- /* 0x04 */ u32 hpIV:5;
- /* 0x04 */ u32 attackIV:5;
- /* 0x05 */ u32 defenseIV:5;
- /* 0x05 */ u32 speedIV:5;
- /* 0x05 */ u32 spAttackIV:5;
- /* 0x06 */ u32 spDefenseIV:5;
- /* 0x07 */ u32 isEgg:1;
- /* 0x07 */ u32 abilityNum:1;
- /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
-};
-
-// Number of bytes in the largest Pokémon substruct.
-// They are assumed to be the same size, and will be padded to
-// the largest size by the union.
-// By default they are all 12 bytes.
-#define NUM_SUBSTRUCT_BYTES (max(sizeof(struct PokemonSubstruct0),     \
-                             max(sizeof(struct PokemonSubstruct1),     \
-                             max(sizeof(struct PokemonSubstruct2),     \
-                                 sizeof(struct PokemonSubstruct3)))))
-
-union PokemonSubstruct
-{
-    struct PokemonSubstruct0 type0;
-    struct PokemonSubstruct1 type1;
-    struct PokemonSubstruct2 type2;
-    struct PokemonSubstruct3 type3;
-    u16 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u16, not u8
 };
 
 struct BoxPokemon
@@ -147,36 +73,58 @@ struct BoxPokemon
     /*0x00*/ u32 personality;
     /*0x04*/ u32 otId;
     /*0x08*/ u8 nickname[POKEMON_NAME_LENGTH];
-    /*0x12*/ u8 language;
+    /*0x12*/ u8 language:3; // 7 languages
     /*0x13*/ u8 isBadEgg:1;
              u8 hasSpecies:1;
              u8 isEgg:1;
-             u8 unused:5;
+             u8 markings:4; // 15 combinations as per sAnims_MarkingCombo
     /*0x14*/ u8 otName[PLAYER_NAME_LENGTH];
-    /*0x1B*/ u8 markings;
-    /*0x1C*/ u16 checksum;
-    /*0x1E*/ u16 unused1E;
-    union
-    {
-        u32 raw[(NUM_SUBSTRUCT_BYTES * 4) / 4]; // *4 because there are 4 substructs, /4 because it's u32, not u8
-        union PokemonSubstruct substructs[4];
-    } secure;
-}; /* size = 80 */
+    /*0x1B*/ u8 metLocation;    // better to not limit the number of map sections. this is actually used for friendship growth, too
+    /*0x1C*/ u32 species:11;    // up to 2047 species. could probably go down to 10 bits...
+             u32 heldItem:10;   // up to 1023 items. could probably be 9 bits if hold items are limited to IDs below 511
+             u32 metLevel:7;
+    /*0x20*/ u32 experience:21;
+             u32 spAttackIV:5;
+             u32 spDefenseIV:5;
+             u32 otGender:1;
+    /*0x24*/ u32 move1:10;  // 1023 moves
+             u32 move2:10;  // bits 11-20
+             u32 move3:10;  // bits 21-30
+    /*0x28*/ u16 move4:10;  // bits 31-40
+             u16 hpIV:5;        // 41-45    
+    /*0x2A*/ u16 attackIV:5;    // 46-50
+             u16 defenseIV:5;   // 51-55
+             u16 speedIV:5;     // 56-60
+    /*0x2C*/ u8 ppBonuses;
+    /*0x2D*/ u8 friendship;
+    /*0x2E*/ u8 pokeball:6;
+             u8 abilityNum:2;
+    /*0x2F*/ u8 hpEV;
+    /*0x30*/ u8 attackEV;
+    /*0x31*/ u8 defenseEV;
+    /*0x32*/ u8 speedEV;
+    /*0x33*/ u8 spAttackEV;
+    /*0x34*/ u8 spDefenseEV; 
+    /*0x35*/ u8 pp1:6;
+             u8 pp2:6;
+             u8 pp3:6;
+             u8 pp4:6;
+}; /* size = 0x3C (60) bytes */
 
 struct Pokemon
 {
     /*0x00*/ struct BoxPokemon box;
-    /*0x50*/ u32 status;
-    /*0x54*/ u8 level;
-    /*0x55*/ u8 mail;
-    /*0x56*/ u16 hp;
-    /*0x58*/ u16 maxHP;
-    /*0x5A*/ u16 attack;
-    /*0x5C*/ u16 defense;
-    /*0x5E*/ u16 speed;
-    /*0x60*/ u16 spAttack;
-    /*0x62*/ u16 spDefense;
-}; /* size = 100 */
+    /*0x3C*/ u32 status;
+    /*0x40*/ u8 level;
+    /*0x41*/ u8 mail;
+    /*0x42*/ u16 hp;
+    /*0x44*/ u16 maxHP;
+    /*0x46*/ u16 attack;
+    /*0x48*/ u16 defense;
+    /*0x4A*/ u16 speed;
+    /*0x4C*/ u16 spAttack;
+    /*0x4E*/ u16 spDefense;
+}; /* size = 80 */
 
 struct MonSpritesGfxManager
 {
@@ -347,10 +295,8 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
-void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
-void CreateEventLegalEnemyMon(void);
 void CalculateMonStats(struct Pokemon *mon);
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
@@ -425,11 +371,6 @@ u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
 void AdjustFriendship(struct Pokemon *mon, u8 event);
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 u16 GetMonEVCount(struct Pokemon *mon);
-void RandomlyGivePartyPokerus(struct Pokemon *party);
-u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
-u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
-void UpdatePartyPokerusTime(u16 days);
-void PartySpreadPokerus(struct Pokemon *party);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm);
 u32 CanSpeciesLearnTMHM(u16 species, u8 tm);

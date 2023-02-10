@@ -1392,14 +1392,6 @@ bool8 ScriptCheckFreePokemonStorageSpace(void)
     return CheckFreePokemonStorageSpace();
 }
 
-bool8 IsPokerusInParty(void)
-{
-    if (!CheckPartyPokerus(gPlayerParty, (1 << PARTY_SIZE) - 1))
-        return FALSE;
-
-    return TRUE;
-}
-
 #define horizontalPan  data[0]
 #define delayCounter   data[1]
 #define numShakes      data[2]

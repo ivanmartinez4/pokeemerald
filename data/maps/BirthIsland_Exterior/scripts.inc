@@ -67,32 +67,6 @@ BirthIsland_Exterior_EventScript_NotSolved3::
 	end
 
 BirthIsland_Exterior_EventScript_Deoxys::
-	waitse
-	setfieldeffectargument 0, LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK
-	setfieldeffectargument 1, MAP_NUM(BIRTH_ISLAND_EXTERIOR)
-	setfieldeffectargument 2, MAP_GROUP(BIRTH_ISLAND_EXTERIOR)
-	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
-	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
-	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
-	addobject LOCALID_DEOXYS
-	applymovement LOCALID_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
-	waitmovement 0
-	waitse
-	playmoncry SPECIES_DEOXYS, CRY_MODE_ENCOUNTER
-	delay 40
-	waitmoncry
-	setvar VAR_LAST_TALKED, LOCALID_DEOXYS
-	seteventmon SPECIES_DEOXYS, 30
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special BattleSetup_StartLegendaryBattle
-	waitstate
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	setflag FLAG_BATTLED_DEOXYS
-	release
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
