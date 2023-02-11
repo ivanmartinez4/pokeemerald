@@ -806,6 +806,8 @@ static void CB2_GoToSoundCheckMenu(void)
         m4aMPlayAllStop();
         SetMainCallback2(CB2_StartSoundCheckMenu);
     }
+    AnimateSprites();
+    BuildOamBuffer();
 }
 
 static void CB2_GoToBerryFixScreen(void)
