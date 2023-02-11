@@ -9,7 +9,7 @@ voicegroup274:: @ bw soundlist
 	voice_keysplit voicegroupInst5, KeySplitTable81	@ harpsichord
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_glockenspiel_c5, 255, 249, 0, 208	@ 127/ 75/  1/116/ 64
 	voice_keysplit voicegroupInst6, KeySplitTable83	@ vibraphone
 	voice_keysplit voicegroupInst7, KeySplitTable94	@ marimba
 	voice_keysplit voicegroupInst8, KeySplitTable53	@ xylophone 1
@@ -54,7 +54,7 @@ voicegroup274:: @ bw soundlist
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
+	voice_directsound 60, 0, DirectSoundWaveData_bw_ocean_waves_sfx_c4, 255, 0, 255, 0	@ 127/127/127/127/ 64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0	@ dummy
