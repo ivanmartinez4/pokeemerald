@@ -21,7 +21,8 @@
 #define TYPE_ICE              15
 #define TYPE_DRAGON           16
 #define TYPE_DARK             17
-#define NUMBER_OF_MON_TYPES   18
+#define TYPE_FAIRY            18
+#define NUMBER_OF_MON_TYPES   19
 
 // Pokemon egg groups
 #define EGG_GROUP_NONE          0
@@ -91,7 +92,7 @@
 #define MAX_STAT_STAGE    12
 
 // Shiny odds
-#define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
+#define SHINY_ODDS 32 // Actual probability is SHINY_ODDS/65536
 
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100

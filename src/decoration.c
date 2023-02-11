@@ -915,13 +915,7 @@ static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct L
 
 static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, u32 itemIndex, u8 y)
 {
-    if (itemIndex != LIST_CANCEL)
-    {
-        if (IsDecorationIndexInSecretBase(itemIndex + 1) == TRUE)
-            BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_RED, 92, y + 2);
-        else if (IsDecorationIndexInPlayersRoom(itemIndex + 1) == TRUE)
-            BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_BLUE, 92, y + 2);
-    }
+
 }
 
 static void AddDecorationItemsScrollIndicators(void)

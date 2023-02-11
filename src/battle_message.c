@@ -1310,26 +1310,27 @@ static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
 
 // For displaying names of invalid moves
-static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][17] =
+static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][20] =
 {
-    [TYPE_NORMAL]   = _("a NORMAL move"),
-    [TYPE_FIGHTING] = _("a FIGHTING move"),
-    [TYPE_FLYING]   = _("a FLYING move"),
-    [TYPE_POISON]   = _("a POISON move"),
-    [TYPE_GROUND]   = _("a GROUND move"),
-    [TYPE_ROCK]     = _("a ROCK move"),
-    [TYPE_BUG]      = _("a BUG move"),
-    [TYPE_GHOST]    = _("a GHOST move"),
-    [TYPE_STEEL]    = _("a STEEL move"),
-    [TYPE_MYSTERY]  = _("a ??? move"),
-    [TYPE_FIRE]     = _("a FIRE move"),
-    [TYPE_WATER]    = _("a WATER move"),
-    [TYPE_GRASS]    = _("a GRASS move"),
-    [TYPE_ELECTRIC] = _("an ELECTRIC move"),
-    [TYPE_PSYCHIC]  = _("a PSYCHIC move"),
-    [TYPE_ICE]      = _("an ICE move"),
-    [TYPE_DRAGON]   = _("a DRAGON move"),
-    [TYPE_DARK]     = _("a DARK move")
+    [TYPE_NORMAL]   = _("un ataque Normal"),
+    [TYPE_FIGHTING] = _("un ataque Lucha"),
+    [TYPE_FLYING]   = _("un ataque Volador"),
+    [TYPE_POISON]   = _("un ataque Veneno"),
+    [TYPE_GROUND]   = _("un ataque Tierra"),
+    [TYPE_ROCK]     = _("un ataque Roca"),
+    [TYPE_BUG]      = _("un ataque Bicho"),
+    [TYPE_GHOST]    = _("un ataque Fantasma"),
+    [TYPE_STEEL]    = _("un ataque Acero"),
+    [TYPE_MYSTERY]  = _("un ataque Misterio"),
+    [TYPE_FIRE]     = _("un ataque Fuego"),
+    [TYPE_WATER]    = _("un ataque Agua"),
+    [TYPE_GRASS]    = _("un ataque Planta"),
+    [TYPE_ELECTRIC] = _("un ataque Eléctrico"),
+    [TYPE_PSYCHIC]  = _("un ataque Psíquico"),
+    [TYPE_ICE]      = _("un ataque Hielo"),
+    [TYPE_DRAGON]   = _("un ataque Dragón"),
+    [TYPE_DARK]     = _("un ataque Siniestro"),
+    [TYPE_FAIRY]    = _("un ataque Hada")
 };
 
 const u8 gText_BattleTourney[] = _("BATTLE TOURNEY");

@@ -805,6 +805,10 @@ static const union AnimCmd sSpriteAnim_TypeDark[] = {
     ANIMCMD_FRAME(TYPE_DARK * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
+static const union AnimCmd sSpriteAnim_TypeFairy[] = {
+    ANIMCMD_FRAME(TYPE_FAIRY * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
 static const union AnimCmd sSpriteAnim_CategoryCool[] = {
     ANIMCMD_FRAME((CONTEST_CATEGORY_COOL + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
@@ -844,6 +848,7 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_TypeIce,
     sSpriteAnim_TypeDragon,
     sSpriteAnim_TypeDark,
+    sSpriteAnim_TypeFairy,
     sSpriteAnim_CategoryCool,
     sSpriteAnim_CategoryBeauty,
     sSpriteAnim_CategoryCute,
@@ -869,24 +874,25 @@ static const struct SpriteTemplate sSpriteTemplate_MoveTypes =
 };
 static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT] =
 {
-    [TYPE_NORMAL] = 13,
+    [TYPE_NORMAL] = 14,
     [TYPE_FIGHTING] = 13,
     [TYPE_FLYING] = 14,
-    [TYPE_POISON] = 14,
+    [TYPE_POISON] = 13,
     [TYPE_GROUND] = 13,
-    [TYPE_ROCK] = 13,
-    [TYPE_BUG] = 15,
+    [TYPE_ROCK] = 15,
+    [TYPE_BUG] = 14,
     [TYPE_GHOST] = 14,
-    [TYPE_STEEL] = 13,
+    [TYPE_STEEL] = 15,
     [TYPE_MYSTERY] = 15,
     [TYPE_FIRE] = 13,
-    [TYPE_WATER] = 14,
-    [TYPE_GRASS] = 15,
-    [TYPE_ELECTRIC] = 13,
-    [TYPE_PSYCHIC] = 14,
-    [TYPE_ICE] = 14,
-    [TYPE_DRAGON] = 15,
-    [TYPE_DARK] = 13,
+    [TYPE_WATER] = 15,
+    [TYPE_GRASS] = 14,
+    [TYPE_ELECTRIC] = 15,
+    [TYPE_PSYCHIC] = 13,
+    [TYPE_ICE] = 15,
+    [TYPE_DRAGON] = 14,
+    [TYPE_DARK] = 14,
+    [TYPE_FAIRY] = 13,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = 13,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = 14,
