@@ -500,7 +500,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             if (sound->songLengthId <= 50)
             {
                 u8 num = sound->songLengthId / 3;
-                m4aSongNumStart(PH_TRAP_HELD + 3 * num);
+                m4aSongNumStart(SE_SUDOWOODO_SHAKE + 3 * num);
             }
             song->state = 2;
             song->phonemeTimer--;

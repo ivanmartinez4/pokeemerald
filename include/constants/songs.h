@@ -280,60 +280,59 @@
 #define SE_PIKE_CURTAIN_CLOSE             267 // SE_CURTAIN
 #define SE_PIKE_CURTAIN_OPEN              268 // SE_CURTAIN1
 #define SE_SUDOWOODO_SHAKE                269 // SE_USSOKI
-// Bard SFX
-#define PH_TRAP_BLEND                     271
-#define PH_TRAP_HELD                      272
-#define PH_TRAP_SOLO                      273
-#define PH_FACE_BLEND                     274
-#define PH_FACE_HELD                      275
-#define PH_FACE_SOLO                      276
-#define PH_CLOTH_BLEND                    277
-#define PH_CLOTH_HELD                     278
-#define PH_CLOTH_SOLO                     279
-#define PH_DRESS_BLEND                    280
-#define PH_DRESS_HELD                     281
-#define PH_DRESS_SOLO                     282
-#define PH_FLEECE_BLEND                   283
-#define PH_FLEECE_HELD                    284
-#define PH_FLEECE_SOLO                    285
-#define PH_KIT_BLEND                      286
-#define PH_KIT_HELD                       287
-#define PH_KIT_SOLO                       288
-#define PH_PRICE_BLEND                    289
-#define PH_PRICE_HELD                     290
-#define PH_PRICE_SOLO                     291
-#define PH_LOT_BLEND                      292
-#define PH_LOT_HELD                       293
-#define PH_LOT_SOLO                       294
-#define PH_GOAT_BLEND                     295
-#define PH_GOAT_HELD                      296
-#define PH_GOAT_SOLO                      297
-#define PH_THOUGHT_BLEND                  298
-#define PH_THOUGHT_HELD                   299
-#define PH_THOUGHT_SOLO                   300
-#define PH_CHOICE_BLEND                   301
-#define PH_CHOICE_HELD                    302
-#define PH_CHOICE_SOLO                    303
-#define PH_MOUTH_BLEND                    304
-#define PH_MOUTH_HELD                     305
-#define PH_MOUTH_SOLO                     306
-#define PH_FOOT_BLEND                     307
-#define PH_FOOT_HELD                      308
-#define PH_FOOT_SOLO                      309
-#define PH_GOOSE_BLEND                    310
-#define PH_GOOSE_HELD                     311
-#define PH_GOOSE_SOLO                     312
-#define PH_STRUT_BLEND                    313
-#define PH_STRUT_HELD                     314
-#define PH_STRUT_SOLO                     315
-#define PH_CURE_BLEND                     316
-#define PH_CURE_HELD                      317
-#define PH_CURE_SOLO                      318
-#define PH_NURSE_BLEND                    319
-#define PH_NURSE_HELD                     320
-#define PH_NURSE_SOLO                     321
+#define MUS_B2_UNOVA_LINK                 270 // Unova Link
+#define MUS_B2_JOIN_AVENUE                271 // Join Avenue
+#define MUS_B2_FUNFEST_MISSION            272 // Funfest Mission Start!
+#define MUS_B2_KYUREM_SCENE_1             273 // Awakening
+#define MUS_B2_KYUREM_SCENE_2             274 // Confrontation
+#define MUS_B2_KYUREM_SCENE_3             275 // Absorption
+#define MUS_B2_KYUREM_SCENE_4             276 // Fusion
+#define MUS_B2_OPELUCID_ATTACKED          277 // Opelucid City Attacked!
+#define MUS_B2_PLASMA_FRIGATE_SCENE       278 // Plasma Frigate Sortie
+#define MUS_B2_RIVAL                      279 // Rival's Theme
+#define MUS_B2_COLRESS                    280 // Colress's Theme
+#define MUS_B2_SHADOW_TRIAD               281 // Shadow Triad's Theme
+#define MUS_B2_ZINZOLIN                   282 // Zinzolin's Theme
+#define MUS_B2_OPELUCID_FROZEN            283 // The Frozen City
+#define MUS_B2_ENCOUNTER_BEAUTY           284 // Trainers' Eyes Meet (Beauty)
+#define MUS_B2_ENCOUNTER_CLOWN            285 // Trainers' Eyes Meet (Harlequin)
+#define MUS_B2_VS_LEADER_KANTO            286 // Battle! (Gym Leader - Kanto Version)
+#define MUS_B2_VS_CHAMPION_KANTO          287 // Battle! (Champion - Kanto Version)
+#define MUS_B2_VS_LEADER_JOHTO            288 // Battle! (Gym Leader - Johto Version)
+#define MUS_B2_VS_CHAMPION_JOHTO          289 // Battle! (Champion - Johto Version)
+#define MUS_B2_VS_LEADER_HOENN            290 // Battle! (Gym Leader - Hoenn Version)
+#define MUS_B2_VS_CHAMPION_HOENN          291 // Battle! (Champion - Hoenn Version)
+#define MUS_B2_VS_LEADER_SINNOH           292 // Battle! (Gym Leader - Sinnoh Version)
+#define MUS_B2_VS_CHAMPION_SINNOH         293 // Battle! (Champion - Sinnoh Version)
+#define MUS_B2_VS_PWT_FINALS              294 // PWT Final Round!
+#define MUS_B2_VS_BLACK_WHITE_KYUREM      295 // Battle! (Black Kyurem/White Kyurem)
+#define MUS_B2_VS_NEO_PLASMA              296 // Battle! (Team Neo Plasma)
+#define MUS_B2_VS_COLRESS                 297 // Battle! (Colress)
+#define MUS_B2_VS_GHETSIS                 298 // Battle! (Ghetsis)
+#define MUS_B2_VS_IRIS                    300 // Battle! (Champion Iris)
+#define MUS_B2_VS_RIVAL                   301 // Battle! (Rival)
+#define MUS_B2_VICTORY_PWT                302 // Winning in the PWT!
+#define MUS_B2_HIDDEN_GROTTO              303 // Hidden Grotto
+#define MUS_B2_JOIN_AVENUE_GREETING       304 // Join Avenue Meet and Greet!
+#define MUS_B2_NEO_PLASMA                 305 // Team Plasma Returns
+#define MUS_B2_END                        306 // The End
+#define MUS_B2_XTRANSCEIVER_GAME_START    307 // Xtransceiver - Game Start!
+#define MUS_B2_XTRANSCEIVER_GAME_WIN      308 // Xtransceiver - Game Won!
+#define MUS_B2_XTRANSCEIVER_03            309 // Xtransceiver Drum Roll
+#define MUS_B2_XTRANSCEIVER_04            310 // Xtransceiver Drum Roll End
+#define MUS_B2_MEDAL_BOX_UPGRADED         311 // Medal Box: Medal Box Upgraded!
+#define MUS_B2_PARTICIPATION_MEDAL        312 // Earned a Participation Prize Medal!
+#define MUS_B2_MEDAL_RALLY_COMPLETE       313 // Medal Rally Complete!
+#define MUS_B2_TYMPOLE_CHOIR              314 // Tympole Choir
+#define MUS_B2_JOIN_AVENUE_RANK_UP_1      315 // Join Avenue Level Up 1
+#define MUS_B2_JOIN_AVENUE_RANK_UP_2      316 // Join Avenue Level Up 2
+#define MUS_B2_JOIN_AVENUE_RAFFLE         317 // Join Avenue Raffle Drawn
+#define MUS_B2_XTRANSCEIVER_CALL_LONG     318 // Xtransceiver call (long ver)
+#define MUS_B2_HABITAT_LIST_1             319 // Pokédex Habitat List Complete!
+#define MUS_B2_HABITAT_LIST_2             320 //
+#define MUS_B2_POKESTAR_FANFARE           321 // Immortalized in Pokéstar Studios!
 
-#define END_SE                            PH_NURSE_SOLO
+#define END_SE                            SE_SUDOWOODO_SHAKE
 
 #define START_MUS                         (END_SE + 1)
 // Ruby & Sapphire Music 
@@ -1089,7 +1088,7 @@
 #define MUS_BW_VICTORY_WILD              1033 // Victory! (Wild Pokémon)
 #define MUS_BW_VICTORY_TRAINER           1034 // Victory! (Trainer Battle)
 #define MUS_BW_VICTORY_GYM_LEADER        1035 // Victory! (Gym Leader)
-#define MUS_BW_VICTORY_N_GHETSIS           1036 // Victory! (Final N & Ghetsis)
+#define MUS_BW_VICTORY_N_GHETSIS         1036 // Victory! (Final N & Ghetsis)
 #define MUS_BW_VICTORY_CHAMPION          1037 // Victory! (Champion)
 #define MUS_BW_WFC                       1038 // Nintendo Wi-Fi Connection
 #define MUS_BW_MYSTERY_GIFT              1039 // Mystery Gift
@@ -1224,59 +1223,8 @@
 #define MUS_B2_HUMILAU_GYM               1161 // Humilau City Gym
 #define MUS_B2_OPELUCID_GYM              1162 // Opelucid City Gym
 #define MUS_B2_XTRANSCEIVER_MINIGAMES    1163 // Xtransceiver Minigames
-#define MUS_B2_UNOVA_LINK                1164 // Unova Link
-#define MUS_B2_JOIN_AVENUE               1165 // Join Avenue
-#define MUS_B2_FUNFEST_MISSION           1166 // Funfest Mission Start!
-#define MUS_B2_KYUREM_SCENE_1            1167 // Awakening
-#define MUS_B2_KYUREM_SCENE_2            1168 // Confrontation
-#define MUS_B2_KYUREM_SCENE_3            1169 // Absorption
-#define MUS_B2_KYUREM_SCENE_4            1170 // Fusion
-#define MUS_B2_OPELUCID_ATTACKED         1171 // Opelucid City Attacked!
-#define MUS_B2_PLASMA_FRIGATE_SCENE      1172 // Plasma Frigate Sortie
-#define MUS_B2_RIVAL                     1173 // Rival's Theme
-#define MUS_B2_COLRESS                   1174 // Colress's Theme
-#define MUS_B2_SHADOW_TRIAD              1175 // Shadow Triad's Theme
-#define MUS_B2_ZINZOLIN                  1176 // Zinzolin's Theme
-#define MUS_B2_OPELUCID_FROZEN           1177 // The Frozen City
-#define MUS_B2_ENCOUNTER_BEAUTY          1178 // Trainers' Eyes Meet (Beauty)
-#define MUS_B2_ENCOUNTER_CLOWN           1179 // Trainers' Eyes Meet (Harlequin)
-#define MUS_B2_VS_LEADER_KANTO           1180 // Battle! (Gym Leader - Kanto Version)
-#define MUS_B2_VS_CHAMPION_KANTO         1181 // Battle! (Champion - Kanto Version)
-#define MUS_B2_VS_LEADER_JOHTO           1182 // Battle! (Gym Leader - Johto Version)
-#define MUS_B2_VS_CHAMPION_JOHTO         1183 // Battle! (Champion - Johto Version)
-#define MUS_B2_VS_LEADER_HOENN           1184 // Battle! (Gym Leader - Hoenn Version)
-#define MUS_B2_VS_CHAMPION_HOENN         1185 // Battle! (Champion - Hoenn Version)
-#define MUS_B2_VS_LEADER_SINNOH          1186 // Battle! (Gym Leader - Sinnoh Version)
-#define MUS_B2_VS_CHAMPION_SINNOH        1187 // Battle! (Champion - Sinnoh Version)
-#define MUS_B2_VS_PWT_FINALS             1188 // PWT Final Round!
-#define MUS_B2_VS_BLACK_WHITE_KYUREM     1189 // Battle! (Black Kyurem/White Kyurem)
-#define MUS_B2_VS_NEO_PLASMA             1190 // Battle! (Team Neo Plasma)
-#define MUS_B2_VS_COLRESS                1191 // Battle! (Colress)
-#define MUS_B2_VS_GHETSIS                1192 // Battle! (Ghetsis)
-#define MUS_B2_VS_IRIS                   1193 // Battle! (Champion Iris)
-#define MUS_B2_VS_RIVAL                  1194 // Battle! (Rival)
-#define MUS_B2_VICTORY_PWT               1195 // Winning in the PWT!
-#define MUS_B2_HIDDEN_GROTTO             1196 // Hidden Grotto
-#define MUS_B2_JOIN_AVENUE_GREETING      1197 // Join Avenue Meet and Greet!
-#define MUS_B2_NEO_PLASMA                1198 // Team Plasma Returns
-#define MUS_B2_END                       1199 // The End
-#define MUS_B2_XTRANSCEIVER_GAME_START   1200 // Xtransceiver - Game Start!
-#define MUS_B2_XTRANSCEIVER_GAME_WIN     1201 // Xtransceiver - Game Won!
-#define MUS_B2_XTRANSCEIVER_03           1202 // Xtransceiver Drum Roll
-#define MUS_B2_XTRANSCEIVER_04           1203 // Xtransceiver Drum Roll End
-#define MUS_B2_MEDAL_BOX_UPGRADED        1204 // Medal Box: Medal Box Upgraded!
-#define MUS_B2_PARTICIPATION_MEDAL       1205 // Earned a Participation Prize Medal!
-#define MUS_B2_MEDAL_RALLY_COMPLETE      1206 // Medal Rally Complete!
-#define MUS_B2_TYMPOLE_CHOIR             1207 // Tympole Choir
-#define MUS_B2_JOIN_AVENUE_RANK_UP_1     1208 // Join Avenue Level Up 1
-#define MUS_B2_JOIN_AVENUE_RANK_UP_2     1209 // Join Avenue Level Up 2
-#define MUS_B2_JOIN_AVENUE_RAFFLE        1210 // Join Avenue Raffle Drawn
-#define MUS_B2_XTRANSCEIVER_CALL_LONG    1211 // Xtransceiver call (long ver)
-#define MUS_B2_HABITAT_LIST_1            1212 // Pokédex Habitat List Complete!
-#define MUS_B2_HABITAT_LIST_2            1213 //
-#define MUS_B2_POKESTAR_FANFARE          1214 // Immortalized in Pokéstar Studios!
 
-#define B2_MUSIC_END                     MUS_B2_POKESTAR_FANFARE
+#define B2_MUSIC_END                     MUS_B2_XTRANSCEIVER_MINIGAMES
 
 #define END_MUS                          B2_MUSIC_END
 

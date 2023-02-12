@@ -14,3 +14,5 @@ Créditos:
 -aarant, por el sistema DNS, iconos y followers.
 
 -ShinyDragonHunter, por el sistema de formas, el sistema de mugshots, y la música de GameBoy.
+
+-CyanSMP64, por la expansión de música.
