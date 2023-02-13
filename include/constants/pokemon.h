@@ -12,17 +12,16 @@
 #define TYPE_BUG              6
 #define TYPE_GHOST            7
 #define TYPE_STEEL            8
-#define TYPE_MYSTERY          9
-#define TYPE_FIRE             10
-#define TYPE_WATER            11
-#define TYPE_GRASS            12
-#define TYPE_ELECTRIC         13
-#define TYPE_PSYCHIC          14
-#define TYPE_ICE              15
-#define TYPE_DRAGON           16
-#define TYPE_DARK             17
-#define TYPE_FAIRY            18
-#define NUMBER_OF_MON_TYPES   19
+#define TYPE_FIRE             9
+#define TYPE_WATER            10
+#define TYPE_GRASS            11
+#define TYPE_ELECTRIC         12
+#define TYPE_PSYCHIC          13
+#define TYPE_ICE              14
+#define TYPE_DRAGON           15
+#define TYPE_DARK             16
+#define TYPE_FAIRY            17
+#define NUMBER_OF_MON_TYPES   18
 
 // Pokemon egg groups
 #define EGG_GROUP_NONE          0
@@ -92,7 +91,7 @@
 #define MAX_STAT_STAGE    12
 
 // Shiny odds
-#define SHINY_ODDS 32 // Actual probability is SHINY_ODDS/65536
+#define SHINY_ODDS 64 // Actual probability is SHINY_ODDS/65536
 
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100
@@ -160,6 +159,12 @@
 #define FLAG_SNATCH_AFFECTED        (1 << 3)
 #define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
 #define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
+
+//Splits
+
+#define SPLIT_PHYSICAL 0x0
+#define SPLIT_SPECIAL  0x1
+#define SPLIT_STATUS   0x2
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0

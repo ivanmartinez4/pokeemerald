@@ -9,6 +9,7 @@
 #include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+#include "battle_util.h"
 #include "data.h"
 #include "event_data.h"
 #include "evolution_scene.h"
@@ -2880,10 +2881,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (attackerHoldEffect == sHoldEffectToType[i][0]
             && type == sHoldEffectToType[i][1])
         {
-            if (IS_TYPE_PHYSICAL(type))
-                attack = (attack * (attackerHoldEffectParam + 100)) / 100;
-            else
-                spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
+            attack = (attack * (attackerHoldEffectParam + 100)) / 100;
+            spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
             break;
         }
     }
@@ -2906,9 +2905,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
         attack *= 2;
 
-    // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
-        spAttack /= 2;
+        gBattleMovePower /= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
@@ -2936,7 +2934,43 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
-    if (IS_TYPE_PHYSICAL(type))
+    // Are effects of weather negated with cloud nine or air lock
+    if (WEATHER_HAS_EFFECT2)
+    {
+        // Rain weakens Fire, boosts Water
+        if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage /= 2;
+                break;
+            case TYPE_WATER:
+                damage = (15 * damage) / 10;
+                break;
+            }
+        }
+
+        // Sun boosts Fire, weakens Water
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage = (15 * damage) / 10;
+                break;
+            case TYPE_WATER:
+                damage /= 2;
+                break;
+            }
+        }
+    }
+
+    // Flash fire triggered
+    if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        damage = (15 * damage) / 10;
+        
+    if (IS_MOVE_PHYSICAL(gCurrentMove))
     {
         if (gCritMultiplier == 2)
         {
@@ -2988,10 +3022,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             damage = 1;
     }
 
-    if (type == TYPE_MYSTERY)
-        damage = 0; // is ??? type. does 0 damage.
-
-    if (IS_TYPE_SPECIAL(type))
+    if (IS_MOVE_SPECIAL(gCurrentMove))
     {
         if (gCritMultiplier == 2)
         {
@@ -3006,6 +3037,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
+
+        // Any weather except sun weakens solar beam
+        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            damage /= 2;
 
         if (gCritMultiplier == 2)
         {
@@ -3033,46 +3068,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // Moves hitting both targets do half damage in double battles
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
-
-        // Are effects of weather negated with cloud nine or air lock
-        if (WEATHER_HAS_EFFECT2)
-        {
-            // Rain weakens Fire, boosts Water
-            if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
-            {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage /= 2;
-                    break;
-                case TYPE_WATER:
-                    damage = (15 * damage) / 10;
-                    break;
-                }
-            }
-
-            // Any weather except sun weakens solar beam
-            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
-                damage /= 2;
-
-            // Sun boosts Fire, weakens Water
-            if (gBattleWeather & B_WEATHER_SUN)
-            {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage = (15 * damage) / 10;
-                    break;
-                case TYPE_WATER:
-                    damage /= 2;
-                    break;
-                }
-            }
-        }
-
-        // Flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
-            damage = (15 * damage) / 10;
     }
 
     return damage + 2;
@@ -5604,17 +5599,8 @@ u16 GetBattleBGM(void)
         case SPECIES_ARTICUNO:
         case SPECIES_ZAPDOS:
         case SPECIES_MOLTRES:
-        #if P_NEW_POKEMON == TRUE
-        case SPECIES_ARTICUNO_GALARIAN:
-        case SPECIES_ZAPDOS_GALARIAN:
-        case SPECIES_MOLTRES_GALARIAN:
-        #endif
             return MUS_RG_VS_LEGEND;
         case SPECIES_MEWTWO:
-        #if P_NEW_POKEMON == TRUE
-        case SPECIES_MEWTWO_MEGA_X:
-        case SPECIES_MEWTWO_MEGA_Y:
-        #endif
             return MUS_RG_VS_MEWTWO;
         case SPECIES_MEW:
             return MUS_VS_MEW;
@@ -5633,110 +5619,17 @@ u16 GetBattleBGM(void)
         case SPECIES_REGIROCK:
         case SPECIES_REGICE:
         case SPECIES_REGISTEEL:
-        #if P_NEW_POKEMON == TRUE
-        case SPECIES_REGIGIGAS:
-        case SPECIES_REGIELEKI:
-        case SPECIES_REGIDRAGO:
-        #endif
             return MUS_VS_REGI;
         case SPECIES_LATIAS:
         case SPECIES_LATIOS:
         case SPECIES_JIRACHI:
-        #if P_NEW_POKEMON == TRUE
-        case SPECIES_LATIAS_MEGA:
-        case SPECIES_LATIOS_MEGA:
-        #endif
             return MUS_VS_WILD;
         case SPECIES_GROUDON:
         case SPECIES_KYOGRE:
         case SPECIES_RAYQUAZA:
-        #if P_NEW_POKEMON == TRUE
-        case SPECIES_RAYQUAZA_MEGA:
-        case SPECIES_KYOGRE_PRIMAL:
-        case SPECIES_GROUDON_PRIMAL:
-        #endif
             return MUS_VS_KYOGRE_GROUDON;
         case SPECIES_DEOXYS:
-        #if P_NEW_POKEMON == TRUE
-        case SPECIES_DEOXYS_ATTACK:
-        case SPECIES_DEOXYS_DEFENSE:
-        case SPECIES_DEOXYS_SPEED:
-        #endif
             return MUS_RG_VS_DEOXYS;
-        #if P_NEW_POKEMON == TRUE
-        case SPECIES_UXIE:
-        case SPECIES_MESPRIT:
-        case SPECIES_AZELF:
-            return MUS_DP_VS_UXIE_MESPRIT_AZELF;
-        case SPECIES_DIALGA:
-        case SPECIES_PALKIA:
-            return MUS_DP_VS_DIALGA_PALKIA;
-        case SPECIES_ROTOM:
-        case SPECIES_ROTOM_HEAT:
-        case SPECIES_ROTOM_WASH:
-        case SPECIES_ROTOM_FROST:
-        case SPECIES_ROTOM_FAN:
-        case SPECIES_ROTOM_MOW:
-        case SPECIES_HEATRAN:
-        case SPECIES_MANAPHY:
-        case SPECIES_DARKRAI:
-            return MUS_DP_VS_LEGEND;
-        case SPECIES_GIRATINA:
-        case SPECIES_GIRATINA_ORIGIN:
-            return MUS_PL_VS_GIRATINA;
-        case SPECIES_CRESSELIA:
-        case SPECIES_PHIONE:
-        case SPECIES_SHAYMIN:
-        case SPECIES_SHAYMIN_SKY:
-            return MUS_DP_VS_WILD;
-        case SPECIES_ARCEUS:
-        case SPECIES_ARCEUS_FIGHTING:
-        case SPECIES_ARCEUS_FLYING:
-        case SPECIES_ARCEUS_POISON:
-        case SPECIES_ARCEUS_GROUND:
-        case SPECIES_ARCEUS_ROCK:
-        case SPECIES_ARCEUS_BUG:
-        case SPECIES_ARCEUS_GHOST:
-        case SPECIES_ARCEUS_STEEL:
-        case SPECIES_ARCEUS_FIRE:
-        case SPECIES_ARCEUS_WATER:
-        case SPECIES_ARCEUS_GRASS:
-        case SPECIES_ARCEUS_ELECTRIC:
-        case SPECIES_ARCEUS_PSYCHIC:
-        case SPECIES_ARCEUS_ICE:
-        case SPECIES_ARCEUS_DRAGON:
-        case SPECIES_ARCEUS_DARK:
-        case SPECIES_ARCEUS_FAIRY:
-            return MUS_DP_VS_ARCEUS;
-        case SPECIES_VICTINI:
-        case SPECIES_COBALION:
-        case SPECIES_TERRAKION:
-        case SPECIES_VIRIZION:
-        case SPECIES_TORNADUS:
-        case SPECIES_THUNDURUS:
-        case SPECIES_LANDORUS:
-        case SPECIES_TORNADUS_THERIAN:
-        case SPECIES_THUNDURUS_THERIAN:
-        case SPECIES_LANDORUS_THERIAN:
-        case SPECIES_KELDEO:
-        case SPECIES_KELDEO_RESOLUTE:
-        case SPECIES_MELOETTA:
-        case SPECIES_MELOETTA_PIROUETTE:
-        case SPECIES_GENESECT:
-        case SPECIES_GENESECT_DOUSE_DRIVE:
-        case SPECIES_GENESECT_SHOCK_DRIVE:
-        case SPECIES_GENESECT_BURN_DRIVE:
-        case SPECIES_GENESECT_CHILL_DRIVE:
-            return MUS_BW_VS_LEGEND;
-        case SPECIES_RESHIRAM:
-        case SPECIES_ZEKROM:
-            return MUS_BW_VS_RESHIRAM_ZEKROM;
-        case SPECIES_KYUREM:
-            return MUS_BW_VS_KYUREM;
-        case SPECIES_KYUREM_WHITE:
-        case SPECIES_KYUREM_BLACK:
-            return MUS_B2_VS_BLACK_WHITE_KYUREM;
-        #endif
         default:
             return MUS_VS_WILD;
         }

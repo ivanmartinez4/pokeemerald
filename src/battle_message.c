@@ -1321,7 +1321,6 @@ static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][20] =
     [TYPE_BUG]      = _("un ataque Bicho"),
     [TYPE_GHOST]    = _("un ataque Fantasma"),
     [TYPE_STEEL]    = _("un ataque Acero"),
-    [TYPE_MYSTERY]  = _("un ataque Misterio"),
     [TYPE_FIRE]     = _("un ataque Fuego"),
     [TYPE_WATER]    = _("un ataque Agua"),
     [TYPE_GRASS]    = _("un ataque Planta"),

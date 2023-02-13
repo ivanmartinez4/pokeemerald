@@ -400,6 +400,11 @@ void HandleAction_UseItem(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
+u8 GetBattleMoveSplit(u32 moveId)
+{
+    return gBattleMoves[moveId].split;
+}
+
 bool8 TryRunFromBattle(u8 battler)
 {
     bool8 effect = FALSE;

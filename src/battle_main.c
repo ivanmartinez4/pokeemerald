@@ -413,7 +413,6 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     [TYPE_BUG] = _("Bicho"),
     [TYPE_GHOST] = _("Fantasma"),
     [TYPE_STEEL] = _("Acero"),
-    [TYPE_MYSTERY] = _("???"),
     [TYPE_FIRE] = _("Fuego"),
     [TYPE_WATER] = _("Agua"),
     [TYPE_GRASS] = _("Planta"),
