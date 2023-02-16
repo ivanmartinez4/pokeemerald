@@ -357,8 +357,7 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
             case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_FILL_WINDOW:
-            case EXT_CTRL_CODE_JPN:
-            case EXT_CTRL_CODE_ENG:
+            case EXT_CTRL_CODE_SPA:
             case EXT_CTRL_CODE_PAUSE_MUSIC:
             case EXT_CTRL_CODE_RESUME_MUSIC:
                 break;
@@ -626,34 +625,6 @@ u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color)
     return dest;
 }
 
-bool32 IsStringJapanese(u8 *str)
-{
-    while (*str != EOS)
-    {
-        if (*str <= JAPANESE_CHAR_END)
-            if (*str != CHAR_SPACE)
-                return TRUE;
-        str++;
-    }
-
-    return FALSE;
-}
-
-bool32 IsStringNJapanese(u8 *str, s32 n)
-{
-    s32 i;
-
-    for (i = 0; *str != EOS && i < n; i++)
-    {
-        if (*str <= JAPANESE_CHAR_END)
-            if (*str != CHAR_SPACE)
-                return TRUE;
-        str++;
-    }
-
-    return FALSE;
-}
-
 u8 GetExtCtrlCodeLength(u8 code)
 {
     static const u8 lengths[] =
@@ -679,8 +650,7 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_SKIP]                   = 2,
         [EXT_CTRL_CODE_CLEAR_TO]               = 2,
         [EXT_CTRL_CODE_MIN_LETTER_SPACING]     = 2,
-        [EXT_CTRL_CODE_JPN]                    = 1,
-        [EXT_CTRL_CODE_ENG]                    = 1,
+        [EXT_CTRL_CODE_SPA]                    = 1,
         [EXT_CTRL_CODE_PAUSE_MUSIC]            = 1,
         [EXT_CTRL_CODE_RESUME_MUSIC]           = 1,
     };
@@ -734,31 +704,6 @@ s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2)
         retVal = -1;
 
     return retVal;
-}
-
-void ConvertInternationalString(u8 *s, u8 language)
-{
-    if (language == LANGUAGE_JAPANESE)
-    {
-        u8 i;
-
-        StripExtCtrlCodes(s);
-        i = StringLength(s);
-        s[i++] = EXT_CTRL_CODE_BEGIN;
-        s[i++] = EXT_CTRL_CODE_ENG;
-        s[i++] = EOS;
-
-        i--;
-
-        while (i != (u8)-1)
-        {
-            s[i + 2] = s[i];
-            i--;
-        }
-
-        s[0] = EXT_CTRL_CODE_BEGIN;
-        s[1] = EXT_CTRL_CODE_JPN;
-    }
 }
 
 void StripExtCtrlCodes(u8 *str)

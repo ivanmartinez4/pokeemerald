@@ -65,7 +65,6 @@ static void LinkPartnerHandleCmd32(void);
 static void LinkPartnerHandleTwoReturnValues(void);
 static void LinkPartnerHandleChosenMonReturnValue(void);
 static void LinkPartnerHandleOneReturnValue(void);
-static void LinkPartnerHandleOneReturnValue_Duplicate(void);
 static void LinkPartnerHandleHitAnimation(void);
 static void LinkPartnerHandleCantSwitch(void);
 static void LinkPartnerHandlePlaySE(void);
@@ -132,7 +131,6 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = LinkPartnerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = LinkPartnerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = LinkPartnerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = LinkPartnerHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = LinkPartnerHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = LinkPartnerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = LinkPartnerHandlePlaySE,
@@ -1362,11 +1360,6 @@ static void LinkPartnerHandleChosenMonReturnValue(void)
 }
 
 static void LinkPartnerHandleOneReturnValue(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleOneReturnValue_Duplicate(void)
 {
     LinkPartnerBufferExecCompleted();
 }

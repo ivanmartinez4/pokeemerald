@@ -111,7 +111,6 @@ static void SetBottomSliderHeartsInvisibility(bool8);
 static void CreateNextTurnSprites(void);
 static void CreateApplauseMeterSprite(void);
 static void CreateJudgeAttentionEyeTask(void);
-static void CreateUnusedBlendTask(void);
 static void ContestDebugDoPrint(void);
 static void DrawContestantWindows(void);
 static void ApplyNextTurnOrder(void);
@@ -146,7 +145,7 @@ static bool8 DrawStatusSymbol(u8);
 static void DrawStatusSymbols(void);
 static void StartStopFlashJudgeAttentionEye(u8);
 static void BlendAudienceBackground(s8, s8);
-static void ShowAndUpdateApplauseMeter(s8 unused);
+static void ShowAndUpdateApplauseMeter(void);
 static void AnimateAudience(void);
 static void UpdateApplauseMeter(void);
 static void RankContestants(void);
@@ -162,8 +161,6 @@ static void Task_UpdateAppealHearts(u8);
 static void SpriteCB_UpdateHeartSlider(struct Sprite *);
 static void Task_FlashJudgeAttentionEye(u8);
 static void Task_StopFlashJudgeAttentionEye(u8);
-static void Task_UnusedBlend(u8);
-static void InitUnusedBlendTaskData(u8);
 static void UpdateBlendTaskContestantData(u8);
 static void SpriteCB_BlinkContestantBox(struct Sprite *);
 static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite);
@@ -213,10 +210,8 @@ enum {
 
 enum {
     JUDGE_SYMBOL_SWIRL,
-    JUDGE_SYMBOL_SWIRL_UNUSED,
     JUDGE_SYMBOL_ONE_EXCLAMATION,
     JUDGE_SYMBOL_TWO_EXCLAMATIONS,
-    JUDGE_SYMBOL_NUMBER_ONE_UNUSED,
     JUDGE_SYMBOL_NUMBER_ONE,
     JUDGE_SYMBOL_NUMBER_FOUR,
     JUDGE_SYMBOL_QUESTION_MARK,
@@ -313,9 +308,7 @@ enum {
     APPEALSTATE_UPDATE_OPPONENT_STARS,
     APPEALSTATE_WAIT_OPPONENT_STARS,
     APPEALSTATE_UPDATE_CROWD,
-    APPEALSTATE_42, // Unused state
     APPEALSTATE_WAIT_EXCITEMENT_HEARTS,
-    APPEALSTATE_44, // Unused state
     APPEALSTATE_WAIT_JUDGE_COMBO,
     APPEALSTATE_WAIT_JUDGE_REPEATED_MOVE,
     APPEALSTATE_TRY_SHOW_NEXT_TURN_GFX,
@@ -1320,7 +1313,6 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CreateNextTurnSprites();
         CreateApplauseMeterSprite();
         CreateJudgeAttentionEyeTask();
-        CreateUnusedBlendTask();
         gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
         gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
@@ -2227,7 +2219,7 @@ static void Task_DoAppeals(u8 taskId)
         case 1:
             if (!eContest.waitForAudienceBlend && !Contest_RunTextPrinters())
             {
-                ShowAndUpdateApplauseMeter(-1);
+                ShowAndUpdateApplauseMeter();
                 gTasks[taskId].tCounter++;
             }
             break;
@@ -2267,7 +2259,7 @@ static void Task_DoAppeals(u8 taskId)
             {
                 AnimateAudience();
                 PlaySE(SE_M_ENCORE2);
-                ShowAndUpdateApplauseMeter(1);
+                ShowAndUpdateApplauseMeter();
                 gTasks[taskId].tCounter++;
             }
             break;
@@ -3958,20 +3950,6 @@ static void Task_FlashJudgeAttentionEye(u8 taskId)
 //       for only one contestant, the heart outlines in the move selection box, etc)
 //       Given the similarities, it's possible this was an incorrect attempt
 //       at something similar to what CreateJudgeAttentionEyeTask does
-static void CreateUnusedBlendTask(void)
-{
-    s32 i;
-
-    eContest.blendTaskId = CreateTask(Task_UnusedBlend, 30);
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-        InitUnusedBlendTaskData(i);
-}
-
-static void InitUnusedBlendTaskData(u8 contestant)
-{
-    gTasks[eContest.blendTaskId].data[contestant * 4] = 0xFF;
-    gTasks[eContest.blendTaskId].data[contestant * 4 + 1] = 0;
-}
 
 static void UpdateBlendTaskContestantsData(void)
 {
@@ -3986,8 +3964,6 @@ static void UpdateBlendTaskContestantData(u8 contestant)
     u32 palOffset1;
     u32 palOffset2;
 
-    InitUnusedBlendTaskData(contestant);
-
     palOffset1 = contestant + 5;
     DmaCopy16Defvars(3,
                      gPlttBufferUnfaded + palOffset1 * 16 + 10,
@@ -3998,38 +3974,6 @@ static void UpdateBlendTaskContestantData(u8 contestant)
                      gPlttBufferUnfaded + palOffset2,
                      gPlttBufferFaded + palOffset2,
                      2);
-}
-
-// See comments on CreateUnusedBlendTask
-static void Task_UnusedBlend(u8 taskId)
-{
-    u8 i;
-
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-    {
-        u8 idx = i * 4;
-
-        // Below is never true
-        if (gTasks[taskId].data[idx] != 0xFF)
-        {
-            if (++gTasks[taskId].data[idx + 2] > 2)
-            {
-                gTasks[taskId].data[idx + 2] = 0;
-
-                if (gTasks[taskId].data[idx + 1] == 0)
-                    gTasks[taskId].data[idx]++;
-                else
-                    gTasks[taskId].data[idx]--;
-
-                if (gTasks[taskId].data[idx] == 16
-                 || gTasks[taskId].data[idx] == 0)
-                    gTasks[taskId].data[idx + 1] ^= 1;
-
-                BlendPalette(BG_PLTT_ID(5 + i) + 10,     1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
-                BlendPalette(BG_PLTT_ID(5 + i) + 12 + i, 1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
-            }
-        }
-    }
 }
 
 static void StartStopFlashJudgeAttentionEye(u8 contestant)
@@ -4588,7 +4532,6 @@ static void DoJudgeSpeechBubble(u8 symbolId)
     switch (symbolId)
     {
     case JUDGE_SYMBOL_SWIRL:
-    case JUDGE_SYMBOL_SWIRL_UNUSED:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0];
         PlaySE(SE_FAILURE);
         break;
@@ -4599,10 +4542,6 @@ static void DoJudgeSpeechBubble(u8 symbolId)
     case JUDGE_SYMBOL_TWO_EXCLAMATIONS:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 8;
         PlaySE(SE_SUCCESS);
-        break;
-    case JUDGE_SYMBOL_NUMBER_ONE_UNUSED: // Identical to JUDGE_SYMBOL_NUMBER_ONE
-        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
-        PlaySE(SE_WARP_IN);
         break;
     case JUDGE_SYMBOL_NUMBER_ONE:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
@@ -4747,11 +4686,9 @@ static void Task_SlideApplauseMeterOut(u8 taskId)
     }
 }
 
-static void ShowAndUpdateApplauseMeter(s8 unused)
+static void ShowAndUpdateApplauseMeter(void)
 {
     u8 taskId = CreateTask(Task_ShowAndUpdateApplauseMeter, 5);
-
-    gTasks[taskId].data[0] = unused;
     eContest.isShowingApplauseMeter = TRUE;
 }
 
@@ -5876,43 +5813,7 @@ static void ContestDebugPrintBitStrings(void)
 
 static u8 GetMonNicknameLanguage(u8 *nickname)
 {
-    u8 ret = GAME_LANGUAGE;
 
-    if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
-        return GAME_LANGUAGE;
-
-    if (StringLength(nickname) < PLAYER_NAME_LENGTH - 1)
-    {
-        while (*nickname != EOS)
-        {
-            if ((*nickname >= CHAR_A && *nickname <= CHAR_z)
-                || (*nickname >= CHAR_0 && *nickname <= CHAR_9)
-                || *nickname == CHAR_SPACE
-                || *nickname == CHAR_PERIOD
-                || *nickname == CHAR_COMMA
-                || *nickname == CHAR_EXCL_MARK
-                || *nickname == CHAR_QUESTION_MARK
-                || *nickname == CHAR_MALE
-                || *nickname == CHAR_FEMALE
-                || *nickname == CHAR_SLASH
-                || *nickname == CHAR_HYPHEN
-                || *nickname == CHAR_ELLIPSIS
-                || *nickname == CHAR_DBL_QUOTE_LEFT
-                || *nickname == CHAR_DBL_QUOTE_RIGHT
-                || *nickname == CHAR_SGL_QUOTE_LEFT
-                || *nickname == CHAR_DBL_QUOTE_LEFT) // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
-            {
-                nickname++;
-            }
-            else
-            {
-                ret = LANGUAGE_JAPANESE;
-                break;
-            }
-        }
-    }
-
-    return ret;
 }
 
 static void StripPlayerNameForLinkContest(u8 *playerName)
@@ -5925,56 +5826,10 @@ static void StripPlayerNameForLinkContest(u8 *playerName)
 
 static void StripMonNameForLinkContest(u8 *monName, s32 language)
 {
-    u8 chr;
 
-    StripExtCtrlCodes(monName);
-    if (language == LANGUAGE_JAPANESE)
-    {
-        monName[5] = EOS;
-        monName[POKEMON_NAME_LENGTH] = EXT_CTRL_CODE_BEGIN;
-    }
-    else
-    {
-        chr = monName[5];
-        monName[5] = EOS;
-        monName[POKEMON_NAME_LENGTH] = chr;
-    }
 }
 
 void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language)
 {
-    u8 *name = mon->nickname;
 
-    if (language == LANGUAGE_JAPANESE)
-    {
-        ConvertInternationalString(name, GetMonNicknameLanguage(name));
-    }
-    else if (name[POKEMON_NAME_LENGTH] == EXT_CTRL_CODE_BEGIN)
-    {
-        ConvertInternationalString(name, LANGUAGE_JAPANESE);
-    }
-    else
-    {
-        name[5] = name[POKEMON_NAME_LENGTH];
-        name[POKEMON_NAME_LENGTH] = EOS;
-    }
-
-    name = mon->trainerName;
-    if (language == LANGUAGE_JAPANESE)
-    {
-        name[PLAYER_NAME_LENGTH] = EOS;
-        name[6] = name[4];
-        name[5] = name[3];
-        name[4] = name[2];
-        name[3] = name[1];
-        name[2] = mon->trainerName[0];
-        name[1] = EXT_CTRL_CODE_JPN;
-        name[0] = EXT_CTRL_CODE_BEGIN;
-    }
-    else
-    {
-        name[5] = name[PLAYER_NAME_LENGTH];
-        name[PLAYER_NAME_LENGTH] = EOS;
-    }
 }
-

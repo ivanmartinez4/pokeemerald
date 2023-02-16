@@ -2252,9 +2252,6 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
         hallRecord->name2[PLAYER_NAME_LENGTH] = EOS;
         TVShowConvertInternationalString(text, hallRecord->name1, hallRecord->language);
         AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, text, (x + 2) * 8, (8 * (y + 5 * position - 1)) + 1, TEXT_SKIP_DRAW, NULL);
-        if (IsStringJapanese(hallRecord->name2))
-            TVShowConvertInternationalString(text, hallRecord->name2, LANGUAGE_JAPANESE);
-        else
             StringCopy(text, hallRecord->name2);
         AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, text, (x + 4) * 8, (8 * (y + 5 * position + 1)) + 1, TEXT_SKIP_DRAW, NULL);
 

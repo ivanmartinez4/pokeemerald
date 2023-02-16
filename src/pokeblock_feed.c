@@ -99,7 +99,6 @@ struct PokeblockFeed
     u16 monAnimLength;
     u16 timer;
     u8 nature;
-    u8 monSpriteId_; // Duplicated unnecessarily
     u8 monSpriteId;
     u8 pokeblockCaseSpriteId;
     u8 pokeblockSpriteId;
@@ -900,7 +899,7 @@ static u8 CreateMonSprite(struct Pokemon *mon)
     u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, MON_X, MON_Y, 2);
 
     sPokeblockFeed->species = species;
-    sPokeblockFeed->monSpriteId_ = spriteId;
+    sPokeblockFeed->monSpriteId = spriteId;
     sPokeblockFeed->nature = GetNature(mon);
     gSprites[spriteId].sSpecies = species;
     gSprites[spriteId].callback = SpriteCallbackDummy;
@@ -1006,7 +1005,7 @@ static void UpdateMonAnim(void)
     {
     case 0:
         pokeblockFeed->animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
-        pokeblockFeed->monSpritePtr = &gSprites[pokeblockFeed->monSpriteId_];
+        pokeblockFeed->monSpritePtr = &gSprites[pokeblockFeed->monSpriteId];
         pokeblockFeed->savedMonSprite = *pokeblockFeed->monSpritePtr;
         pokeblockFeed->animRunState = 10;
         break;

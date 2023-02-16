@@ -17,11 +17,9 @@ enum DecorationShape
 {
     DECORSHAPE_1x1,
     DECORSHAPE_2x1,
-    DECORSHAPE_3x1, // unused
     DECORSHAPE_4x2,
     DECORSHAPE_2x2,
     DECORSHAPE_1x2,
-    DECORSHAPE_1x3, // unused
     DECORSHAPE_2x4,
     DECORSHAPE_3x3,
     DECORSHAPE_3x2,

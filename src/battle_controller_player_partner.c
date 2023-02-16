@@ -63,7 +63,6 @@ static void PlayerPartnerHandleCmd32(void);
 static void PlayerPartnerHandleTwoReturnValues(void);
 static void PlayerPartnerHandleChosenMonReturnValue(void);
 static void PlayerPartnerHandleOneReturnValue(void);
-static void PlayerPartnerHandleOneReturnValue_Duplicate(void);
 static void PlayerPartnerHandleHitAnimation(void);
 static void PlayerPartnerHandleCantSwitch(void);
 static void PlayerPartnerHandlePlaySE(void);
@@ -135,7 +134,6 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = PlayerPartnerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerPartnerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = PlayerPartnerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerPartnerHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = PlayerPartnerHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = PlayerPartnerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = PlayerPartnerHandlePlaySE,
@@ -1603,11 +1601,6 @@ static void PlayerPartnerHandleChosenMonReturnValue(void)
 }
 
 static void PlayerPartnerHandleOneReturnValue(void)
-{
-    PlayerPartnerBufferExecCompleted();
-}
-
-static void PlayerPartnerHandleOneReturnValue_Duplicate(void)
 {
     PlayerPartnerBufferExecCompleted();
 }

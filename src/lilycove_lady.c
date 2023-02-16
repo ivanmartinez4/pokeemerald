@@ -165,7 +165,6 @@ bool8 HasAnotherPlayerGivenFavorLadyItem(void)
     if (sFavorLadyPtr->playerName[0] != EOS)
     {
         StringCopy_PlayerName(gStringVar3, sFavorLadyPtr->playerName);
-        ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
         return TRUE;
     }
     return FALSE;
@@ -192,7 +191,6 @@ void BufferFavorLadyPlayerName(void)
 {
     sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     SetFavorLadyPlayerName(sFavorLadyPtr->playerName, gStringVar3);
-    ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
 }
 
 // Only used to determine if a record-mixed player had given her an item she liked
@@ -369,38 +367,7 @@ u8 GetQuizAuthor(void)
 
 static u8 BufferQuizAuthorName(void)
 {
-    u8 authorNameId;
-    u8 nameLen;
-    u8 i;
 
-    authorNameId = QUIZ_AUTHOR_NAME_PLAYER;
-    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (sQuizLadyPtr->playerName[0] == EOS)
-    {
-        StringCopy_PlayerName(gStringVar1, gText_QuizLady_Lady);
-        authorNameId = QUIZ_AUTHOR_NAME_LADY;
-    }
-    else
-    {
-        StringCopy_PlayerName(gStringVar1, sQuizLadyPtr->playerName);
-        ConvertInternationalString(gStringVar1, sQuizLadyPtr->language);
-        nameLen = GetPlayerNameLength(sQuizLadyPtr->playerName);
-        if (nameLen == GetPlayerNameLength(gSaveBlock2Ptr->playerName))
-        {
-            u8 *name = sQuizLadyPtr->playerName;
-            for (i = 0; i < nameLen; i++)
-            {
-                name = sQuizLadyPtr->playerName;
-                if (name[i] != gSaveBlock2Ptr->playerName[i])
-                {
-                    authorNameId = QUIZ_AUTHOR_NAME_OTHER_PLAYER;
-                    break;
-                }
-            }
-        }
-
-    }
-    return authorNameId;
 }
 
 static bool8 IsQuizTrainerIdNotPlayer(void)

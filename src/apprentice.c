@@ -118,18 +118,7 @@ static void ShiftSavedApprentices(void);
 
 void BufferApprenticeChallengeText(u8 saveApprenticeId)
 {
-    u8 i, num;
-    const u8 *challengeText;
 
-    num = gSaveBlock2Ptr->apprentices[saveApprenticeId].number;
-    for (i = 0; num != 0 && i < APPRENTICE_COUNT; num /= 10, i++)
-        ;
-
-    StringCopy_PlayerName(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].playerName);
-    ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].language);
-    ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->apprentices[saveApprenticeId].number, STR_CONV_MODE_RIGHT_ALIGN, i);
-    challengeText = sApprenticeChallengeTexts[gSaveBlock2Ptr->apprentices[saveApprenticeId].id];
-    StringExpandPlaceholders(gStringVar4, challengeText);
 }
 
 void Apprentice_ScriptContext_Enable(void)
@@ -1258,24 +1247,7 @@ static void GetShouldApprenticeLeave(void)
 
 const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
 {
-    const struct ApprenticeTrainer *apprentice = &gApprentices[apprenticeId];
 
-    switch (language)
-    {
-    case LANGUAGE_JAPANESE:
-        return apprentice->name[0];
-    case LANGUAGE_ENGLISH:
-        return apprentice->name[1];
-    case LANGUAGE_FRENCH:
-        return apprentice->name[2];
-    case LANGUAGE_ITALIAN:
-        return apprentice->name[3];
-    case LANGUAGE_GERMAN:
-        return apprentice->name[4];
-    case LANGUAGE_SPANISH:
-    default:
-        return apprentice->name[5];
-    }
 }
 
 // Functionally unused

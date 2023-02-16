@@ -13,7 +13,7 @@ static const u8 sScrollDistances[] = {
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
 };
-static const u16 sFont_Braille[] = INCBIN_U16("graphics/fonts/braille.fwjpnfont");
+static const u16 sFont_Braille[] = INCBIN_U16("graphics/fonts/braille.latfont");
 
 static void DecompressGlyph_Braille(u16);
 
@@ -206,7 +206,7 @@ static void DecompressGlyph_Braille(u16 glyph)
     gCurGlyph.height = 16;
 }
 
-u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese)
+u32 GetGlyphWidth_Braille(u16 glyphId)
 {
     return 16;
 }

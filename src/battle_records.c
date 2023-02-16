@@ -297,7 +297,6 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, s32 lan
     {
         StringFillWithTerminator(gStringVar1, 8);
         StringCopyN(gStringVar1, record->name, 7);
-        ConvertInternationalString(gStringVar1, language);
 
         AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar1, 8, (y * 8) + 1, 0, NULL);
 

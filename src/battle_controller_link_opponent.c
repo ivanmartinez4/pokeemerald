@@ -65,7 +65,6 @@ static void LinkOpponentHandleCmd32(void);
 static void LinkOpponentHandleTwoReturnValues(void);
 static void LinkOpponentHandleChosenMonReturnValue(void);
 static void LinkOpponentHandleOneReturnValue(void);
-static void LinkOpponentHandleOneReturnValue_Duplicate(void);
 static void LinkOpponentHandleHitAnimation(void);
 static void LinkOpponentHandleCantSwitch(void);
 static void LinkOpponentHandlePlaySE(void);
@@ -133,7 +132,6 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = LinkOpponentHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = LinkOpponentHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = LinkOpponentHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = LinkOpponentHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = LinkOpponentHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = LinkOpponentHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = LinkOpponentHandlePlaySE,
@@ -1523,11 +1521,6 @@ static void LinkOpponentHandleChosenMonReturnValue(void)
 }
 
 static void LinkOpponentHandleOneReturnValue(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleOneReturnValue_Duplicate(void)
 {
     LinkOpponentBufferExecCompleted();
 }

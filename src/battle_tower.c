@@ -357,81 +357,6 @@ static const u8 *const sPartnerApprenticeTexts1[] =
     PARTNER_TEXTS(Apprentice1)
 };
 
-static const u8 *const sPartnerApprenticeTexts2[] =
-{
-    PARTNER_TEXTS(Apprentice2)
-};
-
-static const u8 *const sPartnerApprenticeTexts3[] =
-{
-    PARTNER_TEXTS(Apprentice3)
-};
-
-static const u8 *const sPartnerApprenticeTexts4[] =
-{
-    PARTNER_TEXTS(Apprentice4)
-};
-
-static const u8 *const sPartnerApprenticeTexts5[] =
-{
-    PARTNER_TEXTS(Apprentice5)
-};
-
-static const u8 *const sPartnerApprenticeTexts6[] =
-{
-     PARTNER_TEXTS(Apprentice6)
-};
-
-static const u8 *const sPartnerApprenticeTexts7[] =
-{
-     PARTNER_TEXTS(Apprentice7)
-};
-
-static const u8 *const sPartnerApprenticeTexts8[] =
-{
-     PARTNER_TEXTS(Apprentice8)
-};
-
-static const u8 *const sPartnerApprenticeTexts9[] =
-{
-     PARTNER_TEXTS(Apprentice9)
-};
-
-static const u8 *const sPartnerApprenticeTexts10[] =
-{
-     PARTNER_TEXTS(Apprentice10)
-};
-
-static const u8 *const sPartnerApprenticeTexts11[] =
-{
-     PARTNER_TEXTS(Apprentice11)
-};
-
-static const u8 *const sPartnerApprenticeTexts12[] =
-{
-     PARTNER_TEXTS(Apprentice12)
-};
-
-static const u8 *const sPartnerApprenticeTexts13[] =
-{
-     PARTNER_TEXTS(Apprentice13)
-};
-
-static const u8 *const sPartnerApprenticeTexts14[] =
-{
-     PARTNER_TEXTS(Apprentice14)
-};
-
-static const u8 *const sPartnerApprenticeTexts15[] =
-{
-     PARTNER_TEXTS(Apprentice15)
-};
-
-static const u8 *const sPartnerApprenticeTexts16[] =
-{
-     PARTNER_TEXTS(Apprentice16)
-};
-
 static const u8 *const sPartnerTextsLass[] =
 {
     PARTNER_TEXTS(Lass)
@@ -742,22 +667,7 @@ struct
 
 static const u8 *const *const sPartnerApprenticeTextTables[NUM_APPRENTICES] =
 {
-    sPartnerApprenticeTexts1,
-    sPartnerApprenticeTexts2,
-    sPartnerApprenticeTexts3,
-    sPartnerApprenticeTexts4,
-    sPartnerApprenticeTexts5,
-    sPartnerApprenticeTexts6,
-    sPartnerApprenticeTexts7,
-    sPartnerApprenticeTexts8,
-    sPartnerApprenticeTexts9,
-    sPartnerApprenticeTexts10,
-    sPartnerApprenticeTexts11,
-    sPartnerApprenticeTexts12,
-    sPartnerApprenticeTexts13,
-    sPartnerApprenticeTexts14,
-    sPartnerApprenticeTexts15,
-    sPartnerApprenticeTexts16
+    sPartnerApprenticeTexts1
 };
 
 struct
@@ -2373,7 +2283,6 @@ static void GetPotentialPartnerMoveAndSpecies(u16 trainerId, u16 monId)
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 gStringVar3[i] = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].playerName[i];
             gStringVar3[i] = EOS;
-            ConvertInternationalString(gStringVar3, gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].language);
         }
     }
 
@@ -2424,7 +2333,6 @@ static void ShowPartnerCandidateMessage(void)
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 gStringVar1[i] = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].playerName[i];
             gStringVar1[i] = EOS;
-            ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].language);
             ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].number, STR_CONV_MODE_LEFT_ALIGN, 3);
             GetFrontierTrainerName(gStringVar3, trainerId);
         }
@@ -2908,19 +2816,8 @@ static void FillPartnerParty(u16 trainerId)
             struct EmeraldBattleTowerRecord *record = &gSaveBlock2Ptr->frontier.towerRecords[trainerId];
             struct BattleTowerPokemon monData = record->party[gSaveBlock2Ptr->frontier.trainerIds[18 + i]];
             StringCopy(trainerName, record->name);
-            if (record->language == LANGUAGE_JAPANESE)
-            {
-                if (monData.nickname[0] != EXT_CTRL_CODE_BEGIN || monData.nickname[1] != EXT_CTRL_CODE_JPN)
-                {
-                    monData.nickname[5] = EOS;
-                    ConvertInternationalString(monData.nickname, LANGUAGE_JAPANESE);
-                }
-            }
-            else
-            {
-                if (monData.nickname[0] == EXT_CTRL_CODE_BEGIN && monData.nickname[1] == EXT_CTRL_CODE_JPN)
-                    trainerName[5] = EOS;
-            }
+            if (monData.nickname[0] == EXT_CTRL_CODE_BEGIN)
+                trainerName[5] = EOS;
             CreateBattleTowerMon_HandleLevel(&gPlayerParty[MULTI_PARTY_SIZE + i], &monData, TRUE);
             SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_OT_NAME, trainerName);
             j = IsFrontierTrainerFemale(trainerId + TRAINER_RECORD_MIXING_FRIEND);

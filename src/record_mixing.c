@@ -94,7 +94,6 @@ static struct RecordMixingDaycareMail *sRecordMixMailSave;
 static void *sBattleTowerSave;
 static LilycoveLady *sLilycoveLadySave;
 static void *sApprenticesSave;
-static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
 static u8 sDaycareMailRandSum;
 static struct PlayerHallRecords *sPartnerHallRecords[HALL_RECORDS_COUNT];
@@ -180,7 +179,6 @@ static void SetSrcLookupPointers(void)
     sBattleTowerSave = &gSaveBlock2Ptr->frontier.towerPlayer;
     sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
     sApprenticesSave = gSaveBlock2Ptr->apprentices;
-    sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.towerPlayer;
 }
 
 static void PrepareUnknownExchangePacket(struct PlayerRecordRS *dest)
@@ -201,7 +199,6 @@ static void PrepareUnknownExchangePacket(struct PlayerRecordRS *dest)
 static void PrepareExchangePacketForRubySapphire(struct PlayerRecordRS *dest)
 {
     memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
-    ClearJapaneseSecretBases(dest->secretBases);
     memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
     SanitizeTVShowsForRuby(dest->tvShows);
     memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
@@ -646,34 +643,7 @@ static void ReceiveOldManData(OldMan *records, size_t recordSize, u8 multiplayer
 
 static void ReceiveBattleTowerData(void *records, size_t recordSize, u8 multiplayerId)
 {
-    struct EmeraldBattleTowerRecord *battleTowerRecord;
-    struct BattleTowerPokemon *btPokemon;
-    u32 mixIndices[MAX_LINK_PLAYERS];
-    s32 i;
 
-    ShufflePlayerIndices(mixIndices);
-    if (Link_AnyPartnersPlayingRubyOrSapphire())
-    {
-        if (RubyBattleTowerRecordToEmerald((void *)records + recordSize * mixIndices[multiplayerId], (void *)records + recordSize * multiplayerId) == TRUE)
-        {
-            battleTowerRecord = (void *)records + recordSize * multiplayerId;
-            battleTowerRecord->language = gLinkPlayers[mixIndices[multiplayerId]].language;
-            CalcEmeraldBattleTowerChecksum(battleTowerRecord);
-        }
-    }
-    else
-    {
-        memcpy((void *)records + recordSize * multiplayerId, (void *)records + recordSize * mixIndices[multiplayerId], sizeof(struct EmeraldBattleTowerRecord));
-        battleTowerRecord = (void *)records + recordSize * multiplayerId;
-        for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
-        {
-            btPokemon = &battleTowerRecord->party[i];
-            if (btPokemon->species != SPECIES_NONE && IsStringJapanese(btPokemon->nickname))
-                ConvertInternationalString(btPokemon->nickname, LANGUAGE_JAPANESE);
-        }
-        CalcEmeraldBattleTowerChecksum(battleTowerRecord);
-    }
-    PutNewBattleTowerRecord((void *)records + recordSize * multiplayerId);
 }
 
 static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u8 multiplayerId)
@@ -756,204 +726,7 @@ static u8 GetDaycareMailRandSum(void)
 
 static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size_t recordSize, u8 multiplayerId, TVShow *shows)
 {
-    u16 i, j;
-    u8 linkPlayerCount;
-    u8 tableId;
-    struct RecordMixingDaycareMail *mixMail;
-    u8 playerSlot1, playerSlot2;
-    void *ptr;
-    bool8 canHoldItem[MAX_LINK_PLAYERS][DAYCARE_MON_COUNT];
-    u8 idxs[MAX_LINK_PLAYERS][2];
-    u8 numDaycareCanHold;
-    u16 oldSeed;
-    bool32 anyRS;
 
-    // Seed RNG to the first player's trainer id so that
-    // every player has the same random swap occur
-    // (see the other use of Random2 in this function)
-    oldSeed = Random2();
-    SeedRng2(gLinkPlayers[0].trainerId);
-    linkPlayerCount = GetLinkPlayerCount();
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        canHoldItem[i][0] = FALSE;
-        canHoldItem[i][1] = FALSE;
-    }
-
-    // Handle language differences if RS / Japanese players are present
-    anyRS = Link_AnyPartnersPlayingRubyOrSapphire();
-    for (i = 0; i < GetLinkPlayerCount(); i++)
-    {
-        u32 language, version;
-
-        mixMail = (void *)records + i * recordSize;
-        language = gLinkPlayers[i].language;
-        version = gLinkPlayers[i].version & 0xFF;
-
-        for (j = 0; j < mixMail->numDaycareMons; j++)
-        {
-            u16 otNameLanguage, nicknameLanguage;
-            struct DaycareMail *daycareMail = &mixMail->mail[j];
-
-            if (daycareMail->message.itemId == ITEM_NONE)
-                continue;
-
-            if (anyRS)
-            {
-                // Handle OT name language
-                if (StringLength(daycareMail->otName) <= 5)
-                {
-                    otNameLanguage = LANGUAGE_JAPANESE;
-                }
-                else
-                {
-                    StripExtCtrlCodes(daycareMail->otName);
-                    otNameLanguage = language;
-                }
-
-                // Handle nickname langugae
-                if (daycareMail->monName[0] == EXT_CTRL_CODE_BEGIN && daycareMail->monName[1] == EXT_CTRL_CODE_JPN)
-                {
-                    StripExtCtrlCodes(daycareMail->monName);
-                    nicknameLanguage = LANGUAGE_JAPANESE;
-                }
-                else
-                {
-                    nicknameLanguage = language;
-                }
-
-                // Set languages
-                if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
-                {
-                    daycareMail->gameLanguage = otNameLanguage;
-                    daycareMail->monLanguage = nicknameLanguage;
-                }
-            }
-            else if (language == LANGUAGE_JAPANESE)
-            {
-                if (IsStringJapanese(daycareMail->otName))
-                    daycareMail->gameLanguage = LANGUAGE_JAPANESE;
-                else
-                    daycareMail->gameLanguage = GAME_LANGUAGE;
-
-                if (IsStringJapanese(daycareMail->monName))
-                    daycareMail->monLanguage = LANGUAGE_JAPANESE;
-                else
-                    daycareMail->monLanguage = GAME_LANGUAGE;
-            }
-        }
-    }
-
-    // For each player, get which of their daycare Pokémon can hold items
-    // (can't hold items if already holding one, or if daycare slot is empty).
-    // Note that when deposited in the daycare, Pokémon have their mail taken
-    // from them and returned upon withdrawal, which means daycare Pokémon that
-    // have associated mail do not have a held item.
-    // Because not holding an item is the only determination for a swap, this also
-    // means that a "swap" can occur even if neither Pokémon has associated mail.
-    numDaycareCanHold = 0;
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        mixMail = (void *)records + i * recordSize;
-        if (mixMail->numDaycareMons == 0)
-            continue;
-
-        for (j = 0; j < mixMail->numDaycareMons; j++)
-        {
-            if (!mixMail->cantHoldItem[j])
-                canHoldItem[i][j] = TRUE;
-        }
-    }
-
-    // Fill the idxs array with data about which players
-    // and which daycare slots should swap mail.
-    j = 0;
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        mixMail = (void *)records + i * recordSize;
-
-        // Count number of players that have at least
-        // one daycare Pokémon with no held item
-        if (canHoldItem[i][0] == TRUE || canHoldItem[i][1] == TRUE)
-            numDaycareCanHold++;
-
-        if (canHoldItem[i][0] == TRUE && canHoldItem[i][1] == FALSE)
-        {
-            // Only daycare slot 0 can hold an item for this player, record it
-            idxs[j][MULTIPLAYER_ID] = i;
-            idxs[j][DAYCARE_SLOT] = 0;
-            j++;
-        }
-        else if (canHoldItem[i][0] == FALSE && canHoldItem[i][1] == TRUE)
-        {
-            // Only daycare slot 1 can hold an item for this player, record it
-            idxs[j][MULTIPLAYER_ID] = i;
-            idxs[j][DAYCARE_SLOT] = 1;
-            j++;
-        }
-        else if (canHoldItem[i][0] == TRUE && canHoldItem[i][1] == TRUE)
-        {
-            // Both daycare slots can hold an item, choose which one to use.
-            // If either one is the only one to have associated mail, use that one.
-            // If both do or don't have associated mail, choose one randomly.
-            u32 itemId1, itemId2;
-            idxs[j][MULTIPLAYER_ID] = i;
-            itemId1 = GetDaycareMailItemId(&mixMail->mail[0]);
-            itemId2 = GetDaycareMailItemId(&mixMail->mail[1]);
-
-            if ((!itemId1 && !itemId2) || (itemId1 && itemId2))
-                idxs[j][DAYCARE_SLOT] = Random2() % 2;
-            else if (itemId1 && !itemId2)
-                idxs[j][DAYCARE_SLOT] = 0;
-            else if (!itemId1 && itemId2)
-                 idxs[j][DAYCARE_SLOT] = 1;
-
-            j++;
-        }
-    }
-
-    // Copy the player's record mix mail 4 times to an array that's never read.
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        mixMail = &records[multiplayerId * recordSize];
-    }
-
-    // Choose a random table id to determine who will
-    // swap if there are more than 2 candidate players.
-    tableId = GetDaycareMailRandSum() % NUM_SWAP_COMBOS;
-    switch (numDaycareCanHold)
-    {
-    case 2:
-        // 2 players can swap, just perform swap.
-        SwapDaycareMail(records, recordSize, idxs, 0, 1);
-        break;
-    case 3:
-        // 3 players can swap, select 2 and leave the 3rd out
-        playerSlot1 = sDaycareMailSwapIds_3Player[tableId][0];
-        playerSlot2 = sDaycareMailSwapIds_3Player[tableId][1];
-        SwapDaycareMail(records, recordSize, idxs, playerSlot1, playerSlot2);
-        break;
-    case 4:
-        // 4 players can swap, select which 2 pairings will swap
-        ptr = idxs;
-
-        // Swap pair 1
-        playerSlot1 = sDaycareMailSwapIds_4Player[tableId][0];
-        playerSlot2 = sDaycareMailSwapIds_4Player[tableId][1];
-        SwapDaycareMail(records, recordSize, ptr, playerSlot1, playerSlot2);
-
-        // Swap pair 2
-        playerSlot1 = sDaycareMailSwapIds_4Player[tableId][2];
-        playerSlot2 = sDaycareMailSwapIds_4Player[tableId][3];
-        SwapDaycareMail(records, recordSize, ptr, playerSlot1, playerSlot2);
-        break;
-    }
-
-    // Save player's record mixed mail to the daycare (in case it has changed)
-    mixMail = (void *)records + multiplayerId * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &mixMail->mail[0], sizeof(struct DaycareMail));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &mixMail->mail[1], sizeof(struct DaycareMail));
-    SeedRng(oldSeed);
 }
 
 
@@ -1364,19 +1137,7 @@ static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)
 
 static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *src)
 {
-    s32 i;
 
-    for (i = 0; i < src->numDaycareMons; i++)
-    {
-        struct DaycareMail *mail = &src->mail[i];
-        if (mail->message.itemId != ITEM_NONE)
-        {
-            if (mail->gameLanguage != LANGUAGE_JAPANESE)
-                PadNameString(mail->otName, EXT_CTRL_CODE_BEGIN);
-
-            ConvertInternationalString(mail->monName, mail->monLanguage);
-        }
-    }
 }
 
 static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *src)

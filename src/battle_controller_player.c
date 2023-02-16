@@ -72,7 +72,6 @@ static void PlayerHandleCmd32(void);
 static void PlayerHandleTwoReturnValues(void);
 static void PlayerHandleChosenMonReturnValue(void);
 static void PlayerHandleOneReturnValue(void);
-static void PlayerHandleOneReturnValue_Duplicate(void);
 static void PlayerHandleHitAnimation(void);
 static void PlayerHandleCantSwitch(void);
 static void PlayerHandlePlaySE(void);
@@ -155,7 +154,6 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = PlayerHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = PlayerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = PlayerHandlePlaySE,
@@ -2734,12 +2732,6 @@ static void PlayerHandleChosenMonReturnValue(void)
 static void PlayerHandleOneReturnValue(void)
 {
     BtlController_EmitOneReturnValue(BUFFER_B, 0);
-    PlayerBufferExecCompleted();
-}
-
-static void PlayerHandleOneReturnValue_Duplicate(void)
-{
-    BtlController_EmitOneReturnValue_Duplicate(BUFFER_B, 0);
     PlayerBufferExecCompleted();
 }
 

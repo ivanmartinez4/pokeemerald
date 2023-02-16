@@ -5,7 +5,7 @@ extern bool8 gGiftIsFromEReader;
 
 u16 GetMysteryGiftBaseBlock(void);
 void CB2_MysteryGiftEReader(void);
-void PrintMysteryGiftOrEReaderTopMenu(bool8 isJapanese, bool32 usePickOkCancel);
+void PrintMysteryGiftOrEReaderTopMenu(bool32 usePickOkCancel);
 void MG_DrawCheckerboardPattern(u32 bg);
 void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void);
 bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str);

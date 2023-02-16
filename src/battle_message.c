@@ -2261,9 +2261,9 @@ static const u8 *TryGetStatusString(u8 *src)
 
     for (i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
     {
-        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
-            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
-            return gStatusConditionStringsTable[i][1];
+        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0])
+            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0]))
+            return gStatusConditionStringsTable[i];
     }
     return NULL;
 }
@@ -2518,7 +2518,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     for (i = 0; i < (s32) ARRAY_COUNT(gBattleResources->secretBase->trainerName); i++)
                         text[i] = gBattleResources->secretBase->trainerName[i];
                     text[i] = EOS;
-                    ConvertInternationalString(text, gBattleResources->secretBase->language);
                     toCpy = text;
                 }
                 else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)

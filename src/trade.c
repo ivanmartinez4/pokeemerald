@@ -79,7 +79,6 @@ enum {
     TEXT_SUMMARY,
     TEXT_TRADE,
     TEXT_CANCEL_TRADE,
-    TEXT_JP_QUIT,
 };
 
 // Indexes for sMessages
@@ -1162,23 +1161,7 @@ static bool8 BufferTradeParties(void)
         }
         break;
     case 21:
-        for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
-        {
-            u8 name[POKEMON_NAME_LENGTH + 1];
-            u16 species = GetMonData(mon, MON_DATA_SPECIES);
-
-            if (species != SPECIES_NONE)
-            {
-                if (species == SPECIES_SHEDINJA && GetMonData(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
-                {
-                    GetMonData(mon, MON_DATA_NICKNAME, name);
-
-                    if (!StringCompareWithoutExtCtrlCodes(name, sText_ShedinjaJP))
-                        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[SPECIES_SHEDINJA]);
-                }
-            }
-        }
-        return TRUE;
+        break;
     // Delay until next state
     case 2:
     case 6:

@@ -4200,7 +4200,6 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 
     {
         StringCopyN(gStringVar1, record->name, PLAYER_NAME_LENGTH);
         gStringVar1[PLAYER_NAME_LENGTH] = EOS;
-        ConvertInternationalString(gStringVar1, linkRecords->languages[whichLinkTrainer]);
     }
 }
 

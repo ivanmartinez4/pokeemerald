@@ -69,7 +69,6 @@ static void WallyHandleCmd32(void);
 static void WallyHandleTwoReturnValues(void);
 static void WallyHandleChosenMonReturnValue(void);
 static void WallyHandleOneReturnValue(void);
-static void WallyHandleOneReturnValue_Duplicate(void);
 static void WallyHandleHitAnimation(void);
 static void WallyHandleCantSwitch(void);
 static void WallyHandlePlaySE(void);
@@ -134,7 +133,6 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = WallyHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = WallyHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = WallyHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = WallyHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = WallyHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = WallyHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = WallyHandlePlaySE,
@@ -1275,11 +1273,6 @@ static void WallyHandleChosenMonReturnValue(void)
 }
 
 static void WallyHandleOneReturnValue(void)
-{
-    WallyBufferExecCompleted();
-}
-
-static void WallyHandleOneReturnValue_Duplicate(void)
 {
     WallyBufferExecCompleted();
 }

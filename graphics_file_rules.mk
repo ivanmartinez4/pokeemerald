@@ -15,7 +15,6 @@ PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
 OBJEVENTGFXDIR := graphics/object_events
 MISCGFXDIR := graphics/misc
-JPCONTESTGFXDIR := graphics/contest/japanese
 POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
 NAMINGGFXDIR := graphics/naming_screen
@@ -236,6 +235,12 @@ $(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
 $(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/big.latfont: $(FONTGFXDIR)/latin_big.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/border.latfont: $(FONTGFXDIR)/latin_border.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 	$(GFX) $< $@
 
@@ -245,27 +250,8 @@ $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png
+$(FONTGFXDIR)/braille.latfont: $(FONTGFXDIR)/braille.png
 	$(GFX) $< $@
-
-$(FONTGFXDIR)/normal.hwjpnfont: $(FONTGFXDIR)/japanese_normal.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/bold.hwjpnfont: $(FONTGFXDIR)/japanese_bold.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/short.fwjpnfont: $(FONTGFXDIR)/japanese_short.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/braille.fwjpnfont: $(FONTGFXDIR)/braille.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/frlg_male.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_male_font.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female_font.png
-	$(GFX) $< $@
-
 
 ### Miscellaneous ###
 graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
@@ -274,7 +260,7 @@ graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 graphics/pokenav/region_map/map.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233 -Wnum_tiles
 
-$(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
+$(MISCGFXDIR)/hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29 -Wnum_tiles
 
 $(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox_0.gbapal \
@@ -290,22 +276,6 @@ $(BTLANMSPRGFXDIR)/ice_cube.4bpp: $(BTLANMSPRGFXDIR)/ice_cube_0.4bpp \
 $(BATINTGFXDIR)/battle_bar.4bpp: $(BATINTGFXDIR)/numbers1.4bpp \
                                  $(BATINTGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
-
-$(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
-                                     $(JPCONTESTGFXDIR)/floor.4bpp \
-                                     $(JPCONTESTGFXDIR)/frame_2.4bpp \
-                                     $(JPCONTESTGFXDIR)/symbols.4bpp \
-                                     $(JPCONTESTGFXDIR)/meter.4bpp \
-                                     $(JPCONTESTGFXDIR)/letters.4bpp \
-                                     $(JPCONTESTGFXDIR)/numbers.4bpp
-	@cat $^ >$@
-
-$(JPCONTESTGFXDIR)/composite_2.4bpp: $(JPCONTESTGFXDIR)/interface.4bpp \
-                                     $(JPCONTESTGFXDIR)/audience.4bpp
-	@cat $^ >$@
-
-$(JPCONTESTGFXDIR)/voltage.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 36 -Wnum_tiles
 
 $(BTLANMSPRGFXDIR)/ice_crystals.4bpp: $(BTLANMSPRGFXDIR)/ice_crystals_0.4bpp \
                                       $(BTLANMSPRGFXDIR)/ice_crystals_1.4bpp \

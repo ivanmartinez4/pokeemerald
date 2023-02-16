@@ -191,12 +191,6 @@ static const struct {
         .x     = sDecorTilemap_2x1_X,
         .size  = DECORSIZE(2, 1)
     },
-    [DECORSHAPE_3x1] = {
-        .tiles = sDecorTilemap_3x1_Tiles,
-        .y     = sDecorTilemap_3x1_Y,
-        .x     = sDecorTilemap_3x1_X,
-        .size  = DECORSIZE(3, 1)
-    },
     [DECORSHAPE_4x2] = {
         .tiles = sDecorTilemap_4x2_Tiles,
         .y     = sDecorTilemap_4x2_Y,
@@ -214,12 +208,6 @@ static const struct {
         .y     = sDecorTilemap_1x2_Y,
         .x     = sDecorTilemap_1x2_X,
         .size  = DECORSIZE(1, 2)
-    },
-    [DECORSHAPE_1x3] = {
-        .tiles = sDecorTilemap_1x3_Tiles,
-        .y     = sDecorTilemap_1x3_Y,
-        .x     = sDecorTilemap_1x3_X,
-        .size  = DECORSIZE(1, 3)
     },
     [DECORSHAPE_2x4] = {
         .tiles = sDecorTilemap_4x2_Tiles,

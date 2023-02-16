@@ -1212,15 +1212,6 @@ void BtlController_EmitOneReturnValue(u8 bufferId, u16 ret)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 ret)
-{
-    sBattleBuffersTransferData[0] = CONTROLLER_ONERETURNVALUE_DUPLICATE;
-    sBattleBuffersTransferData[1] = ret;
-    sBattleBuffersTransferData[2] = (ret & 0xFF00) >> 8;
-    sBattleBuffersTransferData[3] = 0;
-    PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
-}
-
 void BtlController_EmitHitAnimation(u8 bufferId)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_HITANIMATION;

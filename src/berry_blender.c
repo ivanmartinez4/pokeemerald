@@ -3467,7 +3467,6 @@ static bool8 PrintBlendingResults(void)
                 Blender_AddTextPrinter(5, sBerryBlender->stringVar, 8, yPos, TEXT_SKIP_DRAW, 3);
 
                 StringCopy(sBerryBlender->stringVar, sBerryBlender->blendedBerries[place].name);
-                ConvertInternationalString(sBerryBlender->stringVar, gLinkPlayers[place].language);
                 StringAppend(sBerryBlender->stringVar, sText_SpaceBerry);
                 Blender_AddTextPrinter(5, sBerryBlender->stringVar, 0x54, yPos, TEXT_SKIP_DRAW, 3);
             }

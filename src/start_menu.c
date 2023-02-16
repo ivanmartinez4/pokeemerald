@@ -434,7 +434,7 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
         else
         {
             StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
-            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + 9, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_BORDER, gStringVar4, 8, (index << 4) + 9, TEXT_SKIP_DRAW, NULL);
         }
 
         index++;
@@ -1244,14 +1244,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 
             if (gWirelessCommType != 0 && InUnionRoom())
             {
-                if (Link_AnyPartnersPlayingFRLG_JP())
-                {
-                    *state = 1;
-                }
-                else
-                {
-                    *state = 5;
-                }
+                *state = 5;
             }
             else
             {

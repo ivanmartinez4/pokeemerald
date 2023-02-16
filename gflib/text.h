@@ -12,14 +12,12 @@
 enum {
     FONT_SMALL,
     FONT_NORMAL,
+    FONT_BIG,
+    FONT_BORDER,
     FONT_SHORT,
-    FONT_SHORT_COPY_1,
-    FONT_SHORT_COPY_2,
-    FONT_SHORT_COPY_3,
     FONT_BRAILLE,
     FONT_NARROW,
     FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
-    FONT_BOLD, // JP glyph set only
 };
 
 // Return values for font functions
@@ -93,7 +91,6 @@ struct TextPrinter
     u8 delayCounter;
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
-    u8 japanese;
 };
 
 struct FontInfo
@@ -114,7 +111,7 @@ extern const struct FontInfo *gFonts;
 struct GlyphWidthFunc
 {
     u32 fontId;
-    u32 (*func)(u16 glyphId, bool32 isJapanese);
+    u32 (*func)(u16 glyphId);
 };
 
 typedef struct {
@@ -168,6 +165,6 @@ u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
 
 // braille.c
 u16 FontFunc_Braille(struct TextPrinter *textPrinter);
-u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese);
+u32 GetGlyphWidth_Braille(u16 glyphId);
 
 #endif // GUARD_TEXT_H

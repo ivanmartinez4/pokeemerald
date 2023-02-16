@@ -226,10 +226,9 @@
 #define EXT_CTRL_CODE_SKIP                   0x12
 #define EXT_CTRL_CODE_CLEAR_TO               0x13
 #define EXT_CTRL_CODE_MIN_LETTER_SPACING     0x14
-#define EXT_CTRL_CODE_JPN                    0x15
-#define EXT_CTRL_CODE_ENG                    0x16
-#define EXT_CTRL_CODE_PAUSE_MUSIC            0x17
-#define EXT_CTRL_CODE_RESUME_MUSIC           0x18
+#define EXT_CTRL_CODE_SPA                    0x15
+#define EXT_CTRL_CODE_PAUSE_MUSIC            0x16
+#define EXT_CTRL_CODE_RESUME_MUSIC           0x17
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -264,10 +263,6 @@
 #define PLACEHOLDER_ID_GROUDON       0xD
 
 // battle placeholders are located in battle_message.h
-
-// Hiragana from 0x1-0x50, Katakana from 0x51-0xA0.
-// This excludes Japanese punctuation, which end at 0xB0
-#define JAPANESE_CHAR_END 0xA0
 
 // Note that while all dot combinations are represented in
 // the Braille font, they are not all meaningful characters.

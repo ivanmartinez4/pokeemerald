@@ -130,7 +130,6 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
             PlaySE(SE_SELECT);
             gSpecialVar_0x8005 = input;
             StringCopy(gStringVar1, trader->playerNames[input]);
-            ConvertInternationalString(gStringVar1, trader->language[input]);
             Task_BufferDecorSelectionAndCloseWindow(taskId, trader->decorations[input]);
             break;
     }

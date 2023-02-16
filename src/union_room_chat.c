@@ -849,16 +849,6 @@ static const union AnimCmd sAnim_ToggleCaseIcon[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_ToggleCaseIcon_Duplicate1[] = {
-    ANIMCMD_FRAME(0x08, 2),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_ToggleCaseIcon_Duplicate2[] = {
-    ANIMCMD_FRAME(0x10, 2),
-    ANIMCMD_END
-};
-
 static const union AnimCmd sAnim_RegisterIcon[] = {
     ANIMCMD_FRAME(0x18, 2),
     ANIMCMD_END
@@ -866,8 +856,6 @@ static const union AnimCmd sAnim_RegisterIcon[] = {
 
 static const union AnimCmd *const sAnims_RButtonLabels[] = {
     sAnim_ToggleCaseIcon,
-    sAnim_ToggleCaseIcon_Duplicate1,
-    sAnim_ToggleCaseIcon_Duplicate2,
     sAnim_RegisterIcon
 };
 

@@ -726,7 +726,6 @@ void IsCurSecretBaseOwnedByAnotherPlayer(void)
 static u8 *GetSecretBaseName(u8 *dest, u8 secretBaseIdx)
 {
     *StringCopyN(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName, GetNameLength(gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName)) = EOS;
-    ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].language);
     return StringAppend(dest, gText_ApostropheSBase);
 }
 
@@ -743,7 +742,6 @@ void CopyCurSecretBaseOwnerName_StrVar1(void)
     secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
     name = gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName;
     *StringCopyN(gStringVar1, name, GetNameLength(name)) = EOS;
-    ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[secretBaseIdx].language);
 }
 
 static bool8 IsSecretBaseRegistered(u8 secretBaseIdx)
@@ -1333,26 +1331,7 @@ void SecretBasePerStepCallback(u8 taskId)
 
 static void SaveSecretBase(u8 secretBaseIdx, struct SecretBase *secretBase, u32 version, u32 language)
 {
-    int stringLength;
-    u8 *name;
 
-    gSaveBlock1Ptr->secretBases[secretBaseIdx] = *secretBase;
-    gSaveBlock1Ptr->secretBases[secretBaseIdx].registryStatus = NEW;
-    if (version == VERSION_SAPPHIRE || version == VERSION_RUBY)
-        gSaveBlock1Ptr->secretBases[secretBaseIdx].language = GAME_LANGUAGE;
-
-    if (version == VERSION_EMERALD && language == LANGUAGE_JAPANESE)
-    {
-        name = gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName;
-        for (stringLength = 0; stringLength < PLAYER_NAME_LENGTH; stringLength++)
-        {
-            if (name[stringLength] == EOS)
-                break;
-        }
-
-        if (stringLength > 5)
-            gSaveBlock1Ptr->secretBases[secretBaseIdx].language = GAME_LANGUAGE;
-    }
 }
 
 static bool8 SecretBasesHaveSameTrainerId(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
@@ -1786,16 +1765,6 @@ void ReceiveSecretBasesData(void *secretBases, size_t recordSize, u8 linkIdx)
         {
             gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived++;
         }
-    }
-}
-
-void ClearJapaneseSecretBases(struct SecretBase *bases)
-{
-    u32 i;
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        if (bases[i].language == LANGUAGE_JAPANESE)
-            ClearSecretBase(&bases[i]);
     }
 }
 

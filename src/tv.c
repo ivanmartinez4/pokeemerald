@@ -106,7 +106,6 @@ static s8 GetFirstEmptyPokeNewsSlot(PokeNews *);
 static bool8 IsAddingPokeNewsDisallowed(u8);
 static void ClearPokeNewsBySlot(u8);
 static void TranslateRubyShows(TVShow *);
-static void TranslateJapaneseEmeraldShows(TVShow *);
 static void SetMixedTVShows(TVShow *, TVShow *, TVShow *, TVShow *);
 static void DeleteExcessMixedShows(void);
 static void DeactivateShowsWithUnseenSpecies(void);
@@ -1248,98 +1247,17 @@ static void InterviewAfter_ContestLiveUpdates(void)
 
 void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent)
 {
-    TVShow *show;
-    u8 name[32];
 
-    sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
-    {
-        TryReplaceOldTVShowOfKind(TVSHOW_BATTLE_UPDATE);
-        if (gSpecialVar_Result != TRUE)
-        {
-            show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-            show->battleUpdate.kind = TVSHOW_BATTLE_UPDATE;
-            show->battleUpdate.active = TRUE;
-            StringCopy(show->battleUpdate.playerName, gSaveBlock2Ptr->playerName);
-
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                show->battleUpdate.battleType = 2;
-            else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                show->battleUpdate.battleType = 1;
-            else
-                show->battleUpdate.battleType = 0;
-
-            show->battleUpdate.move = move;
-            show->battleUpdate.speciesPlayer = speciesPlayer;
-            show->battleUpdate.speciesOpponent = speciesOpponent;
-            StringCopy(name, gLinkPlayers[opponentLinkPlayerId].name);
-            StripExtCtrlCodes(name);
-            StringCopy(show->battleUpdate.linkOpponentName, name);
-            StorePlayerIdInNormalShow(show);
-            show->battleUpdate.language = gGameLanguage;
-            if (show->battleUpdate.language == LANGUAGE_JAPANESE || gLinkPlayers[opponentLinkPlayerId].language == LANGUAGE_JAPANESE)
-                show->battleUpdate.linkOpponentLanguage = LANGUAGE_JAPANESE;
-            else
-                show->battleUpdate.linkOpponentLanguage = gLinkPlayers[opponentLinkPlayerId].language;
-        }
-    }
 }
 
 bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 color, u8 sheen, u8 language)
 {
-    TVShow *show;
-    u8 name[32];
 
-    sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot == -1)
-        return FALSE;
-
-    TryReplaceOldTVShowOfKind(TVSHOW_3_CHEERS_FOR_POKEBLOCKS);
-    if (gSpecialVar_Result == TRUE)
-        return FALSE; // Old show is still active
-
-    show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-    show->threeCheers.kind = TVSHOW_3_CHEERS_FOR_POKEBLOCKS;
-    show->threeCheers.active = TRUE;
-    StringCopy(show->threeCheers.playerName, gSaveBlock2Ptr->playerName);
-    StringCopy(name, partnersName);
-    StripExtCtrlCodes(name);
-    StringCopy(show->threeCheers.worstBlenderName, name);
-    show->threeCheers.flavor = flavor;
-    show->threeCheers.color = color;
-    show->threeCheers.sheen = sheen;
-    StorePlayerIdInNormalShow(show);
-    show->threeCheers.language = gGameLanguage;
-    if (show->threeCheers.language == LANGUAGE_JAPANESE || language == LANGUAGE_JAPANESE)
-        show->threeCheers.worstBlenderLanguage = LANGUAGE_JAPANESE;
-    else
-        show->threeCheers.worstBlenderLanguage = language;
-    return TRUE;
 }
 
 void PutFanClubSpecialOnTheAir(void)
 {
-    TVShow *show;
-    u8 name[32];
-    u32 id;
 
-    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8006];
-    show->fanClubSpecial.score = gSpecialVar_0x8005 * 10;
-    StringCopy(show->fanClubSpecial.playerName, gSaveBlock2Ptr->playerName);
-    show->fanClubSpecial.kind = TVSHOW_FAN_CLUB_SPECIAL;
-    show->fanClubSpecial.active = TRUE;
-    id = GetPlayerIDAsU32();
-    show->fanClubSpecial.idLo = id;
-    show->fanClubSpecial.idHi = id >> 8;
-    StringCopy(name, gStringVar1);
-    StripExtCtrlCodes(name);
-    StringCopy(show->fanClubSpecial.idolName, name);
-    StorePlayerIdInNormalShow(show);
-    show->fanClubSpecial.language = gGameLanguage;
-    if (show->fanClubSpecial.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->linkBattleRecords.languages[0] == LANGUAGE_JAPANESE)
-        show->fanClubSpecial.idolNameLanguage = LANGUAGE_JAPANESE;
-    else
-        show->fanClubSpecial.idolNameLanguage = gSaveBlock1Ptr->linkBattleRecords.languages[0];
 }
 
 void ContestLiveUpdates_Init(u8 round1Placing)
@@ -1382,51 +1300,12 @@ void ContestLiveUpdates_SetWinnerMoveUsed(u16 move)
 
 void ContestLiveUpdates_SetLoserData(u8 flag, u8 loser)
 {
-    TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
-    sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
-    {
-        show->contestLiveUpdates.losingSpecies = gContestMons[loser].species;
-        StringCopy(show->contestLiveUpdates.losingTrainerName, gContestMons[loser].trainerName);
-        StripExtCtrlCodes(show->contestLiveUpdates.losingTrainerName);
-        show->contestLiveUpdates.loserAppealFlag = flag;
 
-        if (loser + 1 > gNumLinkContestPlayers)
-            show->contestLiveUpdates.losingTrainerLanguage = gLinkPlayers[0].language;
-        else if (gGameLanguage == LANGUAGE_JAPANESE || gLinkPlayers[loser].language == LANGUAGE_JAPANESE)
-            show->contestLiveUpdates.losingTrainerLanguage = LANGUAGE_JAPANESE;
-        else
-            show->contestLiveUpdates.losingTrainerLanguage = gLinkPlayers[loser].language;
-    }
 }
 
 static void InterviewAfter_BravoTrainerPokemonProfile(void)
 {
-    TVShow *show;
-    TVShow *show2;
 
-    show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
-    if (show->bravoTrainer.kind == TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE)
-    {
-        show2 = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-        show2->bravoTrainer.kind = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
-        show2->bravoTrainer.active = TRUE;
-        show2->bravoTrainer.species = show->bravoTrainer.species;
-        StringCopy(show2->bravoTrainer.playerName, gSaveBlock2Ptr->playerName);
-        StringCopy(show2->bravoTrainer.pokemonNickname, show->bravoTrainer.pokemonNickname);
-        show2->bravoTrainer.contestCategory = show->bravoTrainer.contestCategory;
-        show2->bravoTrainer.contestRank = show->bravoTrainer.contestRank;
-        show2->bravoTrainer.move = show->bravoTrainer.move;
-        show2->bravoTrainer.contestResult = show->bravoTrainer.contestResult;
-        show2->bravoTrainer.contestCategory = show->bravoTrainer.contestCategory;
-        StorePlayerIdInNormalShow(show2);
-        show2->bravoTrainer.language = gGameLanguage;
-        if (show2->bravoTrainer.language == LANGUAGE_JAPANESE || show->bravoTrainer.pokemonNameLanguage == LANGUAGE_JAPANESE)
-            show2->bravoTrainer.pokemonNameLanguage = LANGUAGE_JAPANESE;
-        else
-            show2->bravoTrainer.pokemonNameLanguage = show->bravoTrainer.pokemonNameLanguage;
-        DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, LAST_TVSHOW_IDX);
-    }
 }
 
 void BravoTrainerPokemonProfile_BeforeInterview1(u16 move)
@@ -1460,26 +1339,7 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace)
 
 static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
 {
-    TVShow *show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-    show->bravoTrainerTower.kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
-    show->bravoTrainerTower.active = TRUE;
-    StringCopy(show->bravoTrainerTower.trainerName, gSaveBlock2Ptr->playerName);
-    StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->frontier.towerInterview.opponentName);
-    show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.towerInterview.playerSpecies;
-    show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.towerInterview.opponentSpecies;
-    show->bravoTrainerTower.numFights = GetCurrentBattleTowerWinStreak(gSaveBlock2Ptr->frontier.towerLvlMode, 0);
-    show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.towerBattleOutcome;
-    if (gSaveBlock2Ptr->frontier.towerLvlMode == FRONTIER_LVL_50)
-        show->bravoTrainerTower.btLevel = FRONTIER_MAX_LEVEL_50;
-    else
-        show->bravoTrainerTower.btLevel = FRONTIER_MAX_LEVEL_OPEN;
-    show->bravoTrainerTower.interviewResponse = gSpecialVar_0x8004;
-    StorePlayerIdInNormalShow(show);
-    show->bravoTrainerTower.language = gGameLanguage;
-    if (show->bravoTrainerTower.language == LANGUAGE_JAPANESE || gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage == LANGUAGE_JAPANESE)
-        show->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_JAPANESE;
-    else
-        show->bravoTrainerTower.pokemonNameLanguage = gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage;
+
 }
 
 void TryPutSmartShopperOnAir(void)
@@ -1600,21 +1460,7 @@ static void InterviewAfter_RecentHappenings(void)
 
 static void InterviewAfter_PkmnFanClubOpinions(void)
 {
-    TVShow *show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-    show->fanclubOpinions.kind = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
-    show->fanclubOpinions.active = TRUE;
-    show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_FRIENDSHIP, NULL) >> 4;
-    show->fanclubOpinions.questionAsked = gSpecialVar_0x8007;
-    StringCopy(show->fanclubOpinions.playerName, gSaveBlock2Ptr->playerName);
-    GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
-    StripExtCtrlCodes(show->fanclubOpinions.nickname);
-    show->fanclubOpinions.species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
-    StorePlayerIdInNormalShow(show);
-    show->fanclubOpinions.language = gGameLanguage;
-    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
-        show->fanclubOpinions.pokemonNameLanguage = LANGUAGE_JAPANESE;
-    else
-        show->fanclubOpinions.pokemonNameLanguage = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE);
+
 }
 
 static void InterviewAfter_Dummy(void)
@@ -2333,33 +2179,7 @@ void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode)
 
 void TryPutSecretBaseSecretsOnAir(void)
 {
-    TVShow *show;
-    u8 strbuf[32];
 
-    if (IsRecordMixShowAlreadySpawned(TVSHOW_SECRET_BASE_SECRETS, FALSE) != TRUE)
-    {
-        sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
-        if (sCurTVShowSlot != -1)
-        {
-            show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-            show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
-            show->secretBaseSecrets.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
-            StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
-            show->secretBaseSecrets.stepsInBase = VarGet(VAR_SECRET_BASE_STEP_COUNTER);
-            CopyCurSecretBaseOwnerName_StrVar1();
-            StringCopy(strbuf, gStringVar1);
-            StripExtCtrlCodes(strbuf);
-            StringCopy(show->secretBaseSecrets.baseOwnersName, strbuf);
-            show->secretBaseSecrets.item = VarGet(VAR_SECRET_BASE_LAST_ITEM_USED);
-            show->secretBaseSecrets.flags = VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) + (VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) << 16);
-            StorePlayerIdInRecordMixShow(show);
-            show->secretBaseSecrets.language = gGameLanguage;
-            if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language == LANGUAGE_JAPANESE)
-                show->secretBaseSecrets.baseOwnersNameLanguage = LANGUAGE_JAPANESE;
-            else
-                show->secretBaseSecrets.baseOwnersNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language;
-        }
-    }
 }
 
 // Check var thresholds required to trigger the Number One show
@@ -3114,7 +2934,6 @@ static void GetNicknameSubstring(u8 varIdx, u8 whichPosition, u8 charParam, u16 
             buff[0] = show->nameRaterShow.trainerName[strlen - (whichPosition + 2)];
             buff[1] = show->nameRaterShow.trainerName[strlen - (whichPosition + 1)];
         }
-        ConvertInternationalString(buff, show->nameRaterShow.language);
     }
     else if (whichString == 1)
     {
@@ -3137,7 +2956,6 @@ static void GetNicknameSubstring(u8 varIdx, u8 whichPosition, u8 charParam, u16 
             buff[0] = show->nameRaterShow.pokemonName[strlen - (whichPosition + 2)];
             buff[1] = show->nameRaterShow.pokemonName[strlen - (whichPosition + 1)];
         }
-        ConvertInternationalString(buff, show->nameRaterShow.pokemonNameLanguage);
     }
     else
     {
@@ -3330,51 +3148,7 @@ void HideBattleTowerReporter(void)
 
 void ReceiveTvShowsData(void *src, u32 size, u8 playersLinkId)
 {
-    u8 i;
-    u16 version;
-    TVShow (*rmBuffer2)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
-    TVShow (*rmBuffer)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
 
-    rmBuffer2 = Alloc(MAX_LINK_PLAYERS * TV_SHOWS_COUNT * sizeof(TVShow));
-    if (rmBuffer2 != NULL)
-    {
-        for (i = 0; i < MAX_LINK_PLAYERS; i++)
-            memcpy((*rmBuffer2)[i], src + i * size, sizeof((*rmBuffer2)[i]));
-
-        rmBuffer = rmBuffer2;
-        for (i = 0; i < GetLinkPlayerCount(); i++)
-        {
-            version = (u8)gLinkPlayers[i].version;
-            if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
-                TranslateRubyShows((*rmBuffer)[i]);
-            else if (version == VERSION_EMERALD && gLinkPlayers[i].language == LANGUAGE_JAPANESE)
-                TranslateJapaneseEmeraldShows((*rmBuffer)[i]);
-        }
-
-        // Position player's TV shows in argument list depending on link id
-        switch (playersLinkId)
-        {
-        case 0:
-            SetMixedTVShows(gSaveBlock1Ptr->tvShows, (*rmBuffer)[1], (*rmBuffer)[2], (*rmBuffer)[3]);
-            break;
-        case 1:
-            SetMixedTVShows((*rmBuffer)[0], gSaveBlock1Ptr->tvShows, (*rmBuffer)[2], (*rmBuffer)[3]);
-            break;
-        case 2:
-            SetMixedTVShows((*rmBuffer)[0], (*rmBuffer)[1], gSaveBlock1Ptr->tvShows, (*rmBuffer)[3]);
-            break;
-        case 3:
-            SetMixedTVShows((*rmBuffer)[0], (*rmBuffer)[1], (*rmBuffer)[2], gSaveBlock1Ptr->tvShows);
-            break;
-        }
-
-        CompactTVShowArray(gSaveBlock1Ptr->tvShows);
-        DeleteExcessMixedShows();
-        CompactTVShowArray(gSaveBlock1Ptr->tvShows);
-        DeactivateShowsWithUnseenSpecies();
-        DeactivateGameCompleteShowsIfNotUnlocked();
-        Free(rmBuffer2);
-    }
 }
 
 static void SetMixedTVShows(TVShow player1[TV_SHOWS_COUNT], TVShow player2[TV_SHOWS_COUNT], TVShow player3[TV_SHOWS_COUNT], TVShow player4[TV_SHOWS_COUNT])
@@ -3836,159 +3610,21 @@ static void ClearPokeNewsIfGameNotComplete(void)
 }
 
 #define SetStrLanguage(strptr, langptr, langfix) \
-if (IsStringJapanese(strptr)) \
-{   \
-    (langptr) = LANGUAGE_JAPANESE; \
-} \
-else \
-{ \
     (langptr) = langfix; \
-}
 
 void SanitizeTVShowsForRuby(TVShow *shows)
 {
-    TVShow *curShow;
 
-    SanitizeTVShowLocationsForRuby(shows);
-    for (curShow = shows; curShow < shows + LAST_TVSHOW_IDX; curShow++)
-    {
-        if (curShow->bravoTrainerTower.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
-        {
-            if ((curShow->bravoTrainerTower.language == LANGUAGE_JAPANESE && curShow->bravoTrainerTower.pokemonNameLanguage != LANGUAGE_JAPANESE)
-             || (curShow->bravoTrainerTower.language != LANGUAGE_JAPANESE && curShow->bravoTrainerTower.pokemonNameLanguage == LANGUAGE_JAPANESE))
-                memset(curShow, 0, sizeof(TVShow));
-        }
-    }
 }
 
 static void TranslateRubyShows(TVShow *shows)
 {
-    TVShow *curShow;
 
-    for (curShow = shows; curShow < shows + LAST_TVSHOW_IDX; curShow++)
-    {
-        if (curShow->bravoTrainerTower.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
-        {
-            if (IsStringJapanese(curShow->bravoTrainerTower.pokemonName))
-                curShow->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_JAPANESE;
-            else
-                curShow->bravoTrainerTower.pokemonNameLanguage = GAME_LANGUAGE;
-        }
-    }
 }
 
 static u8 GetStringLanguage(u8 *str)
 {
-    return IsStringJapanese(str) ? LANGUAGE_JAPANESE : GAME_LANGUAGE;
-}
-
-static void TranslateJapaneseEmeraldShows(TVShow *shows)
-{
-    TVShow *curShow;
-
-    for (curShow = shows; curShow < shows + LAST_TVSHOW_IDX; curShow++)
-    {
-        switch(curShow->common.kind)
-        {
-        case TVSHOW_FAN_CLUB_LETTER:
-            curShow->fanclubLetter.language = GetStringLanguage(curShow->fanclubLetter.playerName);
-            break;
-        case TVSHOW_RECENT_HAPPENINGS:
-            curShow->recentHappenings.language = GetStringLanguage(curShow->recentHappenings.playerName);
-            break;
-        case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
-            curShow->fanclubOpinions.language = GetStringLanguage(curShow->fanclubOpinions.playerName);
-            curShow->fanclubOpinions.pokemonNameLanguage = GetStringLanguage(curShow->fanclubOpinions.nickname);
-            break;
-        case TVSHOW_DUMMY:
-            curShow->dummy.language = GetStringLanguage(curShow->dummy.name);
-            break;
-        case TVSHOW_NAME_RATER_SHOW:
-            curShow->nameRaterShow.language = GetStringLanguage(curShow->nameRaterShow.trainerName);
-            curShow->nameRaterShow.pokemonNameLanguage = GetStringLanguage(curShow->nameRaterShow.pokemonName);
-            break;
-        case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
-            curShow->bravoTrainer.language = GetStringLanguage(curShow->bravoTrainer.playerName);
-            curShow->bravoTrainer.pokemonNameLanguage = GetStringLanguage(curShow->bravoTrainer.pokemonNickname);
-            break;
-        case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
-            curShow->bravoTrainerTower.language = GetStringLanguage(curShow->bravoTrainerTower.trainerName);
-            curShow->bravoTrainerTower.pokemonNameLanguage = GetStringLanguage(curShow->bravoTrainerTower.pokemonName);
-            break;
-        case TVSHOW_CONTEST_LIVE_UPDATES:
-            curShow->contestLiveUpdates.winningTrainerLanguage = GetStringLanguage(curShow->contestLiveUpdates.winningTrainerName);
-            curShow->contestLiveUpdates.losingTrainerLanguage = GetStringLanguage(curShow->contestLiveUpdates.losingTrainerName);
-            break;
-        case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
-            curShow->threeCheers.language = GetStringLanguage(curShow->threeCheers.playerName);
-            curShow->threeCheers.worstBlenderLanguage = GetStringLanguage(curShow->threeCheers.worstBlenderName);
-            break;
-        case TVSHOW_BATTLE_UPDATE:
-            curShow->battleUpdate.language = GetStringLanguage(curShow->battleUpdate.playerName);
-            curShow->battleUpdate.linkOpponentLanguage = GetStringLanguage(curShow->battleUpdate.linkOpponentName);
-            break;
-        case TVSHOW_FAN_CLUB_SPECIAL:
-            curShow->fanClubSpecial.language = GetStringLanguage(curShow->fanClubSpecial.playerName);
-            curShow->fanClubSpecial.idolNameLanguage = GetStringLanguage(curShow->fanClubSpecial.idolName);
-            break;
-        case TVSHOW_LILYCOVE_CONTEST_LADY:
-            curShow->contestLady.language = GetStringLanguage(curShow->contestLady.playerName);
-            curShow->contestLady.pokemonNameLanguage = GetStringLanguage(curShow->contestLady.nickname);
-            break;
-        case TVSHOW_POKEMON_TODAY_CAUGHT:
-            curShow->pokemonToday.language = GetStringLanguage(curShow->pokemonToday.playerName);
-            curShow->pokemonToday.language2 = GetStringLanguage(curShow->pokemonToday.nickname);
-            break;
-        case TVSHOW_SMART_SHOPPER:
-            curShow->smartshopperShow.language = GetStringLanguage(curShow->smartshopperShow.playerName);
-            break;
-        case TVSHOW_POKEMON_TODAY_FAILED:
-            curShow->pokemonTodayFailed.language = GetStringLanguage(curShow->pokemonTodayFailed.playerName);
-            break;
-        case TVSHOW_FISHING_ADVICE:
-            curShow->pokemonAngler.language = GetStringLanguage(curShow->pokemonAngler.playerName);
-            break;
-        case TVSHOW_WORLD_OF_MASTERS:
-            curShow->worldOfMasters.language = GetStringLanguage(curShow->worldOfMasters.playerName);
-            break;
-        case TVSHOW_TREND_WATCHER:
-            curShow->trendWatcher.language = GetStringLanguage(curShow->trendWatcher.playerName);
-            break;
-        case TVSHOW_BREAKING_NEWS:
-            curShow->breakingNews.language = GetStringLanguage(curShow->breakingNews.playerName);
-            break;
-        case TVSHOW_BATTLE_SEMINAR:
-            curShow->battleSeminar.language = GetStringLanguage(curShow->battleSeminar.playerName);
-            break;
-        case TVSHOW_FIND_THAT_GAMER:
-        case TVSHOW_TRAINER_FAN_CLUB:
-            curShow->trainerFanClub.language = GetStringLanguage(curShow->trainerFanClub.playerName);
-            break;
-        case TVSHOW_CUTIES:
-            curShow->cuties.language = GetStringLanguage(curShow->cuties.playerName);
-            curShow->cuties.pokemonNameLanguage = GetStringLanguage(curShow->cuties.nickname);
-            break;
-        case TVSHOW_TODAYS_RIVAL_TRAINER:
-        case TVSHOW_SECRET_BASE_VISIT:
-        case TVSHOW_FRONTIER:
-            curShow->rivalTrainer.language = GetStringLanguage(curShow->rivalTrainer.playerName);
-            break;
-        case TVSHOW_TREASURE_INVESTIGATORS:
-        case TVSHOW_LOTTO_WINNER:
-        case TVSHOW_NUMBER_ONE:
-            curShow->treasureInvestigators.language = GetStringLanguage(curShow->treasureInvestigators.playerName);
-            break;
-        case TVSHOW_SECRET_BASE_SECRETS:
-            curShow->secretBaseSecrets.language = GetStringLanguage(curShow->secretBaseSecrets.playerName);
-            curShow->secretBaseSecrets.baseOwnersNameLanguage = GetStringLanguage(curShow->secretBaseSecrets.baseOwnersName);
-            break;
-        case TVSHOW_SAFARI_FAN_CLUB:
-            curShow->safariFanClub.language = GetStringLanguage(curShow->safariFanClub.playerName);
-            break;
-        case TVSHOW_MASS_OUTBREAK:
-            break;
-        }
-    }
+    return GAME_LANGUAGE;
 }
 
 void SanitizeTVShowLocationsForRuby(TVShow *shows)

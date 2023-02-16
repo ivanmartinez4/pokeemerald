@@ -331,11 +331,9 @@ static const struct {
 {
     [DECORSHAPE_1x1] = {SPRITE_SHAPE(16x16), SPRITE_SIZE(16x16), 120, 78},
     [DECORSHAPE_2x1] = {SPRITE_SHAPE(32x16), SPRITE_SIZE(32x16), 128, 78},
-    [DECORSHAPE_3x1] = {SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), 144, 86},
     [DECORSHAPE_4x2] = {SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), 144, 70},
     [DECORSHAPE_2x2] = {SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), 128, 70},
     [DECORSHAPE_1x2] = {SPRITE_SHAPE(16x32), SPRITE_SIZE(16x32), 120, 70},
-    [DECORSHAPE_1x3] = {SPRITE_SHAPE(32x64), SPRITE_SIZE(32x64), 128, 86},
     [DECORSHAPE_2x4] = {SPRITE_SHAPE(32x64), SPRITE_SIZE(32x64), 128, 54},
     [DECORSHAPE_3x3] = {SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64), 144, 70},
     [DECORSHAPE_3x2] = {SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), 144, 70},
@@ -1237,9 +1235,6 @@ void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decoration)
     case DECORSHAPE_2x1:
         ShowDecorationOnMap_(mapX, mapY, 2, 1, decoration);
         break;
-    case DECORSHAPE_3x1: // unused
-        ShowDecorationOnMap_(mapX, mapY, 3, 1, decoration);
-        break;
     case DECORSHAPE_4x2:
         ShowDecorationOnMap_(mapX, mapY, 4, 2, decoration);
         break;
@@ -1248,9 +1243,6 @@ void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decoration)
         break;
     case DECORSHAPE_1x2:
         ShowDecorationOnMap_(mapX, mapY, 1, 2, decoration);
-        break;
-    case DECORSHAPE_1x3: // unused
-        ShowDecorationOnMap_(mapX, mapY, 1, 3, decoration);
         break;
     case DECORSHAPE_2x4:
         ShowDecorationOnMap_(mapX, mapY, 2, 4, decoration);
@@ -1387,7 +1379,7 @@ static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecoration
     u8 x;
 
     x = 16 * (u8)gTasks[taskId].tDecorWidth + sDecorationMovementInfo[data->decoration->shape].cameraX - 8 * ((u8)gTasks[taskId].tDecorWidth - 1);
-    if (data->decoration->shape == DECORSHAPE_3x1 || data->decoration->shape == DECORSHAPE_3x3 || data->decoration->shape == DECORSHAPE_3x2)
+    if (data->decoration->shape == DECORSHAPE_3x3 || data->decoration->shape == DECORSHAPE_3x2)
         x -= 8;
 
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -1412,10 +1404,6 @@ static void SetUpDecorationShape(u8 taskId)
             gTasks[taskId].tDecorWidth = 2;
             gTasks[taskId].tDecorHeight = 1;
             break;
-        case DECORSHAPE_3x1:
-            gTasks[taskId].tDecorWidth = 3;
-            gTasks[taskId].tDecorHeight = 1;
-            break;
         case DECORSHAPE_4x2:
             gTasks[taskId].tDecorWidth = 4;
             gTasks[taskId].tDecorHeight = 2;
@@ -1427,11 +1415,6 @@ static void SetUpDecorationShape(u8 taskId)
         case DECORSHAPE_1x2:
             gTasks[taskId].tDecorWidth = 1;
             gTasks[taskId].tDecorHeight = 2;
-            break;
-        case DECORSHAPE_1x3:
-            gTasks[taskId].tDecorWidth = 1;
-            gTasks[taskId].tDecorHeight = 3;
-            gTasks[taskId].tCursorY++;
             break;
         case DECORSHAPE_2x4:
             gTasks[taskId].tDecorWidth = 2;
@@ -2386,11 +2369,6 @@ static void SetDecorRearrangementShape(u8 decor, struct DecorRearrangementDataBu
         data->width = 2;
         data->height = 1;
     }
-    else if (gDecorations[decor].shape == DECORSHAPE_3x1)
-    {
-        data->width = 3;
-        data->height = 1;
-    }
     else if (gDecorations[decor].shape == DECORSHAPE_4x2)
     {
         data->width = 4;
@@ -2405,11 +2383,6 @@ static void SetDecorRearrangementShape(u8 decor, struct DecorRearrangementDataBu
     {
         data->width = 1;
         data->height = 2;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_1x3)
-    {
-        data->width = 1;
-        data->height = 3;
     }
     else if (gDecorations[decor].shape == DECORSHAPE_2x4)
     {

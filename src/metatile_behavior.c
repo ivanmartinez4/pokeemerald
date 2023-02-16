@@ -1366,14 +1366,6 @@ bool8 MetatileBehavior_IsQuestionnaire(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsLongGrass_Duplicate(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_LONG_GRASS)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 bool8 MetatileBehavior_IsLongGrassSouthEdge(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LONG_GRASS_SOUTH_EDGE)

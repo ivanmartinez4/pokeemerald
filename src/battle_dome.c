@@ -1344,9 +1344,6 @@ static const u8 sLeftTrainerMonY[FRONTIER_PARTY_SIZE]  = { 56,  80, 104};
 static const u8 sRightTrainerMonX[FRONTIER_PARTY_SIZE] = {144, 144, 144};
 static const u8 sRightTrainerMonY[FRONTIER_PARTY_SIZE] = { 56,  80, 104};
 
-// Duplicate of sTourneyTreeTrainerIds
-static const u8 sTourneyTreeTrainerIds2[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
-
 // The number of possible trainers that could be competing in a given match
 #define NUM_POSSIBLE_MATCH_TRAINERS(round) (DOME_TOURNAMENT_TRAINERS_COUNT / (1 << (DOME_ROUNDS_COUNT - round - 1)))
 
@@ -4652,7 +4649,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
     // Get winners name
     for (i = sCompetitorRangeByMatch[matchNum][0]; i < sCompetitorRangeByMatch[matchNum][0] + sCompetitorRangeByMatch[matchNum][1]; i++)
     {
-        tournamentId = sTourneyTreeTrainerIds2[i];
+        tournamentId = sTourneyTreeTrainerIds[i];
         if (!DOME_TRAINERS[tournamentId].isEliminated)
         {
             tournamentIds[count] = tournamentId;
@@ -4672,7 +4669,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
 
     for (i = sCompetitorRangeByMatch[matchNum][0]; i < sCompetitorRangeByMatch[matchNum][0] + sCompetitorRangeByMatch[matchNum][1]; i++)
     {
-        tournamentId = sTourneyTreeTrainerIds2[i];
+        tournamentId = sTourneyTreeTrainerIds[i];
 
         if (DOME_TRAINERS[tournamentId].isEliminated
             && DOME_TRAINERS[tournamentId].eliminatedAt >= sCompetitorRangeByMatch[matchNum][2])

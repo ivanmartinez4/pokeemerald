@@ -70,7 +70,6 @@ static void OpponentHandleCmd32(void);
 static void OpponentHandleTwoReturnValues(void);
 static void OpponentHandleChosenMonReturnValue(void);
 static void OpponentHandleOneReturnValue(void);
-static void OpponentHandleOneReturnValue_Duplicate(void);
 static void OpponentHandleHitAnimation(void);
 static void OpponentHandleCantSwitch(void);
 static void OpponentHandlePlaySE(void);
@@ -138,7 +137,6 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = OpponentHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = OpponentHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = OpponentHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = OpponentHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = OpponentHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = OpponentHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = OpponentHandlePlaySE,
@@ -1691,11 +1689,6 @@ static void OpponentHandleChosenMonReturnValue(void)
 }
 
 static void OpponentHandleOneReturnValue(void)
-{
-    OpponentBufferExecCompleted();
-}
-
-static void OpponentHandleOneReturnValue_Duplicate(void)
 {
     OpponentBufferExecCompleted();
 }

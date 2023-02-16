@@ -605,17 +605,6 @@ const struct CompressedSpriteSheet gSpriteSheet_IntroBicycle[] =
     {}
 };
 
-// In RS these were Latios/Latias. In Emerald both are replaced with Flygon and now only 1 is used
-static const struct CompressedSpriteSheet sSpriteSheet_IntroFlygon_Unused[] =
-{
-    {
-        .data = gIntroFlygon_Gfx,
-        .size = 0x1000,
-        .tag = TAG_FLYGON_LATIOS
-    },
-    {}
-};
-
 const struct CompressedSpriteSheet gSpriteSheet_IntroFlygon[] =
 {
     {
@@ -1123,18 +1112,6 @@ static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
     sprite->x2 = gSprites[sprite->sLeftSpriteId].x2;
     sprite->y2 = gSprites[sprite->sLeftSpriteId].y2;
 }
-
-// In RS these were for Latios/Latias. In Emerald both are replaced with Flygon and now only 1 is used
-static u8 CreateIntroFlygonSprite_Unused(s16 x, s16 y)
-{
-    u8 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x - 32, y, 5);
-    u8 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x + 32, y, 6);
-    gSprites[rightSpriteId].sLeftSpriteId = leftSpriteId;
-    StartSpriteAnim(&gSprites[rightSpriteId], 1);
-    gSprites[rightSpriteId].callback = &SpriteCB_FlygonRightHalf;
-    return leftSpriteId;
-}
-
 
 u8 CreateIntroFlygonSprite(s16 x, s16 y)
 {

@@ -3438,8 +3438,6 @@ static void Task_SearchForChildOrParent(u8 taskId)
 
         if (!IsPartnerActivityAcceptable(rfu.data.activity, gTasks[taskId].data[4]))
             rfu = sUnionRoomPlayer_DummyRfu;
-        if (rfu.data.compatibility.language == LANGUAGE_JAPANESE)
-            rfu = sUnionRoomPlayer_DummyRfu;
 
         if (!isParent)
         {
@@ -4466,5 +4464,4 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct WirelessLink_URoom *d
 static void CopyAndTranslatePlayerName(u8 *dest, struct RfuPlayer *player)
 {
     StringCopy_PlayerName(dest, player->rfu.name);
-    ConvertInternationalString(dest, player->rfu.data.compatibility.language);
 }

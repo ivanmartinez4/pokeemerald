@@ -61,7 +61,6 @@ static void RecordedPlayerHandleCmd32(void);
 static void RecordedPlayerHandleTwoReturnValues(void);
 static void RecordedPlayerHandleChosenMonReturnValue(void);
 static void RecordedPlayerHandleOneReturnValue(void);
-static void RecordedPlayerHandleOneReturnValue_Duplicate(void);
 static void RecordedPlayerHandleHitAnimation(void);
 static void RecordedPlayerHandleCantSwitch(void);
 static void RecordedPlayerHandlePlaySE(void);
@@ -128,7 +127,6 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_TWORETURNVALUES]          = RecordedPlayerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = RecordedPlayerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = RecordedPlayerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = RecordedPlayerHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = RecordedPlayerHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = RecordedPlayerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = RecordedPlayerHandlePlaySE,
@@ -1493,11 +1491,6 @@ static void RecordedPlayerHandleChosenMonReturnValue(void)
 }
 
 static void RecordedPlayerHandleOneReturnValue(void)
-{
-    RecordedPlayerBufferExecCompleted();
-}
-
-static void RecordedPlayerHandleOneReturnValue_Duplicate(void)
 {
     RecordedPlayerBufferExecCompleted();
 }
