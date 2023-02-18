@@ -483,7 +483,7 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
         palOffset = startPalIndex * 16;
         UpdateAltBgPalettes(palettes & PALETTES_BG);
         // Thunder gamma-shift looks bad on night-blended palettes, so ignore time blending in some situations
-        if (!(colorMapIndex > 3 && gWeatherPtr->currWeather == WEATHER_RAIN_THUNDERSTORM) && MapHasNaturalLight(gMapHeader.mapType))
+        if (!(colorMapIndex > 3) && MapHasNaturalLight(gMapHeader.mapType))
           UpdatePalettesWithTime(palettes);
         else
           CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, 32 * numPalettes);
@@ -885,7 +885,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
               UpdateSpritePaletteWithTime(spritePaletteIndex);
         } else { // In horizontal fog, only specific palettes should be fog-blended
           if (allowFog) {
-            paletteIndex *= 16;
+            paletteIndex = PLTT_ID(paletteIndex);
             // First blend with time
             CpuFastCopy(gPlttBufferUnfaded + paletteIndex, gPlttBufferFaded + paletteIndex, 32);
             UpdateSpritePaletteWithTime(spritePaletteIndex);
@@ -908,7 +908,7 @@ void LoadCustomWeatherSpritePalette(const u16 *palette)
     if (gWeatherPtr->weatherPicSpritePalIndex > 16) // haven't allocated palette yet
         if ((gWeatherPtr->weatherPicSpritePalIndex = AllocSpritePalette(PALTAG_WEATHER_2)) > 16)
             return;
-    LoadPalette(palette, 0x100 + gWeatherPtr->weatherPicSpritePalIndex * 16, 32);
+    LoadPalette(palette, OBJ_PLTT_ID(gWeatherPtr->weatherPicSpritePalIndex), PLTT_SIZE_4BPP);
     UpdateSpritePaletteWithWeather(gWeatherPtr->weatherPicSpritePalIndex, TRUE);
 }
 
