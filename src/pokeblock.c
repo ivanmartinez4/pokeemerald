@@ -764,7 +764,7 @@ static void DrawPokeblockInfo(s32 pkblId)
     struct Pokeblock *pokeblock;
     u16 rectTilemapSrc[2];
 
-    FillWindowPixelBuffer(7, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_FEEL, PIXEL_FILL(0));
 
     if (pkblId != LIST_CANCEL)
     {
@@ -801,7 +801,7 @@ static void DrawPokeblockInfo(s32 pkblId)
         for (i = 0; i < FLAVOR_COUNT; i++)
             CopyToBgTilemapBufferRect(2, rectTilemapSrc, (i / 3 * 6) + 1, (i % 3 * 2) + 13, 1, 2);
 
-        CopyWindowToVram(7, COPYWIN_GFX);
+        CopyWindowToVram(WIN_FEEL, COPYWIN_GFX);
     }
 
     ScheduleBgCopyTilemapToVram(0);

@@ -32,6 +32,12 @@
 #include "wonder_news.h"
 #include "constants/cable_club.h"
 
+enum {
+    WIN_HEADER,
+    WIN_MSG,
+    WIN_UNK, // Cleared, but nothing is ever apparently rendered on it
+};
+
 #define LIST_MENU_TILE_NUM 10
 #define LIST_MENU_PAL_NUM BG_PLTT_ID(14)
 
@@ -93,7 +99,7 @@ static const struct BgTemplate sBGTemplates[] = {
 };
 
 static const struct WindowTemplate sMainWindows[] = {
-    {
+    [WIN_HEADER] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -101,7 +107,8 @@ static const struct WindowTemplate sMainWindows[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x0013
-    }, {
+    },
+    [WIN_MSG] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -109,7 +116,8 @@ static const struct WindowTemplate sMainWindows[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x004f
-    }, {
+    },
+    [WIN_UNK] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 15,
@@ -219,7 +227,7 @@ static const struct ListMenuTemplate sListMenuTemplate_ThreeOptions = {
     .itemPrintFunc = NULL,
     .totalItems = 3,
     .maxShowed = 3,
-    .windowId = 0,
+    .windowId = 0, // Overwritten by DoMysteryGiftListMenu
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
@@ -264,7 +272,7 @@ static const struct ListMenuTemplate sListMenu_ReceiveSendToss = {
     .itemPrintFunc = NULL,
     .totalItems = 4,
     .maxShowed = 4,
-    .windowId = 0,
+    .windowId = 0, // Overwritten by DoMysteryGiftListMenu
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
@@ -285,7 +293,7 @@ static const struct ListMenuTemplate sListMenu_ReceiveToss = {
     .itemPrintFunc = NULL,
     .totalItems = 3,
     .maxShowed = 3,
-    .windowId = 0,
+    .windowId = 0, // Overwritten by DoMysteryGiftListMenu
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
@@ -306,7 +314,7 @@ static const struct ListMenuTemplate sListMenu_ReceiveSend = {
     .itemPrintFunc = NULL,
     .totalItems = 3,
     .maxShowed = 3,
-    .windowId = 0,
+    .windowId = 0, // Overwritten by DoMysteryGiftListMenu
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
@@ -327,7 +335,7 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .itemPrintFunc = NULL,
     .totalItems = 2,
     .maxShowed = 2,
-    .windowId = 0,
+    .windowId = 0, // Overwritten by DoMysteryGiftListMenu
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
@@ -342,9 +350,9 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
-ALIGNED(2) static const u8 sTextColors_TopMenu[]      = { TEXT_COLOR_00, TEXT_COLOR_01,     TEXT_COLOR_02 };
-ALIGNED(2) static const u8 sTextColors_TopMenu_Copy[] = { TEXT_COLOR_00, TEXT_COLOR_01,     TEXT_COLOR_02 };
-ALIGNED(2) static const u8 sMG_Ereader_TextColor_2[]  = { TEXT_COLOR_01,       TEXT_COLOR_02, TEXT_COLOR_03 };
+ALIGNED(2) static const u8 sTextColors_TopMenu[]      = {TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_02};
+ALIGNED(2) static const u8 sTextColors_TopMenu_Copy[] = {TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_02};
+ALIGNED(2) static const u8 sMG_Ereader_TextColor_2[]  = {TEXT_COLOR_01, TEXT_COLOR_02, TEXT_COLOR_03};
 
 static void VBlankCB_MysteryGiftEReader(void)
 {
@@ -504,21 +512,21 @@ static void ClearScreenInBg0(bool32 ignoreTopTwoRows)
     CopyBgTilemapBufferToVram(0);
 }
 
-void AddTextPrinterToWindow1(const u8 *str)
+void MG_AddMessageTextPrinter(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
-    FillWindowPixelBuffer(1, 0x11);
-    AddTextPrinterParameterized4(1, FONT_NORMAL, 0, 1, 0, 0, sMG_Ereader_TextColor_2, 0, gStringVar4);
-    DrawTextBorderOuter(1, 0x001, 0xF);
-    PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_MSG, 0x11);
+    AddTextPrinterParameterized4(WIN_MSG, FONT_NORMAL, 0, 1, 0, 0, sMG_Ereader_TextColor_2, 0, gStringVar4);
+    DrawTextBorderOuter(WIN_MSG, 0x001, 0xF);
+    PutWindowTilemap(WIN_MSG);
+    CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
 }
 
-static void ClearTextWindow(void)
+static void ClearMessage(void)
 {
-    rbox_fill_rectangle(1);
-    ClearWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_MAP);
+    rbox_fill_rectangle(WIN_MSG);
+    ClearWindowTilemap(WIN_MSG);
+    CopyWindowToVram(WIN_MSG, COPYWIN_MAP);
 }
 
 #define DOWN_ARROW_X 208
@@ -529,18 +537,18 @@ bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
     switch (*textState)
     {
     case 0:
-        AddTextPrinterToWindow1(str);
+        MG_AddMessageTextPrinter(str);
         (*textState)++;
         break;
     case 1:
-        DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
-        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
+        DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
             (*textState)++;
         break;
     case 2:
-        DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+        DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
         *textState = 0;
-        ClearTextWindow();
+        ClearMessage();
         return TRUE;
     case 0xFF:
         *textState = 2;
@@ -551,23 +559,23 @@ bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
 
 static void HideDownArrow(void)
 {
-    DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+    DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
 }
 
 static void ShowDownArrow(void)
 {
-    DrawDownArrow(1, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
+    DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
 }
 
 static bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
 {
     if (*counter == 0)
-        AddTextPrinterToWindow1(str);
+        MG_AddMessageTextPrinter(str);
 
     if (++(*counter) > 120)
     {
         *counter = 0;
-        ClearTextWindow();
+        ClearMessage();
         return TRUE;
     }
     else
@@ -601,8 +609,8 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 whichMenu)
     response = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, LIST_MENU_TILE_NUM, LIST_MENU_PAL_NUM);
     if (response != LIST_NOTHING_CHOSEN)
     {
-        ClearWindowTilemap(2);
-        CopyWindowToVram(2, COPYWIN_MAP);
+        ClearWindowTilemap(WIN_UNK);
+        CopyWindowToVram(WIN_UNK, COPYWIN_MAP);
     }
     return response;
 }
@@ -818,7 +826,7 @@ static bool32 SaveOnMysteryGiftMenu(u8 * state)
     switch (*state)
     {
     case 0:
-        AddTextPrinterToWindow1(gText_DataWillBeSaved);
+        MG_AddMessageTextPrinter(gText_DataWillBeSaved);
         (*state)++;
         break;
     case 1:
@@ -826,7 +834,7 @@ static bool32 SaveOnMysteryGiftMenu(u8 * state)
         (*state)++;
         break;
     case 2:
-        AddTextPrinterToWindow1(gText_SaveCompletedPressA);
+        MG_AddMessageTextPrinter(gText_SaveCompletedPressA);
         (*state)++;
         break;
     case 3:
@@ -835,7 +843,7 @@ static bool32 SaveOnMysteryGiftMenu(u8 * state)
         break;
     case 4:
         *state = 0;
-        ClearTextWindow();
+        ClearMessage();
         return TRUE;
     }
 
@@ -920,7 +928,7 @@ static bool32 PrintSuccessMessage(u8 * state, const u8 * msg, u16 * timer)
     {
     case 0:
         if (msg != NULL)
-            AddTextPrinterToWindow1(msg);
+            MG_AddMessageTextPrinter(msg);
         PlayFanfare(MUS_OBTAIN_ITEM);
         *timer = 0;
         (*state)++;
@@ -933,7 +941,7 @@ static bool32 PrintSuccessMessage(u8 * state, const u8 * msg, u16 * timer)
         if (IsFanfareTaskInactive())
         {
             *state = 0;
-            ClearTextWindow();
+            ClearMessage();
             return TRUE;
         }
         break;
@@ -1123,9 +1131,9 @@ static void Task_MysteryGift(u8 taskId)
     }
     case MG_STATE_SOURCE_PROMPT:
         if (!data->isWonderNews)
-            AddTextPrinterToWindow1(gText_WhereShouldCardBeAccessed);
+            MG_AddMessageTextPrinter(gText_WhereShouldCardBeAccessed);
         else
-            AddTextPrinterToWindow1(gText_WhereShouldNewsBeAccessed);
+            MG_AddMessageTextPrinter(gText_WhereShouldNewsBeAccessed);
         data->state = MG_STATE_SOURCE_PROMPT_INPUT;
         break;
     case MG_STATE_SOURCE_PROMPT_INPUT:
@@ -1133,17 +1141,17 @@ static void Task_MysteryGift(u8 taskId)
         switch (MysteryGift_HandleThreeOptionMenu(TRUE))
         {
         case 0: // "Wireless Communication"
-            ClearTextWindow();
+            ClearMessage();
             data->state = MG_STATE_CLIENT_LINK_START;
             data->sourceIsFriend = FALSE;
             break;
         case 1: // "Friend"
-            ClearTextWindow();
+            ClearMessage();
             data->state = MG_STATE_CLIENT_LINK_START;
             data->sourceIsFriend = TRUE;
             break;
         case LIST_CANCEL:
-            ClearTextWindow();
+            ClearMessage();
             if (ValidateCardOrNews(data->isWonderNews))
             {
                 data->state = MG_STATE_LOAD_GIFT;
@@ -1193,7 +1201,7 @@ static void Task_MysteryGift(u8 taskId)
         }
         break;
     case MG_STATE_CLIENT_COMMUNICATING:
-        AddTextPrinterToWindow1(gText_Communicating);
+        MG_AddMessageTextPrinter(gText_Communicating);
         data->state = MG_STATE_CLIENT_LINK;
         break;
     case MG_STATE_CLIENT_LINK:
@@ -1493,12 +1501,12 @@ static void Task_MysteryGift(u8 taskId)
 
         if (!data->isWonderNews)
         {
-            AddTextPrinterToWindow1(gText_SendingWonderCard);
+            MG_AddMessageTextPrinter(gText_SendingWonderCard);
             MysterGiftServer_CreateForCard();
         }
         else
         {
-            AddTextPrinterToWindow1(gText_SendingWonderNews);
+            MG_AddMessageTextPrinter(gText_SendingWonderNews);
             MysterGiftServer_CreateForNews();
         }
         data->state = MG_STATE_SERVER_LINK;
