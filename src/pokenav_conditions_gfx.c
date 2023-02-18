@@ -550,9 +550,9 @@ static bool32 UpdateConditionGraphMenuWindows(u8 mode, u16 bufferIndex, bool8 wi
             AddTextPrinterParameterized(menu->nameGenderWindowId, FONT_NORMAL, str, 0, 17, 0, NULL);
             text[0] = EXT_CTRL_CODE_BEGIN;
             text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-            text[2] = TEXT_COLOR_BLUE;
-            text[3] = TEXT_COLOR_TRANSPARENT;
-            text[4] = TEXT_COLOR_LIGHT_BLUE;
+            text[2] = TEXT_COLOR_08;
+            text[3] = TEXT_COLOR_00;
+            text[4] = TEXT_COLOR_09;
             StringCopy(&text[5], gText_Number2);
             AddTextPrinterParameterized(menu->listIndexWindowId, FONT_NORMAL, text, 4, 1, 0, NULL);
             ConvertIntToDecimalStringN(&text[5], GetConditionMonDataBuffer(), STR_CONV_MODE_RIGHT_ALIGN, 4);

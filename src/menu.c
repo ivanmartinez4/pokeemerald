@@ -107,7 +107,7 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
 };
 
 static const u16 sHofPC_TopBar_Pal[] = INCBIN_U16("graphics/interface/hof_pc_topbar.gbapal");
-static const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
+static const u8 sTextColors[] = { TEXT_COLOR_15, TEXT_COLOR_01, TEXT_COLOR_02 };
 
 // Table of move info icon offsets in graphics/interface/menu_info.png
 static const struct MenuInfoIcon sMenuInfoIcons[] =
@@ -189,19 +189,19 @@ void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
     void (*callback)(struct TextPrinterTemplate *, u16) = NULL;
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
 }
 
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
 }
 
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, speed, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
 }
 
 void LoadMessageBoxAndBorderGfx(void)
@@ -517,7 +517,7 @@ void RemoveMapNamePopUpWindow(void)
 void AddTextPrinterWithCallbackForMessage(bool8 canSpeedUp, void (*callback)(struct TextPrinterTemplate *, u16))
 {
     gTextFlags.canABSpeedUpPrint = canSpeedUp;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), callback, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
 }
 
 void EraseFieldMessageBox(bool8 copyToVram)
@@ -819,15 +819,15 @@ void HofPCTopBar_PrintPair(const u8 *string, const u8 *string2, bool8 noBg, u8 l
     {
         if (noBg)
         {
-            color[0] = TEXT_COLOR_TRANSPARENT;
-            color[1] = TEXT_COLOR_WHITE;
-            color[2] = TEXT_COLOR_DARK_GRAY;
+            color[0] = TEXT_COLOR_00;
+            color[1] = TEXT_COLOR_01;
+            color[2] = TEXT_COLOR_02;
         }
         else
         {
-            color[0] = TEXT_DYNAMIC_COLOR_6;
-            color[1] = TEXT_COLOR_WHITE;
-            color[2] = TEXT_COLOR_DARK_GRAY;
+            color[0] = TEXT_COLOR_15;
+            color[1] = TEXT_COLOR_01;
+            color[2] = TEXT_COLOR_02;
         }
         PutWindowTilemap(sHofPCTopBarWindowId);
         FillWindowPixelBuffer(sHofPCTopBarWindowId, PIXEL_FILL(15));
@@ -1759,23 +1759,10 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
     AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, TEXT_SKIP_DRAW, 0);
 }
 
-void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
+void ListMenuLoadStdPalAt(u8 palOffset)
 {
     const u16 *palette;
-
-    switch (palId)
-    {
-        case 0:
-        default:
-            palette = gMenuInfoElements1_Pal;
-            break;
-        case 1:
-            palette = gMenuInfoElements2_Pal;
-            break;
-        case 2:
-            palette = gMenuInfoElements3_Pal;
-            break;
-    }
+    palette = gMenuInfoElements_Pal;
 
     LoadPalette(palette, palOffset, PLTT_SIZE_4BPP);
 }

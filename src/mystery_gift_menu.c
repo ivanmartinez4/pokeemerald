@@ -342,9 +342,9 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
-ALIGNED(2) static const u8 sTextColors_TopMenu[]      = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
-ALIGNED(2) static const u8 sTextColors_TopMenu_Copy[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
-ALIGNED(2) static const u8 sMG_Ereader_TextColor_2[]  = { TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY };
+ALIGNED(2) static const u8 sTextColors_TopMenu[]      = { TEXT_COLOR_00, TEXT_COLOR_01,     TEXT_COLOR_02 };
+ALIGNED(2) static const u8 sTextColors_TopMenu_Copy[] = { TEXT_COLOR_00, TEXT_COLOR_01,     TEXT_COLOR_02 };
+ALIGNED(2) static const u8 sMG_Ereader_TextColor_2[]  = { TEXT_COLOR_01,       TEXT_COLOR_02, TEXT_COLOR_03 };
 
 static void VBlankCB_MysteryGiftEReader(void)
 {

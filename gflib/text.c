@@ -612,7 +612,7 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
     struct TextGlyph *glyph;
     u8 *glyphHeight;
 
-    if (sLastTextBgColor != TEXT_COLOR_TRANSPARENT)
+    if (sLastTextBgColor != TEXT_COLOR_00)
     {
         window = &gWindows[textPrinter->printerTemplate.windowId];
         pixels_data.pixels = window->tileData;
@@ -1351,11 +1351,11 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
 
     SaveTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
 
-    fgColor = TEXT_COLOR_WHITE;
-    bgColor = TEXT_COLOR_TRANSPARENT;
-    shadowColor = TEXT_COLOR_LIGHT_GRAY;
+    fgColor = TEXT_COLOR_01;
+    bgColor = TEXT_COLOR_00;
+    shadowColor = TEXT_COLOR_03;
 
-    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_01, TEXT_COLOR_00, TEXT_COLOR_03);
     strLocal = str;
     strPos = 0;
 

@@ -117,8 +117,8 @@ static const u16 sBerryFixPalColors[] = {
     RGB(26, 26, 25), RGB_BLACK,       RGB_BLACK,       RGB_BLACK
 };
 
-static const u8 sBerryProgramTextColors[] = {TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_2, TEXT_DYNAMIC_COLOR_3};
-static const u8 sGameTitleTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_4};
+static const u8 sBerryProgramTextColors[] = {TEXT_COLOR_10, TEXT_COLOR_11, TEXT_COLOR_12};
+static const u8 sGameTitleTextColors[] = { TEXT_COLOR_00, TEXT_COLOR_10, TEXT_COLOR_13};
 
 enum {
     SCENE_ENSURE_CONNECT,

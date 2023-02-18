@@ -4325,9 +4325,9 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.letterSpacing = 2;
     textPrinter.lineSpacing = 0;
     textPrinter.unk = 0;
-    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-    textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+    textPrinter.fgColor = TEXT_COLOR_14;
+    textPrinter.bgColor = TEXT_COLOR_00;
+    textPrinter.shadowColor = TEXT_COLOR_13;
 
     // Get class and trainer name
     i = 0;
@@ -4874,9 +4874,9 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
     textPrinter.unk = 0;
-    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-    textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+    textPrinter.fgColor = TEXT_COLOR_14;
+    textPrinter.bgColor = TEXT_COLOR_00;
+    textPrinter.shadowColor = TEXT_COLOR_13;
     StringExpandPlaceholders(gStringVar4, sBattleDomeWinTexts[winStringId]);
     textPrinter.currentChar = gStringVar4;
     textPrinter.windowId = windowId + 8;
@@ -5370,9 +5370,9 @@ static void Task_ShowTourneyTree(u8 taskId)
         textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x70, textPrinter.letterSpacing);
         textPrinter.currentY = 1;
         textPrinter.unk = 0;
-        textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-        textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-        textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+        textPrinter.fgColor = TEXT_COLOR_14;
+        textPrinter.bgColor = TEXT_COLOR_00;
+        textPrinter.shadowColor = TEXT_COLOR_13;
         AddTextPrinter(&textPrinter, 0, NULL);
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
         {
@@ -5425,26 +5425,26 @@ static void Task_ShowTourneyTree(u8 taskId)
             {
                 if (DOME_TRAINERS[i].trainerId == TRAINER_PLAYER)
                 {
-                    textPrinter.fgColor = TEXT_COLOR_LIGHT_GRAY;
-                    textPrinter.shadowColor = TEXT_COLOR_RED;
+                    textPrinter.fgColor = TEXT_COLOR_03;
+                    textPrinter.shadowColor = TEXT_COLOR_04;
                 }
                 else
                 {
-                    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
-                    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+                    textPrinter.fgColor = TEXT_COLOR_11;
+                    textPrinter.shadowColor = TEXT_COLOR_13;
                 }
             }
             else
             {
                 if (DOME_TRAINERS[i].trainerId == TRAINER_PLAYER)
                 {
-                    textPrinter.fgColor = TEXT_COLOR_LIGHT_GRAY;
-                    textPrinter.shadowColor = TEXT_COLOR_RED;
+                    textPrinter.fgColor = TEXT_COLOR_03;
+                    textPrinter.shadowColor = TEXT_COLOR_04;
                 }
                 else
                 {
-                    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-                    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+                    textPrinter.fgColor = TEXT_COLOR_14;
+                    textPrinter.shadowColor = TEXT_COLOR_13;
                 }
             }
 
@@ -5551,9 +5551,9 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
             textPrinter.letterSpacing = 2;
             textPrinter.lineSpacing = 0;
             textPrinter.unk = 0;
-            textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
-            textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-            textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+            textPrinter.fgColor = TEXT_COLOR_11;
+            textPrinter.bgColor = TEXT_COLOR_00;
+            textPrinter.shadowColor = TEXT_COLOR_13;
 
             // Update the advancement lines and gray out eliminated trainer names
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)

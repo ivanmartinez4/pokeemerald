@@ -148,9 +148,9 @@ static void SaveFailedScreenTextPrint(const u8 *text, u8 x, u8 y)
 {
     u8 color[3];
 
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GRAY;
+    color[0] = TEXT_COLOR_00;
+    color[1] = TEXT_COLOR_15;
+    color[2] = TEXT_COLOR_03;
     AddTextPrinterParameterized4(sWindowIds[TEXT_WIN_ID], FONT_NORMAL, x * 8, y * 8 + 1, 0, 0, color, 0, text);
 }
 

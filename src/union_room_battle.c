@@ -49,7 +49,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sTextColors[] = { TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY };
+static const u8 sTextColors[] = { TEXT_COLOR_01, TEXT_COLOR_02, TEXT_COLOR_03 };
 
 static void CB2_SetUpPartiesAndStartBattle(void)
 {

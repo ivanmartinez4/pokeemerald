@@ -144,9 +144,9 @@ static const struct WindowTemplate sHof_WindowTemplate = {
     .baseBlock = 1
 };
 
-static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
-static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
-static const u8 sUnusedTextColors[4] = {TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_TRANSPARENT};
+static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_02};
+static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_00, TEXT_COLOR_02, TEXT_COLOR_03};
+static const u8 sUnusedTextColors[4] = {TEXT_COLOR_04, TEXT_COLOR_05, TEXT_COLOR_00};
 
 static const struct CompressedSpriteSheet sSpriteSheet_Confetti[] =
 {
@@ -515,7 +515,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     *lastSavedTeam = *sHofMonPtr;
 
     DrawDialogueFrame(0, FALSE);
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
     CopyWindowToVram(0, COPYWIN_FULL);
     gTasks[taskId].func = Task_Hof_TrySaveData;
 }
@@ -723,7 +723,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         HallOfFame_PrintPlayerInfo();
         DrawDialogueFrame(0, FALSE);
-        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LeagueChamp, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LeagueChamp, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
         CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_Hof_ExitOnKeyPressed;
     }
@@ -1088,7 +1088,7 @@ static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 {
     HofPCTopBar_Print(gText_AButtonExit, 8, TRUE);
     DrawDialogueFrame(0, FALSE);
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_HOFCorrupted, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_HOFCorrupted, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
     CopyWindowToVram(0, COPYWIN_FULL);
     gTasks[taskId].func = Task_HofPC_ExitOnButtonPress;
 }

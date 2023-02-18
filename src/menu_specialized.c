@@ -73,7 +73,7 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
 
 static const u8 sPlayerNameTextColors[] =
 {
-    TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY
+    TEXT_COLOR_01, TEXT_COLOR_02, TEXT_COLOR_03
 };
 
 static const u8 sEmptyItemName[] = _("");
@@ -845,7 +845,7 @@ void MoveRelearnerPrintText(u8 *str)
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     gTextFlags.canABSpeedUpPrint = TRUE;
     speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized2(3, FONT_NORMAL, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, 3);
+    AddTextPrinterParameterized2(3, FONT_NORMAL, str, speed, NULL, TEXT_COLOR_02, TEXT_COLOR_01, 3);
 }
 
 bool16 MoveRelearnerRunTextPrinters(void)
@@ -896,9 +896,9 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
     mon = monId;
     *(dst++) = EXT_CTRL_CODE_BEGIN;
     *(dst++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-    *(dst++) = TEXT_COLOR_BLUE;
-    *(dst++) = TEXT_COLOR_TRANSPARENT;
-    *(dst++) = TEXT_COLOR_LIGHT_BLUE;
+    *(dst++) = TEXT_COLOR_08;
+    *(dst++) = TEXT_COLOR_00;
+    *(dst++) = TEXT_COLOR_09;
     if (GetBoxOrPartyMonData(box, mon, MON_DATA_IS_EGG, NULL))
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
     GetBoxOrPartyMonData(box, mon, MON_DATA_NICKNAME, dst);
@@ -934,28 +934,28 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
     case MON_MALE:
         *(str++) = EXT_CTRL_CODE_BEGIN;
         *(str++) = EXT_CTRL_CODE_COLOR;
-        *(str++) = TEXT_COLOR_RED;
+        *(str++) = TEXT_COLOR_04;
         *(str++) = EXT_CTRL_CODE_BEGIN;
         *(str++) = EXT_CTRL_CODE_SHADOW;
-        *(str++) = TEXT_COLOR_LIGHT_RED;
+        *(str++) = TEXT_COLOR_05;
         *(str++) = CHAR_MALE;
         break;
     case MON_FEMALE:
         *(str++) = EXT_CTRL_CODE_BEGIN;
         *(str++) = EXT_CTRL_CODE_COLOR;
-        *(str++) = TEXT_COLOR_GREEN;
+        *(str++) = TEXT_COLOR_06;
         *(str++) = EXT_CTRL_CODE_BEGIN;
         *(str++) = EXT_CTRL_CODE_SHADOW;
-        *(str++) = TEXT_COLOR_LIGHT_GREEN;
+        *(str++) = TEXT_COLOR_07;
         *(str++) = CHAR_FEMALE;
         break;
     }
 
     *(str++) = EXT_CTRL_CODE_BEGIN;
     *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-    *(str++) = TEXT_COLOR_BLUE;
-    *(str++) = TEXT_COLOR_TRANSPARENT;
-    *(str++) = TEXT_COLOR_LIGHT_BLUE;
+    *(str++) = TEXT_COLOR_08;
+    *(str++) = TEXT_COLOR_00;
+    *(str++) = TEXT_COLOR_09;
     *(str++) = CHAR_SLASH;
     *(str++) = CHAR_EXTRA_SYMBOL;
     *(str++) = CHAR_LV_2;
@@ -998,9 +998,9 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
         GetConditionMenuMonString(nameDst, box, mon);
         locationDst[0] = EXT_CTRL_CODE_BEGIN;
         locationDst[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-        locationDst[2] = TEXT_COLOR_BLUE;
-        locationDst[3] = TEXT_COLOR_TRANSPARENT;
-        locationDst[4] = TEXT_COLOR_LIGHT_BLUE;
+        locationDst[2] = TEXT_COLOR_08;
+        locationDst[3] = TEXT_COLOR_00;
+        locationDst[4] = TEXT_COLOR_09;
         if (box == TOTAL_BOXES_COUNT) // Party mon.
             BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, 8);
         else

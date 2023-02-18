@@ -98,7 +98,7 @@ static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
 
 static const u8 sHelpBarTextColors[3] =
 {
-    TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY
+    TEXT_COLOR_04, TEXT_COLOR_01, TEXT_COLOR_02
 };
 
 static const struct CompressedSpriteSheet sSpinningPokenavSpriteSheet[] =

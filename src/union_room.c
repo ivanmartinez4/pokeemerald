@@ -2401,7 +2401,7 @@ void RunUnionRoom(void)
     uroom->unreadPlayerId = 0;
 
     gSpecialVar_Result = 0;
-    ListMenuLoadStdPalAt(BG_PLTT_ID(13), 1);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(13));
 }
 
 static u16 ReadAsU16(const u8 *ptr)
@@ -3764,51 +3764,51 @@ static void PrintUnionRoomText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y
     case UR_COLOR_DEFAULT:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_DARK_GRAY;
-        printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
+        printerTemplate.fgColor = TEXT_COLOR_02;
+        printerTemplate.bgColor = TEXT_COLOR_01;
+        printerTemplate.shadowColor = TEXT_COLOR_03;
         break;
     case UR_COLOR_RED:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_RED;
-        printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_RED;
+        printerTemplate.fgColor = TEXT_COLOR_04;
+        printerTemplate.bgColor = TEXT_COLOR_01;
+        printerTemplate.shadowColor = TEXT_COLOR_05;
         break;
     case UR_COLOR_GREEN:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_GREEN;
-        printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GREEN;
+        printerTemplate.fgColor = TEXT_COLOR_06;
+        printerTemplate.bgColor = TEXT_COLOR_01;
+        printerTemplate.shadowColor = TEXT_COLOR_07;
         break;
     case UR_COLOR_WHITE:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_WHITE;
-        printerTemplate.bgColor = TEXT_COLOR_WHITE;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
+        printerTemplate.fgColor = TEXT_COLOR_01;
+        printerTemplate.bgColor = TEXT_COLOR_01;
+        printerTemplate.shadowColor = TEXT_COLOR_03;
         break;
     case UR_COLOR_CANCEL:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_WHITE;
-        printerTemplate.bgColor = TEXT_COLOR_DARK_GRAY;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_GRAY;
+        printerTemplate.fgColor = TEXT_COLOR_01;
+        printerTemplate.bgColor = TEXT_COLOR_02;
+        printerTemplate.shadowColor = TEXT_COLOR_03;
         break;
     case UR_COLOR_TRADE_BOARD_SELF:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_COLOR_LIGHT_GREEN;
-        printerTemplate.bgColor = TEXT_DYNAMIC_COLOR_6;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_BLUE;
+        printerTemplate.fgColor = TEXT_COLOR_07;
+        printerTemplate.bgColor = TEXT_COLOR_15;
+        printerTemplate.shadowColor = TEXT_COLOR_09;
         break;
     case UR_COLOR_TRADE_BOARD_OTHER:
         printerTemplate.letterSpacing = 0;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.fgColor = TEXT_DYNAMIC_COLOR_5;
-        printerTemplate.bgColor = TEXT_DYNAMIC_COLOR_6;
-        printerTemplate.shadowColor = TEXT_COLOR_LIGHT_BLUE;
+        printerTemplate.fgColor = TEXT_COLOR_14;
+        printerTemplate.bgColor = TEXT_COLOR_15;
+        printerTemplate.shadowColor = TEXT_COLOR_09;
         break;
     }
 

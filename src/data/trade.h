@@ -351,9 +351,9 @@ static const u8 *const sMessages[] =
 
 static const u8 sTradeTextColors[] =
 {
-    TEXT_COLOR_TRANSPARENT, //bg color
-    TEXT_COLOR_WHITE,       //fg color
-    TEXT_COLOR_DARK_GRAY    //shadow color
+    TEXT_COLOR_00, //bg color
+    TEXT_COLOR_01,       //fg color
+    TEXT_COLOR_02    //shadow color
 };
 
 static const struct BgTemplate sBgTemplates[] =

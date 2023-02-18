@@ -266,8 +266,8 @@ static const u8 *const sPageDescriptions[] =
     [POKENAV_MENUITEM_CONDITION_SEARCH_CANCEL] = gText_ReturnToConditionMenu
 };
 
-static const u8 sOptionDescTextColors[]  = {TEXT_COLOR_GREEN, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_GREEN};
-static const u8 sOptionDescTextColors2[] = {TEXT_COLOR_GREEN, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_GREEN};
+static const u8 sOptionDescTextColors[]  = {TEXT_COLOR_06, TEXT_COLOR_08, TEXT_COLOR_07};
+static const u8 sOptionDescTextColors2[] = {TEXT_COLOR_06, TEXT_COLOR_08, TEXT_COLOR_07};
 
 static const struct OamData sOamData_MenuOption =
 {

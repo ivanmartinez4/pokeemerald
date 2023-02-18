@@ -614,7 +614,7 @@ static void HandleDecorationActionsMenuInput(u8 taskId)
 static void PrintCurMainMenuDescription(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, sSecretBasePCMenuItemDescriptions[sDecorationActionsCursorPos], 0, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, sSecretBasePCMenuItemDescriptions[sDecorationActionsCursorPos], 0, 0, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
 }
 
 static void DecorationMenuAction_Decorate(u8 taskId)

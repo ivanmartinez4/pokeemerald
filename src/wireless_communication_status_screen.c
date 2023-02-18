@@ -336,29 +336,29 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     switch (mode)
     {
     case COLORMODE_NORMAL:
-        color[0] = TEXT_COLOR_TRANSPARENT;
-        color[1] = TEXT_COLOR_DARK_GRAY;
-        color[2] = TEXT_COLOR_LIGHT_GRAY;
+        color[0] = TEXT_COLOR_00;
+        color[1] = TEXT_COLOR_02;
+        color[2] = TEXT_COLOR_03;
         break;
     case COLORMODE_WHITE_LGRAY:
-        color[0] = TEXT_COLOR_TRANSPARENT;
-        color[1] = TEXT_COLOR_WHITE;
-        color[2] = TEXT_COLOR_LIGHT_GRAY;
+        color[0] = TEXT_COLOR_00;
+        color[1] = TEXT_COLOR_01;
+        color[2] = TEXT_COLOR_03;
         break;
     case COLORMODE_RED:
-        color[0] = TEXT_COLOR_TRANSPARENT;
-        color[1] = TEXT_COLOR_RED;
-        color[2] = TEXT_COLOR_LIGHT_RED;
+        color[0] = TEXT_COLOR_00;
+        color[1] = TEXT_COLOR_04;
+        color[2] = TEXT_COLOR_05;
         break;
     case COLORMODE_GREEN:
-        color[0] = TEXT_COLOR_TRANSPARENT;
-        color[1] = TEXT_COLOR_LIGHT_GREEN;
-        color[2] = TEXT_COLOR_GREEN;
+        color[0] = TEXT_COLOR_00;
+        color[1] = TEXT_COLOR_07;
+        color[2] = TEXT_COLOR_06;
         break;
     case COLORMODE_WHITE_DGRAY:
-        color[0] = TEXT_COLOR_TRANSPARENT;
-        color[1] = TEXT_COLOR_WHITE;
-        color[2] = TEXT_COLOR_DARK_GRAY;
+        color[0] = TEXT_COLOR_00;
+        color[1] = TEXT_COLOR_01;
+        color[2] = TEXT_COLOR_02;
         break;
     }
 

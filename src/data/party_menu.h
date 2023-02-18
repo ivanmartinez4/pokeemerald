@@ -112,12 +112,12 @@ static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/party_menu/cance
 // Text colors for BG, FG, and Shadow in that order
 static const u8 sFontColorTable[][3] =
 {
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_DARK_GRAY},  // Default
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_GREEN},      // Unused
-    {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_2,  TEXT_DYNAMIC_COLOR_3},  // Gender symbol
-    {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY}, // Selection actions
-    {TEXT_COLOR_WHITE,       TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_BLUE}, // Field moves
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},  // Unused
+    {TEXT_COLOR_00, TEXT_COLOR_03, TEXT_COLOR_02},  // Default
+    {TEXT_COLOR_00, TEXT_COLOR_01,      TEXT_COLOR_06},      // Unused
+    {TEXT_COLOR_00, TEXT_COLOR_11,  TEXT_COLOR_12},  // Gender symbol
+    {TEXT_COLOR_01,       TEXT_COLOR_02,  TEXT_COLOR_03}, // Selection actions
+    {TEXT_COLOR_01,       TEXT_COLOR_08,       TEXT_COLOR_09}, // Field moves
+    {TEXT_COLOR_00, TEXT_COLOR_01,      TEXT_COLOR_02},  // Unused
 };
 
 static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =

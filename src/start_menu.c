@@ -1234,9 +1234,9 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
                                         gText_SavingDontTurnOffPower,
                                         TEXT_SKIP_DRAW,
                                         NULL,
-                                        TEXT_COLOR_DARK_GRAY,
-                                        TEXT_COLOR_WHITE,
-                                        TEXT_COLOR_LIGHT_GRAY);
+                                        TEXT_COLOR_02,
+                                        TEXT_COLOR_01,
+                                        TEXT_COLOR_03);
             DrawTextBorderOuter(0, 8, 14);
             PutWindowTilemap(0);
             CopyWindowToVram(0, COPYWIN_FULL);
@@ -1305,16 +1305,16 @@ static void ShowSaveInfoWindow(void)
     DrawStdWindowFrame(sSaveInfoWindowId, FALSE);
 
     gender = gSaveBlock2Ptr->playerGender;
-    color = TEXT_COLOR_RED;  // Red when female, blue when male.
+    color = TEXT_COLOR_04;  // Red when female, blue when male.
 
     if (gender == MALE)
     {
-        color = TEXT_COLOR_BLUE;
+        color = TEXT_COLOR_08;
     }
 
     // Print region name
     yOffset = 1;
-    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_GREEN);
+    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_06);
     AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, 0, yOffset, TEXT_SKIP_DRAW, NULL);
 
     // Print player name

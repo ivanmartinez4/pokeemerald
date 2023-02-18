@@ -271,9 +271,9 @@ static const u16 *const sKantoTrainerCardPals[] =
     sKantoTrainerCardGold_Pal,   // 4 stars
 };
 
-static const u8 sTrainerCardTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
-static const u8 sTrainerCardStatColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
-static const u8 sTimeColonInvisibleTextColors[6] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT};
+static const u8 sTrainerCardTextColors[] = {TEXT_COLOR_00, TEXT_COLOR_02, TEXT_COLOR_03};
+static const u8 sTrainerCardStatColors[] = {TEXT_COLOR_00, TEXT_COLOR_04, TEXT_COLOR_05};
+static const u8 sTimeColonInvisibleTextColors[6] = {TEXT_COLOR_00, TEXT_COLOR_00, TEXT_COLOR_00};
 
 static const u8 sTrainerPicOffset[2][GENDER_COUNT][2] =
 {

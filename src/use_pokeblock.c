@@ -193,9 +193,9 @@ static const u8 sConditionToFlavor[CONDITION_COUNT] =
 
 static const u8 sNatureTextColors[] =
 {
-    TEXT_COLOR_TRANSPARENT,
-    TEXT_COLOR_BLUE,
-    TEXT_COLOR_WHITE
+    TEXT_COLOR_00,
+    TEXT_COLOR_08,
+    TEXT_COLOR_01
 };
 
 static const struct BgTemplate sBgTemplates[4] =

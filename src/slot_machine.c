@@ -806,7 +806,7 @@ static const struct WindowTemplate sWindowTemplate_InfoBox =
     .baseBlock = 1
 };
 
-static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
+static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_03, TEXT_COLOR_01, TEXT_COLOR_02};
 
 static bool8 (*const sSlotTasks[])(struct Task *task) =
 {

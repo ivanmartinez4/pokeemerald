@@ -213,7 +213,7 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
+static const u8 sTextColors[] = { TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_02 };
 
 bool8 IsWirelessAdapterConnected(void)
 {

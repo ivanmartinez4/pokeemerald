@@ -119,9 +119,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
 };
 
 static const u8 sTextColors[] = {
-    TEXT_COLOR_TRANSPARENT,
-    TEXT_DYNAMIC_COLOR_1,
-    TEXT_DYNAMIC_COLOR_2
+    TEXT_COLOR_00,
+    TEXT_COLOR_10,
+    TEXT_COLOR_11
 };
 
 // Background is alternating bars of a dark/light color.

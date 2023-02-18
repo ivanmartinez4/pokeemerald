@@ -1349,9 +1349,9 @@ static void InitMatchCallTextPrinter(int windowId, const u8 *str)
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
-    printerTemplate.fgColor = TEXT_DYNAMIC_COLOR_1;
-    printerTemplate.bgColor = TEXT_COLOR_BLUE;
-    printerTemplate.shadowColor = TEXT_DYNAMIC_COLOR_5;
+    printerTemplate.fgColor = TEXT_COLOR_10;
+    printerTemplate.bgColor = TEXT_COLOR_08;
+    printerTemplate.shadowColor = TEXT_COLOR_14;
     gTextFlags.useAlternateDownArrow = FALSE;
 
     AddTextPrinter(&printerTemplate, GetPlayerTextSpeedDelay(), NULL);

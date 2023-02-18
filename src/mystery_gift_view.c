@@ -78,8 +78,8 @@ static void DestroyCardSprites(void);
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
 
 static const u8 sCard_TextColorTable[][3] = {
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
+    {TEXT_COLOR_00, TEXT_COLOR_02, TEXT_COLOR_03},
+    {TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_02}
 };
 
 static const u8 ALIGNED(4) sCard_FooterTextOffsets[CARD_TYPE_COUNT] =
@@ -575,8 +575,8 @@ static void DrawNewsWindows(void);
 static void UpdateNewsScroll(void);
 
 static const u8 sNews_TextColorTable[][3] = {
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY}
+    {TEXT_COLOR_00, TEXT_COLOR_02, TEXT_COLOR_03},
+    {TEXT_COLOR_00, TEXT_COLOR_01,     TEXT_COLOR_02}
 };
 
 static const struct WindowTemplate sNews_WindowTemplates[] = {

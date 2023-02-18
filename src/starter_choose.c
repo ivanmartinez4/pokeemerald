@@ -148,7 +148,7 @@ static const struct BgTemplate sBgTemplates[3] =
     },
 };
 
-static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
+static const u8 sTextColors[] = {TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_03};
 
 static const struct OamData sOam_Hand =
 {

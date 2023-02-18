@@ -900,7 +900,7 @@ static const union AffineAnimCmd sAffineAnim_ChooseBoxMenu[] =
     AFFINEANIMCMD_END
 };
 
-static const u8 sChooseBoxMenu_TextColors[] = {TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
+static const u8 sChooseBoxMenu_TextColors[] = {TEXT_COLOR_04, TEXT_COLOR_15, TEXT_COLOR_14};
 static const u8 sText_OutOf30[] = _("/30");
 
 static const u8 sChooseBoxMenuCenter_Gfx[]   = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
@@ -1293,11 +1293,11 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     tileData2 = (winTemplate.width * TILE_SIZE_4BPP) + tileData1;
 
     if (!zero1)
-        txtColor[0] = TEXT_COLOR_TRANSPARENT;
+        txtColor[0] = TEXT_COLOR_00;
     else
         txtColor[0] = zero2;
-    txtColor[1] = TEXT_DYNAMIC_COLOR_6;
-    txtColor[2] = TEXT_DYNAMIC_COLOR_5;
+    txtColor[1] = TEXT_COLOR_15;
+    txtColor[2] = TEXT_COLOR_14;
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 1, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
 
     tileBytesToBuffer = bytesToBuffer;
@@ -1444,7 +1444,7 @@ static void Task_PCMainMenu(u8 taskId)
         LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, FALSE);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
         CopyWindowToVram(0, COPYWIN_FULL);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
         task->tState++;
@@ -1468,7 +1468,7 @@ static void Task_PCMainMenu(u8 taskId)
             {
                 task->tSelectedOption = task->tNextOption;
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
             }
             break;
         case MENU_B_PRESSED:
@@ -1484,14 +1484,14 @@ static void Task_PCMainMenu(u8 taskId)
             {
                 // Can't withdraw
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, FONT_NORMAL, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                AddTextPrinterParameterized2(0, FONT_NORMAL, gText_PartyFull, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
                 task->tState = STATE_ERROR_MSG;
             }
             else if (task->tInput == OPTION_DEPOSIT && CountPartyMons() == 1)
             {
                 // Can't deposit
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, FONT_NORMAL, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                AddTextPrinterParameterized2(0, FONT_NORMAL, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
                 task->tState = STATE_ERROR_MSG;
             }
             else
@@ -1509,7 +1509,7 @@ static void Task_PCMainMenu(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
             task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_UP))
@@ -1519,7 +1519,7 @@ static void Task_PCMainMenu(u8 taskId)
             Menu_MoveCursor(-1);
             task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
             task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -1529,7 +1529,7 @@ static void Task_PCMainMenu(u8 taskId)
             Menu_MoveCursor(1);
             task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
             task->tState = STATE_HANDLE_INPUT;
         }
         break;
@@ -7035,30 +7035,30 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         switch (gender)
         {
         case MON_MALE:
-            *(txtPtr)++ = TEXT_COLOR_RED;
-            *(txtPtr)++ = TEXT_COLOR_WHITE;
-            *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
+            *(txtPtr)++ = TEXT_COLOR_04;
+            *(txtPtr)++ = TEXT_COLOR_01;
+            *(txtPtr)++ = TEXT_COLOR_05;
             *(txtPtr)++ = CHAR_MALE;
             break;
         case MON_FEMALE:
-            *(txtPtr)++ = TEXT_COLOR_GREEN;
-            *(txtPtr)++ = TEXT_COLOR_WHITE;
-            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;
+            *(txtPtr)++ = TEXT_COLOR_06;
+            *(txtPtr)++ = TEXT_COLOR_01;
+            *(txtPtr)++ = TEXT_COLOR_07;
             *(txtPtr)++ = CHAR_FEMALE;
             break;
         default:
-            *(txtPtr)++ = TEXT_COLOR_DARK_GRAY;
-            *(txtPtr)++ = TEXT_COLOR_WHITE;
-            *(txtPtr)++ = TEXT_COLOR_LIGHT_GRAY;
+            *(txtPtr)++ = TEXT_COLOR_02;
+            *(txtPtr)++ = TEXT_COLOR_01;
+            *(txtPtr)++ = TEXT_COLOR_03;
             *(txtPtr)++ = CHAR_SPACER; // Genderless
             break;
         }
 
         *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
         *(txtPtr++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-        *(txtPtr++) = TEXT_COLOR_DARK_GRAY;
-        *(txtPtr++) = TEXT_COLOR_WHITE;
-        *(txtPtr++) = TEXT_COLOR_LIGHT_GRAY;
+        *(txtPtr++) = TEXT_COLOR_02;
+        *(txtPtr++) = TEXT_COLOR_01;
+        *(txtPtr++) = TEXT_COLOR_03;
         *(txtPtr++) = CHAR_SPACE;
         *(txtPtr++) = CHAR_EXTRA_SYMBOL;
         *(txtPtr++) = CHAR_LV_2;

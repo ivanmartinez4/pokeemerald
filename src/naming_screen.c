@@ -728,7 +728,7 @@ static void DisplaySentToPCMessage(void)
     StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_02, TEXT_COLOR_01, TEXT_COLOR_03);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -1760,8 +1760,8 @@ static void DummyGenderIcon(void)
 
 static const u8 sGenderColors[2][3] =
 {
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_BLUE},
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED}
+    {TEXT_COLOR_00, TEXT_COLOR_09, TEXT_COLOR_08},
+    {TEXT_COLOR_00, TEXT_COLOR_05, TEXT_COLOR_04}
 };
 
 static void DrawGenderIcon(void)
@@ -1933,9 +1933,9 @@ struct TextColor   // Needed because of alignment
 static const struct TextColor sTextColorStruct =
 {
     {
-        {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
-        {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
-        {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
+        {TEXT_COLOR_13, TEXT_COLOR_01, TEXT_COLOR_02},
+        {TEXT_COLOR_14, TEXT_COLOR_01, TEXT_COLOR_02},
+        {TEXT_COLOR_15, TEXT_COLOR_01, TEXT_COLOR_02}
     }
 };
 
@@ -2003,7 +2003,7 @@ static void DrawKeyboardPageOnDeck(void)
 
 static void PrintControls(void)
 {
-    const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
+    const u8 color[3] = { TEXT_COLOR_15, TEXT_COLOR_01, TEXT_COLOR_02 };
 
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_BANNER], PIXEL_FILL(15));
     AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], FONT_SMALL, 2, 1, color, 0, gText_MoveOkBack);

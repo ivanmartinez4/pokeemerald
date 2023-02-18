@@ -6030,7 +6030,7 @@ static void DrawLevelUpWindow1(void)
     u16 currStats[NUM_STATS];
 
     GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
-    DrawLevelUpWindowPg1(B_WIN_LEVEL_UP_BOX, gBattleResources->beforeLvlUp->stats, currStats, TEXT_DYNAMIC_COLOR_5, TEXT_DYNAMIC_COLOR_4, TEXT_DYNAMIC_COLOR_6);
+    DrawLevelUpWindowPg1(B_WIN_LEVEL_UP_BOX, gBattleResources->beforeLvlUp->stats, currStats, TEXT_COLOR_14, TEXT_COLOR_13, TEXT_COLOR_15);
 }
 
 static void DrawLevelUpWindow2(void)
@@ -6038,7 +6038,7 @@ static void DrawLevelUpWindow2(void)
     u16 currStats[NUM_STATS];
 
     GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
-    DrawLevelUpWindowPg2(B_WIN_LEVEL_UP_BOX, currStats, TEXT_DYNAMIC_COLOR_5, TEXT_DYNAMIC_COLOR_4, TEXT_DYNAMIC_COLOR_6);
+    DrawLevelUpWindowPg2(B_WIN_LEVEL_UP_BOX, currStats, TEXT_COLOR_14, TEXT_COLOR_13, TEXT_COLOR_15);
 }
 
 static void InitLevelUpBanner(void)
@@ -6094,9 +6094,9 @@ static void DrawLevelUpBannerText(void)
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
-    printerTemplate.fgColor = TEXT_COLOR_WHITE;
-    printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
-    printerTemplate.shadowColor = TEXT_COLOR_DARK_GRAY;
+    printerTemplate.fgColor = TEXT_COLOR_01;
+    printerTemplate.bgColor = TEXT_COLOR_00;
+    printerTemplate.shadowColor = TEXT_COLOR_02;
 
     AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 
@@ -6113,14 +6113,14 @@ static void DrawLevelUpBannerText(void)
     {
         if (monGender == MON_MALE)
         {
-            txtPtr = WriteColorChangeControlCode(txtPtr, 0, TEXT_DYNAMIC_COLOR_3);
-            txtPtr = WriteColorChangeControlCode(txtPtr, 1, TEXT_DYNAMIC_COLOR_4);
+            txtPtr = WriteColorChangeControlCode(txtPtr, 0, TEXT_COLOR_12);
+            txtPtr = WriteColorChangeControlCode(txtPtr, 1, TEXT_COLOR_13);
             *(txtPtr++) = CHAR_MALE;
         }
         else
         {
-            txtPtr = WriteColorChangeControlCode(txtPtr, 0, TEXT_DYNAMIC_COLOR_5);
-            txtPtr = WriteColorChangeControlCode(txtPtr, 1, TEXT_DYNAMIC_COLOR_6);
+            txtPtr = WriteColorChangeControlCode(txtPtr, 0, TEXT_COLOR_14);
+            txtPtr = WriteColorChangeControlCode(txtPtr, 1, TEXT_COLOR_15);
             *(txtPtr++) = CHAR_FEMALE;
         }
         *(txtPtr++) = EOS;

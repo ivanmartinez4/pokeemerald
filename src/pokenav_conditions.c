@@ -343,9 +343,9 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
     monId = monListPtr->monData[listId].monId;
     *(str++) = EXT_CTRL_CODE_BEGIN;
     *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-    *(str++) = TEXT_COLOR_BLUE;
-    *(str++) = TEXT_COLOR_TRANSPARENT;
-    *(str++) = TEXT_COLOR_LIGHT_BLUE;
+    *(str++) = TEXT_COLOR_08;
+    *(str++) = TEXT_COLOR_00;
+    *(str++) = TEXT_COLOR_09;
 
     if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
         return StringCopyPadded(str, gText_EggNickname, CHAR_SPACE, 12);
@@ -383,28 +383,28 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
     case MON_MALE:
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_COLOR;
-        *(str_++) = TEXT_COLOR_RED;
+        *(str_++) = TEXT_COLOR_04;
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_SHADOW;
-        *(str_++) = TEXT_COLOR_LIGHT_RED;
+        *(str_++) = TEXT_COLOR_05;
         *(str_++) = CHAR_MALE;
         break;
     case MON_FEMALE:
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_COLOR;
-        *(str_++) = TEXT_COLOR_GREEN;
+        *(str_++) = TEXT_COLOR_06;
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_SHADOW;
-        *(str_++) = TEXT_COLOR_LIGHT_GREEN;
+        *(str_++) = TEXT_COLOR_07;
         *(str_++) = CHAR_FEMALE;
         break;
     }
 
     *(str_++) = EXT_CTRL_CODE_BEGIN;
     *(str_++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-    *(str_++) = TEXT_COLOR_BLUE;
-    *(str_++) = TEXT_COLOR_TRANSPARENT;
-    *(str_++) = TEXT_COLOR_LIGHT_BLUE;
+    *(str_++) = TEXT_COLOR_08;
+    *(str_++) = TEXT_COLOR_00;
+    *(str_++) = TEXT_COLOR_09;
     *(str_++) = CHAR_SLASH;
     *(str_++) = CHAR_EXTRA_SYMBOL;
     *(str_++) = CHAR_LV_2;
@@ -435,9 +435,9 @@ static void CopyMonNameGenderLocation(s16 listId, u8 loadId)
         boxId = monListPtr->monData[listId].boxId;
         menu->locationText[loadId][0] = EXT_CTRL_CODE_BEGIN;
         menu->locationText[loadId][1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-        menu->locationText[loadId][2] = TEXT_COLOR_BLUE;
-        menu->locationText[loadId][3] = TEXT_COLOR_TRANSPARENT;
-        menu->locationText[loadId][4] = TEXT_COLOR_LIGHT_BLUE;
+        menu->locationText[loadId][2] = TEXT_COLOR_08;
+        menu->locationText[loadId][3] = TEXT_COLOR_00;
+        menu->locationText[loadId][4] = TEXT_COLOR_09;
         if (boxId == TOTAL_BOXES_COUNT)
             CopyStringLeftAlignedToConditionData(&menu->locationText[loadId][5], gText_InParty, BOX_NAME_LENGTH);
         else

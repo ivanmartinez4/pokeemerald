@@ -382,10 +382,10 @@ enum {
 };
 static const u8 sFontColorTable[][3] = {
                             // bgColor, textColor, shadowColor
-    [COLORID_NORMAL]      = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_LIGHT_GRAY},
-    [COLORID_POCKET_NAME] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_RED},
-    [COLORID_GRAY_CURSOR] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_GREEN},
-    [COLORID_TMHM_INFO]   = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_5,  TEXT_DYNAMIC_COLOR_1}
+    [COLORID_NORMAL]      = {TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_03},
+    [COLORID_POCKET_NAME] = {TEXT_COLOR_00, TEXT_COLOR_01, TEXT_COLOR_04},
+    [COLORID_GRAY_CURSOR] = {TEXT_COLOR_00, TEXT_COLOR_03, TEXT_COLOR_06},
+    [COLORID_TMHM_INFO]   = {TEXT_COLOR_00, TEXT_COLOR_14, TEXT_COLOR_08}
 };
 
 static const struct WindowTemplate sDefaultBagWindows[] =
@@ -2447,7 +2447,7 @@ static void LoadBagMenuTextWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
     LoadMessageBoxGfx(0, 10, BG_PLTT_ID(13));
-    ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(12));
     LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
@@ -2548,7 +2548,7 @@ static void PrintTMHMMoveData(u16 itemId)
     if (itemId == ITEM_NONE)
     {
         for (i = 0; i < 4; i++)
-            BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gText_ThreeDashes, 7, i * 12, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+            BagMenu_Print(WIN_TMHM_INFO, FONT_SHORT, gText_ThreeDashes, 7, i * 12, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
         CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
     }
     else
@@ -2566,7 +2566,7 @@ static void PrintTMHMMoveData(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveId].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 12, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_SHORT, text, 7, 12, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         // Print TMHM accuracy
         if (gBattleMoves[moveId].accuracy == 0)
@@ -2578,11 +2578,11 @@ static void PrintTMHMMoveData(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveId].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 24, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_SHORT, text, 7, 24, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         // Print TMHM pp
         ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveId].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gStringVar1, 7, 36, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_SHORT, gStringVar1, 7, 36, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
     }

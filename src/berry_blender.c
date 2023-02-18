@@ -3811,19 +3811,19 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
     {
     case 0:
     case 3:
-        txtColor[0] = TEXT_COLOR_WHITE;
-        txtColor[1] = TEXT_COLOR_DARK_GRAY;
-        txtColor[2] = TEXT_COLOR_LIGHT_GRAY;
+        txtColor[0] = TEXT_COLOR_01;
+        txtColor[1] = TEXT_COLOR_02;
+        txtColor[2] = TEXT_COLOR_03;
         break;
     case 1:
-        txtColor[0] = TEXT_COLOR_TRANSPARENT;
-        txtColor[1] = TEXT_COLOR_DARK_GRAY;
-        txtColor[2] = TEXT_COLOR_LIGHT_GRAY;
+        txtColor[0] = TEXT_COLOR_00;
+        txtColor[1] = TEXT_COLOR_02;
+        txtColor[2] = TEXT_COLOR_03;
         break;
     case 2:
-        txtColor[0] = TEXT_COLOR_TRANSPARENT;
-        txtColor[1] = TEXT_COLOR_RED;
-        txtColor[2] = TEXT_COLOR_LIGHT_RED;
+        txtColor[0] = TEXT_COLOR_00;
+        txtColor[1] = TEXT_COLOR_04;
+        txtColor[2] = TEXT_COLOR_05;
         break;
     }
 

@@ -2859,7 +2859,7 @@ static void DrawTextEntryMessage(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shad
 {
     u8 color[3];
     u8 strBuffer[35];
-    if (bgColor != TEXT_COLOR_TRANSPARENT)
+    if (bgColor != TEXT_COLOR_00)
         FillTextEntryWindow(x, GetTextEntryCursorPosition() - x, bgColor);
 
     color[0] = bgColor;
@@ -2884,9 +2884,9 @@ static void PrintCurrentKeyboardPage(void)
 
     FillWindowPixelBuffer(2, PIXEL_FILL(15));
     page = GetCurrentKeyboardPage();
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_5;
-    color[2] = TEXT_DYNAMIC_COLOR_4;
+    color[0] = TEXT_COLOR_00;
+    color[1] = TEXT_COLOR_14;
+    color[2] = TEXT_COLOR_13;
     if (page != UNION_ROOM_KB_PAGE_REGISTER)
     {
         str[0] = EXT_CTRL_CODE_BEGIN;
@@ -2994,7 +2994,7 @@ static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
 {
     // colorIdx: 0 = gray, 1 = red, 2 = green, 3 = blue
     u8 color[3];
-    color[0] = TEXT_COLOR_WHITE;
+    color[0] = TEXT_COLOR_01;
     color[1] = colorIdx * 2 + 2;
     color[2] = colorIdx * 2 + 3;
     FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);

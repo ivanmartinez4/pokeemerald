@@ -2318,9 +2318,9 @@ static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8 *str, u8 left
 {
     u8 color[3];
 
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GRAY;
+    color[0] = TEXT_COLOR_00;
+    color[1] = TEXT_COLOR_15;
+    color[2] = TEXT_COLOR_03;
     AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
@@ -3160,9 +3160,9 @@ static void SpriteCB_DexListStartMenuCursor(struct Sprite *sprite)
 static void PrintInfoScreenText(const u8 *str, u8 left, u8 top)
 {
     u8 color[3];
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GRAY;
+    color[0] = TEXT_COLOR_00;
+    color[1] = TEXT_COLOR_15;
+    color[2] = TEXT_COLOR_03;
 
     AddTextPrinterParameterized4(0, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
@@ -4465,9 +4465,9 @@ static void ResetOtherVideoRegisters(u16 regBits)
 static void PrintInfoSubMenuText(u8 windowId, const u8 *str, u8 left, u8 top)
 {
     u8 color[3];
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GRAY;
+    color[0] = TEXT_COLOR_00;
+    color[1] = TEXT_COLOR_15;
+    color[2] = TEXT_COLOR_03;
 
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
@@ -4762,9 +4762,9 @@ static void PrintSearchText(const u8 *str, u32 x, u32 y)
 {
     u8 color[3];
 
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_DARK_GRAY;
+    color[0] = TEXT_COLOR_00;
+    color[1] = TEXT_COLOR_15;
+    color[2] = TEXT_COLOR_02;
     AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 

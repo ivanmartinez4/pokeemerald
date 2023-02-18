@@ -353,7 +353,7 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
     }
 };
 
-static const u8 sSwapArrowTextColors[] = {TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_DARK_GRAY};
+static const u8 sSwapArrowTextColors[] = {TEXT_COLOR_01, TEXT_COLOR_03, TEXT_COLOR_02};
 
 // Macro below is likely a fakematch, equivalent to sNewGamePCItems[i].quantity
 #define GET_QUANTITY(i) ((u16)((u16 *)sNewGamePCItems + 1)[i * 2])

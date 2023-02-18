@@ -396,7 +396,7 @@ static const struct SpriteSheet sSpriteSheet_WirelessIndicatorWindow =
     .tag = TAG_WIRELESS_INDICATOR_WINDOW
 };
 
-static const u8 sContestLinkTextColors[4] = {TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
+static const u8 sContestLinkTextColors[4] = {TEXT_COLOR_01, TEXT_COLOR_15, TEXT_COLOR_14};
 
 
 static void InitContestResultsDisplay(void)

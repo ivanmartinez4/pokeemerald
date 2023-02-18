@@ -709,7 +709,7 @@ static void SetListMarginTile(struct PokenavListMenuWindow *listWindow, bool32 d
 // Print the trainer's name and title at the top of their check page
 static void PrintCheckPageTrainerName(struct PokenavListWindowState *state, struct PokenavListSub *list)
 {
-    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_RED};
+    u8 colors[3] = {TEXT_COLOR_00, TEXT_COLOR_02, TEXT_COLOR_05};
 
     list->bufferItemFunc(state->listPtr + state->listItemSize * state->windowTopIndex, list->itemTextBuffer);
     list->iconDrawFunc(list->listWindow.windowId, state->windowTopIndex, list->listWindow.unkA);
@@ -736,7 +736,7 @@ static void PrintMatchCallFieldNames(struct PokenavListSub *list, u32 fieldId)
         gText_PokenavMatchCall_TrainerPokemon,
         gText_PokenavMatchCall_SelfIntroduction
     };
-    u8 colors[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
+    u8 colors[3] = {TEXT_COLOR_01, TEXT_COLOR_04, TEXT_COLOR_05};
     u32 top = (list->listWindow.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, top << 4, list->listWindow.width, 16);

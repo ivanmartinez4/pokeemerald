@@ -230,22 +230,22 @@
 #define EXT_CTRL_CODE_PAUSE_MUSIC            0x16
 #define EXT_CTRL_CODE_RESUME_MUSIC           0x17
 
-#define TEXT_COLOR_TRANSPARENT  0x0
-#define TEXT_COLOR_WHITE        0x1
-#define TEXT_COLOR_DARK_GRAY    0x2
-#define TEXT_COLOR_LIGHT_GRAY   0x3
-#define TEXT_COLOR_RED          0x4
-#define TEXT_COLOR_LIGHT_RED    0x5
-#define TEXT_COLOR_GREEN        0x6
-#define TEXT_COLOR_LIGHT_GREEN  0x7
-#define TEXT_COLOR_BLUE         0x8
-#define TEXT_COLOR_LIGHT_BLUE   0x9
-#define TEXT_DYNAMIC_COLOR_1    0xA // Usually white
-#define TEXT_DYNAMIC_COLOR_2    0xB // Usually white w/ tinge of green
-#define TEXT_DYNAMIC_COLOR_3    0xC // Usually white
-#define TEXT_DYNAMIC_COLOR_4    0xD // Usually aquamarine
-#define TEXT_DYNAMIC_COLOR_5    0xE // Usually blue-green
-#define TEXT_DYNAMIC_COLOR_6    0xF // Usually cerulean
+#define TEXT_COLOR_00           0x0
+#define TEXT_COLOR_01           0x1
+#define TEXT_COLOR_02           0x2
+#define TEXT_COLOR_03           0x3
+#define TEXT_COLOR_04           0x4
+#define TEXT_COLOR_05           0x5
+#define TEXT_COLOR_06           0x6
+#define TEXT_COLOR_07           0x7
+#define TEXT_COLOR_08           0x8
+#define TEXT_COLOR_09           0x9
+#define TEXT_COLOR_10           0xA
+#define TEXT_COLOR_11           0xB
+#define TEXT_COLOR_12           0xC
+#define TEXT_COLOR_13           0xD
+#define TEXT_COLOR_14           0xE
+#define TEXT_COLOR_15           0xF
 
 #define PLACEHOLDER_ID_UNKNOWN       0x0
 #define PLACEHOLDER_ID_PLAYER        0x1

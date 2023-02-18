@@ -400,8 +400,8 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
 };
 
 static const u16 sSelectText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal");
-static const u8 sMenuOptionTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
-static const u8 sSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
+static const u8 sMenuOptionTextColors[] = {TEXT_COLOR_00, TEXT_COLOR_02, TEXT_COLOR_00};
+static const u8 sSpeciesNameTextColors[] = {TEXT_COLOR_00, TEXT_COLOR_04, TEXT_COLOR_00};
 
 static const struct OamData sOam_Select_Pokeball =
 {
@@ -1012,8 +1012,8 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
 };
 
 static const u16 sSwapText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal"); // Identical to sSelectText_Pal
-static const u8 sSwapMenuOptionsTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
-static const u8 sSwapSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
+static const u8 sSwapMenuOptionsTextColors[] = {TEXT_COLOR_00, TEXT_COLOR_02, TEXT_COLOR_00};
+static const u8 sSwapSpeciesNameTextColors[] = {TEXT_COLOR_00, TEXT_COLOR_04, TEXT_COLOR_00};
 
 #define SWAPACTION_MON           1
 #define SWAPACTION_PKMN_FOR_SWAP 2
