@@ -48,15 +48,6 @@ static const u16 sTextWindowFrame18_Pal[] = INCBIN_U16("graphics/text_window/18.
 static const u16 sTextWindowFrame19_Pal[] = INCBIN_U16("graphics/text_window/19.gbapal");
 static const u16 sTextWindowFrame20_Pal[] = INCBIN_U16("graphics/text_window/20.gbapal");
 
-static const u16 sTextWindowPalettes[][16] =
-{
-    INCBIN_U16("graphics/text_window/message_box.gbapal"),
-    INCBIN_U16("graphics/text_window/text_pal1.gbapal"),
-    INCBIN_U16("graphics/text_window/text_pal2.gbapal"),
-    INCBIN_U16("graphics/text_window/text_pal3.gbapal"),
-    INCBIN_U16("graphics/text_window/text_pal4.gbapal")
-};
-
 static const struct TilesPal sWindowFrames[WINDOW_FRAMES_COUNT] =
 {
     {gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal},
@@ -157,31 +148,6 @@ void rbox_fill_rectangle(u8 windowId)
     u16 height = GetWindowAttribute(windowId, WINDOW_HEIGHT);
 
     FillBgTilemapBufferRect(bgLayer, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, 0x11);
-}
-
-const u16 *GetTextWindowPalette(u8 id)
-{
-    switch (id)
-    {
-    case 0:
-        id = 0x00;
-        break;
-    case 1:
-        id = 0x10;
-        break;
-    case 2:
-        id = 0x20;
-        break;
-    case 3:
-        id = 0x30;
-        break;
-    case 4:
-    default:
-        id = 0x40;
-        break;
-    }
-
-    return (const u16 *)(sTextWindowPalettes) + id;
 }
 
 const u16 *GetOverworldTextboxPalettePtr(void)

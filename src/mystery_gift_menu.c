@@ -408,7 +408,6 @@ static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         break;
     case 1:
         LoadPalette(sTextboxBorder_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         Menu_LoadStdPalAt(BG_PLTT_ID(12));
         LoadUserWindowBorderGfx(0, 0xA, BG_PLTT_ID(14));
         LoadUserWindowBorderGfx_(0, 0x1, BG_PLTT_ID(15));
