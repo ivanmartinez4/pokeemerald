@@ -725,10 +725,13 @@ PetalburgCity_Text_WaterReflection:
 	.string "What do you see reflected in your face?$"
 
 PetalburgCity_Text_FullPartyExplanation:
-	.string "Let's say you have six POKéMON.\n"
-	.string "If you catch another one…\p"
-	.string "It is automatically sent to a STORAGE\n"
-	.string "BOX over a PC connection.$"
+	.string "Hola, {COLOR TRANSPARENT}esto es {COLOR WHITE}una prueba.\n"
+	.string "{COLOR DARK_GRAY}¿Qué te parecen {COLOR LIGHT_GRAY}mis colores?\p"
+	.string "{COLOR BLUE}Yo creo {COLOR GREEN}que algunos {COLOR BLACK}son muy buenos.\n"
+	.string "{COLOR LIGHT_BLUE}Aunque otros {COLOR YELLOW} necesitan mejorar.\p"
+	.string "{COLOR RED}Por eso, {COLOR LIGHT_GREEN} me hace falta ayuda.\n"
+	.string "{COLOR DARK_BLUE}Por ejemplo, {COLOR ORANGE} este es {COLOR PINK} divertido.\p"
+	.string "{COLOR PURPLE}Y este, y {COLOR BROWN}este también…$"
 
 PetalburgCity_Text_GymSign:
 	.string "PETALBURG CITY POKéMON GYM\n"

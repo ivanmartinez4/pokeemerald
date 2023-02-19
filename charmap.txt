@@ -280,20 +280,18 @@ TRANSPARENT = 00
 WHITE = 01
 DARK_GRAY = 02
 LIGHT_GRAY = 03
-RED = 04
-LIGHT_RED = 05
-GREEN = 06
-LIGHT_GREEN = 07
-BLUE = 08
-LIGHT_BLUE = 09
-@ these next colors can be set to anything arbitrary at runtime
-@ usually though they'll have the textbox border colors as described below
-DYNAMIC_COLOR1 = 0A @ white
-DYNAMIC_COLOR2 = 0B @ white with a tinge of green
-DYNAMIC_COLOR3 = 0C @ white 2
-DYNAMIC_COLOR4 = 0D @ aquamarine
-DYNAMIC_COLOR5 = 0E @ blue-green
-DYNAMIC_COLOR6 = 0F @ cerulean
+BLUE = 04
+LIGHT_BLUE = 05
+BLACK = 06
+GREEN = 07
+YELLOW = 08
+RED = 09
+LIGHT_GREEN = 0A
+DARK_BLUE = 0B
+ORANGE = 0C
+PINK = 0D
+PURPLE = 0E
+BROWN = 0F
 
 @ sound and music
 

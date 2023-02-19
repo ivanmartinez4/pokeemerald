@@ -687,7 +687,7 @@ static void (*const sTextPrinterTasks[])(u8 taskId) =
     [PSS_PAGE_CONTEST_MOVES] = Task_PrintContestMoves
 };
 
-static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
+static const u8 sMemoNatureTextColor[] = _("{COLOR GREEN}{SHADOW BLACK}");
 static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}"); // This is also affected by palettes, apparently
 static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 2}\n{DYNAMIC 3}");
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
@@ -3313,8 +3313,8 @@ static void PrintHeldItemName(void)
 }
 
 static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n) {
-  static const u8 textNatureMinus[] = _("{COLOR_HIGHLIGHT_SHADOW}{BLUE}{TRANSPARENT}{07}"); // Blue
-  static const u8 textNaturePlus[] = _("{COLOR_HIGHLIGHT_SHADOW}{05}{TRANSPARENT}{06}"); // Red
+  static const u8 textNatureMinus[] = _("{COLOR_HIGHLIGHT_SHADOW}{YELLOW}{TRANSPARENT}{LIGHT_BLUE}"); // Blue
+  static const u8 textNaturePlus[] = _("{COLOR_HIGHLIGHT_SHADOW}{GREEN}{TRANSPARENT}{BLACK}"); // Red
   static const u8 textNatureNone[] = _("{COLOR_HIGHLIGHT_SHADOW}{01}{TRANSPARENT}{DARK_GRAY}"); // Black
   u8 *txtPtr;
   if (natureMod == 0)
