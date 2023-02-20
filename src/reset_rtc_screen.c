@@ -61,7 +61,6 @@ struct ResetRtcInputMap
     /*0x4*/ u16 maxVal;
     /*0x6*/ u8 left;
     /*0x7*/ u8 right;
-    /*0x8*/ u8 unk; // never read
 };
 
 static void CB2_ResetRtcScreen(void);
@@ -123,7 +122,6 @@ static const struct ResetRtcInputMap sInputMap[] =
         .maxVal = 9999,
         .left = 0,
         .right = 2,
-        .unk = 0,
     },
     [SELECTION_HOURS - 1] = {
         .dataIndex = DATAIDX_HOURS,
@@ -131,7 +129,6 @@ static const struct ResetRtcInputMap sInputMap[] =
         .maxVal = 23,
         .left = 1,
         .right = 3,
-        .unk = 0,
     },
     [SELECTION_MINS - 1] = {
         .dataIndex = DATAIDX_MINS,
@@ -139,7 +136,6 @@ static const struct ResetRtcInputMap sInputMap[] =
         .maxVal = 59,
         .left = 2,
         .right = 4,
-        .unk = 0,
     },
     [SELECTION_SECS - 1] = {
         .dataIndex = DATAIDX_SECS,
@@ -147,7 +143,6 @@ static const struct ResetRtcInputMap sInputMap[] =
         .maxVal = 59,
         .left = 3,
         .right = 5,
-        .unk = 0,
     },
     [SELECTION_CONFIRM - 1] = {
         .dataIndex = DATAIDX_CONFIRM,
@@ -155,7 +150,6 @@ static const struct ResetRtcInputMap sInputMap[] =
         .maxVal = 0,
         .left = 4,
         .right = 0,
-        .unk = 6,
     },
 };
 

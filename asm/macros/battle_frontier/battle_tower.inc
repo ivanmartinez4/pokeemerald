@@ -47,7 +47,7 @@
 	special CallBattleTowerFunc
 	.endm
 
-	@ Load the parties, gfx, and other data (like Apprentice id) for the multi partner candidates
+	@ Load the parties, gfx, and other data for the multi partner candidates
 	.macro tower_loadpartners
 	setvar VAR_0x8004, BATTLE_TOWER_FUNC_LOAD_PARTNERS
 	special CallBattleTowerFunc

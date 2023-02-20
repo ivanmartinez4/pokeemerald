@@ -2198,7 +2198,6 @@ static void Task_Scene3_Kyogre(u8 taskId)
 #define sBaseY  data[2]
 #define sTaskId data[5]
 #define sDelay  data[6]
-#define sUnk    data[7] // Never read
 
 // taskId is used inconsistently for these two functions.
 // The sprite callback for the bubbles will always read it, unless delay is 0 to
@@ -2222,7 +2221,6 @@ static void CreateKyogreBubbleSprites_Body(u8 taskId)
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].sTaskId = taskId;
         gSprites[spriteId].sDelay = sKyogreBubbleData[i][2];
-        gSprites[spriteId].sUnk = 64;
     }
 }
 
@@ -2239,12 +2237,7 @@ static void CreateKyogreBubbleSprites_Fins(void)
                                 sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][1],
                                 i);
         gSprites[spriteId].invisible = TRUE;
-#ifdef BUGFIX
         gSprites[spriteId].sDelay = sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][2];
-#else
-        gSprites[spriteId].sDelay = sKyogreBubbleData[i][2]; // Using the wrong set of delays here
-#endif
-        gSprites[spriteId].sUnk = 64;
     }
 }
 
@@ -2297,7 +2290,6 @@ static void SpriteCB_KyogreBubbles(struct Sprite *sprite)
 #undef sBaseY
 #undef sTaskId
 #undef sDelay
-#undef sUnk
 
 static void Task_Scene3_LoadClouds1(u8 taskId)
 {

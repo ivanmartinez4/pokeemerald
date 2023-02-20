@@ -203,31 +203,6 @@ struct BerryCrush
     u32 berryPowderAmount;
 };
 
-struct ApprenticeMon
-{
-    u16 species;
-    u16 moves[MAX_MON_MOVES];
-    u16 item;
-};
-
-// This is for past players Apprentices or Apprentices received via Record Mix.
-// For the current Apprentice, see struct PlayersApprentice
-struct Apprentice
-{
-    u8 id:5;
-    u8 lvlMode:2;
-    //u8 padding1:1;
-    u8 numQuestions;
-    u8 number;
-    //u8 padding2;
-    struct ApprenticeMon party[MULTI_PARTY_SIZE];
-    u16 speechWon[EASY_CHAT_BATTLE_WORDS_COUNT];
-    u8 playerId[TRAINER_ID_LENGTH];
-    u8 playerName[PLAYER_NAME_LENGTH];
-    u8 language;
-    u32 checksum;
-};
-
 struct BattleTowerPokemon
 {
     u16 species;
@@ -403,30 +378,6 @@ struct BattleFrontier
     /*0xEFC*/ struct DomeMonData domePlayerPartyData[FRONTIER_PARTY_SIZE];
 };
 
-struct ApprenticeQuestion
-{
-    u8 questionId:2;
-    u8 monId:2;
-    u8 moveSlot:2;
-    u8 suggestedChange:2; // TRUE if told to use held item or second move, FALSE if told to use no item or first move
-    //u8 padding;
-    u16 data; // used both as an itemId and a moveId
-};
-
-struct PlayersApprentice
-{
-    /*0xB0*/ u8 id;
-    /*0xB1*/ u8 lvlMode:2;  //0: Unassigned, 1: Lv 50, 2: Open Lv
-    /*0xB1*/ u8 questionsAnswered:4;
-    /*0xB1*/ u8 leadMonId:2;
-    /*0xB2*/ u8 party:3;
-             u8 saveId:2;
-             //u8 padding1:3;
-    /*0xB4*/ u8 speciesIds[MULTI_PARTY_SIZE];
-    /*0xB7*/ //u8 padding2;
-    /*0xB8*/ struct ApprenticeQuestion questions[APPRENTICE_MAX_QUESTIONS];
-};
-
 struct RankingHall1P
 {
     u8 id[TRAINER_ID_LENGTH];
@@ -469,8 +420,6 @@ struct SaveBlock2
     /*0x18*/ struct Pokedex pokedex;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xB0*/ struct PlayersApprentice playerApprentice;
-    /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
