@@ -2820,7 +2820,7 @@ void SetContestants(u8 contestType, u8 rank)
     u8 opponentsCount = 0;
     u8 opponents[100];
     bool8 allowPostgameContestants = FALSE;
-    const u8 * filter;
+    const u8 *filter;
 
     TryPutPlayerLast();
 
@@ -2939,7 +2939,7 @@ static void DrawContestantWindowText(void)
 
 static u8 *Contest_CopyStringWithColor(const u8 *string, u8 color)
 {
-    u8 * ptr = StringCopy(gDisplayedStringBattle, gText_ColorTransparent);
+    u8 *ptr = StringCopy(gDisplayedStringBattle, gText_ColorTransparent);
     ptr[-1] = color; // Overwrites the "{COLOR TRANSPARENT}" part of the string.
     ptr = StringCopy(ptr, string);
 
@@ -3052,9 +3052,9 @@ static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 ind
     species = SanitizeSpecies(species);
 
     if (index == gContestPlayerMonIndex)
-        HandleLoadSpecialPokePic(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], species, personality);
+        HandleLoadSpecialPokePic(FALSE, gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], species, personality);
     else
-        HandleLoadSpecialPokePic(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], species, personality);
+        HandleLoadSpecialPokePic(FALSE, gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT], species, personality);
 
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
     SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_PLAYER_LEFT);
@@ -5218,7 +5218,7 @@ static void SetBattleTargetSpritePosition(void)
 
 static void SetMoveTargetPosition(u16 move)
 {
-    switch (gBattleMoves[move].target)
+    switch (GetBattlerMoveTargetType(gBattlerAttacker, move))
     {
     case MOVE_TARGET_USER_OR_SELECTED:
     case MOVE_TARGET_USER:

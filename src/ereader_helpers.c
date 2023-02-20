@@ -139,7 +139,7 @@ bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet * hillSet)
     return result;
 }
 
-static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u8 * buffer)
+static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u8 *buffer)
 {
     if (TryReadSpecialSaveSector(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
         return FALSE;

@@ -368,9 +368,6 @@ static void AddHatchedMonToParty(u8 id)
 
     GetMonNickname2(mon, gStringVar1);
 
-    ball = ITEM_POKE_BALL;
-    SetMonData(mon, MON_DATA_POKEBALL, &ball);
-
     // A met level of 0 is interpreted on the summary screen as "hatched at"
     metLevel = 0;
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
@@ -434,7 +431,7 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesL
         {
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[species],
+            HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->sprites.ptr[(useAlt * 2) + B_POSITION_OPPONENT_LEFT],
                                      species, pid);
             LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
@@ -920,8 +917,10 @@ u8 GetEggCyclesToSubtract(void)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG))
         {
-            u8 ability = GetMonAbility(&gPlayerParty[i]);
-            if (ability == ABILITY_MAGMA_ARMOR || ability == ABILITY_FLAME_BODY)
+            u16 ability = GetMonAbility(&gPlayerParty[i]);
+            if (ability == ABILITY_MAGMA_ARMOR
+             || ability == ABILITY_FLAME_BODY
+             || ability == ABILITY_STEAM_ENGINE)
                 return 2;
         }
     }

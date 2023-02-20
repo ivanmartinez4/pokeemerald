@@ -2,6 +2,11 @@
 #define GUARD_POKEMON_H
 
 #include "sprite.h"
+#include "constants/region_map_sections.h"
+#include "constants/map_groups.h"
+
+#define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
+#define FORM_SPECIES_END (0xffff)
 
 // Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
@@ -165,30 +170,30 @@ struct BattlePokemon
     /*0x15*/ u32 speedIV:5;
     /*0x16*/ u32 spAttackIV:5;
     /*0x17*/ u32 spDefenseIV:5;
-    /*0x17*/ u32 isEgg:1;
-    /*0x17*/ u32 abilityNum:1;
+    /*0x17*/ u32 abilityNum:2;
     /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
-    /*0x20*/ u8 ability;
-    /*0x21*/ u8 type1;
-    /*0x22*/ u8 type2;
-    /*0x23*/ u8 unknown;
-    /*0x24*/ u8 pp[MAX_MON_MOVES];
-    /*0x28*/ u16 hp;
-    /*0x2A*/ u8 level;
-    /*0x2B*/ u8 friendship;
-    /*0x2C*/ u16 maxHP;
-    /*0x2E*/ u16 item;
-    /*0x30*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x3B*/ u8 ppBonuses;
-    /*0x3C*/ u8 otName[PLAYER_NAME_LENGTH + 1];
-    /*0x44*/ u32 experience;
-    /*0x48*/ u32 personality;
-    /*0x4C*/ u32 status1;
-    /*0x50*/ u32 status2;
-    /*0x54*/ u32 otId;
+    /*0x20*/ u16 ability;
+    /*0x22*/ u8 type1;
+    /*0x23*/ u8 type2;
+    /*0x24*/ u8 type3;
+    /*0x25*/ u8 pp[MAX_MON_MOVES];
+    /*0x29*/ u16 hp;
+    /*0x2B*/ u8 level;
+    /*0x2C*/ u8 friendship;
+    /*0x2D*/ u16 maxHP;
+    /*0x2F*/ u16 item;
+    /*0x31*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x3C*/ u8 ppBonuses;
+    /*0x3D*/ u8 otName[PLAYER_NAME_LENGTH + 1];
+    /*0x45*/ u32 experience;
+    /*0x49*/ u32 personality;
+    /*0x4D*/ u32 status1;
+    /*0x51*/ u32 status2;
+    /*0x55*/ u32 otId;
+    /*0x59*/ u8 metLevel;
 };
 
-struct SpeciesInfo
+struct SpeciesInfo /*0x24*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -198,38 +203,43 @@ struct SpeciesInfo
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 expYield;
- /* 0x0A */ u16 evYield_HP:2;
- /* 0x0A */ u16 evYield_Attack:2;
- /* 0x0A */ u16 evYield_Defense:2;
- /* 0x0A */ u16 evYield_Speed:2;
- /* 0x0B */ u16 evYield_SpAttack:2;
- /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 itemCommon;
- /* 0x0E */ u16 itemRare;
- /* 0x10 */ u8 genderRatio;
- /* 0x11 */ u8 eggCycles;
- /* 0x12 */ u8 friendship;
- /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroups[2];
- /* 0x16 */ u8 abilities[2];
- /* 0x18 */ u8 safariZoneFleeRate;
- /* 0x19 */ u8 bodyColor : 7;
+ /* 0x09 padding */
+ /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
+ /* 0x0C */ u16 evYield_HP:2;
+            u16 evYield_Attack:2;
+            u16 evYield_Defense:2;
+            u16 evYield_Speed:2;
+ /* 0x0D */ u16 evYield_SpAttack:2;
+            u16 evYield_SpDefense:2;
+ /* 0x0E */ u16 itemCommon;
+ /* 0x10 */ u16 itemRare;
+ /* 0x12 */ u8 genderRatio;
+ /* 0x13 */ u8 eggCycles;
+ /* 0x14 */ u8 friendship;
+ /* 0x15 */ u8 growthRate;
+ /* 0x16 */ u8 eggGroups[2];
+ /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
+ /* 0x1E */ u8 safariZoneFleeRate;
+ /* 0x1F */ u8 bodyColor : 7;
             u8 noFlip : 1;
+ /* 0x20 */ u16 flags;
 };
 
 struct BattleMove
 {
-    u8 effect;
-    u8 power;
+    u16 effect;
+    u16 power;  //higher than 255 for z moves
     u8 type;
     u8 accuracy;
     u8 pp;
     u8 secondaryEffectChance;
-    u8 target;
+    u16 target;
     s8 priority;
-    u8 flags;
+    u32 flags;
     u8 split;
+    u8 argument;
+    u8 zMovePower;
+    u8 zMoveEffect;
 };
 
 #define SPINDA_SPOT_WIDTH 16
@@ -241,10 +251,10 @@ struct SpindaSpot
     u16 image[SPINDA_SPOT_HEIGHT];
 };
 
-struct __attribute__((packed)) LevelUpMove
+struct LevelUpMove
 {
-    u16 move:9;
-    u16 level:7;
+    u16 move;
+    u16 level;
 };
 
 struct Evolution
@@ -252,6 +262,15 @@ struct Evolution
     u16 method;
     u16 param;
     u16 targetSpecies;
+};
+
+struct FormChange
+{
+    u16 method;
+    u16 targetSpecies;
+    u16 param1;
+    u16 param2;
+    u16 param3;
 };
 
 #define GET_SHINY_VALUE(otId, personality) (HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality))
@@ -268,7 +287,8 @@ extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
 extern const u8 *const gItemEffectTable[];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
-extern const u16 *const gLevelUpLearnsets[];
+extern const struct LevelUpMove *const gLevelUpLearnsets[];
+extern const u16 *const gTeachableLearnsets[];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];
@@ -276,6 +296,8 @@ extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
 extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const s8 gNatureStatTable[][5];
+extern const u16 *const gFormSpeciesIdTables[NUM_SPECIES];
+extern const u32 sExpCandyExperienceTable[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -308,7 +330,6 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
-s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 bankAtk, u8 bankDef);
 u8 CountAliveMonsInBattle(u8 caseId);
 u8 GetDefaultMoveTarget(u8 battlerId);
 u8 GetMonGender(struct Pokemon *mon);
@@ -329,12 +350,13 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 void CopyMon(void *dest, void *src, size_t size);
 u8 GiveMonToPlayer(struct Pokemon *mon);
+u8 SendMonToPC(struct Pokemon* mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
 u8 GetMonsStateToDoubles(void);
 u8 GetMonsStateToDoubles_2(void);
-u8 GetAbilityBySpecies(u16 species, u8 abilityNum);
-u8 GetMonAbility(struct Pokemon *mon);
+u16 GetAbilityBySpecies(u16 species, u8 abilityNum);
+u16 GetMonAbility(struct Pokemon *mon);
 void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord);
 u8 GetSecretBaseTrainerPicIndex(void);
 u8 GetSecretBaseTrainerClass(void);
@@ -344,6 +366,7 @@ void GetSpeciesName(u8 *name, u16 species);
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
 void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex);
+void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst);
 void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex);
 bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex);
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e);
@@ -352,7 +375,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
 u8 *UseStatIncreaseItem(u16 itemId);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, struct Pokemon *tradePartner);
 u16 HoennPokedexNumToSpecies(u16 hoennNum);
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16 nationalNum);
@@ -370,8 +393,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event);
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 u16 GetMonEVCount(struct Pokemon *mon);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
-u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm);
-u32 CanSpeciesLearnTMHM(u16 species, u8 tm);
+u8 CanLearnTeachableMove(u16 species, u16 move);
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon);
@@ -414,5 +436,14 @@ bool8 HasTwoFramesAnimation(u16 species);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode);
 void DestroyMonSpritesGfxManager(u8 managerId);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
+u16 GetFormSpeciesId(u16 speciesId, u8 formId);
+u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg);
+u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
+bool32 ShouldShowFemaleDifferences(u16 species, u32 personality);
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon);
+u32 GetMonFriendshipScore(struct Pokemon *pokemon);
+void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 
 #endif // GUARD_POKEMON_H

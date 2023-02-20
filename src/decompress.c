@@ -3,11 +3,10 @@
 #include "data.h"
 #include "decompress.h"
 #include "pokemon.h"
+#include "pokemon_debug.h"
 #include "text.h"
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
-
-static void DuplicateDeoxysTiles(void *pointer, s32 species);
 
 void LZDecompressWram(const u32 *src, void *dest)
 {
@@ -69,24 +68,30 @@ void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffe
         LZ77UnCompWram(src->data, buffer);
 }
 
-void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality)
+void DecompressPicFromTableGender(void* buffer, s32 species, u32 personality)
 {
-    bool8 isFrontPic;
-
-    if (src == &gMonFrontPicTable[species])
-        isFrontPic = TRUE; // frontPic
+    if (ShouldShowFemaleDifferences(species, personality))
+        DecompressPicFromTable(&gMonFrontPicTableFemale[species], buffer, species);
     else
-        isFrontPic = FALSE; // backPic
-
-    LoadSpecialPokePic(src, dest, species, personality, isFrontPic);
+        DecompressPicFromTable(&gMonFrontPicTable[species], buffer, species);
 }
 
-void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
+void HandleLoadSpecialPokePic(bool32 isFrontPic, void *dest, s32 species, u32 personality)
+{
+    LoadSpecialPokePic(dest, species, personality, isFrontPic);
+}
+
+void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
     if (species > NUM_SPECIES) // is species unknown? draw the ? icon
         LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
     else
-        LZ77UnCompWram(src->data, dest);
+    {
+        if (isFrontPic)
+            LZ77UnCompWram(gMonFrontPicTable[species].data, dest);
+        else
+            LZ77UnCompWram(gMonBackPicTable[species].data, dest);
+    }
 
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }

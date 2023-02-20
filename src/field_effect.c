@@ -913,7 +913,7 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
-    s32 spriteId = CreateMonPicSprite(species, 0, 0x8000, MON_PIC_NO_AFFINE_FRONT, x, y, 0, gMonPaletteTable[species].tag);
+    s32 spriteId = CreateMonPicSprite(species, 0, 0x8000, TRUE, x, y, 0, gMonPaletteTable[species].tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
@@ -924,10 +924,8 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-    // force load unique tag here to avoid collision with follower pokemon
-    u8 paletteSlot = AllocSpritePalette(FLDEFF_PAL_TAG_FIELD_MOVE_MON);
-    u16 spriteId = CreateMonPicSprite(species, otId, personality, MON_PIC_NO_AFFINE_FRONT, x, y, paletteSlot, TAG_NONE);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_FIELD_MOVE_MON) + 0x10);
+    u16 spriteId = CreateMonPicSprite(species, otId, personality, TRUE, x, y, 0, spritePalette->tag);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
     else

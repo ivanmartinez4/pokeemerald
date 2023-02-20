@@ -130,7 +130,7 @@ const u16 gBattleFrontierHeldItems[] =
     [BATTLE_FRONTIER_ITEM_APICOT_BERRY]   = ITEM_APICOT_BERRY,
     [BATTLE_FRONTIER_ITEM_STARF_BERRY]    = ITEM_STARF_BERRY,
     [BATTLE_FRONTIER_ITEM_LIECHI_BERRY]   = ITEM_LIECHI_BERRY,
-    [BATTLE_FRONTIER_ITEM_STICK]          = ITEM_STICK,
+    [BATTLE_FRONTIER_ITEM_LEEK]           = ITEM_LEEK,
     [BATTLE_FRONTIER_ITEM_LAX_INCENSE]    = ITEM_LAX_INCENSE,
     [BATTLE_FRONTIER_ITEM_AGUAV_BERRY]    = ITEM_AGUAV_BERRY,
     [BATTLE_FRONTIER_ITEM_FIGY_BERRY]     = ITEM_FIGY_BERRY,
@@ -1347,6 +1347,13 @@ static void HandleSpecialTrainerBattleEnd(void)
     case SPECIAL_BATTLE_EREADER:
         CopyEReaderTrainerFarewellMessage();
         break;
+    case SPECIAL_BATTLE_MULTI:
+        for (i = 0; i < 3; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
+                gSaveBlock1Ptr->playerParty[i] = gPlayerParty[i];
+        }
+        break;
     }
 
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -1488,6 +1495,34 @@ void DoSpecialTrainerBattle(void)
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(B_TRANSITION_MAGMA);
+        break;
+    case SPECIAL_BATTLE_MULTI:
+        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD) // Player + AI against wild mon
+        {
+            gBattleTypeFlags = BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
+        }
+        else if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_1) // Player + AI against one trainer
+        {
+            gTrainerBattleOpponent_B = 0xFFFF;
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
+        }
+        else // MULTI_BATTLE_2_VS_2
+        {
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
+        }
+
+        gPartnerSpriteId = VarGet(gSpecialVar_0x8007);
+        gPartnerTrainerId = VarGet(gSpecialVar_0x8006) + TRAINER_CUSTOM_PARTNER;
+        FillPartnerParty(gPartnerTrainerId);
+        CreateTask(Task_StartBattleAfterTransition, 1);
+        PlayMapChosenOrBattleBGM(0);
+        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD)
+            BattleTransition_StartOnField(GetWildBattleTransition());
+        else
+            BattleTransition_StartOnField(GetTrainerBattleTransition());
+
+        if (gSpecialVar_0x8005 & MULTI_BATTLE_CHOOSE_MONS) // Skip mons restoring(done in the script)
+            gBattleScripting.specialTrainerBattleType = 0xFF;
         break;
     }
 }
@@ -1984,7 +2019,6 @@ void TryHideBattleTowerReporter(void)
 
 static void FillPartnerParty(u16 trainerId)
 {
-
 }
 
 bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst)

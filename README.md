@@ -4,7 +4,6 @@ Características del juego:
 
 -Ha sido limpiado en buena medida, lo que lo hace estar optimizado, y, sobre todo, tener más espacio para nuevo contenido.
 
-
 Créditos:
 
 -Pret (incluida su wiki).

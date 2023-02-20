@@ -2394,7 +2394,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     // If the player is trading an Egg then the partner must also be trading an Egg
     // Odd that this wasn't checked earlier, as by this point we know either the partner doesn't have an Egg or that both do.
     if (playerSpecies2 == SPECIES_EGG && playerSpecies2 != partnerSpecies)
-        return UR_TRADE_MSG_MON_CANT_BE_TRADED_1;
+        return UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW;
 
     // If the player doesn't have the National Dex then Eggs and non-Hoenn Pokémon can't be traded
     if (!playerHasNationalDex)
@@ -2403,7 +2403,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
             return UR_TRADE_MSG_EGG_CANT_BE_TRADED;
 
         if (!IsSpeciesInHoennDex(playerSpecies2))
-            return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
+            return UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW;
 
         if (!IsSpeciesInHoennDex(partnerSpecies))
             return UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED;
@@ -2431,7 +2431,7 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
     if (IsSpeciesInHoennDex(species2))
         return CAN_REGISTER_MON;
 
-    return CANT_REGISTER_MON;
+    return CANT_REGISTER_MON_NOW;
 }
 
 static void SpriteCB_LinkMonGlow(struct Sprite *sprite)
@@ -2593,10 +2593,7 @@ static void LoadTradeMonPic(u8 whichParty, u8 state)
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-        if (whichParty == TRADE_PLAYER)
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
-        else
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[whichParty * 2 + B_POSITION_OPPONENT_LEFT], species, personality);
+        HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites.ptr[whichParty * 2 + B_POSITION_OPPONENT_LEFT], species, personality);
 
         LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
         sTradeAnim->monSpecies[whichParty] = species;
@@ -3589,10 +3586,10 @@ static bool8 DoTradeAnim_Cable(void)
     case STATE_POKEBALL_ARRIVE_WAIT:
         if (gSprites[sTradeAnim->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[sTradeAnim->monSpecies[TRADE_PARTNER]],
-                                        gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
-                                        sTradeAnim->monSpecies[TRADE_PARTNER],
-                                        sTradeAnim->monPersonalities[TRADE_PARTNER]);
+            HandleLoadSpecialPokePic(TRUE,
+                                     gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
+                                     sTradeAnim->monSpecies[TRADE_PARTNER],
+                                     sTradeAnim->monPersonalities[TRADE_PARTNER]);
             sTradeAnim->state++;
         }
         break;
@@ -3654,7 +3651,7 @@ static bool8 DoTradeAnim_Cable(void)
     case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         sTradeAnim->state++;
@@ -4082,10 +4079,10 @@ static bool8 DoTradeAnim_Wireless(void)
     case STATE_POKEBALL_ARRIVE_WAIT:
         if (gSprites[sTradeAnim->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[sTradeAnim->monSpecies[TRADE_PARTNER]],
-                                        gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
-                                        sTradeAnim->monSpecies[TRADE_PARTNER],
-                                        sTradeAnim->monPersonalities[TRADE_PARTNER]);
+            HandleLoadSpecialPokePic(TRUE,
+                                      gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
+                                      sTradeAnim->monSpecies[TRADE_PARTNER],
+                                      sTradeAnim->monPersonalities[TRADE_PARTNER]);
             sTradeAnim->state++;
         }
         break;
@@ -4147,7 +4144,7 @@ static bool8 DoTradeAnim_Wireless(void)
     case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         sTradeAnim->state++;
@@ -4190,7 +4187,7 @@ static void CB2_TryLinkTradeEvolution(void)
         break;
     case 4:
         gCB2_AfterEvolution = CB2_SaveAndEndTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         else if (IsWirelessTrade())
