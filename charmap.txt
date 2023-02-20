@@ -163,17 +163,16 @@ PLAYER         = FD 01
 STR_VAR_1      = FD 02
 STR_VAR_2      = FD 03
 STR_VAR_3      = FD 04
-KUN            = FD 05
-RIVAL          = FD 06
+RIVAL          = FD 05
 @ version-dependent strings (originally made for Ruby/Sapphire differences)
 @ Emerald uses the Sapphire strings (except for VERSION).
-VERSION        = FD 07 @ "EMERALD"
-AQUA           = FD 08
-MAGMA          = FD 09
-ARCHIE         = FD 0A
-MAXIE          = FD 0B
-KYOGRE         = FD 0C
-GROUDON        = FD 0D
+VERSION        = FD 06 @ "EMERALD"
+AQUA           = FD 07
+MAGMA          = FD 08
+ARCHIE         = FD 09
+MAXIE          = FD 0A
+KYOGRE         = FD 0B
+GROUDON        = FD 0C
 
 @ battle string placeholders
 
@@ -266,13 +265,13 @@ RESUME_MUSIC = FC 18
 
 @ fonts
 
-FONT_SMALL = FC 06 00
-FONT_NORMAL = FC 06 01
+FONT_SMALL_NARROW = FC 06 00
+FONT_SMALL = FC 06 01
 FONT_SHORT = FC 06 02
-FONT_BIG = FC 06 03
-FONT_BORDER = FC 06 04
-FONT_NARROW = FC 06 07
-FONT_SMALL_NARROW = FC 06 08
+FONT_NARROW = FC 06 03
+FONT_NORMAL = FC 06 04
+FONT_BIG = FC 06 05
+FONT_BORDER = FC 06 06
 
 @ colors
 

@@ -10,14 +10,14 @@
 #define TEXT_SKIP_DRAW 0xFF
 
 enum {
+    FONT_SMALL_NARROW,
     FONT_SMALL,
+    FONT_SHORT,
+    FONT_NARROW,
     FONT_NORMAL,
     FONT_BIG,
     FONT_BORDER,
-    FONT_SHORT,
     FONT_BRAILLE,
-    FONT_NARROW,
-    FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
 };
 
 // Return values for font functions

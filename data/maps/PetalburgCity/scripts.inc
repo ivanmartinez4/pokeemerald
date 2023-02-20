@@ -698,9 +698,9 @@ PetalburgCity_EventScript_GymBoy::
 	end
 
 PetalburgCity_Text_WhereIsWally:
-	.string "Where has our WALLY gone?\p"
-	.string "We have to leave for VERDANTURF TOWN\n"
-	.string "very soon…$"
+	.string "{FONT_NARROW}ABCDEFGHIJKLMNÑOPQRSTUVWXYZ.\p"
+	.string "abcdefghijklmnñopqrstuvwxyz,\n"
+	.string "áéíóú…0123456789$"
 
 PetalburgCity_Text_AreYouRookieTrainer:
 	.string "Hiya! Are you maybe…\n"

@@ -36,7 +36,7 @@ else
 EXE :=
 endif
 
-TITLE       := POKEMON EMER
+TITLE       := POKEMON ALBOR
 GAME_CODE   := BPES
 MAKER_CODE  := 01
 REVISION    := 0

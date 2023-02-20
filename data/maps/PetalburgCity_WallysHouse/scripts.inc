@@ -69,7 +69,7 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf::
 
 PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:
 	.string "You're…\n"
-	.string "Ah, you must be {PLAYER}{KUN}, right?\p"
+	.string "Ah, you must be {PLAYER}, right?\p"
 	.string "Thank you for playing with WALLY a\n"
 	.string "little while ago.\p"
 	.string "He's been frail and sickly ever\n"
@@ -87,7 +87,7 @@ PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:
 	.string "I wonder how our WALLY is doing?$"
 
 PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
-	.string "{PLAYER}{KUN}! Please excuse us for\n"
+	.string "{PLAYER}! Please excuse us for\n"
 	.string "dragging you here this way.\p"
 	.string "But our WALLY's become very healthy\n"
 	.string "since he went to VERDANTURF TOWN.\p"
@@ -114,16 +114,15 @@ PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:
 PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity:
 	.string "Oh? You met WALLY in\n"
 	.string "EVER GRANDE CITY?\p"
-	.string "Oh, {PLAYER}{KUN}, don't be silly.\p"
+	.string "Oh, {PLAYER}, don't be silly.\p"
 	.string "He may have gotten healthy, but he\n"
 	.string "can't go somewhere far away like\l"
 	.string "that all by himself.$"
 
 PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:
-	.string "WALLY was really happy when he told\n"
-	.string "us that he caught a POKéMON.\p"
-	.string "It's been ages since I've seen him\n"
-	.string "smile like that.$"
+	.string "{FONT_NARROW}ABCDEFGHIJKLMNÑOPQRSTUVWXYZ.\p"
+	.string "abcdefghijklmnñopqrstuvwxyz,\n"
+	.string "áéíóú…0123456789$"
 
 PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:
 	.string "I want you to keep this a secret\n"
