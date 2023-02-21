@@ -3,7 +3,6 @@ ALIGNED(4) static const u8 sText_Colon[] = _(":");
 ALIGNED(4) static const u8 sText_ID[] = _("{ID}");
 ALIGNED(4) static const u8 sText_PleaseStartOver[] = _("Please start over from the beginning.");
 ALIGNED(4) static const u8 sText_WirelessSearchCanceled[] = _("The Wireless Communication\nSystem search has been canceled.");
-ALIGNED(4) static const u8 sText_AwaitingCommunucation2[] = _("Awaiting communication\nfrom another player."); // Unused
 ALIGNED(4) static const u8 sText_AwaitingCommunication[] = _("{STR_VAR_1}! Awaiting\ncommunication from another player.");
 ALIGNED(4) static const u8 sText_AwaitingLinkPressStart[] = _("{STR_VAR_1}! Awaiting link!\nPress Start when everyone's ready.");
 ALIGNED(4) static const u8 sJPText_SingleBattle[] = _("シングルバトルを かいさいする");
@@ -13,30 +12,9 @@ ALIGNED(4) static const u8 sJPText_TradePokemon[] = _("ポケモンこうかん�
 ALIGNED(4) static const u8 sJPText_Chat[] = _("チャットを かいさいする");
 ALIGNED(4) static const u8 sJPText_DistWonderCard[] = _("ふしぎなカードをくばる");
 ALIGNED(4) static const u8 sJPText_DistWonderNews[] = _("ふしぎなニュースをくばる");
-ALIGNED(4) static const u8 sJPText_DistMysteryEvent[] = _("ふしぎなできごとを かいさいする"); // Unused
-ALIGNED(4) static const u8 sJPText_HoldPokemonJump[] = _("なわとびを かいさいする");
 ALIGNED(4) static const u8 sJPText_HoldBerryCrush[] = _("きのみマッシャーを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldBerryPicking[] = _("きのみどりを かいさいする");
 ALIGNED(4) static const u8 sJPText_HoldSpinTrade[] = _("ぐるぐるこうかんを かいさいする");
 ALIGNED(4) static const u8 sJPText_HoldSpinShop[] = _("ぐるぐるショップを かいさいする");
-
-// Unused
-static const u8 *const sJPLinkGroupActionTexts[] = {
-    sJPText_SingleBattle,
-    sJPText_DoubleBattle,
-    sJPText_MultiBattle,
-    sJPText_TradePokemon,
-    sJPText_Chat,
-    sJPText_DistWonderCard,
-    sJPText_DistWonderNews,
-    sJPText_DistWonderCard,
-    sJPText_HoldPokemonJump,
-    sJPText_HoldBerryCrush,
-    sJPText_HoldBerryPicking,
-    sJPText_HoldBerryPicking,
-    sJPText_HoldSpinTrade,
-    sJPText_HoldSpinShop
-};
 
 static const u8 sText_1PlayerNeeded[] = _("1 player\nneeded.");
 static const u8 sText_2PlayersNeeded[] = _("2 players\nneeded.");
@@ -446,8 +424,6 @@ ALIGNED(4) static const u8 sText_TradingBoardInfo[] = _("This Trading Board is u
                                                         "and trade them with many, many\l"
                                                         "other Trainers.\p"
                                                         "Would you like to register one of\nyour Pokémon?");
-ALIGNED(4) static const u8 sText_ThankYouForRegistering[] = _("We have registered your Pokémon for\ntrade on the Trading Board.\pThank you for using this service!\p"); // unused
-ALIGNED(4) static const u8 sText_NobodyHasRegistered[] = _("Nobody has registered any Pokémon\nfor trade on the Trading Board.\p\n"); // unused
 ALIGNED(4) static const u8 sText_ChooseRequestedMonType[] = _("Please choose the type of Pokémon\nthat you would like in the trade.\n");
 ALIGNED(4) static const u8 sText_WhichMonWillYouOffer[] = _("Which of your party Pokémon will\nyou offer in trade?\p");
 ALIGNED(4) static const u8 sText_RegistrationCanceled[] = _("Registration has been canceled.\p");
@@ -456,21 +432,11 @@ ALIGNED(4) static const u8 sText_TradeCanceled[] = _("The trade has been cancele
 ALIGNED(4) static const u8 sText_CancelRegistrationOfMon[] = _("Cancel the registration of your\nLv. {STR_VAR_2} {STR_VAR_1}?");
 ALIGNED(4) static const u8 sText_CancelRegistrationOfEgg[] = _("Cancel the registration of your\nEgg?");
 ALIGNED(4) static const u8 sText_RegistrationCanceled2[] = _("The registration has been canceled.\p");
-ALIGNED(4) static const u8 sText_TradeTrainersWillBeListed[] = _("Trainers wishing to make a trade\nwill be listed."); // unused
-ALIGNED(4) static const u8 sText_ChooseTrainerToTradeWith2[] = _("Please choose the Trainer with whom\nyou would like to trade Pokémon."); // unused
 ALIGNED(4) static const u8 sText_AskTrainerToMakeTrade[] = _("Would you like to ask {STR_VAR_1} to\nmake a trade?");
-ALIGNED(4) static const u8 sText_AwaitingResponseFromTrainer2[] = _("Awaiting a response from\nthe other Trainer…"); // unused
-ALIGNED(4) static const u8 sText_NotRegisteredAMonForTrade[] = _("You have not registered a Pokémon\nfor trading.\p"); // unused
 ALIGNED(4) static const u8 sText_DontHaveTypeTrainerWants[] = _("You don't have a {STR_VAR_2}-type\nPokémon that {STR_VAR_1} wants.\p");
 ALIGNED(4) static const u8 sText_DontHaveEggTrainerWants[] = _("You don't have an Egg that\n{STR_VAR_1} wants.\p");
 ALIGNED(4) static const u8 sText_PlayerCantTradeForYourMon[] = _("{STR_VAR_1} can't make a trade for\nyour Pokémon right now.\p");
 ALIGNED(4) static const u8 sText_CantTradeForPartnersMon[] = _("You can't make a trade for\n{STR_VAR_1}'s Pokémon right now.\p");
-
-// Unused
-static const u8 *const sCantTradeMonTexts[] = {
-    sText_PlayerCantTradeForYourMon,
-    sText_CantTradeForPartnersMon
-};
 
 ALIGNED(4) static const u8 sText_TradeOfferRejected[] = _("Your trade offer was rejected.\p");
 ALIGNED(4) static const u8 sText_EggTrade[] = _("Egg Trade");
@@ -482,9 +448,7 @@ ALIGNED(4) static const u8 sText_ChooseLeaderMultiBattle[] = _("Please choose th
 ALIGNED(4) static const u8 sText_ChooseTrainerToTradeWith[] = _("Please choose the Trainer to\ntrade with.");
 ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderCards[] = _("Please choose the Trainer who is\nsharing Wonder Cards.");
 ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderNews[] = _("Please choose the Trainer who is\nsharing Wonder News.");
-ALIGNED(4) static const u8 sText_ChooseLeaderPokemonJump[] = _("Jump with mini Pokémon!\nPlease choose the Leader.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryCrush[] = _("Berry Crush!\nPlease choose the Leader.");
-ALIGNED(4) static const u8 sText_ChooseLeaderBerryPicking[] = _("Dodrio Berry-Picking!\nPlease choose the Leader.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryBlender[] = _("Berry Blender!\nPlease choose the Leader.");
 ALIGNED(4) static const u8 sText_ChooseLeaderRecordCorner[] = _("Record Corner!\nPlease choose the Leader.");
 ALIGNED(4) static const u8 sText_ChooseLeaderCoolContest[] = _("Coolness Contest!\nPlease choose the Leader.");
@@ -501,9 +465,7 @@ static const u8 *const sChooseTrainerTexts[NUM_LINK_GROUP_TYPES] =
     [LINK_GROUP_DOUBLE_BATTLE]     = sText_ChooseTrainerDoubleBattle,
     [LINK_GROUP_MULTI_BATTLE]      = sText_ChooseLeaderMultiBattle,
     [LINK_GROUP_TRADE]             = sText_ChooseTrainerToTradeWith,
-    [LINK_GROUP_POKEMON_JUMP]      = sText_ChooseLeaderPokemonJump,
     [LINK_GROUP_BERRY_CRUSH]       = sText_ChooseLeaderBerryCrush,
-    [LINK_GROUP_BERRY_PICKING]     = sText_ChooseLeaderBerryPicking,
     [LINK_GROUP_WONDER_CARD]       = sText_ChooseTrainerToShareWonderCards,
     [LINK_GROUP_WONDER_NEWS]       = sText_ChooseTrainerToShareWonderNews,
     [LINK_GROUP_UNION_ROOM_RESUME] = NULL,
@@ -550,9 +512,7 @@ ALIGNED(4) static const u8 sText_Chat[] = _("Chat");
 ALIGNED(4) static const u8 sText_Cards[] = _("Cards");
 ALIGNED(4) static const u8 sText_WonderCards[] = _("Wonder Cards");
 ALIGNED(4) static const u8 sText_WonderNews[] = _("Wonder News");
-ALIGNED(4) static const u8 sText_PokemonJump[] = _("Pokémon Jump");
 ALIGNED(4) static const u8 sText_BerryCrush[] = _("Berry Crush");
-ALIGNED(4) static const u8 sText_BerryPicking[] = _("Berry-Picking");
 ALIGNED(4) static const u8 sText_Search[] = _("Search");
 ALIGNED(4) static const u8 sText_BerryBlender[] = _("Berry Blender");
 ALIGNED(4) static const u8 sText_RecordCorner[] = _("Record Corner");
@@ -596,12 +556,8 @@ static const u8 *const sLinkGroupActivityNameTexts[] = {
     [ACTIVITY_BATTLE_MULTI]      = sText_MultiBattle,
     [ACTIVITY_TRADE]             = sText_PokemonTrades,
     [ACTIVITY_CHAT]              = sText_Chat,
-    [ACTIVITY_WONDER_CARD_DUP]   = sText_WonderCards,
-    [ACTIVITY_WONDER_NEWS_DUP]   = sText_WonderNews,
     [ACTIVITY_CARD]              = sText_Cards,
-    [ACTIVITY_POKEMON_JUMP]      = sText_PokemonJump,
     [ACTIVITY_BERRY_CRUSH]       = sText_BerryCrush,
-    [ACTIVITY_BERRY_PICK]        = sText_BerryPicking,
     [ACTIVITY_SEARCH]            = sText_Search,
     [ACTIVITY_SPIN_TRADE]        = sText_EmptyString,
     [ACTIVITY_BATTLE_TOWER_OPEN] = sText_BattleTowerOpenLv,
@@ -643,9 +599,7 @@ static const u32 sLinkGroupToActivityAndCapacity[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_DOUBLE_BATTLE]     = ACTIVITY_BATTLE_DOUBLE     | LINK_GROUP_CAPACITY(0, 2),
     [LINK_GROUP_MULTI_BATTLE]      = ACTIVITY_BATTLE_MULTI      | LINK_GROUP_CAPACITY(0, 4),
     [LINK_GROUP_TRADE]             = ACTIVITY_TRADE             | LINK_GROUP_CAPACITY(0, 2),
-    [LINK_GROUP_POKEMON_JUMP]      = ACTIVITY_POKEMON_JUMP      | LINK_GROUP_CAPACITY(2, 5),
     [LINK_GROUP_BERRY_CRUSH]       = ACTIVITY_BERRY_CRUSH       | LINK_GROUP_CAPACITY(2, 5),
-    [LINK_GROUP_BERRY_PICKING]     = ACTIVITY_BERRY_PICK        | LINK_GROUP_CAPACITY(3, 5),
     [LINK_GROUP_WONDER_CARD]       = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
     [LINK_GROUP_WONDER_NEWS]       = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
     [LINK_GROUP_UNION_ROOM_RESUME] = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
@@ -1022,9 +976,7 @@ ALIGNED(4) static const u8 sAcceptedActivityIds_SingleBattle[]    = {ACTIVITY_BA
 ALIGNED(4) static const u8 sAcceptedActivityIds_DoubleBattle[]    = {ACTIVITY_BATTLE_DOUBLE, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_MultiBattle[]     = {ACTIVITY_BATTLE_MULTI, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_Trade[]           = {ACTIVITY_TRADE, 0xff};
-ALIGNED(4) static const u8 sAcceptedActivityIds_PokemonJump[]     = {ACTIVITY_POKEMON_JUMP, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_BerryCrush[]      = {ACTIVITY_BERRY_CRUSH, 0xff};
-ALIGNED(4) static const u8 sAcceptedActivityIds_BerryPicking[]    = {ACTIVITY_BERRY_PICK, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_WonderCard[]      = {ACTIVITY_WONDER_CARD, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_WonderNews[]      = {ACTIVITY_WONDER_NEWS, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_Resume[]          = {
@@ -1045,9 +997,7 @@ ALIGNED(4) static const u8 sAcceptedActivityIds_Unk11[]           = {
     ACTIVITY_BATTLE_DOUBLE,
     ACTIVITY_BATTLE_MULTI,
     ACTIVITY_TRADE,
-    ACTIVITY_POKEMON_JUMP,
     ACTIVITY_BERRY_CRUSH,
-    ACTIVITY_BERRY_PICK,
     ACTIVITY_WONDER_CARD,
     ACTIVITY_WONDER_NEWS,
     ACTIVITY_SPIN_TRADE,
@@ -1068,9 +1018,7 @@ static const u8 *const sAcceptedActivityIds[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_DOUBLE_BATTLE]     = sAcceptedActivityIds_DoubleBattle,
     [LINK_GROUP_MULTI_BATTLE]      = sAcceptedActivityIds_MultiBattle,
     [LINK_GROUP_TRADE]             = sAcceptedActivityIds_Trade,
-    [LINK_GROUP_POKEMON_JUMP]      = sAcceptedActivityIds_PokemonJump,
     [LINK_GROUP_BERRY_CRUSH]       = sAcceptedActivityIds_BerryCrush,
-    [LINK_GROUP_BERRY_PICKING]     = sAcceptedActivityIds_BerryPicking,
     [LINK_GROUP_WONDER_CARD]       = sAcceptedActivityIds_WonderCard,
     [LINK_GROUP_WONDER_NEWS]       = sAcceptedActivityIds_WonderNews,
     [LINK_GROUP_UNION_ROOM_RESUME] = sAcceptedActivityIds_Resume,
@@ -1094,9 +1042,7 @@ static const u8 sLinkGroupToURoomActivity[NUM_LINK_GROUP_TYPES + 2] =
     [LINK_GROUP_DOUBLE_BATTLE]     = ACTIVITY_BATTLE_DOUBLE,
     [LINK_GROUP_MULTI_BATTLE]      = ACTIVITY_BATTLE_MULTI,
     [LINK_GROUP_TRADE]             = ACTIVITY_TRADE,
-    [LINK_GROUP_POKEMON_JUMP]      = ACTIVITY_POKEMON_JUMP,
     [LINK_GROUP_BERRY_CRUSH]       = ACTIVITY_BERRY_CRUSH,
-    [LINK_GROUP_BERRY_PICKING]     = ACTIVITY_BERRY_PICK,
     [LINK_GROUP_WONDER_CARD]       = ACTIVITY_WONDER_CARD,
     [LINK_GROUP_WONDER_NEWS]       = ACTIVITY_WONDER_NEWS,
     [LINK_GROUP_UNION_ROOM_RESUME] = ACTIVITY_NONE,

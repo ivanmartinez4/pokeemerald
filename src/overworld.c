@@ -40,7 +40,6 @@
 #include "palette.h"
 #include "play_time.h"
 #include "random.h"
-#include "roamer.h"
 #include "rotating_gate.h"
 #include "safari_zone.h"
 #include "save.h"
@@ -421,8 +420,6 @@ static void UpdateMiscOverworldStates(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     ChooseAmbientCrySpecies();
     ResetCyclingRoadChallengeData();
-    UpdateLocationHistoryForRoamer();
-    RoamerMoveToOtherLocationSet();
 }
 
 void ResetGameStats(void)
@@ -816,8 +813,6 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
         ApplyWeatherColorMapToPal(paletteIndex);
 
     InitSecondaryTilesetAnimation();
-    UpdateLocationHistoryForRoamer();
-    RoamerMove();
     DoCurrentWeather();
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
@@ -861,8 +856,6 @@ static void LoadMapFromWarp(bool32 a1)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
-    UpdateLocationHistoryForRoamer();
-    RoamerMoveToOtherLocationSet();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())

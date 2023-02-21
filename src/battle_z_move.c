@@ -199,10 +199,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
         holdEffect = gBattleStruct->debugHoldEffects[battlerId];
     else
 #endif
-    if (item == ITEM_ENIGMA_BERRY)
-        return FALSE;   // HoldEffect = gEnigmaBerries[battlerId].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(item);
+    holdEffect = ItemId_GetHoldEffect(item);
 
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
     {

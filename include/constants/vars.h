@@ -59,7 +59,7 @@
 #define VAR_FRIENDSHIP_STEP_COUNTER                      0x402A
 #define VAR_POISON_STEP_COUNTER                          0x402B
 #define VAR_RESET_RTC_ENABLE                             0x402C
-#define VAR_ENIGMA_BERRY_AVAILABLE                       0x402D
+#define VAR_UNUSED_0x402D                                0x402D
 #define VAR_WONDER_NEWS_STEP_COUNTER                     0x402E
 
 #define VAR_FRONTIER_MANIAC_FACILITY                     0x402F
@@ -229,7 +229,7 @@
 #define VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE               0x40D2
 #define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE              0x40D3
 #define VAR_SS_TIDAL_SCOTT_STATE                         0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
-#define VAR_ROAMER_POKEMON                               0x40D5 // 0 = Latias, 1 = Latios
+#define VAR_UNUSED_0x40D5                                0x40D5
 #define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6
 #define VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE                 0x40D7
 #define VAR_SOOTOPOLIS_WALLACE_STATE                     0x40D8

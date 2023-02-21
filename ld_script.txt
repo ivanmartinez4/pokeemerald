@@ -81,8 +81,6 @@ SECTIONS {
         src/union_room_chat.o(.text);
         src/berry_crush.o(.text);
         src/berry_powder.o(.text);
-        src/dodrio_berry_picking.o(.text);
-        src/pokemon_jump.o(.text);
         src/minigame_countdown.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
@@ -259,7 +257,6 @@ SECTIONS {
         src/move_relearner.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
-        src/roamer.o(.text);
         src/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
@@ -475,8 +472,6 @@ SECTIONS {
         src/union_room_chat.o(.rodata);
         src/berry_crush.o(.rodata);
         src/berry_powder.o(.rodata);
-        src/dodrio_berry_picking.o(.rodata);
-        src/pokemon_jump.o(.rodata);
         src/minigame_countdown.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
@@ -626,7 +621,6 @@ SECTIONS {
         src/battle_controller_safari.o(.rodata);
         src/battle_anim_effects_3.o(.rodata);
         src/move_relearner.o(.rodata);
-        src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
