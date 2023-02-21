@@ -177,20 +177,6 @@ OldaleTown_Movement_PlayerNorth:
 	walk_up
 	step_end
 
-OldaleTown_Movement_Unknown2:
-	walk_left
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
 OldaleTown_EventScript_FootprintsMan::
 	lock
 	faceplayer
