@@ -3354,7 +3354,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
         StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(linkDirection(objEvent)));
 
     UpdateObjectEventSpriteInvisibility(sprite, FALSE);
-    if (objEvent->triggerGroundEffectsOnMove)
+    if (objEvent->triggerGroundEffectsOnStop && !objEvent->invisible)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);
         sprite->data[7]++;
