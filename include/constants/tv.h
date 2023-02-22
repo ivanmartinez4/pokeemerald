@@ -70,9 +70,6 @@
 //
 #define TVGROUP_OUTBREAK_END                        60
 
-// The first 5 elements of gSaveBlock1Ptr->tvShows are reserved
-// for TV shows from TVGROUP_NORMAL. The remainder are for TV
-// shows from TVGROUP_RECORD_MIX.
 #define NUM_NORMAL_TVSHOW_SLOTS 5
 
 #define PLAYERS_HOUSE_TV_NONE  0
