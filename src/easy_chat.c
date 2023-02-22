@@ -1485,9 +1485,6 @@ void ShowEasyChatScreen(void)
     case EASY_CHAT_TYPE_DUMMY_SHOW:
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
-        words = (u16 *)gStringVar3;
-        words[0] = gSaveBlock1Ptr->dewfordTrends[0].words[0];
-        words[1] = gSaveBlock1Ptr->dewfordTrends[0].words[1];
         break;
     case EASY_CHAT_TYPE_GABBY_AND_TY:
         break;
@@ -1502,15 +1499,12 @@ void ShowEasyChatScreen(void)
     case EASY_CHAT_TYPE_FAN_QUESTION:
         break;
     case EASY_CHAT_TYPE_QUIZ_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer;
         break;
     case EASY_CHAT_TYPE_QUIZ_QUESTION:
         return;
     case EASY_CHAT_TYPE_QUIZ_SET_QUESTION:
-        words = gSaveBlock1Ptr->lilycoveLady.quiz.question;
         break;
     case EASY_CHAT_TYPE_QUIZ_SET_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer;
         break;
     case EASY_CHAT_TYPE_APPRENTICE:
         break;
@@ -1527,25 +1521,7 @@ void ShowEasyChatScreen(void)
 
 static void CB2_QuizLadyQuestion(void)
 {
-    LilycoveLady *lilycoveLady;
 
-    UpdatePaletteFade();
-    switch (gMain.state)
-    {
-    case 0:
-        FadeScreen(FADE_TO_BLACK, 0);
-        break;
-    case 1:
-        if (!gPaletteFade.active)
-        {
-            lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-            lilycoveLady->quiz.playerAnswer = EC_EMPTY_WORD;
-            CleanupOverworldWindowsAndTilemaps();
-            DoQuizQuestionEasyChatScreen();
-        }
-        return;
-    }
-    gMain.state ++;
 }
 
 void QuizLadyShowQuizQuestion(void)
@@ -1581,35 +1557,22 @@ static void EnterQuizLadyScreen(u16 funcId)
 
 static void DoQuizAnswerEasyChatScreen(void)
 {
-    DoEasyChatScreen(
-        EASY_CHAT_TYPE_QUIZ_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer,
-        CB2_ReturnToFieldContinueScript,
-        EASY_CHAT_PERSON_DISPLAY_NONE);
+
 }
 
 static void DoQuizQuestionEasyChatScreen(void)
 {
-    DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.question,
-        CB2_ReturnToFieldContinueScript,
-        EASY_CHAT_PERSON_DISPLAY_NONE);
+
 }
 
 static void DoQuizSetAnswerEasyChatScreen(void)
 {
-    DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer,
-        CB2_ReturnToFieldContinueScript,
-        EASY_CHAT_PERSON_DISPLAY_NONE);
+
 }
 
 static void DoQuizSetQuestionEasyChatScreen(void)
 {
-    DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.question,
-        CB2_ReturnToFieldContinueScript,
-        EASY_CHAT_PERSON_DISPLAY_NONE);
+
 }
 
 static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonType)
@@ -2871,51 +2834,17 @@ static bool32 IsCurrentPhraseFull(void)
 
 static int IsQuizQuestionEmpty(void)
 {
-    int i;
-    struct SaveBlock1 *saveBlock1;
 
-    if (sEasyChatScreen->type == EASY_CHAT_TYPE_QUIZ_SET_QUESTION)
-        return IsCurrentPhraseEmpty();
-
-    saveBlock1 = gSaveBlock1Ptr;
-    for (i = 0; i < QUIZ_QUESTION_LEN; i++)
-    {
-        if (saveBlock1->lilycoveLady.quiz.question[i] != EC_EMPTY_WORD)
-            return FALSE;
-    }
-
-    return TRUE;
 }
 
 static int IsQuizAnswerEmpty(void)
 {
-    struct LilycoveLadyQuiz *quiz;
-    if (sEasyChatScreen->type == EASY_CHAT_TYPE_QUIZ_SET_ANSWER)
-        return IsCurrentPhraseEmpty();
 
-    quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    return quiz->correctAnswer == EC_EMPTY_WORD ? TRUE : FALSE;
 }
 
 static void GetQuizTitle(u8 *dst)
 {
-    u8 name[32];
-    struct SaveBlock1 *saveBlock1 = gSaveBlock1Ptr;
-    DynamicPlaceholderTextUtil_Reset();
 
-    // Buffer author's name
-    if (StringLength(saveBlock1->lilycoveLady.quiz.playerName) != 0)
-    {
-        TVShowConvertInternationalString(name, saveBlock1->lilycoveLady.quiz.playerName, saveBlock1->lilycoveLady.quiz.language);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, name);
-    }
-    else
-    {
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gText_Lady);
-    }
-
-    // "<author>'s Quiz"
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(dst, gText_F700sQuiz);
 }
 
 static void BufferCurrentPhraseToStringVar2(void)
@@ -5405,19 +5334,12 @@ void BufferDeepLinkPhrase(void)
 
 static bool8 IsAdditionalPhraseUnlocked(u8 additionalPhraseId)
 {
-    int byteOffset = additionalPhraseId / 8;
-    int shift = additionalPhraseId % 8;
-    return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
+
 }
 
 void UnlockAdditionalPhrase(u8 additionalPhraseId)
 {
-    if (additionalPhraseId < NUM_ADDITIONAL_PHRASES)
-    {
-        int byteOffset = additionalPhraseId / 8;
-        int shift = additionalPhraseId % 8;
-        gSaveBlock1Ptr->additionalPhrases[byteOffset] |= 1 << shift;
-    }
+
 }
 
 static u8 GetNumAdditionalPhrasesUnlocked(void)
@@ -5540,18 +5462,6 @@ void InitEasyChatPhrases(void)
         for (j = 0; j < MAIL_WORDS_COUNT; j++)
             gSaveBlock1Ptr->mail[i].words[j] = EC_EMPTY_WORD;
     }
-
-#ifndef UBFIX
-    // BUG: This is supposed to clear 64 bits, but this loop is clearing 64 bytes.
-    // However, this bug has no resulting effect on gameplay because only the
-    // Mauville old man data is corrupted, which is initialized directly after
-    // this function is called when starting a new game.
-    for (i = 0; i < 64; i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
-#else
-    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->additionalPhrases); i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
-#endif
 }
 
 static bool8 InitEasyChatScreenWordData(void)

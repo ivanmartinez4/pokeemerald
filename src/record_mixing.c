@@ -43,19 +43,9 @@
 // Used by several tasks in this file
 #define tState        data[0]
 
-struct RecordMixingHallRecords
-{
-    struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT * 2];
-    struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT * 2];
-};
-
 struct PlayerRecordRS
 {
     struct SecretBase secretBases[SECRET_BASES_COUNT];
-    TVShow tvShows[TV_SHOWS_COUNT];
-    PokeNews pokeNews[POKE_NEWS_COUNT];
-    struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
-    struct RecordMixingDaycareMail daycareMail;
     struct RSBattleTowerRecord battleTowerRecord;
     u16 giftItem;
     u16 filler[50];
@@ -64,14 +54,8 @@ struct PlayerRecordRS
 struct PlayerRecordEmerald
 {
     /* 0x0000 */ struct SecretBase secretBases[SECRET_BASES_COUNT];
-    /* 0x0C80 */ TVShow tvShows[TV_SHOWS_COUNT];
-    /* 0x1004 */ PokeNews pokeNews[POKE_NEWS_COUNT];
-    /* 0x1084 */ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
-    /* 0x10AC */ struct RecordMixingDaycareMail daycareMail;
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 giftItem;
-    /* 0x1214 */ LilycoveLady lilycoveLady;
-    /* 0x12DC */ struct PlayerHallRecords hallRecords;
     /* 0x1434 */ u8 filler_1434[16];
 }; // 0x1444
 
@@ -83,17 +67,11 @@ union PlayerRecord
 
 static bool8 sReadyToReceive;
 static struct SecretBase *sSecretBasesSave;
-static struct DewfordTrend *sDewfordTrendsSave;
-static struct RecordMixingDaycareMail *sRecordMixMailSave;
 static void *sBattleTowerSave;
-static LilycoveLady *sLilycoveLadySave;
 static void *sApprenticesSave;
 static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
 static u8 sDaycareMailRandSum;
-static struct PlayerHallRecords *sPartnerHallRecords[HALL_RECORDS_COUNT];
-
-static EWRAM_DATA struct RecordMixingDaycareMail sRecordMixMail = {0};
 static EWRAM_DATA union PlayerRecord *sReceivedRecords = NULL;
 static EWRAM_DATA union PlayerRecord *sSentRecord = NULL;
 
@@ -108,16 +86,16 @@ static u8 GetMultiplayerId_(void);
 static void *GetPlayerRecvBuffer(u8);
 static void ReceiveOldManData(u8, size_t, u8);
 static void ReceiveBattleTowerData(void *, size_t, u8);
-static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u8);
+static void ReceiveLilycoveLadyData(u8, size_t, u8);
 static void CalculateDaycareMailRandSum(const u8 *);
-static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *, size_t, u8, u8);
+static void ReceiveDaycareMailData(u8, size_t, u8, u8);
 static void ReceiveGiftItem(u16 *, u8 );
 static void Task_DoRecordMixing(u8);
 static void GetSavedApprentices(u8, u8);
 static void ReceiveApprenticeData(u8, size_t, u32);
-static void ReceiveRankingHallRecords(struct PlayerHallRecords *, size_t, u32);
-static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *);
-static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *);
+static void ReceiveRankingHallRecords(u8, size_t, u32);
+static void GetRecordMixingDaycareMail(u8);
+static void SanitizeDaycareMailForRuby(u8);
 static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *);
 static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *);
 
@@ -568,39 +546,14 @@ static void ReceiveBattleTowerData(void *records, size_t recordSize, u8 multipla
     PutNewBattleTowerRecord((void *)records + recordSize * multiplayerId);
 }
 
-static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u8 multiplayerId)
+static void ReceiveLilycoveLadyData(u8 unused, size_t recordSize, u8 multiplayerId)
 {
-    LilycoveLady *lilycoveLady;
-    u32 mixIndices[MAX_LINK_PLAYERS];
 
-    ShufflePlayerIndices(mixIndices);
-    memcpy((void *)records + recordSize * multiplayerId, sLilycoveLadySave, sizeof(LilycoveLady));
-
-    if (GetLilycoveLadyId() == 0)
-    {
-        lilycoveLady = Alloc(sizeof(*lilycoveLady));
-        if (lilycoveLady == NULL)
-            return;
-
-        memcpy(lilycoveLady, sLilycoveLadySave, sizeof(LilycoveLady));
-    }
-    else
-    {
-        lilycoveLady = NULL;
-    }
-
-    memcpy(sLilycoveLadySave, (void *)records + recordSize * mixIndices[multiplayerId], sizeof(LilycoveLady));
-    ResetLilycoveLadyForRecordMix();
-    if (lilycoveLady != NULL)
-    {
-        QuizLadyClearQuestionForRecordMix(lilycoveLady);
-        Free(lilycoveLady);
-    }
 }
 
-static u8 GetDaycareMailItemId(struct DaycareMail *mail)
+static u8 GetDaycareMailItemId(u8 unused)
 {
-    return mail->message.itemId;
+
 }
 
 // Indexes for a 2 element array used to store the multiplayer id and daycare
@@ -610,21 +563,9 @@ enum {
     DAYCARE_SLOT,
 };
 
-static void SwapDaycareMail(struct RecordMixingDaycareMail *records, size_t recordSize, u8 (*idxs)[2], u8 playerSlot1, u8 playerSlot2)
+static void SwapDaycareMail(u8 unused, size_t recordSize, u8 (*idxs)[2], u8 playerSlot1, u8 playerSlot2)
 {
-    struct DaycareMail temp;
-    struct RecordMixingDaycareMail *mixMail1, *mixMail2;
 
-    // 1st player's daycare mail --> temp
-    mixMail1 = (void *)records + recordSize * idxs[playerSlot1][MULTIPLAYER_ID];
-    memcpy(&temp, &mixMail1->mail[idxs[playerSlot1][DAYCARE_SLOT]], sizeof(struct DaycareMail));
-
-    // 2nd player's daycare mail --> 1st player's daycare mail
-    mixMail2 = (void *)records + recordSize * idxs[playerSlot2][MULTIPLAYER_ID];
-    memcpy(&mixMail1->mail[idxs[playerSlot1][DAYCARE_SLOT]], &mixMail2->mail[idxs[playerSlot2][DAYCARE_SLOT]], sizeof(struct DaycareMail));
-
-    // temp --> 2nd player's daycare mail
-    memcpy(&mixMail2->mail[idxs[playerSlot2][DAYCARE_SLOT]], &temp, sizeof(struct DaycareMail));
 }
 
 // This sum is used to determine which players will swap daycare mail if there are more than 2 players who can.
@@ -646,212 +587,9 @@ static u8 GetDaycareMailRandSum(void)
     return sDaycareMailRandSum;
 }
 
-static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size_t recordSize, u8 multiplayerId, u8 unused)
+static void ReceiveDaycareMailData(u8 unused1, size_t recordSize, u8 multiplayerId, u8 unused2)
 {
-    u16 i, j;
-    u8 linkPlayerCount;
-    u8 tableId;
-    struct RecordMixingDaycareMail *mixMail;
-    u8 playerSlot1, playerSlot2;
-    void *ptr;
-    u8 unusedArr1[MAX_LINK_PLAYERS];
-    u8 unusedArr2[MAX_LINK_PLAYERS];
-    struct RecordMixingDaycareMail *unusedMixMail[MAX_LINK_PLAYERS];
-    bool8 canHoldItem[MAX_LINK_PLAYERS][DAYCARE_MON_COUNT];
-    u8 idxs[MAX_LINK_PLAYERS][2];
-    u8 numDaycareCanHold;
-    u16 oldSeed;
-    bool32 anyRS;
 
-    // Seed RNG to the first player's trainer id so that
-    // every player has the same random swap occur
-    // (see the other use of Random2 in this function)
-    oldSeed = Random2();
-    SeedRng2(gLinkPlayers[0].trainerId);
-    linkPlayerCount = GetLinkPlayerCount();
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        unusedArr1[i] = 0xFF;
-        unusedArr2[i] = 0;
-        canHoldItem[i][0] = FALSE;
-        canHoldItem[i][1] = FALSE;
-    }
-
-    // Handle language differences if RS / Japanese players are present
-    anyRS = Link_AnyPartnersPlayingRubyOrSapphire();
-    for (i = 0; i < GetLinkPlayerCount(); i++)
-    {
-        u32 language, version;
-
-        mixMail = (void *)records + i * recordSize;
-        language = gLinkPlayers[i].language;
-        version = gLinkPlayers[i].version & 0xFF;
-
-        for (j = 0; j < mixMail->numDaycareMons; j++)
-        {
-            u16 otNameLanguage, nicknameLanguage;
-            struct DaycareMail *daycareMail = &mixMail->mail[j];
-
-            if (daycareMail->message.itemId == ITEM_NONE)
-                continue;
-
-            if (anyRS)
-            {
-                // Handle OT name language
-                if (StringLength(daycareMail->otName) <= 5)
-                {
-                    otNameLanguage = LANGUAGE_JAPANESE;
-                }
-                else
-                {
-                    StripExtCtrlCodes(daycareMail->otName);
-                    otNameLanguage = language;
-                }
-
-                // Handle nickname langugae
-                if (daycareMail->monName[0] == EXT_CTRL_CODE_BEGIN && daycareMail->monName[1] == EXT_CTRL_CODE_JPN)
-                {
-                    StripExtCtrlCodes(daycareMail->monName);
-                    nicknameLanguage = LANGUAGE_JAPANESE;
-                }
-                else
-                {
-                    nicknameLanguage = language;
-                }
-
-                // Set languages
-                if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
-                {
-                    daycareMail->gameLanguage = otNameLanguage;
-                    daycareMail->monLanguage = nicknameLanguage;
-                }
-            }
-            else if (language == LANGUAGE_JAPANESE)
-            {
-                if (IsStringJapanese(daycareMail->otName))
-                    daycareMail->gameLanguage = LANGUAGE_JAPANESE;
-                else
-                    daycareMail->gameLanguage = GAME_LANGUAGE;
-
-                if (IsStringJapanese(daycareMail->monName))
-                    daycareMail->monLanguage = LANGUAGE_JAPANESE;
-                else
-                    daycareMail->monLanguage = GAME_LANGUAGE;
-            }
-        }
-    }
-
-    // For each player, get which of their daycare Pokémon can hold items
-    // (can't hold items if already holding one, or if daycare slot is empty).
-    // Note that when deposited in the daycare, Pokémon have their mail taken
-    // from them and returned upon withdrawal, which means daycare Pokémon that
-    // have associated mail do not have a held item.
-    // Because not holding an item is the only determination for a swap, this also
-    // means that a "swap" can occur even if neither Pokémon has associated mail.
-    numDaycareCanHold = 0;
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        mixMail = (void *)records + i * recordSize;
-        if (mixMail->numDaycareMons == 0)
-            continue;
-
-        for (j = 0; j < mixMail->numDaycareMons; j++)
-        {
-            if (!mixMail->cantHoldItem[j])
-                canHoldItem[i][j] = TRUE;
-        }
-    }
-
-    // Fill the idxs array with data about which players
-    // and which daycare slots should swap mail.
-    j = 0;
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        mixMail = (void *)records + i * recordSize;
-
-        // Count number of players that have at least
-        // one daycare Pokémon with no held item
-        if (canHoldItem[i][0] == TRUE || canHoldItem[i][1] == TRUE)
-            numDaycareCanHold++;
-
-        if (canHoldItem[i][0] == TRUE && canHoldItem[i][1] == FALSE)
-        {
-            // Only daycare slot 0 can hold an item for this player, record it
-            idxs[j][MULTIPLAYER_ID] = i;
-            idxs[j][DAYCARE_SLOT] = 0;
-            j++;
-        }
-        else if (canHoldItem[i][0] == FALSE && canHoldItem[i][1] == TRUE)
-        {
-            // Only daycare slot 1 can hold an item for this player, record it
-            idxs[j][MULTIPLAYER_ID] = i;
-            idxs[j][DAYCARE_SLOT] = 1;
-            j++;
-        }
-        else if (canHoldItem[i][0] == TRUE && canHoldItem[i][1] == TRUE)
-        {
-            // Both daycare slots can hold an item, choose which one to use.
-            // If either one is the only one to have associated mail, use that one.
-            // If both do or don't have associated mail, choose one randomly.
-            u32 itemId1, itemId2;
-            idxs[j][MULTIPLAYER_ID] = i;
-            itemId1 = GetDaycareMailItemId(&mixMail->mail[0]);
-            itemId2 = GetDaycareMailItemId(&mixMail->mail[1]);
-
-            if ((!itemId1 && !itemId2) || (itemId1 && itemId2))
-                idxs[j][DAYCARE_SLOT] = Random2() % 2;
-            else if (itemId1 && !itemId2)
-                idxs[j][DAYCARE_SLOT] = 0;
-            else if (!itemId1 && itemId2)
-                 idxs[j][DAYCARE_SLOT] = 1;
-
-            j++;
-        }
-    }
-
-    // Copy the player's record mix mail 4 times to an array that's never read.
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        mixMail = &records[multiplayerId * recordSize];
-        unusedMixMail[i] = mixMail;
-    }
-
-    // Choose a random table id to determine who will
-    // swap if there are more than 2 candidate players.
-    tableId = GetDaycareMailRandSum() % NUM_SWAP_COMBOS;
-    switch (numDaycareCanHold)
-    {
-    case 2:
-        // 2 players can swap, just perform swap.
-        SwapDaycareMail(records, recordSize, idxs, 0, 1);
-        break;
-    case 3:
-        // 3 players can swap, select 2 and leave the 3rd out
-        playerSlot1 = sDaycareMailSwapIds_3Player[tableId][0];
-        playerSlot2 = sDaycareMailSwapIds_3Player[tableId][1];
-        SwapDaycareMail(records, recordSize, idxs, playerSlot1, playerSlot2);
-        break;
-    case 4:
-        // 4 players can swap, select which 2 pairings will swap
-        ptr = idxs;
-
-        // Swap pair 1
-        playerSlot1 = sDaycareMailSwapIds_4Player[tableId][0];
-        playerSlot2 = sDaycareMailSwapIds_4Player[tableId][1];
-        SwapDaycareMail(records, recordSize, ptr, playerSlot1, playerSlot2);
-
-        // Swap pair 2
-        playerSlot1 = sDaycareMailSwapIds_4Player[tableId][2];
-        playerSlot2 = sDaycareMailSwapIds_4Player[tableId][3];
-        SwapDaycareMail(records, recordSize, ptr, playerSlot1, playerSlot2);
-        break;
-    }
-
-    // Save player's record mixed mail to the daycare (in case it has changed)
-    mixMail = (void *)records + multiplayerId * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &mixMail->mail[0], sizeof(struct DaycareMail));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &mixMail->mail[1], sizeof(struct DaycareMail));
-    SeedRng(oldSeed);
 }
 
 
@@ -953,43 +691,9 @@ static void GetSavedApprentices(u8 unused1, u8 unused2)
 
 }
 
-void GetPlayerHallRecords(struct PlayerHallRecords *dst)
+void GetPlayerHallRecords(u8 unused)
 {
-    s32 i, j;
 
-    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
-    {
-        for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-        {
-            CopyTrainerId(dst->onePlayer[i][j].id, gSaveBlock2Ptr->playerTrainerId);
-            dst->onePlayer[i][j].language = GAME_LANGUAGE;
-            StringCopy(dst->onePlayer[i][j].name, gSaveBlock2Ptr->playerName);
-        }
-    }
-
-    for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-    {
-        dst->twoPlayers[j].language = GAME_LANGUAGE;
-        CopyTrainerId(dst->twoPlayers[j].id1, gSaveBlock2Ptr->playerTrainerId);
-        CopyTrainerId(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.opponentTrainerIds[j]);
-        StringCopy(dst->twoPlayers[j].name1, gSaveBlock2Ptr->playerName);
-        StringCopy(dst->twoPlayers[j].name2, gSaveBlock2Ptr->frontier.opponentNames[j]);
-    }
-
-    for (i = 0; i < FRONTIER_LVL_MODE_COUNT; i++)
-    {
-        dst->onePlayer[RANKING_HALL_TOWER_SINGLES][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_TOWER_DOUBLES][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_DOUBLES][i];
-        dst->onePlayer[RANKING_HALL_TOWER_MULTIS][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_MULTIS][i];
-        dst->onePlayer[RANKING_HALL_DOME][i].winStreak = gSaveBlock2Ptr->frontier.domeRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_PALACE][i].winStreak = gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_ARENA][i].winStreak = gSaveBlock2Ptr->frontier.arenaRecordStreaks[i];
-        dst->onePlayer[RANKING_HALL_FACTORY][i].winStreak = gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_PIKE][i].winStreak = gSaveBlock2Ptr->frontier.pikeRecordStreaks[i];
-        dst->onePlayer[RANKING_HALL_PYRAMID][i].winStreak = gSaveBlock2Ptr->frontier.pyramidRecordStreaks[i];
-
-        dst->twoPlayers[i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_LINK_MULTIS][i];
-    }
 }
 
 static bool32 IsApprenticeAlreadySaved(u8 unused1, u8 unused2)
@@ -1002,188 +706,39 @@ static void ReceiveApprenticeData(u8 unused, size_t recordSize, u32 multiplayerI
 
 }
 
-static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records, size_t recordSize, u32 multiplayerId, s32 linkPlayerCount)
+static void GetNewHallRecords(u8 unused, void *records, size_t recordSize, u32 multiplayerId, s32 linkPlayerCount)
 {
-    s32 i, j, k, l;
-    s32 repeatTrainers;
 
-    // Load sPartnerHallRecords with link partners' hall records
-    k = 0;
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        if (i != multiplayerId)
-            sPartnerHallRecords[k++] = records;
-        if (k == HALL_RECORDS_COUNT)
-            break;
-        records += recordSize;
-    }
-
-    // Get improved 1P hall records
-    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
-    {
-        for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-        {
-            // First get the existing saved records
-            for (k = 0; k < HALL_RECORDS_COUNT; k++)
-                dst->hallRecords1P[i][j][k] = gSaveBlock2Ptr->hallRecords1P[i][j][k];
-
-            // Then read the new mixed records
-            for (k = 0; k < linkPlayerCount - 1; k++)
-            {
-                repeatTrainers = 0;
-                for (l = 0; l < HALL_RECORDS_COUNT; l++)
-                {
-                    // If the new trainer is already in the existing saved records, only
-                    // use the new one if the win streak is better
-                    if (GetTrainerId(dst->hallRecords1P[i][j][l].id) == GetTrainerId(sPartnerHallRecords[k]->onePlayer[i][j].id))
-                    {
-                        repeatTrainers++;
-                        if (dst->hallRecords1P[i][j][l].winStreak < sPartnerHallRecords[k]->onePlayer[i][j].winStreak)
-                            dst->hallRecords1P[i][j][l] = sPartnerHallRecords[k]->onePlayer[i][j];
-                    }
-                }
-
-                // If all of the mixed records are new trainers, just save them
-                if (repeatTrainers == 0)
-                    dst->hallRecords1P[i][j][k + HALL_RECORDS_COUNT] = sPartnerHallRecords[k]->onePlayer[i][j];
-            }
-        }
-    }
-
-    // Get improved 2P hall records
-    for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-    {
-        // First get the existing saved records
-        for (k = 0; k < HALL_RECORDS_COUNT; k++)
-            dst->hallRecords2P[j][k] = gSaveBlock2Ptr->hallRecords2P[j][k];
-
-        // Then read the new mixed records
-        for (k = 0; k < linkPlayerCount - 1; k++)
-        {
-            repeatTrainers = 0;
-            for (l = 0; l < HALL_RECORDS_COUNT; l++)
-            {
-                // If the new trainer pair is already in the existing saved records, only
-                // use the new pair if the win streak is better
-                if (GetTrainerId(dst->hallRecords2P[j][l].id1) == GetTrainerId(sPartnerHallRecords[k]->twoPlayers[j].id1)
-                 && GetTrainerId(dst->hallRecords2P[j][l].id2) == GetTrainerId(sPartnerHallRecords[k]->twoPlayers[j].id2))
-                {
-                    repeatTrainers++;
-                    if (dst->hallRecords2P[j][l].winStreak < sPartnerHallRecords[k]->twoPlayers[j].winStreak)
-                        dst->hallRecords2P[j][l] = sPartnerHallRecords[k]->twoPlayers[j];
-                }
-            }
-
-            // If all of the mixed records are new trainer pairs, just save them
-            if (repeatTrainers == 0)
-                dst->hallRecords2P[j][k + HALL_RECORDS_COUNT] = sPartnerHallRecords[k]->twoPlayers[j];
-        }
-    }
 }
 
-static void FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct RankingHall1P *mixRecords)
+static void FillWinStreakRecords1P(u8 unused1, u8 unused2)
 {
-    s32 i, j;
 
-    // Fill the player's 1P records with the highest win streaks from the mixed records
-    for (i = 0; i < HALL_RECORDS_COUNT; i++)
-    {
-        // Get the highest remaining win streak in the mixed hall records
-        s32 highestWinStreak = 0;
-        s32 highestId = -1;
-        for (j = 0; j < HALL_RECORDS_COUNT * 2; j++)
-        {
-            if (mixRecords[j].winStreak > highestWinStreak)
-            {
-                highestId = j;
-                highestWinStreak = mixRecords[j].winStreak;
-            }
-        }
-
-        // Save the win streak to the player's records, then clear it from the mixed records
-        if (highestId >= 0)
-        {
-            playerRecords[i] = mixRecords[highestId];
-            mixRecords[highestId].winStreak = 0;
-        }
-    }
 }
 
-static void FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct RankingHall2P *mixRecords)
+static void FillWinStreakRecords2P(u8 unused1, u8 unused2)
 {
-    s32 i, j;
 
-    // Fill the player's 2P records with the highest win streaks from the mixed records
-    for (i = 0; i < HALL_RECORDS_COUNT; i++)
-    {
-        // Get the highest remaining win streak in the mixed hall records
-        s32 highestWinStreak = 0;
-        s32 highestId = -1;
-        for (j = 0; j < HALL_RECORDS_COUNT * 2; j++)
-        {
-            if (mixRecords[j].winStreak > highestWinStreak)
-            {
-                highestId = j;
-                highestWinStreak = mixRecords[j].winStreak;
-            }
-        }
-
-        // Save the win streak to the player's records, then clear it from the mixed records
-        if (highestId >= 0)
-        {
-            playerRecords[i] = mixRecords[highestId];
-            mixRecords[highestId].winStreak = 0;
-        }
-    }
 }
 
-static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallRecords)
+static void SaveHighestWinStreakRecords(u8 unused)
 {
-    s32 i, j;
 
-    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
-    {
-        for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-            FillWinStreakRecords1P(gSaveBlock2Ptr->hallRecords1P[i][j], mixHallRecords->hallRecords1P[i][j]);
-    }
-    for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-        FillWinStreakRecords2P(gSaveBlock2Ptr->hallRecords2P[j], mixHallRecords->hallRecords2P[j]);
 }
 
-static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t recordSize, u32 multiplayerId)
+static void ReceiveRankingHallRecords(u8 unused, size_t recordSize, u32 multiplayerId)
 {
-    u8 linkPlayerCount = GetLinkPlayerCount();
-    struct RecordMixingHallRecords *mixHallRecords = AllocZeroed(sizeof(*mixHallRecords));
 
-    GetNewHallRecords(mixHallRecords, records, recordSize, multiplayerId, linkPlayerCount);
-    SaveHighestWinStreakRecords(mixHallRecords);
-
-    Free(mixHallRecords);
 }
 
-static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)
+static void GetRecordMixingDaycareMail(u8 unused)
 {
-    sRecordMixMail.mail[0] = gSaveBlock1Ptr->daycare.mons[0].mail;
-    sRecordMixMail.mail[1] = gSaveBlock1Ptr->daycare.mons[1].mail;
-    InitDaycareMailRecordMixing(&gSaveBlock1Ptr->daycare, &sRecordMixMail);
-    *dst = *sRecordMixMailSave;
+
 }
 
-static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *src)
+static void SanitizeDaycareMailForRuby(u8 unused)
 {
-    s32 i;
 
-    for (i = 0; i < src->numDaycareMons; i++)
-    {
-        struct DaycareMail *mail = &src->mail[i];
-        if (mail->message.itemId != ITEM_NONE)
-        {
-            if (mail->gameLanguage != LANGUAGE_JAPANESE)
-                PadNameString(mail->otName, EXT_CTRL_CODE_BEGIN);
-
-            ConvertInternationalString(mail->monName, mail->monLanguage);
-        }
-    }
 }
 
 static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *src)

@@ -4,7 +4,7 @@
 void InitDewfordTrend(void);
 void UpdateDewfordTrendPerDay(u16 days);
 bool8 TrySetTrendyPhrase(u16 *phrase);
-void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 unused);
+void ReceiveDewfordTrendData(u8, size_t size, u8 unused);
 
 
 #endif // GUARD_DEWFORDTREND_H
