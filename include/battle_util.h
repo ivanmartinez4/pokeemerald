@@ -44,13 +44,12 @@
 // For the first argument of ItemBattleEffects, to deteremine which block of item effects to try
 #define ITEMEFFECT_ON_SWITCH_IN                 0
 #define ITEMEFFECT_NORMAL                       1
-#define ITEMEFFECT_DUMMY                        2 // Unused, empty
-#define ITEMEFFECT_MOVE_END                     3
-#define ITEMEFFECT_KINGSROCK                    4
-#define ITEMEFFECT_TARGET                       5
-#define ITEMEFFECT_ORBS                         6
-#define ITEMEFFECT_LIFEORB_SHELLBELL            7
-#define ITEMEFFECT_USE_LAST_ITEM                8 // move end effects for just the battler, not whole field
+#define ITEMEFFECT_MOVE_END                     2
+#define ITEMEFFECT_KINGSROCK                    3
+#define ITEMEFFECT_TARGET                       4
+#define ITEMEFFECT_ORBS                         5
+#define ITEMEFFECT_LIFEORB_SHELLBELL            6
+#define ITEMEFFECT_USE_LAST_ITEM                7 // move end effects for just the battler, not whole field
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 
