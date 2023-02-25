@@ -64,7 +64,6 @@ static const u8 *const sPlayersNeededOrModeTexts[][5] = {
 };
 
 ALIGNED(4) static const u8 sText_BButtonCancel[] = _("{B_BUTTON}Cancel");
-ALIGNED(4) static const u8 sJPText_SearchingForParticipants[] = _("ため\nさんかしゃ ぼしゅうちゅう です！"); // Unused, may have been cut off
 ALIGNED(4) static const u8 sText_PlayerContactedYouForXAccept[] = _("{STR_VAR_2} contacted you for\n{STR_VAR_1}. Accept?");
 ALIGNED(4) static const u8 sText_PlayerContactedYouShareX[] = _("{STR_VAR_2} contacted you.\nWill you share {STR_VAR_1}?");
 ALIGNED(4) static const u8 sText_PlayerContactedYouAddToMembers[] = _("{STR_VAR_2} contacted you.\nAdd to the members?");
@@ -129,14 +128,6 @@ static const u8 *const sLinkDroppedTexts[] = {
 
 ALIGNED(4) static const u8 sText_DoYouWantXMode[] = _("Do you want the {STR_VAR_2}\nMode?");
 ALIGNED(4) static const u8 sText_DoYouWantXMode2[] = _("Do you want the {STR_VAR_2}\nMode?");
-
-// Unused
-static const u8 *const sDoYouWantModeTexts[] = {
-    sText_DoYouWantXMode,
-    sText_DoYouWantXMode2
-};
-
-ALIGNED(4) static const u8 sText_CommunicatingPleaseWait[] = _("Communicating…\nPlease wait."); // Unused
 ALIGNED(4) static const u8 sText_AwaitingPlayersResponseAboutTrade[] = _("Awaiting {STR_VAR_1}'s response about\nthe trade…");
 ALIGNED(4) static const u8 sText_Communicating[] = _("Communicating{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n"
                                                      "{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
@@ -169,19 +160,6 @@ static const u8 *const sHiDoSomethingTexts[][GENDER_COUNT] = {
 ALIGNED(4) static const u8 sText_DoSomethingMale[] = _("Want to do something?");
 ALIGNED(4) static const u8 sText_DoSomethingFemale[] = _("Would you like to do something?");
 ALIGNED(4) static const u8 sText_DoSomethingAgainMale[] = _("{STR_VAR_1}: What would you like to\ndo now?");
-ALIGNED(4) static const u8 sText_DoSomethingAgainFemale[] = _("{STR_VAR_1}: Want to do anything else?"); // Unused
-
-// Unused
-static const u8 *const sDoSomethingTexts[][GENDER_COUNT] = {
-    {
-        sText_DoSomethingMale,
-        sText_DoSomethingFemale
-    }, {
-        sText_DoSomethingAgainMale,
-        sText_DoSomethingAgainMale // was probably supposed to be sText_DoSomethingAgainFemale
-    }
-};
-
 ALIGNED(4) static const u8 sText_SomebodyHasContactedYou[] = _("Somebody has contacted you.{PAUSE 60}");
 ALIGNED(4) static const u8 sText_PlayerHasContactedYou[] = _("{STR_VAR_1} has contacted you.{PAUSE 60}");
 
@@ -207,14 +185,6 @@ ALIGNED(4) static const u8 sText_ChatDropped[] = _("The chat has been dropped.\p
 ALIGNED(4) static const u8 sText_OfferDeclined1[] = _("You declined the offer.\p");
 ALIGNED(4) static const u8 sText_OfferDeclined2[] = _("You declined the offer.\p");
 ALIGNED(4) static const u8 sText_ChatEnded[] = _("The chat was ended.\p");
-
-// Unused
-static const u8 *const sInvitationTexts[] = {
-    sText_ShowTrainerCard,
-    sText_BattleChallenge,
-    sText_ChatInvitation,
-    sText_OfferToTradeMon
-};
 
 ALIGNED(4) static const u8 sText_JoinChatMale[] = _("Oh, hey! We're in a chat right now.\nWant to join us?");
 ALIGNED(4) static const u8 sText_PlayerJoinChatMale[] = _("{STR_VAR_1}: Hey, {PLAYER}!\nWe're having a chat right now.\lWant to join us?");
@@ -253,7 +223,6 @@ static const u8 *const sText_WaitOrShowCardTexts[GENDER_COUNT][4] = {
     }
 };
 
-ALIGNED(4) static const u8 sText_WaitForChatMale2[] = _("You want to chat, huh?\nSure, just wait a little."); // Unused
 ALIGNED(4) static const u8 sText_DoneWaitingBattleMale[] = _("Thanks for waiting!\nLet's get our battle started!{PAUSE 60}");
 ALIGNED(4) static const u8 sText_DoneWaitingChatMale[] = _("All right!\nLet's chat!{PAUSE 60}");
 ALIGNED(4) static const u8 sText_DoneWaitingBattleFemale[] = _("Sorry I made you wait!\nLet's get started!{PAUSE 60}");
@@ -484,11 +453,9 @@ static const u8 *const sChooseTrainerTexts[NUM_LINK_GROUP_TYPES] =
 };
 
 ALIGNED(4) static const u8 sText_SearchingForWirelessSystemWait[] = _("Searching for a Wireless\nCommunication System. Wait...");
-ALIGNED(4) static const u8 sText_MustHaveTwoMonsForDoubleBattle[] = _("For a Double Battle, you must have\nat least two Pokémon.\p"); // Unused
 ALIGNED(4) static const u8 sText_AwaitingPlayersResponse[] = _("Awaiting {STR_VAR_1}'s response…");
 ALIGNED(4) static const u8 sText_PlayerHasBeenAskedToRegisterYouPleaseWait[] = _("{STR_VAR_1} has been asked to register\nyou as a member. Please wait.");
 ALIGNED(4) static const u8 sText_AwaitingResponseFromWirelessSystem[] = _("Awaiting a response from the\nWireless Communication System.");
-ALIGNED(4) static const u8 sText_PleaseWaitForOtherTrainersToGather[] = _("Please wait for other Trainers to\ngather and get ready."); // Unused
 ALIGNED(4) static const u8 sText_NoCardsSharedRightNow[] = _("No Cards appear to be shared \nright now.");
 ALIGNED(4) static const u8 sText_NoNewsSharedRightNow[] = _("No News appears to be shared\nright now.");
 
@@ -918,17 +885,6 @@ static const struct ListMenuTemplate sTradeBoardListMenuTemplate = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
-// Unused
-static const struct WindowTemplate sWindowTemplate_Unused = {
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 5,
-    .width = 28,
-    .height = 12,
-    .paletteNum = 13,
-    .baseBlock = 0x0039
-};
-
 static const struct ListMenuItem sEmptyListMenuItems[] = {
     { sText_EmptyString,  0 },
     { sText_EmptyString,  1 },
@@ -946,28 +902,6 @@ static const struct ListMenuItem sEmptyListMenuItems[] = {
     { sText_EmptyString, 13 },
     { sText_EmptyString, 14 },
     { sText_EmptyString, 15 }
-};
-
-// Unused
-static const struct ListMenuTemplate sEmptyListMenuTemplate = {
-    .items = sEmptyListMenuItems,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = ItemPrintFunc_EmptyList,
-    .totalItems = ARRAY_COUNT(sEmptyListMenuItems),
-    .maxShowed = 4,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
-    .fontId = FONT_NORMAL,
-    .cursorKind = CURSOR_BLACK_ARROW
 };
 
 static const struct RfuPlayerData sUnionRoomPlayer_DummyRfu = {0};

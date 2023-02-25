@@ -28,7 +28,6 @@ gSpecials::
 	def_special GetSecretBaseOwnerAndState
 	def_special InitSecretBaseDecorationSprites
 	def_special SetDecoration
-	def_special GetObjectEventLocalIdByFlag
 	def_special GetSecretBaseTypeInFrontOfPlayer
 	def_special SetSecretBaseOwnerGfxId
 	def_special PutAwayDecorationIteration
@@ -43,8 +42,6 @@ gSpecials::
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered
 	def_special PlayerEnteredTradeSeat
-	def_special Script_StartWiredTrade
-	def_special CableClubSaveGame
 	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerObjectEvent
@@ -82,20 +79,16 @@ gSpecials::
 	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
 	def_special GetNextActiveShowIfMassOutbreak
-	def_special IsTVShowAlreadyInQueue
 	def_special CheckForPlayersHouseNews
 	def_special GetMomOrDadStringForTVMessage
 	def_special ResetTVShowState
 	def_special GetContestWinnerId
 	def_special GetContestPlayerId
-	def_special GetNpcContestantLocalId
 	def_special BufferContestWinnerTrainerName
 	def_special BufferContestWinnerMonName
 	def_special BufferContestTrainerAndMonNames
-	def_special GetContestMonConditionRanking
 	def_special SetContestTrainerGfxIds
 	def_special TryEnterContestMon
-	def_special GetContestantNamesAtRank
 	def_special SetLinkContestPlayerGfx
 	def_special GetContestMonCondition
 	def_special HasMonWonThisContestBefore
@@ -146,7 +139,6 @@ gSpecials::
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special ShouldReadyContestArtist
 	def_special SaveMuseumContestPainting
-	def_special DoesContestCategoryHaveMuseumPainting
 	def_special CountPlayerMuseumPaintings
 	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
 	def_special MauvilleGymSetDefaultBarriers
@@ -436,7 +428,6 @@ gSpecials::
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
 	def_special LinkContestWaitForConnection
-	def_special GetWirelessCommType
 	def_special LinkContestTryShowWirelessIndicator
 	def_special LinkContestTryHideWirelessIndicator
 	def_special IsWirelessContest

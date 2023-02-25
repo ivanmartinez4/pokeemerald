@@ -254,12 +254,6 @@ static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
 };
 
-// unused
-static const struct ScanlineEffectParams sIntroScanlineParams32Bit =
-{
-    &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_32BIT, 1
-};
-
 const struct SpriteTemplate gUnusedBattleInitSprite =
 {
     .tileTag = 0,
@@ -2613,12 +2607,6 @@ static void SpriteCB_BattleSpriteSlideLeft(struct Sprite *sprite)
             sprite->data[1] = 0;
         }
     }
-}
-
-// Unused
-static void SetIdleSpriteCallback(struct Sprite *sprite)
-{
-    sprite->callback = SpriteCB_Idle;
 }
 
 static void SpriteCB_Idle(struct Sprite *sprite)

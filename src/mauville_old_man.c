@@ -304,12 +304,6 @@ void SanitizeMauvilleOldManForRuby(u8 unused)
 
 }
 
-// Unused
-static void SetMauvilleOldManLanguage(u8 unused, u32 language1, u32 language2, u32 language3)
-{
-
-}
-
 void SanitizeReceivedEmeraldOldMan(u8 unused, u32 version, u32 language)
 {
 

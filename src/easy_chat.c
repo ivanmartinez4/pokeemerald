@@ -5384,29 +5384,6 @@ u16 GetNewHipsterPhraseToTeach(void)
     return EC_EMPTY_WORD;
 }
 
-// Unused
-u16 GetRandomTaughtHipsterPhrase(void)
-{
-    u16 i;
-    u16 additionalPhraseId = GetNumAdditionalPhrasesUnlocked();
-    if (additionalPhraseId == 0)
-        return EC_EMPTY_WORD;
-
-    additionalPhraseId = Random() % additionalPhraseId;
-    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
-    {
-        if (IsAdditionalPhraseUnlocked(i))
-        {
-            if (additionalPhraseId)
-                additionalPhraseId--;
-            else
-                return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
-        }
-    }
-
-    return EC_EMPTY_WORD;
-}
-
 static bool8 EasyChatIsNationalPokedexEnabled(void)
 {
     return IsNationalPokedexEnabled();
@@ -5517,21 +5494,6 @@ static u8 GetUnlockedEasyChatGroupId(u8 index)
         return EC_NUM_GROUPS;
     else
         return sWordData->unlockedGroupIds[index];
-}
-
-// Unused
-static u8 *BufferEasyChatWordGroupName(u8 *dest, u8 groupId, u16 totalChars)
-{
-    u16 i;
-    u8 *str = StringCopy(dest, sEasyChatGroupNamePointers[groupId]);
-    for (i = str - dest; i < totalChars; i++)
-    {
-        *str = CHAR_SPACE;
-        str++;
-    }
-
-    *str = EOS;
-    return str;
 }
 
 static const u8 *GetEasyChatWordGroupName(u8 groupId)

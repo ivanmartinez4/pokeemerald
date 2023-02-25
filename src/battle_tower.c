@@ -1066,36 +1066,6 @@ u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
     return trainerId;
 }
 
-// Unused
-static void GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *rangePtr)
-{
-    u16 trainerId, range;
-
-    if (challengeNum <= 7)
-    {
-        if (battleNum == FRONTIER_STAGES_PER_CHALLENGE - 1)
-        {
-            // The last battle in each challenge has a jump in difficulty, pulls from a table with higher ranges
-            range = (sFrontierTrainerIdRangesHard[challengeNum][1] - sFrontierTrainerIdRangesHard[challengeNum][0]) + 1;
-            trainerId = sFrontierTrainerIdRangesHard[challengeNum][0];
-        }
-        else
-        {
-            range = (sFrontierTrainerIdRanges[challengeNum][1] - sFrontierTrainerIdRanges[challengeNum][0]) + 1;
-            trainerId = sFrontierTrainerIdRanges[challengeNum][0];
-        }
-    }
-    else
-    {
-        // After challenge 7, trainer IDs always come from the last, hardest range, which is the same for both trainer ID tables
-        range = (sFrontierTrainerIdRanges[7][1] - sFrontierTrainerIdRanges[7][0]) + 1;
-        trainerId = sFrontierTrainerIdRanges[7][0];
-    }
-
-    *trainerIdPtr = trainerId;
-    *rangePtr = range;
-}
-
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
 {
 
@@ -2554,33 +2524,6 @@ u8 FacilityClassToGraphicsId(u8 facilityClass)
     else
     {
         return OBJ_EVENT_GFX_BOY_1;
-    }
-}
-
-bool32 ValidateBattleTowerRecord(u8 recordId) // unused
-{
-    s32 i;
-    u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
-    u32 checksum = 0;
-    u32 hasData = 0;
-    for (i = 0; i < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; i++) // - 4, because of the last fjeld bejng the checksum jtself.
-    {
-        checksum += record[i];
-        hasData |= record[i];
-    }
-
-    if (checksum == 0 && hasData == 0)
-    {
-        return FALSE;
-    }
-    else if (gSaveBlock2Ptr->frontier.towerRecords[recordId].checksum != checksum)
-    {
-        ClearBattleTowerRecord(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
-        return FALSE;
-    }
-    else
-    {
-        return TRUE;
     }
 }
 

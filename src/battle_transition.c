@@ -954,13 +954,6 @@ static void CB2_TestBattleTransition(void)
     UpdatePaletteFade();
 }
 
-// Unused
-static void TestBattleTransition(u8 transitionId)
-{
-    sTestingTransitionId = transitionId;
-    SetMainCallback2(CB2_TestBattleTransition);
-}
-
 void BattleTransition_StartOnField(u8 transitionId)
 {
     gMain.callback2 = CB2_OverworldBasic;

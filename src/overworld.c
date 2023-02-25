@@ -997,12 +997,6 @@ void SetObjectEventLoadFlag(u8 flag)
     sObjectEventLoadFlag = flag;
 }
 
-// Unused, sObjectEventLoadFlag is read directly
-static u8 GetObjectEventLoadFlag(void)
-{
-    return sObjectEventLoadFlag;
-}
-
 static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
 {
     if (!FlagGet(FLAG_SYS_WEATHER_CTRL))
@@ -2639,12 +2633,6 @@ u32 GetCableClubPartnersReady(void)
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_READY))
         return CABLE_SEAT_SUCCESS;
     return CABLE_SEAT_WAITING;
-}
-
-// Unused
-static bool32 IsAnyPlayerExitingCableClub(void)
-{
-    return IsAnyPlayerInLinkState(PLAYER_LINK_STATE_EXITING_ROOM);
 }
 
 u16 SetInCableClubSeat(void)

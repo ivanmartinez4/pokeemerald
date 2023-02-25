@@ -1083,14 +1083,6 @@ bool8 MetatileBehavior_IsSkyPillarClosedDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsRoulette(u8 metatileBehavior) // unused
-{
-    if (metatileBehavior == MB_ROULETTE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 bool8 MetatileBehavior_IsPokeblockFeeder(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POKEBLOCK_FEEDER)

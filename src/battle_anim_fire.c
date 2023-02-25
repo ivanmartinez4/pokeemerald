@@ -158,18 +158,6 @@ const struct SpriteTemplate gFirePlumeSpriteTemplate =
     .callback = AnimFirePlume,
 };
 
-// Unused
-static const struct SpriteTemplate sUnusedEmberFirePlumeSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gAnims_FirePlume,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimFirePlume,
-};
-
 static const union AnimCmd sAnim_UnusedSmallEmber[] =
 {
     ANIMCMD_FRAME(16, 6),
@@ -181,18 +169,6 @@ static const union AnimCmd sAnim_UnusedSmallEmber[] =
 static const union AnimCmd *const sAnims_UnusedSmallEmber[] =
 {
     sAnim_UnusedSmallEmber,
-};
-
-// Unused
-static const struct SpriteTemplate sUnusedSmallEmberSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_UnusedSmallEmber,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnusedSmallEmber,
 };
 
 static const union AffineAnimCmd sAffineAnim_SunlightRay[] =
@@ -323,13 +299,6 @@ static const union AffineAnimCmd sAffineAnim_Unused_1[] =
 {
     AFFINEANIMCMD_FRAME(0xA0, 0xA0, 0, 0),
     AFFINEANIMCMD_END,
-};
-
-// Unused
-static const union AffineAnimCmd *const sAffineAnims_Unused[] =
-{
-    sAffineAnim_Unused_0,
-    sAffineAnim_Unused_1,
 };
 
 const struct SpriteTemplate gFireBlastCrossSpriteTemplate =

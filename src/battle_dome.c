@@ -908,13 +908,6 @@ static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
     {},
 };
 
-// Unused
-static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
-{
-    {gDomeTourneyTreeButtons_Pal, 0x0000},
-    {},
-};
-
 static const struct OamData sOamData_TourneyTreePokeball =
 {
     .y = 0,

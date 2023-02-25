@@ -341,12 +341,6 @@ static const struct HallofFameMon sDummyFameMon =
     .nick = {0}
 };
 
-// Unused, order of party slots on Hall of Fame screen
-static const u8 sHallOfFame_SlotOrder[] = {
-    2, 1, 3,
-    6, 4, 5,
-};
-
 // code
 static void VBlankCB_HallOfFame(void)
 {
