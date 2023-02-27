@@ -69,7 +69,6 @@ static bool8 sReadyToReceive;
 static struct SecretBase *sSecretBasesSave;
 static void *sBattleTowerSave;
 static void *sApprenticesSave;
-static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
 static u8 sDaycareMailRandSum;
 static EWRAM_DATA union PlayerRecord *sReceivedRecords = NULL;

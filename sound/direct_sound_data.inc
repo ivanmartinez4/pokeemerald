@@ -31,14 +31,6 @@ DirectSoundWaveData_sd90_classical_oboe::
 	.incbin "sound/direct_sound_samples/sd90_classical_oboe.bin"
 
 	.align 2
-DirectSoundWaveData_unused_sd90_oboe::
-	.incbin "sound/direct_sound_samples/unused_sd90_oboe.bin"
-
-	.align 2
-DirectSoundWaveData_unused_guitar_separates_power_chord::
-	.incbin "sound/direct_sound_samples/unused_guitar_separates_power_chord.bin"
-
-	.align 2
 DirectSoundWaveData_unused_sc88pro_unison_slap::
 	.incbin "sound/direct_sound_samples/unused_sc88pro_unison_slap.bin"
 

@@ -374,18 +374,17 @@ static const struct ListMenuItem sAIListItems[] =
     {sText_PreferBatonPass, 6},
     {sText_InDoubles, 7},
     {sText_HpAware, 8},
-    // {sText_Unknown, 9},
 };
 
 static const struct ListMenuItem sStatsListItems[] =
 {
     {sText_CurrHp, 0},
-    {sText_MaxHp, 1},
-    {gText_Attack, 2},
-    {gText_Defense, 3},
-    {gText_Speed, 4},
-    {gText_SpAtk, 5},
-    {gText_SpDef, 6},
+    {gText_PS, 1},
+    {gText_Ataque, 2},
+    {gText_Defensa, 3},
+    {gText_Velocidad, 4},
+    {gText_AtaqueEspecial, 5},
+    {gText_DefensaEspecial, 6},
 };
 
 static const struct ListMenuItem sStatus1ListItems[] =

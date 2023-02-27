@@ -297,23 +297,6 @@ void SetMauvilleOldManObjEventGfx(void)
     VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BARD);
 }
 
-// Language fixers?
-
-void SanitizeMauvilleOldManForRuby(u8 unused)
-{
-
-}
-
-void SanitizeReceivedEmeraldOldMan(u8 unused, u32 version, u32 language)
-{
-
-}
-
-void SanitizeReceivedRubyOldMan(u8 unused, u32 version, u32 language)
-{
-
-}
-
 struct Story
 {
     u8 stat;

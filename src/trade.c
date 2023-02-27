@@ -189,7 +189,6 @@ static EWRAM_DATA struct {
     u8 bufferPartyState;
     u8 filler_6A[5];
     u8 callbackId;
-    u8 neverRead_70;
     u16 bottomTextTileStart;
     u8 drawSelectedMonState[2];
     u8 selectedMonIdx[2];
@@ -222,7 +221,6 @@ static EWRAM_DATA struct {
     u8 linkTimeoutZero1;
     u8 linkTimeoutZero2;
     u16 linkTimeoutTimer;
-    u16 neverRead_8C;
     u8 monSpriteIds[2];
     u8 connectionSpriteId1; // Multi-purpose sprite ids used during the transfer sequence
     u8 connectionSpriteId2;
@@ -234,8 +232,6 @@ static EWRAM_DATA struct {
     u8 bouncingPokeballSpriteId;
     u16 texX;
     u16 texY;
-    u16 neverRead_D8;
-    u16 neverRead_DA;
     u16 scrX;
     u16 scrY;
     s16 bg1vofs;
@@ -408,7 +404,6 @@ static void InitTradeMenu(void)
         LoadMonIconPalettes();
         sTradeMenu->bufferPartyState = 0;
         sTradeMenu->callbackId = CB_MAIN_MENU;
-        sTradeMenu->neverRead_70 = 0;
         sTradeMenu->drawSelectedMonState[TRADE_PLAYER] = 0;
         sTradeMenu->drawSelectedMonState[TRADE_PARTNER] = 0;
         sTradeMenu->playerConfirmStatus = STATUS_NONE;
@@ -2834,13 +2829,10 @@ void CB2_LinkTrade(void)
         TradeAnimInit_LoadGfx();
         ClearLinkTimeoutTimer();
         gMain.state++;
-        sTradeAnim->neverRead_8C = 0;
         sTradeAnim->state = 0;
         sTradeAnim->isLinkTrade = TRUE;
         sTradeAnim->texX = 64;
         sTradeAnim->texY = 64;
-        sTradeAnim->neverRead_D8 = 0;
-        sTradeAnim->neverRead_DA = 0;
         sTradeAnim->scrX = DISPLAY_WIDTH / 2;
         sTradeAnim->scrY = DISPLAY_HEIGHT / 2;
         sTradeAnim->sXY = 256;
@@ -3006,12 +2998,9 @@ static void CB2_InitInGameTrade(void)
         SetVBlankCallback(VBlankCB_TradeAnim);
         TradeAnimInit_LoadGfx();
         sTradeAnim->isLinkTrade = FALSE;
-        sTradeAnim->neverRead_8C = 0;
         sTradeAnim->state = 0;
         sTradeAnim->texX = 64;
         sTradeAnim->texY = 64;
-        sTradeAnim->neverRead_D8 = 0;
-        sTradeAnim->neverRead_DA = 0;
         sTradeAnim->scrX = DISPLAY_WIDTH / 2;
         sTradeAnim->scrY = DISPLAY_HEIGHT / 2;
         sTradeAnim->sXY = 256;
@@ -3394,7 +3383,6 @@ enum {
     STATE_LINK_MON_ARRIVED_DELAY,
     STATE_MOVE_GBA_TO_CENTER,
     STATE_GBA_FLASH_RECV,
-    STATE_UNUSED,
     STATE_GBA_STOP_FLASH_RECV,
     STATE_GBA_ZOOM_IN,
     STATE_FADE_OUT_TO_NEW_MON,

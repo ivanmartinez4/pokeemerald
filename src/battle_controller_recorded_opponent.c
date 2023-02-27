@@ -66,7 +66,6 @@ static void RecordedOpponentHandleCmd32(void);
 static void RecordedOpponentHandleTwoReturnValues(void);
 static void RecordedOpponentHandleChosenMonReturnValue(void);
 static void RecordedOpponentHandleOneReturnValue(void);
-static void RecordedOpponentHandleOneReturnValue_Duplicate(void);
 static void RecordedOpponentHandleClearUnkVar(void);
 static void RecordedOpponentHandleSetUnkVar(void);
 static void RecordedOpponentHandleClearUnkFlag(void);
@@ -139,7 +138,6 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     [CONTROLLER_TWORETURNVALUES]          = RecordedOpponentHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = RecordedOpponentHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = RecordedOpponentHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = RecordedOpponentHandleOneReturnValue_Duplicate,
     [CONTROLLER_CLEARUNKVAR]              = RecordedOpponentHandleClearUnkVar,
     [CONTROLLER_SETUNKVAR]                = RecordedOpponentHandleSetUnkVar,
     [CONTROLLER_CLEARUNKFLAG]             = RecordedOpponentHandleClearUnkFlag,
@@ -1547,32 +1545,23 @@ static void RecordedOpponentHandleOneReturnValue(void)
     RecordedOpponentBufferExecCompleted();
 }
 
-static void RecordedOpponentHandleOneReturnValue_Duplicate(void)
-{
-    RecordedOpponentBufferExecCompleted();
-}
-
 static void RecordedOpponentHandleClearUnkVar(void)
 {
-    gUnusedControllerStruct.unk = 0;
     RecordedOpponentBufferExecCompleted();
 }
 
 static void RecordedOpponentHandleSetUnkVar(void)
 {
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
     RecordedOpponentBufferExecCompleted();
 }
 
 static void RecordedOpponentHandleClearUnkFlag(void)
 {
-    gUnusedControllerStruct.flag = 0;
     RecordedOpponentBufferExecCompleted();
 }
 
 static void RecordedOpponentHandleToggleUnkFlag(void)
 {
-    gUnusedControllerStruct.flag ^= 1;
     RecordedOpponentBufferExecCompleted();
 }
 

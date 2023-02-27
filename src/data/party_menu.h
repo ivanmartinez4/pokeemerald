@@ -1085,16 +1085,6 @@ const struct SpriteTemplate gSpriteTemplate_StatusIcons =
     .callback = SpriteCallbackDummy,
 };
 
-static const u8 *const sUnused_StatStrings[] =
-{
-    gText_HP4,
-    gText_Attack3,
-    gText_Defense3,
-    gText_SpAtk4,
-    gText_SpDef4,
-    gText_Speed2
-};
-
 static const u16 sTMHMMoves[] =
 {
     [ITEM_TM01 - ITEM_TM01] = MOVE_FOCUS_PUNCH,

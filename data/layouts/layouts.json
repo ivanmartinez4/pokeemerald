@@ -2842,16 +2842,6 @@
       "blockdata_filepath": "data/layouts/ScorchedSlab/map.bin"
     },
     {
-      "id": "LAYOUT_CAVE_OF_ORIGIN_UNUSED_B4F_LAVA",
-      "name": "CaveOfOrigin_Unused_B4F_Lava_Layout",
-      "width": 19,
-      "height": 19,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/CaveOfOrigin_Unused_B4F_Lava/border.bin",
-      "blockdata_filepath": "data/layouts/CaveOfOrigin_Unused_B4F_Lava/map.bin"
-    },
-    {
       "id": "LAYOUT_RUSTBORO_CITY_FLAT1_1F",
       "name": "RustboroCity_Flat1_1F_Layout",
       "width": 14,
@@ -3280,16 +3270,6 @@
       "secondary_tileset": "gTileset_BattlePike",
       "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomWildMons/border.bin",
       "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomWildMons/map.bin"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_UNUSED",
-      "name": "BattleFrontier_BattlePikeRoomUnused_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomUnused/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomUnused/map.bin"
     },
     {
       "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY",

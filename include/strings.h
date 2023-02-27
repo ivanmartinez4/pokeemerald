@@ -17,6 +17,16 @@ extern const u8 gText_ExpandedPlaceholder_Groudon[];
 extern const u8 gText_ExpandedPlaceholder_Brendan[];
 extern const u8 gText_ExpandedPlaceholder_May[];
 
+//Stats
+extern const u8 gText_PS[];
+extern const u8 gText_Ataque[];
+extern const u8 gText_Defensa[];
+extern const u8 gText_AtaqueEspecial[];
+extern const u8 gText_DefensaEspecial[];
+extern const u8 gText_Velocidad[];
+static const u8 gText_Precision[];
+static const u8 gText_Evasion[];
+
 extern const u8 gText_FromSpace[];
 
 extern const u8 gText_Lv50[];
@@ -480,9 +490,6 @@ extern const u8 gText_PkmnCuredOfParalysis[];
 extern const u8 gText_PkmnGotOverInfatuation[];
 extern const u8 gText_PkmnTransformed[];
 extern const u8 gText_PkmnBecameHealthy[];
-extern const u8 gText_HP3[];
-extern const u8 gText_SpAtk3[];
-extern const u8 gText_SpDef3[];
 extern const u8 gText_PkmnBaseVar2StatIncreased[];
 extern const u8 gText_MovesPPIncreased[];
 extern const u8 gText_PPWasRestored[];
@@ -514,12 +521,6 @@ extern const u8 gText_EggCantBattle[];
 extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnAlreadyInBattle[];
 extern const u8 gText_PkmnCantSwitchOut[];
-extern const u8 gText_MaxHP[];
-extern const u8 gText_Attack[];
-extern const u8 gText_Defense[];
-extern const u8 gText_SpAtk[];
-extern const u8 gText_SpDef[];
-extern const u8 gText_Speed[];
 extern const u8 gText_Dash[];
 extern const u8 gText_Plus[];
 
@@ -954,17 +955,10 @@ extern const u8 gText_Info[];
 extern const u8 gText_Switch[];
 extern const u8 gText_RentalPkmn[];
 extern const u8 gText_TypeSlash[];
-extern const u8 gText_HP4[];
-extern const u8 gText_Attack3[];
-extern const u8 gText_Defense3[];
-extern const u8 gText_SpAtk4[];
-extern const u8 gText_SpDef4[];
-extern const u8 gText_Speed2[];
 extern const u8 gText_ExpPoints[];
 extern const u8 gText_NextLv[];
 extern const u8 gText_Status[];
 extern const u8 gText_Power[];
-extern const u8 gText_Accuracy2[];
 extern const u8 gText_Appeal[];
 extern const u8 gText_Jam[];
 extern const u8 gText_OTSlash[];

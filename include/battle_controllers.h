@@ -100,12 +100,6 @@ enum {
 #define RET_VALUE_LEVELED_UP   11
 #define RET_MEGA_EVOLUTION 0x80
 
-struct UnusedControllerStruct
-{
-    u8 unk:7;
-    u8 flag:1;
-};
-
 struct HpAndStatus
 {
     u16 hp;
@@ -170,7 +164,6 @@ enum
     CONTROLLER_TWORETURNVALUES,
     CONTROLLER_CHOSENMONRETURNVALUE,
     CONTROLLER_ONERETURNVALUE,
-    CONTROLLER_ONERETURNVALUE_DUPLICATE,
     CONTROLLER_CLEARUNKVAR,
     CONTROLLER_SETUNKVAR,
     CONTROLLER_CLEARUNKFLAG,
@@ -195,8 +188,6 @@ enum
     CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
 };
-
-extern struct UnusedControllerStruct gUnusedControllerStruct;
 
 // general functions
 void HandleLinkBattleSetup(void);
@@ -233,7 +224,6 @@ void BtlController_EmitDataTransfer(u8 bufferId, u16 size, void *data);
 void BtlController_EmitTwoReturnValues(u8 bufferId, u8 ret8, u32 ret32);
 void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 partyId, u8 *battlePartyOrder);
 void BtlController_EmitOneReturnValue(u8 bufferId, u16 ret);
-void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 ret);
 void BtlController_EmitHitAnimation(u8 bufferId);
 void BtlController_EmitCantSwitch(u8 bufferId);
 void BtlController_EmitPlaySE(u8 bufferId, u16 songId);

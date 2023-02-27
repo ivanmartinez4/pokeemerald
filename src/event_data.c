@@ -29,7 +29,6 @@ EWRAM_DATA u16 gSpecialVar_LastTalked = 0;
 EWRAM_DATA u16 gSpecialVar_Facing = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
-EWRAM_DATA u16 gSpecialVar_Unused_0x8014 = 0;
 EWRAM_DATA static u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
 
 extern u16 *const gSpecialVars[];
@@ -112,26 +111,6 @@ void EnableMysteryGift(void)
 bool32 IsMysteryGiftEnabled(void)
 {
     return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
-}
-
-void ClearMysteryGiftFlags(void)
-{
-    FlagClear(FLAG_MYSTERY_GIFT_DONE);
-    FlagClear(FLAG_MYSTERY_GIFT_1);
-    FlagClear(FLAG_MYSTERY_GIFT_2);
-    FlagClear(FLAG_MYSTERY_GIFT_3);
-    FlagClear(FLAG_MYSTERY_GIFT_4);
-    FlagClear(FLAG_MYSTERY_GIFT_5);
-    FlagClear(FLAG_MYSTERY_GIFT_6);
-    FlagClear(FLAG_MYSTERY_GIFT_7);
-    FlagClear(FLAG_MYSTERY_GIFT_8);
-    FlagClear(FLAG_MYSTERY_GIFT_9);
-    FlagClear(FLAG_MYSTERY_GIFT_10);
-    FlagClear(FLAG_MYSTERY_GIFT_11);
-    FlagClear(FLAG_MYSTERY_GIFT_12);
-    FlagClear(FLAG_MYSTERY_GIFT_13);
-    FlagClear(FLAG_MYSTERY_GIFT_14);
-    FlagClear(FLAG_MYSTERY_GIFT_15);
 }
 
 void ClearMysteryGiftVars(void)

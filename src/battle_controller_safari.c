@@ -60,7 +60,6 @@ static void SafariHandleCmd32(void);
 static void SafariHandleTwoReturnValues(void);
 static void SafariHandleChosenMonReturnValue(void);
 static void SafariHandleOneReturnValue(void);
-static void SafariHandleOneReturnValue_Duplicate(void);
 static void SafariHandleClearUnkVar(void);
 static void SafariHandleSetUnkVar(void);
 static void SafariHandleClearUnkFlag(void);
@@ -125,7 +124,6 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = SafariHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = SafariHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = SafariHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = SafariHandleOneReturnValue_Duplicate,
     [CONTROLLER_CLEARUNKVAR]              = SafariHandleClearUnkVar,
     [CONTROLLER_SETUNKVAR]                = SafariHandleSetUnkVar,
     [CONTROLLER_CLEARUNKFLAG]             = SafariHandleClearUnkFlag,
@@ -547,11 +545,6 @@ static void SafariHandleChosenMonReturnValue(void)
 }
 
 static void SafariHandleOneReturnValue(void)
-{
-    SafariBufferExecCompleted();
-}
-
-static void SafariHandleOneReturnValue_Duplicate(void)
 {
     SafariBufferExecCompleted();
 }

@@ -4265,27 +4265,27 @@ static void GetMedicineItemEffectMessage(u16 item)
         StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
         break;
     case ITEM_EFFECT_HP_EV:
-        StringCopy(gStringVar2, gText_HP3);
+        StringCopy(gStringVar2, gText_PS);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_ATK_EV:
-        StringCopy(gStringVar2, gText_Attack3);
+        StringCopy(gStringVar2, gText_Ataque);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_DEF_EV:
-        StringCopy(gStringVar2, gText_Defense3);
+        StringCopy(gStringVar2, gText_Defensa);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPEED_EV:
-        StringCopy(gStringVar2, gText_Speed2);
+        StringCopy(gStringVar2, gText_Velocidad);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPATK_EV:
-        StringCopy(gStringVar2, gText_SpAtk3);
+        StringCopy(gStringVar2, gText_AtaqueEspecial);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPDEF_EV:
-        StringCopy(gStringVar2, gText_SpDef3);
+        StringCopy(gStringVar2, gText_DefensaEspecial);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_PP_UP:
@@ -4673,22 +4673,22 @@ static void ItemEffectToStatString(u8 effectType, u8 *dest)
     switch (effectType)
     {
     case ITEM_EFFECT_HP_EV:
-        StringCopy(dest, gText_HP3);
+        StringCopy(dest, gText_PS);
         break;
     case ITEM_EFFECT_ATK_EV:
-        StringCopy(dest, gText_Attack3);
+        StringCopy(dest, gText_Ataque);
         break;
     case ITEM_EFFECT_DEF_EV:
-        StringCopy(dest, gText_Defense3);
+        StringCopy(dest, gText_Defensa);
         break;
     case ITEM_EFFECT_SPEED_EV:
-        StringCopy(dest, gText_Speed2);
+        StringCopy(dest, gText_Velocidad);
         break;
     case ITEM_EFFECT_SPATK_EV:
-        StringCopy(dest, gText_SpAtk3);
+        StringCopy(dest, gText_AtaqueEspecial);
         break;
     case ITEM_EFFECT_SPDEF_EV:
-        StringCopy(dest, gText_SpDef3);
+        StringCopy(dest, gText_DefensaEspecial);
         break;
     }
 }

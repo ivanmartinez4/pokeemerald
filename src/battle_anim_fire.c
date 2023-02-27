@@ -11,8 +11,6 @@
 static void AnimFireSpiralInward(struct Sprite *);
 static void AnimLargeFlame(struct Sprite *);
 static void AnimLargeFlame_Step(struct Sprite *);
-static void AnimUnusedSmallEmber(struct Sprite *);
-static void AnimUnusedSmallEmber_Step(struct Sprite *);
 static void AnimSunlight(struct Sprite *);
 static void AnimEmberFlare(struct Sprite *);
 static void AnimBurnFlame(struct Sprite *);
@@ -158,19 +156,6 @@ const struct SpriteTemplate gFirePlumeSpriteTemplate =
     .callback = AnimFirePlume,
 };
 
-static const union AnimCmd sAnim_UnusedSmallEmber[] =
-{
-    ANIMCMD_FRAME(16, 6),
-    ANIMCMD_FRAME(32, 6),
-    ANIMCMD_FRAME(48, 6),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sAnims_UnusedSmallEmber[] =
-{
-    sAnim_UnusedSmallEmber,
-};
-
 static const union AffineAnimCmd sAffineAnim_SunlightRay[] =
 {
     AFFINEANIMCMD_FRAME(0x50, 0x50, 0, 0),
@@ -287,18 +272,6 @@ static const union AnimCmd sAnim_FireBlastCross[] =
 const union AnimCmd *const gAnims_FireBlastCross[] =
 {
     sAnim_FireBlastCross,
-};
-
-static const union AffineAnimCmd sAffineAnim_Unused_0[] =
-{
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
-    AFFINEANIMCMD_END,
-};
-
-static const union AffineAnimCmd sAffineAnim_Unused_1[] =
-{
-    AFFINEANIMCMD_FRAME(0xA0, 0xA0, 0, 0),
-    AFFINEANIMCMD_END,
 };
 
 const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
@@ -598,57 +571,6 @@ static void AnimLargeFlame_Step(struct Sprite *sprite)
 
     if (sprite->data[0] == sprite->data[1])
         DestroySpriteAndMatrix(sprite);
-}
-
-static void AnimUnusedSmallEmber(struct Sprite *sprite)
-{
-    SetSpriteCoordsToAnimAttackerCoords(sprite);
-
-    if (GetBattlerSide(gBattleAnimAttacker))
-    {
-        sprite->x -= gBattleAnimArgs[0];
-    }
-    else
-    {
-        sprite->x += gBattleAnimArgs[0];
-        sprite->subpriority = 8;
-    }
-
-    sprite->y += gBattleAnimArgs[1];
-    sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[1] = gBattleAnimArgs[3];
-    sprite->data[2] = gBattleAnimArgs[4];
-    sprite->data[3] = gBattleAnimArgs[5];
-    sprite->data[4] = gBattleAnimArgs[6];
-    sprite->data[5] = 0;
-
-    sprite->callback = AnimUnusedSmallEmber_Step;
-}
-
-static void AnimUnusedSmallEmber_Step(struct Sprite *sprite)
-{
-    if (sprite->data[3])
-    {
-        if(sprite->data[5] > 10000)
-            sprite->subpriority = 1;
-
-        sprite->x2 = Sin(sprite->data[0], sprite->data[1] + (sprite->data[5] >> 8));
-        sprite->y2 = Cos(sprite->data[0], sprite->data[1] + (sprite->data[5] >> 8));
-
-        sprite->data[0] += sprite->data[2];
-        sprite->data[5] += sprite->data[4];
-
-        if (sprite->data[0] > 255)
-            sprite->data[0] -= 256;
-        else if (sprite->data[0] < 0)
-            sprite->data[0] += 256;
-
-        sprite->data[3]--;
-    }
-    else
-    {
-        DestroySpriteAndMatrix(sprite);
-    }
 }
 
 // Sunlight from Sunny Day / sunny weather

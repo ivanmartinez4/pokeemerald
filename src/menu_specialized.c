@@ -1502,12 +1502,12 @@ static void ShowAllConditionSparkles(struct Sprite *sprite)
 
 static const u8 *const sLvlUpStatStrings[NUM_STATS] =
 {
-    gText_MaxHP,
-    gText_Attack,
-    gText_Defense,
-    gText_SpAtk,
-    gText_SpDef,
-    gText_Speed
+    gText_PS,
+    gText_Ataque,
+    gText_Defensa,
+    gText_AtaqueEspecial,
+    gText_DefensaEspecial,
+    gText_Velocidad
 };
 
 void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr)
