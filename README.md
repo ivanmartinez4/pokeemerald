@@ -1,57 +1,120 @@
-# Pokémon Emerald
+# Pokémon Albor
 
-This is a fork of the [matching decompilation](https://github.com/pret/pokeemerald) at [PRET](https://github.com/pret).
+## ¿Qué es esto?
 
-This fork tries to maintain vanilla compatibility whenever possible. It doesn't increase the size of any save data structure or the object event structure.
+Es un romhack en desarrollo que tiene como base la pokeemerald-expansion, con muchos QoL implementados, y con el objetivo de crear un juego de Pokémon con una nueva historia en un mundo abierto.
 
-There are several branches, each with one main feature (and sometimes some extra stuff):
+## Nuevo contenido y créditos:
 
-**followers** branch:
-* [HGSS-style pokémon followers](https://bulbapedia.bulbagarden.net/wiki/Walking_Pok%C3%A9mon#Pok.C3.A9mon_HeartGold_and_SoulSilver) for all 386 pokémon, including emotes, the 28 Unown forms and a majority of follower messages.
-* Dynamic overworld palettes & reflections compatible with vanilla berry trees.
-* PID (but not legitimacy) preserving Pokémon nature-changing function
-* Function to detect modern emulators/GBA hardware.
+-El motor de batalla (Equipo de Rh-hideout).
 
-**icons** branch:
-* Everything from the **followers** branch.
-* All pokemon icons updated to Gen 6, based on [this repo](https://github.com/msikma/pokesprite/tree/master/icons/pokemon/regular)
-* This includes compatibility with the PC, trade, contests, mail, Battle Dome. Examples:
-![PC](https://i.imgur.com/wzwJfd1.png)
-![Party](https://i.imgur.com/8hbE88t.png)
-![Contest](https://i.imgur.com/S9mCEFL.png)
-* Icons share palettes with front sprites, meaning that shiny pokemon will also have shiny icons!
+-Shinies personalizados.
 
-**lighting** branch:
-* Everything from the **followers** branch.
-* Day/night shading compatible with weather.
-* GSC-style window lights.
-* WIP interframe-blended lamp lights at night, i.e in Rustboro.
-* HGSS-style alpha-blended shadows for object events.
+-Sistema de día y noche(Aarant). Se le ha añadido también la salida y puesta de Sol.
 
-Additional branches  to mention:
+-Iconos Pokémon adaptados a las últimas generaciones, y que usan las paletas de sus sprites de batalla(Aarant).
 
-* `followers-expanded-id` - like `followers`, but includes backwards-compatible 16-bit graphics IDs for object events.
-* `lighting-expanded-id` - like the above but for `lighting`.
+-Los Pokémon te siguen (Aarant).
 
-To set up the repository, see [INSTALL.md](INSTALL.md).
+-Se han balanceado la mayoría de Pokémon, con énfasis en los más débiles (por hacer).
 
-## See also
+-Decapitalización (AsparagusEduardo).
 
-Other disassembly and/or decompilation projects:
-* [**Pokémon Red and Blue**](https://github.com/pret/pokered)
-* [**Pokémon Gold and Silver (Space World '97 demo)**](https://github.com/pret/pokegold-spaceworld)
-* [**Pokémon Yellow**](https://github.com/pret/pokeyellow)
-* [**Pokémon Trading Card Game**](https://github.com/pret/poketcg)
-* [**Pokémon Pinball**](https://github.com/pret/pokepinball)
-* [**Pokémon Stadium**](https://github.com/pret/pokestadium)
-* [**Pokémon Gold and Silver**](https://github.com/pret/pokegold)
-* [**Pokémon Crystal**](https://github.com/pret/pokecrystal)
-* [**Pokémon Ruby and Sapphire**](https://github.com/pret/pokeruby)
-* [**Pokémon Pinball: Ruby & Sapphire**](https://github.com/pret/pokepinballrs)
-* [**Pokémon FireRed and LeafGreen**](https://github.com/pret/pokefirered)
-* [**Pokémon Mystery Dungeon: Red Rescue Team**](https://github.com/pret/pmd-red)
+-Expansión de música a HGGS y DPPT (CyanSMP64).
+
+-Porcentaje de shinies actualizado a 1/1024.
+
+-Cadenas de pesca que permiten mayor cantidad de shinies (Ghoulslash) (por hacer).
+
+-Los puntos de esfuerzo pueden ser llevados al máximo con vitaminas.
+
+-El límite de puntos de esfuerzo máximo es 504, y por estadística es 252, solo dos estadísticas pueden estar al máximo.
+
+-Puzzles estilo HGSS (Sphericalice) (por hacer).
+
+-El nivel de eclosión de huevos es 1.
+
+-Expansión de objetos en el OW. (Ghoulslash) (por hacer)
+
+-Descripción de objetos la primera vez que los obtienes (Ghoulslash). (por hacer)
+
+-DéxNav (Ghoulslash). (por hacer)
+
+-Menú de equipo estilo DS (TheXaman). (por hacer)
+
+-Se vuelve al inicio en la pantalla de equipo si avanzas más del último miembro (Zeturic). (por hacer)
+
+-Los Pokémon sobreviven al veneno en el OW (Lunos). (por hacer)
+
+-Se hereda la naturaleza en la crianza siempre que se esté llevando una piedraeterna (Takyon). (por hacer)
+
+-Velocidad rápida de surfeo/buceo (Ghoulslash). (por hacer)
+
+-Cambio de forma de Deoxys en el OW (Lunos). (por hacer)
+
+-Bici estilo gen 4 (Lunos & Blurose). (por hacer)
+
+-Treparrocas en el OW (Ghoulslash). (por hacer)
+
+-Cambio rápido en la pantalla de equipo con Select (Lunos). (por hacer)
+
+-Escaleras laterales y subida y bajada de escaleras estilo FRLG (Ghoulslash). (por hacer)
+
+-Los Pokémon salvajes te dan objetos si los derrotas (AgustinGDLV). (por hacer)
+
+-Mejor sistema de reflejo (Ghoulslash).
+
+-El estilo de batalla "shift" no te dice qué Pokémon va a enviar el oponente. (por hacer)
+
+-Las interacciones con las enfermeras se han acelerado. (por hacer)
+
+-Shuckle hace zumo de baya (AsparagusEduardo).
+
+-Todos los movimientos son olvidables (Lunos). (por hacer)
+
+-Se puede mover objetos entre los miembros del equipo (Zeturic). (por hacer)
+
+-Los huevos heredan 4 IVs de los padres (6 si tienen lazo destino equipado). (por hacer)
+
+-Efectividad de los movimientos se muestra en batalla. (por hacer)
+
+-Expansión de mochila (999 de cada objeto). (por hacer)
+
+-Los Pokémon pueden hacer movimientos MO en el OW siempre que puedan aprenderlos (ya no es necesario tener un esclavo MO). (por hacer)
+
+-Los Pokémon salvajes tienen nivel dinámico (entre 2 y 4 menos que tu Pokémon de mayor nivel). Los entrenadores igual, pero tienen el mismo nivel que tu Pokémon de mayor nivel. (por hacer)
+
+-Minijuego de Pinball (Huderlem). (por hacer)
+
+-Sistema de misiones (psf). (por hacer)
 
 
-## Contacts
+## Créditos gráficos:
+Sprites Rillaboom, Thwackey, Grookey: lennybitao
 
-You can find PRET on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://web.libera.chat/?#pret).
+Sprites Kleavor, Sneasler, Wyrdeer: KingOfThe-X-Roads
+
+Sprites Castform y formas: farore.
+
+## Cambios de balance:
+
+-Cambios a los climas --> Los climas invocados por habilidad duran hasta que el Pokémon que lo haya invocado sea debilitado. Si ha sido invocado por movimiento, dura 6 turnos (o 9 con objetos climáticos). A cambio, el aumento de daño de clima soleado y lluvioso pasa a ser del 30% (en vez del 50%). (por hacer)
+
+-Defensa de los tipo Hielo en granizo +50%.
+
+-Balance tabla de tipos: 
+
+*Tipo lucha inmune a climas.
+*Tipo bicho y tipo psíquico inmunes a confusión.
+*Tipo acero pierde inmunidad a climas.
+*Normal pega x1 a acero.
+*Hielo resiste a volador.
+*Veneno pega x2 a bicho.
+*Planta inmune a tierra.
+*Bicho pega x2 a hada.
+*Bicho pega x2 a fantasma.
+*Dragón inmune a fuego.
+*Hielo resiste a agua.
+*Planta golpea x1 a acero.
+*Psíquico golpea x2 a acero.
+
