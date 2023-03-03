@@ -611,6 +611,8 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_FIGURE_8] = gMovementActionFuncs_Figure8,
     [MOVEMENT_ACTION_FLY_UP] = gMovementActionFuncs_FlyUp,
     [MOVEMENT_ACTION_FLY_DOWN] = gMovementActionFuncs_FlyDown,
+    [MOVEMENT_ACTION_EXIT_POKEBALL] = gMovementActionFuncs_ExitPokeball,
+    [MOVEMENT_ACTION_ENTER_POKEBALL] = gMovementActionFuncs_EnterPokeball,
     //fast diagonal
     [MOVEMENT_ACTION_WALK_FAST_DIAGONAL_UP_LEFT] = gMovementActionFuncs_WalkFastDiagonalUpLeft,
     [MOVEMENT_ACTION_WALK_FAST_DIAGONAL_UP_RIGHT] = gMovementActionFuncs_WalkFastDiagonalUpRight,
