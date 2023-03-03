@@ -129,6 +129,7 @@ void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);
 struct ObjectEvent * GetFollowerObject(void);
 u8 GetDirectionToFace(s16 x, s16 y, s16 targetX, s16 targetY);
+void UpdateLightSprite(struct Sprite *);
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY);
 u8 CreateObjectGraphicsSprite(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup);
@@ -136,6 +137,7 @@ u8 SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 l
 u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *);
 void SetSpritePosToMapCoords(s16 mapX, s16 mapY, s16 *destX, s16 *destY);
 void CameraObjectReset1(void);
+u8 LoadObjectEventPalette(u16);
 u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate *, struct Sprite *);
 void ObjectEventSetGraphicsId(struct ObjectEvent *, u8 graphicsId);
 void ObjectEventTurn(struct ObjectEvent *, u8 direction);
