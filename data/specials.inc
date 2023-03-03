@@ -28,7 +28,6 @@ gSpecials::
 	def_special GetSecretBaseOwnerAndState
 	def_special InitSecretBaseDecorationSprites
 	def_special SetDecoration
-	def_special GetObjectEventLocalIdByFlag
 	def_special GetSecretBaseTypeInFrontOfPlayer
 	def_special SetSecretBaseOwnerGfxId
 	def_special PutAwayDecorationIteration
@@ -43,8 +42,6 @@ gSpecials::
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered
 	def_special PlayerEnteredTradeSeat
-	def_special Script_StartWiredTrade
-	def_special CableClubSaveGame
 	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerObjectEvent
@@ -61,7 +58,6 @@ gSpecials::
 	def_special ObjectEventInteractionRemoveBerryTree
 	def_special ObjectEventInteractionWaterBerryTree
 	def_special PlayerHasBerries
-	def_special IsEnigmaBerryValid
 	def_special GetTrainerBattleMode
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
@@ -83,20 +79,16 @@ gSpecials::
 	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
 	def_special GetNextActiveShowIfMassOutbreak
-	def_special IsTVShowAlreadyInQueue
 	def_special CheckForPlayersHouseNews
 	def_special GetMomOrDadStringForTVMessage
 	def_special ResetTVShowState
 	def_special GetContestWinnerId
 	def_special GetContestPlayerId
-	def_special GetNpcContestantLocalId
 	def_special BufferContestWinnerTrainerName
 	def_special BufferContestWinnerMonName
 	def_special BufferContestTrainerAndMonNames
-	def_special GetContestMonConditionRanking
 	def_special SetContestTrainerGfxIds
 	def_special TryEnterContestMon
-	def_special GetContestantNamesAtRank
 	def_special SetLinkContestPlayerGfx
 	def_special GetContestMonCondition
 	def_special HasMonWonThisContestBefore
@@ -147,7 +139,6 @@ gSpecials::
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special ShouldReadyContestArtist
 	def_special SaveMuseumContestPainting
-	def_special DoesContestCategoryHaveMuseumPainting
 	def_special CountPlayerMuseumPaintings
 	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
 	def_special MauvilleGymSetDefaultBarriers
@@ -207,7 +198,6 @@ gSpecials::
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special CheckDaycareMonReceivedMail
-	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
 	def_special TryFieldPoisonWhiteOut
@@ -307,7 +297,6 @@ gSpecials::
 	def_special Special_AreLeadMonEVsMaxedOut
 	def_special Script_FacePlayer
 	def_special Script_ClearHeldMovement
-	def_special InitRoamer
 	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
 	def_special DoContestHallWarp
@@ -349,7 +338,6 @@ gSpecials::
 	def_special MonOTNameNotPlayer
 	def_special BufferLottoTicketNumber
 	def_special TryHideBattleTowerReporter
-	def_special DoesPartyHaveEnigmaBerry
 	def_special GenerateContestRand
 	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
@@ -436,15 +424,10 @@ gSpecials::
 	def_special IsBadEggInParty
 	def_special ValidateSavedWonderCard
 	def_special HasAtLeastOneBerry
-	def_special IsPokemonJumpSpeciesInParty
-	def_special ShowPokemonJumpRecords
-	def_special IsDodrioInParty
-	def_special ShowDodrioBerryPickingRecords
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
 	def_special LinkContestWaitForConnection
-	def_special GetWirelessCommType
 	def_special LinkContestTryShowWirelessIndicator
 	def_special LinkContestTryHideWirelessIndicator
 	def_special IsWirelessContest
@@ -503,7 +486,6 @@ gSpecials::
 	def_special GetMartEmployeeObjectEventId
 	def_special SaveForBattleTowerLink
 	def_special Unused_SetWeatherSunny
-	def_special SetUnlockedPokedexFlags
 	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex

@@ -588,7 +588,7 @@ static void Cmd_settypebasedhalvers(void);
 static void Cmd_jumpifsubstituteblocks(void);
 static void Cmd_tryrecycleitem(void);
 static void Cmd_settypetoterrain(void);
-static void Cmd_pursuitdoubles(void);
+static void Cmd_unused3(void);
 static void Cmd_snatchsetbattlers(void);
 static void Cmd_removelightscreenreflect(void);
 static void Cmd_handleballthrow(void);
@@ -743,7 +743,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_trysetrest,                              //0x81
     Cmd_jumpifnotfirstturn,                      //0x82
     Cmd_setmiracleeye,                           //0x83
-    Cmd_jumpifuproarwakes,                    //0x84
+    Cmd_jumpifuproarwakes,                       //0x84
     Cmd_stockpile,                               //0x85
     Cmd_stockpiletobasedamage,                   //0x86
     Cmd_stockpiletohpheal,                       //0x87
@@ -847,7 +847,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifsubstituteblocks,                  //0xE9
     Cmd_tryrecycleitem,                          //0xEA
     Cmd_settypetoterrain,                        //0xEB
-    Cmd_pursuitdoubles,                          //0xEC
+    Cmd_unused3,                                 //0xEC
     Cmd_snatchsetbattlers,                       //0xED
     Cmd_removelightscreenreflect,                //0xEE
     Cmd_handleballthrow,                         //0xEF
@@ -3480,7 +3480,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
                     }
                     else if (gBattleMons[gBattlerAttacker].item != ITEM_NONE
-                        || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY_E_READER
                         || gBattleMons[gBattlerTarget].item == ITEM_NONE)
                     {
                         gBattlescriptCurrInstr++;
@@ -4162,11 +4161,7 @@ static void Cmd_getexp(void)
                     viaSentIn++;
 
                 item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-
-                if (item == ITEM_ENIGMA_BERRY_E_READER)
-                    holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-                else
-                    holdEffect = ItemId_GetHoldEffect(item);
+                holdEffect = ItemId_GetHoldEffect(item);
 
                 if (holdEffect == HOLD_EFFECT_EXP_SHARE)
                     viaExpShare++;
@@ -4211,11 +4206,7 @@ static void Cmd_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             item = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HELD_ITEM);
-
-            if (item == ITEM_ENIGMA_BERRY_E_READER)
-                holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-            else
-                holdEffect = ItemId_GetHoldEffect(item);
+            holdEffect = ItemId_GetHoldEffect(item);
 
             if (holdEffect != HOLD_EFFECT_EXP_SHARE && !(gBattleStruct->sentInPokes & 1))
             {
@@ -8115,9 +8106,10 @@ static bool8 SlideOutLevelUpBanner(void)
 static void PutMonIconOnLvlUpBanner(void)
 {
     u8 spriteId;
-    const u16 *iconPal;
+    // const u16* iconPal;
     struct SpriteSheet iconSheet;
-    struct SpritePalette iconPalSheet;
+    // struct SpritePalette iconPalSheet;
+    u32 index = AllocSpritePalette(TAG_LVLUP_BANNER_MON_ICON);
 
     u16 species = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_PERSONALITY);
@@ -8127,16 +8119,17 @@ static void PutMonIconOnLvlUpBanner(void)
     iconSheet.size = 0x200;
     iconSheet.tag = TAG_LVLUP_BANNER_MON_ICON;
 
-    iconPal = GetValidMonIconPalettePtr(species);
-    iconPalSheet.data = iconPal;
-    iconPalSheet.tag = TAG_LVLUP_BANNER_MON_ICON;
+    // iconPal = GetValidMonIconPalettePtr(species);
+    // iconPalSheet.data = iconPal;
+    // iconPalSheet.tag = TAG_LVLUP_BANNER_MON_ICON;
 
     LoadSpriteSheet(&iconSheet);
-    LoadSpritePalette(&iconPalSheet);
+    // LoadSpritePalette(&iconPalSheet);
 
     spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBanner, 256, 10, 0);
     gSprites[spriteId].sDestroy = FALSE;
     gSprites[spriteId].sXOffset = gBattle_BG2_X;
+    SetMonIconPalette(&gPlayerParty[gBattleStruct->expGetterMonId], NULL, index);
 }
 
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite)
@@ -12621,7 +12614,7 @@ static void Cmd_weatherdamage(void)
         {
             if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ROCK)
                 && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GROUND)
-                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_STEEL)
+                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIGHTING)
                 && ability != ABILITY_SAND_VEIL
                 && ability != ABILITY_SAND_FORCE
                 && ability != ABILITY_SAND_RUSH
@@ -12648,6 +12641,7 @@ static void Cmd_weatherdamage(void)
                 gBattleMoveDamage *= -1;
             }
             else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
+                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIGHTING)
                 && ability != ABILITY_SNOW_CLOAK
                 && ability != ABILITY_OVERCOAT
                 && ability != ABILITY_ICE_BODY
@@ -13240,26 +13234,6 @@ static bool8 IsTwoTurnsMove(u16 move)
         return TRUE;
     else
         return FALSE;
-}
-
-// unused
-static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a charging turn, otherwise 2
-{
-    // first argument is unused
-    if (gBattleMoves[move].effect == EFFECT_SOLAR_BEAM
-        && IsBattlerWeatherAffected(battlerId, B_WEATHER_SUN))
-        return 2;
-
-    if (gBattleMoves[move].effect == EFFECT_SKULL_BASH
-     || gBattleMoves[move].effect == EFFECT_TWO_TURNS_ATTACK
-     || gBattleMoves[move].effect == EFFECT_SOLAR_BEAM
-     || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
-     || gBattleMoves[move].effect == EFFECT_BIDE)
-    {
-        if ((gHitMarker & HITMARKER_CHARGING))
-            return 1;
-    }
-    return 2;
 }
 
 static void Cmd_trychoosesleeptalkmove(void)
@@ -14832,6 +14806,10 @@ static void Cmd_unused2(void)
 {
 }
 
+static void Cmd_unused3(void)
+{
+}
+
 static void Cmd_switchoutabilities(void)
 {
     CMD_ARGS(u8 battler);
@@ -15243,31 +15221,6 @@ static void Cmd_settypetoterrain(void)
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, terrainType);
 
         gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-}
-
-// Unused
-static void Cmd_pursuitdoubles(void)
-{
-    CMD_ARGS(const u8 *failInstr);
-
-    gActiveBattler = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerAttacker)));
-
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-        && !(gAbsentBattlerFlags & gBitTable[gActiveBattler])
-        && gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
-        && gChosenMoveByBattler[gActiveBattler] == MOVE_PURSUIT)
-    {
-        gActionsByTurnOrder[gActiveBattler] = B_ACTION_TRY_FINISH;
-        gCurrentMove = MOVE_PURSUIT;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-        gBattleScripting.animTurn = 1;
-        gBattleScripting.savedBattler = gBattlerAttacker;
-        gBattlerAttacker = gActiveBattler;
     }
     else
     {

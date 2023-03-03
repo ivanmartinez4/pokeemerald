@@ -40,7 +40,6 @@
 #include "palette.h"
 #include "play_time.h"
 #include "random.h"
-#include "roamer.h"
 #include "rotating_gate.h"
 #include "rtc.h"
 #include "safari_zone.h"
@@ -123,7 +122,6 @@ static void ResumeMap(bool32);
 static void SetCameraToTrackPlayer(void);
 static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
-static void SetCameraToTrackGuestPlayer_2(void);
 static void CreateLinkPlayerSprites(void);
 static void ClearAllPlayerKeys(void);
 static void ResetAllPlayerLinkStates(void);
@@ -193,6 +191,9 @@ bool8 (*gFieldCallback2)(void);
 u8 gLocalLinkPlayerId; // This is our player id in a multiplayer mode.
 u8 gFieldLinkPlayerCount;
 
+u8 gTimeOfDay;
+struct TimeBlendSettings currentTimeBlend;
+u16 gTimeUpdateCounter; // playTimeVBlanks will eventually overflow, so this is used to update TOD
 
 // EWRAM vars
 EWRAM_DATA static u8 sObjectEventLoadFlag = 0;
@@ -214,11 +215,6 @@ static const struct WarpData sDummyWarpData =
     .warpId = WARP_ID_NONE,
     .x = -1,
     .y = -1,
-};
-
-static const u32 sUnusedData[] =
-{
-    1200, 3600, 1200, 2400, 50, 80, -44, 44
 };
 
 const struct UCoords32 gDirectionToVectors[] =
@@ -430,8 +426,6 @@ static void UpdateMiscOverworldStates(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     ChooseAmbientCrySpecies();
     ResetCyclingRoadChallengeData();
-    UpdateLocationHistoryForRoamer();
-    RoamerMoveToOtherLocationSet();
 }
 
 void ResetGameStats(void)
@@ -819,14 +813,11 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     RunOnTransitionMapScript();
     InitMap();
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
-    LoadSecondaryTilesetPalette(gMapHeader.mapLayout);
+    LoadSecondaryTilesetPalette(gMapHeader.mapLayout, TRUE); // skip copying to Faded, gamma shift will take care of it
 
-    for (paletteIndex = NUM_PALS_IN_PRIMARY; paletteIndex < NUM_PALS_TOTAL; paletteIndex++)
-        ApplyWeatherColorMapToPal(paletteIndex);
+    ApplyWeatherColorMapToPals(NUM_PALS_IN_PRIMARY, NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY); // palettes [6,12]
 
     InitSecondaryTilesetAnimation();
-    UpdateLocationHistoryForRoamer();
-    RoamerMove();
     DoCurrentWeather();
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
@@ -870,8 +861,6 @@ static void LoadMapFromWarp(bool32 a1)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
-    UpdateLocationHistoryForRoamer();
-    RoamerMoveToOtherLocationSet();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
@@ -1011,12 +1000,6 @@ void SetCurrentMapLayout(u16 mapLayoutId)
 void SetObjectEventLoadFlag(u8 flag)
 {
     sObjectEventLoadFlag = flag;
-}
-
-// Unused, sObjectEventLoadFlag is read directly
-static u8 GetObjectEventLoadFlag(void)
-{
-    return sObjectEventLoadFlag;
 }
 
 static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
@@ -1461,6 +1444,126 @@ void CB1_Overworld(void)
         DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
 }
 
+#define TINT_NIGHT Q_8_8(0.456) | Q_8_8(0.456) << 8 | Q_8_8(0.615) << 16
+
+const struct BlendSettings gTimeOfDayBlend[] =
+{
+  [TIME_OF_DAY_NIGHT] = {.coeff = 10, .blendColor = TINT_NIGHT, .isTint = TRUE},
+  [TIME_OF_DAY_TWILIGHT] = {.coeff = 4, .blendColor = 0xA8B0E0, .isTint = TRUE},
+  [TIME_OF_DAY_DAY] = {.coeff = 0, .blendColor = 0},
+};
+
+u8 UpdateTimeOfDay(void) {
+    s32 hours, minutes;
+    RtcCalcLocalTime();
+    hours = gLocalTime.hours;
+    minutes = gLocalTime.minutes;
+    if (hours < 4) { // night
+        currentTimeBlend.weight = 256;
+        currentTimeBlend.altWeight = 0;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_OF_DAY_NIGHT;
+    } else if (hours < 7) { // night->twilight
+        currentTimeBlend.time0 = TIME_OF_DAY_NIGHT;
+        currentTimeBlend.time1 = TIME_OF_DAY_TWILIGHT;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 4) * 60 + minutes) / ((7-4)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIME_OF_DAY_DAY;
+    } else if (hours < 10) { // twilight->day
+        currentTimeBlend.time0 = TIME_OF_DAY_TWILIGHT;
+        currentTimeBlend.time1 = TIME_OF_DAY_DAY;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 7) * 60 + minutes) / ((10-7)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2 + 128;
+        gTimeOfDay = TIME_OF_DAY_DAY;
+    } else if (hours < 18) { // day
+        currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_OF_DAY_DAY;
+    } else if (hours < 20) { // day->twilight
+        currentTimeBlend.time0 = TIME_OF_DAY_DAY;
+        currentTimeBlend.time1 = TIME_OF_DAY_TWILIGHT;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 18) * 60 + minutes) / ((20-18)*60);
+        currentTimeBlend.altWeight = currentTimeBlend.weight / 2 + 128;
+        gTimeOfDay = TIME_OF_DAY_TWILIGHT;
+    } else if (hours < 22) { // twilight->night
+        currentTimeBlend.time0 = TIME_OF_DAY_TWILIGHT;
+        currentTimeBlend.time1 = TIME_OF_DAY_NIGHT;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 20) * 60 + minutes) / ((22-20)*60);
+        currentTimeBlend.altWeight = currentTimeBlend.weight / 2;
+        gTimeOfDay = TIME_OF_DAY_NIGHT;
+    } else { // 22-24, night
+        currentTimeBlend.weight = 256;
+        currentTimeBlend.altWeight = 0;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_OF_DAY_NIGHT;
+    }
+    return gTimeOfDay;
+}
+
+bool8 MapHasNaturalLight(u8 mapType) { // Whether a map type is naturally lit/outside
+  return mapType == MAP_TYPE_TOWN || mapType == MAP_TYPE_CITY || mapType == MAP_TYPE_ROUTE
+      || mapType == MAP_TYPE_OCEAN_ROUTE;
+}
+
+// Update & mix day / night bg palettes (into unfaded)
+void UpdateAltBgPalettes(u16 palettes) {
+    struct Tileset *primary = gMapHeader.mapLayout->primaryTileset;
+    struct Tileset *secondary = gMapHeader.mapLayout->secondaryTileset;
+    u32 i = 1;
+    if (!MapHasNaturalLight(gMapHeader.mapType))
+        return;
+    palettes &= ~((1 << NUM_PALS_IN_PRIMARY) - 1) | primary->swapPalettes;
+    palettes &= ((1 << NUM_PALS_IN_PRIMARY) - 1) | (secondary->swapPalettes << NUM_PALS_IN_PRIMARY);
+    palettes &= 0x1FFE; // don't blend palette 0, [13,15]
+    palettes >>= 1; // start at palette 1
+    if (!palettes)
+        return;
+    while (palettes) {
+        if (palettes & 1) {
+            if (i < NUM_PALS_IN_PRIMARY)
+                AvgPaletteWeighted(&((u16*)primary->palettes)[i*16], &((u16*)primary->palettes)[((i+9)%16)*16], gPlttBufferUnfaded + i * 16, currentTimeBlend.altWeight);
+            else
+                AvgPaletteWeighted(&((u16*)secondary->palettes)[i*16], &((u16*)secondary->palettes)[((i+9)%16)*16], gPlttBufferUnfaded + i * 16, currentTimeBlend.altWeight);
+        }
+        i++;
+        palettes >>= 1;
+    }
+}
+
+void UpdatePalettesWithTime(u32 palettes) {
+  if (MapHasNaturalLight(gMapHeader.mapType)) {
+    u32 i;
+    u32 mask = 1 << 16;
+    if (palettes >= 0x10000)
+      for (i = 0; i < 16; i++, mask <<= 1)
+        if (GetSpritePaletteTagByPaletteNum(i) >> 15) // Don't blend special sprite palette tags
+          palettes &= ~(mask);
+
+    palettes &= 0xFFFF1FFF; // Don't blend UI BG palettes [13,15]
+    if (!palettes)
+      return;
+    TimeMixPalettes(palettes,
+      gPlttBufferUnfaded,
+      gPlttBufferFaded,
+      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time0],
+      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time1],
+      currentTimeBlend.weight);
+  }
+}
+
+u8 UpdateSpritePaletteWithTime(u8 paletteNum) {
+  if (MapHasNaturalLight(gMapHeader.mapType)) {
+    u16 offset;
+    if (GetSpritePaletteTagByPaletteNum(paletteNum) >> 15)
+      return paletteNum;
+    offset = (paletteNum + 16) << 4;
+    TimeMixPalettes(1,
+      gPlttBufferUnfaded + offset,
+      gPlttBufferFaded + offset,
+      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time0],
+      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time1],
+      currentTimeBlend.weight);
+  }
+  return paletteNum;
+}
+
 static void OverworldBasic(void)
 {
     ScriptContext_RunScript();
@@ -1472,6 +1575,22 @@ static void OverworldBasic(void)
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
+    // Every minute if no palette fade is active, update TOD blending as needed
+    if (!gPaletteFade.active && ++gTimeUpdateCounter >= 3600) {
+      struct TimeBlendSettings cachedBlend = {
+        .time0 = currentTimeBlend.time0,
+        .time1 = currentTimeBlend.time1,
+        .weight = currentTimeBlend.weight,
+      };
+      gTimeUpdateCounter = 0;
+      UpdateTimeOfDay();
+      if (cachedBlend.time0 != currentTimeBlend.time0
+       || cachedBlend.time1 != currentTimeBlend.time1
+       || cachedBlend.weight != currentTimeBlend.weight) {
+           UpdateAltBgPalettes(PALETTES_BG);
+           UpdatePalettesWithTime(PALETTES_ALL);
+       }
+    }
 }
 
 // This CB2 is used when starting
@@ -2007,7 +2126,7 @@ static bool32 ReturnToFieldLink(u8 *state)
     case 2:
         CreateLinkPlayerSprites();
         InitObjectEventsReturnToField();
-        SetCameraToTrackGuestPlayer_2();
+        SetCameraToTrackGuestPlayer();
         (*state)++;
         break;
     case 3:
@@ -2193,12 +2312,6 @@ static void SetCameraToTrackPlayer(void)
 }
 
 static void SetCameraToTrackGuestPlayer(void)
-{
-    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
-}
-
-// Duplicate function.
-static void SetCameraToTrackGuestPlayer_2(void)
 {
     InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
 }
@@ -2658,12 +2771,6 @@ u32 GetCableClubPartnersReady(void)
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_READY))
         return CABLE_SEAT_SUCCESS;
     return CABLE_SEAT_WAITING;
-}
-
-// Unused
-static bool32 IsAnyPlayerExitingCableClub(void)
-{
-    return IsAnyPlayerInLinkState(PLAYER_LINK_STATE_EXITING_ROOM);
 }
 
 u16 SetInCableClubSeat(void)
@@ -3221,7 +3328,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
         StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(linkDirection(objEvent)));
 
     UpdateObjectEventSpriteInvisibility(sprite, FALSE);
-    if (objEvent->triggerGroundEffectsOnMove)
+    if (objEvent->triggerGroundEffectsOnStop && !objEvent->invisible)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);
         sprite->data[7]++;

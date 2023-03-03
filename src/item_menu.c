@@ -1549,7 +1549,7 @@ static void OpenContextMenu(u8 taskId)
         gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BerryBlenderCrush);
         break;
     case ITEMMENULOCATION_APPRENTICE:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId))
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_Apprentice;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Apprentice);
@@ -1561,7 +1561,7 @@ static void OpenContextMenu(u8 taskId)
         }
         break;
     case ITEMMENULOCATION_FAVOR_LADY:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId))
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_FavorLady;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_FavorLady);
@@ -1573,7 +1573,7 @@ static void OpenContextMenu(u8 taskId)
         }
         break;
     case ITEMMENULOCATION_QUIZ_LADY:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId))
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_QuizLady;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_QuizLady);
@@ -2464,12 +2464,6 @@ static void LoadBagMenuTextWindows(void)
 static void BagMenu_Print(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIndex)
 {
     AddTextPrinterParameterized4(windowId, fontId, left, top, letterSpacing, lineSpacing, sFontColorTable[colorIndex], speed, str);
-}
-
-// Unused
-static u8 BagMenu_GetWindowId(u8 windowType)
-{
-    return gBagMenu->windowIds[windowType];
 }
 
 static u8 BagMenu_AddWindow(u8 windowType)

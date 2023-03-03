@@ -28,13 +28,85 @@ static const struct SpriteFrameImage sPicTable_ShadowExtraLarge[] = {
     obj_frame_tiles(gFieldEffectObjectPic_ShadowExtraLarge),
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall = {0xFFFF, TAG_WEATHER_START, &gObjectEventBaseOam_8x8, sAnimTable_Shadow, sPicTable_ShadowSmall, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
+const struct SpriteFrameImage gFieldEffectObjectPicTable_BallLight[] = {
+    obj_frame_tiles(gFieldEffectObjectPic_BallLight),
+};
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium = {0xFFFF, TAG_WEATHER_START, &gObjectEventBaseOam_16x8, sAnimTable_Shadow, sPicTable_ShadowMedium, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
+const struct SpriteFrameImage gFieldEffectObjectPicTable_PokeCenterLight[] = {
+    obj_frame_tiles(gFieldEffectObjectPic_PokeCenterLight),
+};
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge = {0xFFFF, TAG_WEATHER_START, &gObjectEventBaseOam_32x8, sAnimTable_Shadow, sPicTable_ShadowLarge, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
+const struct SpriteFrameImage gFieldEffectObjectPicTable_MartLight[] = {
+    obj_frame_tiles(gFieldEffectObjectPic_MartLight),
+};
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge = {0xFFFF, TAG_WEATHER_START, &gObjectEventBaseOam_64x32, sAnimTable_Shadow, sPicTable_ShadowExtraLarge, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
+const struct SpriteTemplate gFieldEffectObjectTemplate_BallLight = {OBJ_EVENT_PAL_TAG_LIGHT, OBJ_EVENT_PAL_TAG_LIGHT, &gObjectEventBaseOam_32x32, sAnimTable_Inanimate, gFieldEffectObjectPicTable_BallLight, gDummySpriteAffineAnimTable, UpdateLightSprite};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_PokeCenterLight = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NEON_LIGHT,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = gFieldEffectObjectPicTable_PokeCenterLight,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateLightSprite,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_MartLight = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NEON_LIGHT,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = gFieldEffectObjectPicTable_MartLight,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateLightSprite,
+};
+
+const struct SpriteTemplate *const gFieldEffectLightTemplates[] = {
+    &gFieldEffectObjectTemplate_BallLight,
+    &gFieldEffectObjectTemplate_PokeCenterLight,
+    &gFieldEffectObjectTemplate_MartLight,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall = {
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_SMALL,
+    .paletteTag = TAG_WEATHER_START,
+    .oam = &gObjectEventBaseOam_8x8,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowSmall,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateShadowFieldEffect,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium = {
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_MEDIUM,
+    .paletteTag = TAG_WEATHER_START,
+    .oam = &gObjectEventBaseOam_16x8,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowMedium,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateShadowFieldEffect,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge = {
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_LARGE,
+    .paletteTag = TAG_WEATHER_START,
+    .oam = &gObjectEventBaseOam_32x8,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowLarge,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateShadowFieldEffect,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge = {
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_EXTRA_LARGE,
+    .paletteTag = TAG_WEATHER_START,
+    .oam = &gObjectEventBaseOam_64x32,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowExtraLarge,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateShadowFieldEffect,
+};
 
 static const struct SpriteFrameImage sPicTable_TallGrass[] = {
     overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 0),
@@ -696,111 +768,6 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_JumpLongGrass = {
     .callback = UpdateJumpImpactEffect,
 };
 
-static const struct SpriteFrameImage sPicTable_UnusedGrass[] = {
-    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 6),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 0),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 1),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 2),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 3),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 4),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 5),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 6),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 7),
-};
-
-static const union AnimCmd sAnim_UnusedGrass[] =
-{
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(3, 4),
-    ANIMCMD_FRAME(4, 4),
-    ANIMCMD_FRAME(5, 4),
-    ANIMCMD_FRAME(6, 4),
-    ANIMCMD_FRAME(7, 4),
-    ANIMCMD_FRAME(8, 4),
-    ANIMCMD_JUMP(7),
-};
-
-static const union AnimCmd *const sAnimTable_UnusedGrass[] =
-{
-    sAnim_UnusedGrass,
-};
-
-const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass = {
-    .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
-    .oam = &gObjectEventBaseOam_16x16,
-    .anims = sAnimTable_UnusedGrass,
-    .images = sPicTable_UnusedGrass,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = WaitFieldEffectSpriteAnim,
-};
-
-static const struct SpriteFrameImage sPicTable_UnusedGrass2[] = {
-    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 0),
-    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 1),
-    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 2),
-    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 3),
-};
-
-static const union AnimCmd sAnim_UnusedGrass2[] =
-{
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(3, 4),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sAnimTable_UnusedGrass2[] =
-{
-    sAnim_UnusedGrass2,
-};
-
-const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass2 = {
-    .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
-    .oam = &gObjectEventBaseOam_16x16,
-    .anims = sAnimTable_UnusedGrass2,
-    .images = sPicTable_UnusedGrass2,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = WaitFieldEffectSpriteAnim,
-};
-
-static const struct SpriteFrameImage sPicTable_UnusedSand[] = {
-    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 0),
-    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 1),
-    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 2),
-    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 3),
-};
-
-static const union AnimCmd sAnim_UnusedSand[] =
-{
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(3, 4),
-    ANIMCMD_JUMP(0),
-};
-
-static const union AnimCmd *const sAnimTable_UnusedSand[] =
-{
-    sAnim_UnusedSand,
-};
-
-const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedSand = {
-    .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
-    .oam = &gObjectEventBaseOam_16x16,
-    .anims = sAnimTable_UnusedSand,
-    .images = sPicTable_UnusedSand,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = WaitFieldEffectSpriteAnim,
-};
-
 static const struct SpriteFrameImage sPicTable_SandPile[] = {
     overworld_frame(gFieldEffectObjectPic_SandPile, 2, 1, 0),
     overworld_frame(gFieldEffectObjectPic_SandPile, 2, 1, 1),
@@ -1302,5 +1269,3 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateRayquazaSpotlightEffect,
 };
-
-static const struct SpritePalette sSpritePalette_Unused = {gObjectEventPal_Npc3, FLDEFF_PAL_TAG_UNKNOWN};

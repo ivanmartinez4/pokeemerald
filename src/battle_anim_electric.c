@@ -69,18 +69,6 @@ static const union AffineAnimCmd *const sAffineAnims_UnusedSpinningFist[] =
     sAffineAnim_UnusedSpinningFist,
 };
 
-// Unused
-static const struct SpriteTemplate sUnusedSpinningFistSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_HANDS_AND_FEET,
-    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
-    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = sAffineAnims_UnusedSpinningFist,
-    .callback = AnimUnusedSpinningFist,
-};
-
 static const union AnimCmd sAnim_UnusedCirclingShock[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -95,18 +83,6 @@ static const union AnimCmd sAnim_UnusedCirclingShock[] =
 static const union AnimCmd *const sAnims_UnusedCirclingShock[] =
 {
     sAnim_UnusedCirclingShock,
-};
-
-// Unused
-static const struct SpriteTemplate sUnusedCirclingShockSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_SHOCK,
-    .paletteTag = ANIM_TAG_SHOCK,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_UnusedCirclingShock,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnusedCirclingShock,
 };
 
 const struct SpriteTemplate gSparkElectricitySpriteTemplate =

@@ -471,7 +471,6 @@ struct LinkBattlerHeader
     u8 versionSignatureHi;
     u8 vsScreenHealthFlagsLo;
     u8 vsScreenHealthFlagsHi;
-    struct BattleEnigmaBerry battleEnigmaBerry;
 };
 
 struct MegaEvolutionData
@@ -885,7 +884,6 @@ extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff3[30]; //to handle stupidly large z move names
 extern u32 gBattleTypeFlags;
 extern u8 gBattleTerrain;
-extern u32 gUnusedFirstBattleVar1;
 extern u8 *gBattleAnimBgTileBuffer;
 extern u8 *gBattleAnimBgTilemapBuffer;
 extern u8 gActiveBattler;
@@ -933,7 +931,6 @@ extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u16 gMoveResultFlags;
 extern u32 gHitMarker;
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
-extern u8 gUnusedFirstBattleVar2;
 extern u32 gSideStatuses[NUM_BATTLE_SIDES];
 extern struct SideTimer gSideTimers[NUM_BATTLE_SIDES];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
@@ -951,11 +948,9 @@ extern struct WishFutureKnock gWishFutureKnock;
 extern u16 gIntroSlideFlags;
 extern u8 gSentPokesToOpponent[2];
 extern u16 gExpShareExp;
-extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern struct BattleScripting gBattleScripting;
 extern struct BattleStruct *gBattleStruct;
 extern u8 *gLinkBattleSendBuffer;
-extern u8 *gLinkBattleRecvBuffer;
 extern struct BattleResources *gBattleResources;
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];

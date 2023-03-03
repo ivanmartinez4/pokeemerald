@@ -252,25 +252,15 @@ static const u16 sBlenderCenter_Pal[] = INCBIN_U16("graphics/berry_blender/cente
 static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
 static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/outer.gbapal");
 
-static const u16 sUnused_Pal[] = INCBIN_U16("graphics/berry_blender/unused.gbapal");
-static const u16 sEmpty_Pal[16 * 14] = {0};
-
-// unused text
-static const u8 sUnusedText_YesNo[] = _("YES\nNO");
-static const u8 sUnusedText_2[] = _("▶");
-static const u8 sUnusedText_Space[] = _(" ");
-static const u8 sUnusedText_Terminating[] = _("Terminating.");
-static const u8 sUnusedText_LinkPartnerNotFound[] = _("Link partner(s) not found.\nPlease try again.\p");
-
-static const u8 sText_BerryBlenderStart[] = _("Starting up the BERRY BLENDER.\pPlease select a BERRY from your BAG\nto put in the BERRY BLENDER.\p");
+static const u8 sText_BerryBlenderStart[] = _("Starting up the Berry Blender.\pPlease select a Berry from your Bag\nto put in the Berry Blender.\p");
 static const u8 sText_NewParagraph[] = _("\p");
 static const u8 sText_WasMade[] = _(" was made!");
-static const u8 sText_Mister[] = _("MISTER");
-static const u8 sText_Laddie[] = _("LADDIE");
-static const u8 sText_Lassie[] = _("LASSIE");
-static const u8 sText_Master[] = _("MASTER");
-static const u8 sText_Dude[] = _("DUDE");
-static const u8 sText_Miss[] = _("MISS");
+static const u8 sText_Mister[] = _("Mister");
+static const u8 sText_Laddie[] = _("Laddie");
+static const u8 sText_Lassie[] = _("Lassie");
+static const u8 sText_Master[] = _("Master");
+static const u8 sText_Dude[] = _("Dude");
+static const u8 sText_Miss[] = _("Miss");
 
 static const u8 *const sBlenderOpponentsNames[] =
 {
@@ -285,23 +275,23 @@ static const u8 *const sBlenderOpponentsNames[] =
 static const u8 sText_PressAToStart[] = _("Press the A Button to start.");
 static const u8 sText_PleaseWaitAWhile[] = _("Please wait a while.");
 static const u8 sText_CommunicationStandby[] = _("Communication standby…");
-static const u8 sText_WouldLikeToBlendAnotherBerry[] = _("Would you like to blend another BERRY?");
-static const u8 sText_RunOutOfBerriesForBlending[] = _("You've run out of BERRIES for\nblending in the BERRY BLENDER.\p");
-static const u8 sText_YourPokeblockCaseIsFull[] = _("Your {POKEBLOCK} CASE is full.\p");
-static const u8 sText_HasNoBerriesToPut[] = _(" has no BERRIES to put in\nthe BERRY BLENDER.");
-static const u8 sText_ApostropheSPokeblockCaseIsFull[] = _("'s {POKEBLOCK} CASE is full.\p");
-static const u8 sText_BlendingResults[] = _("RESULTS OF BLENDING");
-static const u8 sText_BerryUsed[] = _("BERRY USED");
-static const u8 sText_SpaceBerry[] = _(" BERRY");
+static const u8 sText_WouldLikeToBlendAnotherBerry[] = _("Would you like to blend another Berry?");
+static const u8 sText_RunOutOfBerriesForBlending[] = _("You've run out of Berries for\nblending in the Berry Blender.\p");
+static const u8 sText_YourPokeblockCaseIsFull[] = _("Your {POKEBLOCK} Case is full.\p");
+static const u8 sText_HasNoBerriesToPut[] = _(" has no Berries to put in\nthe Berry Blender.");
+static const u8 sText_ApostropheSPokeblockCaseIsFull[] = _("'s {POKEBLOCK} Case is full.\p");
+static const u8 sText_BlendingResults[] = _("Results of blending");
+static const u8 sText_BerryUsed[] = _("Berry used");
+static const u8 sText_SpaceBerry[] = _(" Berry");
 static const u8 sText_Time[] = _("Time:");
 static const u8 sText_Min[] = _(" min. ");
 static const u8 sText_Sec[] = _(" sec.");
-static const u8 sText_MaximumSpeed[] = _("MAXIMUM SPEED");
+static const u8 sText_MaximumSpeed[] = _("Maximum speed");
 static const u8 sText_RPM[] = _(" RPM");
 static const u8 sText_Dot[] = _(".");
 static const u8 sText_NewLine[] = _("\n");
 static const u8 sText_Space[] = _(" ");
-static const u8 sText_Ranking[] = _("RANKING");
+static const u8 sText_Ranking[] = _("Ranking");
 static const u8 sText_TheLevelIs[] = _("The level is ");
 static const u8 sText_TheFeelIs[] = _(", and the feel is ");
 static const u8 sText_Dot2[] = _(".");
@@ -1545,21 +1535,10 @@ static void SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, struct B
     u16 berryMasterDiff;
     u16 i;
 
-    if (playerBerryItemId == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        for (i = 0; i < FLAVOR_COUNT; i++)
-        {
-            if (playerBerry->flavors[opponentSetId] > playerBerry->flavors[i])
-                opponentSetId = i;
-        }
-        opponentSetId += NUM_NPC_BERRIES;
-    }
-    else
-    {
-        opponentSetId = ITEM_TO_BERRY(playerBerryItemId) - 1;
-        if (opponentSetId >= NUM_NPC_BERRIES)
-            opponentSetId = (opponentSetId % NUM_NPC_BERRIES) + NUM_NPC_BERRIES;
-    }
+    opponentSetId = ITEM_TO_BERRY(playerBerryItemId) - 1;
+    if (opponentSetId >= NUM_NPC_BERRIES)
+        opponentSetId = (opponentSetId % NUM_NPC_BERRIES) + NUM_NPC_BERRIES;
+
     for (i = 0; i < playersNum - 1; i++)
     {
         opponentBerryId = sOpponentBerrySets[opponentSetId][i];
@@ -2293,7 +2272,7 @@ static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, 
         for (j = 0; j < numPlayers; j++)
         {
             if (berries[i].itemId == berries[j].itemId && i != j
-                && (berries[i].itemId != ITEM_ENIGMA_BERRY_E_READER || AreBlenderBerriesSame(berries, i, j)))
+                && (AreBlenderBerriesSame(berries, i, j)))
                     return PBLOCK_CLR_BLACK;
         }
     }
@@ -2374,12 +2353,6 @@ static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, 
 static void Debug_SetMaxRPMStage(s16 value)
 {
     sDebug_MaxRPMStage = value;
-}
-
-// Unused
-static s16 Debug_GetMaxRPMStage(void)
-{
-    return sDebug_MaxRPMStage;
 }
 
 static void Debug_SetGameTimeStage(s16 value)
@@ -2498,12 +2471,6 @@ static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *p
 
     for (i = 0; i < FLAVOR_COUNT + 1; i++)
         flavors[i] = sPokeblockFlavors[i];
-}
-
-// Unused
-static void Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
-{
-    CalculatePokeblock(berries, pokeblock, numPlayers, flavors, maxRPM);
 }
 
 static void Debug_SetStageVars(void)
@@ -3458,8 +3425,7 @@ static void SpriteCB_PlayerArrow(struct Sprite *sprite)
 
 static void TryUpdateBerryBlenderRecord(void)
 {
-    if (gSaveBlock1Ptr->berryBlenderRecords[sBerryBlender->numPlayers - 2] < sBerryBlender->maxRPM)
-        gSaveBlock1Ptr->berryBlenderRecords[sBerryBlender->numPlayers - 2] = sBerryBlender->maxRPM;
+
 }
 
 static bool8 PrintBlendingResults(void)
@@ -3764,38 +3730,7 @@ static bool8 PrintBlendingRanking(void)
 
 void ShowBerryBlenderRecordWindow(void)
 {
-    s32 i;
-    s32 xPos, yPos;
-    struct WindowTemplate winTemplate;
-    u8 text[32];
 
-    winTemplate = sBlenderRecordWindowTemplate;
-    gRecordsWindowId = AddWindow(&winTemplate);
-    DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
-
-    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_BlenderMaxSpeedRecord, 144);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_234Players, 4, 41, 0, NULL);
-
-    for (i = 0, yPos = 41; i < NUM_SCORE_TYPES; i++)
-    {
-        u8 *txtPtr;
-        u32 record;
-
-        record = gSaveBlock1Ptr->berryBlenderRecords[i];
-
-        txtPtr = ConvertIntToDecimalStringN(text, record / 100, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        txtPtr = StringAppend(txtPtr, sText_Dot);
-        txtPtr = ConvertIntToDecimalStringN(txtPtr, record % 100, STR_CONV_MODE_LEADING_ZEROS, 2);
-        txtPtr = StringAppend(txtPtr, sText_RPM);
-
-        xPos = GetStringRightAlignXOffset(FONT_NORMAL, text, 140);
-        AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, text, xPos, yPos + (i * 16), 0, NULL);
-    }
-
-    PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
 
 static void Task_PlayPokeblockFanfare(u8 taskId)

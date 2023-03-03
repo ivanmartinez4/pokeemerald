@@ -748,13 +748,6 @@
 	.byte \varId2
 	.endm
 
-	@ Duplicate of above
-	.macro addvar_duplicate varId1:req, varId2:req
-	.byte 0x74
-	.byte \varId1
-	.byte \varId2
-	.endm
-
 	.macro if_less_than varId:req, num:req, destination:req
 	.byte 0x75
 	.byte \varId

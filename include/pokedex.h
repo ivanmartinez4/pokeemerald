@@ -1,7 +1,6 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
-extern u8 gUnusedPokedexU8;
 extern void (*gPokedexVBlankCB)(void);
 extern const u8 *const gMonFootprintTable[];
 
@@ -25,7 +24,6 @@ struct PokedexEntry
     /*0x0C*/ u16 height; //in decimeters
     /*0x0E*/ u16 weight; //in hectograms
     /*0x10*/ const u8 *description;
-    /*0x14*/ u16 unused;
     /*0x16*/ u16 pokemonScale;
     /*0x18*/ u16 pokemonOffset;
     /*0x1A*/ u16 trainerScale;

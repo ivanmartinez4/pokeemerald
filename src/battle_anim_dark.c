@@ -23,18 +23,6 @@ static void SetAllBattlersSpritePriority(u8);
 static void AnimPunishment(struct Sprite *sprite);
 static void AnimTask_MetallicShine_Step(u8);
 
-// Unused
-static const struct SpriteTemplate sUnusedBagStealSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_TIED_BAG,
-    .paletteTag = ANIM_TAG_TIED_BAG,
-    .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnusedBagSteal,
-};
-
 static const union AffineAnimCmd sAffineAnim_Bite_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),

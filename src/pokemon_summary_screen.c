@@ -1200,7 +1200,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
 
     if (gMonSpritesGfxPtr == NULL)
-        CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
+        CreateMonSpritesGfxManager();
 
     SetMainCallback2(CB2_InitSummaryScreen);
 }
@@ -1591,7 +1591,7 @@ static void CloseSummaryScreen(u8 taskId)
         StopCryAndClearCrySongs();
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         if (gMonSpritesGfxPtr == NULL)
-            DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
+            DestroyMonSpritesGfxManager();
         FreeSummaryScreen();
         DestroyTask(taskId);
     }
@@ -2930,23 +2930,23 @@ static void PrintPageNamesAndStats(void)
 
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL, gText_RentalPkmn, 0, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE, gText_TypeSlash, 0, 1, 0, 0);
-    statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_HP4, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP4, statsXPos, 1, 0, 1);
-    statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Attack3, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack3, statsXPos, 17, 0, 1);
-    statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Defense3, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense3, statsXPos, 33, 0, 1);
-    statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_SpAtk4, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk4, statsXPos, 1, 0, 1);
-    statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_SpDef4, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef4, statsXPos, 17, 0, 1);
-    statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Speed2, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed2, statsXPos, 33, 0, 1);
+    statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_PS, 42);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_PS, statsXPos, 1, 0, 1);
+    statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Ataque, 42);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Ataque, statsXPos, 17, 0, 1);
+    statsXPos = 6 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Defensa, 42);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defensa, statsXPos, 33, 0, 1);
+    statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_AtaqueEspecial, 36);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_AtaqueEspecial, statsXPos, 1, 0, 1);
+    statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_DefensaEspecial, 36);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_DefensaEspecial, statsXPos, 17, 0, 1);
+    statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Velocidad, 36);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Velocidad, statsXPos, 33, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_ExpPoints, 6, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_NextLv, 6, 17, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS, gText_Status, 2, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Power, 0, 1, 0, 1);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Accuracy2, 0, 17, 0, 1);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Precision, 0, 17, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Appeal, 0, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Jam, 0, 17, 0, 1);
 }
@@ -3418,13 +3418,7 @@ static void PrintHeldItemName(void)
     const u8 *text;
     int x;
 
-    if (sMonSummaryScreen->summary.item == ITEM_ENIGMA_BERRY_E_READER
-        && IsMultiBattle() == TRUE
-        && (sMonSummaryScreen->curMonIndex == 1 || sMonSummaryScreen->curMonIndex == 4 || sMonSummaryScreen->curMonIndex == 5))
-    {
-        text = ItemId_GetName(ITEM_ENIGMA_BERRY_E_READER);
-    }
-    else if (sMonSummaryScreen->summary.item == ITEM_NONE)
+    if (sMonSummaryScreen->summary.item == ITEM_NONE)
     {
         text = gText_None;
     }
@@ -4016,7 +4010,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
             else
             {
                 HandleLoadSpecialPokePic(TRUE,
-                                         MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
+                                         MonSpritesGfxManager_GetSpritePtr(B_POSITION_OPPONENT_LEFT),
                                          summary->species2,
                                          summary->pid);
             }
@@ -4089,15 +4083,6 @@ static void SummaryScreen_DestroyAnimDelayTask(void)
         DestroyTask(sAnimDelayTaskId);
         sAnimDelayTaskId = TASK_NONE;
     }
-}
-
-// unused
-static bool32 IsMonAnimationFinished(void)
-{
-    if (gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].callback == SpriteCallbackDummy)
-        return FALSE;
-    else
-        return TRUE;
 }
 
 static void StopPokemonAnimations(void)  // A subtle effect, this function stops pokemon animations when leaving the PSS

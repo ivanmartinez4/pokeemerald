@@ -46,7 +46,6 @@
 #include "player_pc.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
-#include "pokemon_jump.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
@@ -328,8 +327,6 @@ static void UpdatePartySelectionDoubleLayout(s8 *, s8);
 static s8 GetNewSlotDoubleLayout(s8, s8);
 static void PrintMessage(const u8 *);
 static void Task_PrintAndWaitForText(u8);
-static bool16 IsMonAllowedInPokemonJump(struct Pokemon *);
-static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *);
 static void Task_CancelParticipationYesNo(u8);
 static void Task_HandleCancelParticipationYesNoInput(u8);
 static bool8 ShouldUseChooseMonText(void);
@@ -1055,6 +1052,8 @@ static u8 *GetPartyMenuBgTile(u16 tileId)
     return &sPartyBgGfxTilemap[tileId << 5];
 }
 
+#define POKE_ICON_BASE_PAL_TAG 56000
+
 static void CreatePartyMonSprites(u8 slot)
 {
     u8 actualSlot;
@@ -1066,7 +1065,12 @@ static void CreatePartyMonSprites(u8 slot)
 
         if (gMultiPartnerParty[actualSlot].species != SPECIES_NONE)
         {
+            u8 index = slot < PARTY_SIZE ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + slot) : 0xFF;
             CreatePartyMonIconSpriteParameterized(gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].personality, &sPartyMenuBoxes[slot], 0);
+            if (index < 16) { // Like SetMonIconPalette, but by species & personality
+                LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gMultiPartnerParty[actualSlot].species, 0, gMultiPartnerParty[actualSlot].personality), index*16 + 0x100, 32);
+                gSprites[sPartyMenuBoxes[slot].monSpriteId].oam.paletteNum = index;
+            }
             CreatePartyMonHeldItemSpriteParameterized(gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].heldItem, &sPartyMenuBoxes[slot]);
             CreatePartyMonPokeballSpriteParameterized(gMultiPartnerParty[actualSlot].species, &sPartyMenuBoxes[slot]);
             if (gMultiPartnerParty[actualSlot].hp == 0)
@@ -1939,40 +1943,7 @@ u8 GetMonAilment(struct Pokemon *mon)
 
 static void SetPartyMonsAllowedInMinigame(void)
 {
-    u16 *ptr;
 
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MINIGAME)
-    {
-        u8 i;
-
-        ptr = &gPartyMenu.data1;
-        gPartyMenu.data1 = 0;
-        if (gSpecialVar_0x8005 == 0)
-        {
-            for (i = 0; i < gPlayerPartyCount; i++)
-                *ptr += IsMonAllowedInPokemonJump(&gPlayerParty[i]) << i;
-        }
-        else
-        {
-            for (i = 0; i < gPlayerPartyCount; i++)
-                *ptr += IsMonAllowedInDodrioBerryPicking(&gPlayerParty[i]) << i;
-        }
-    }
-}
-
-static bool16 IsMonAllowedInPokemonJump(struct Pokemon *mon)
-{
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && IsSpeciesAllowedInPokemonJump(GetMonData(mon, MON_DATA_SPECIES)))
-        return TRUE;
-    return FALSE;
-}
-
-
-static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *mon)
-{
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_DODRIO)
-        return TRUE;
-    return FALSE;
 }
 
 static bool8 IsMonAllowedInMinigame(u8 slot)
@@ -3928,9 +3899,11 @@ static bool8 SetUpFieldMove_Dive(void)
 static void CreatePartyMonIconSprite(struct Pokemon *mon, struct PartyMenuBox *menuBox, u32 slot)
 {
     u16 species2;
+    u8 index = slot < PARTY_SIZE ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + slot) : 0xFF;
 
     species2 = GetMonData(mon, MON_DATA_SPECIES2);
     CreatePartyMonIconSpriteParameterized(species2, GetMonData(mon, MON_DATA_PERSONALITY), menuBox, 1);
+    SetMonIconPalette(mon, &gSprites[menuBox->monSpriteId], index);
     UpdatePartyMonHPBar(menuBox->monSpriteId, mon);
 }
 
@@ -4149,26 +4122,6 @@ static void PartyMenuStartSpriteAnim(u8 spriteId, u8 animNum)
     StartSpriteAnim(&gSprites[spriteId], animNum);
 }
 
-// Unused. Might explain the large blank section in gPartyMenuPokeballSmall_Gfx
-// At the very least this is how the unused anim cmds for sSpriteAnimTable_MenuPokeballSmall were meant to be accessed
-static void SpriteCB_BounceConfirmCancelButton(u8 spriteId, u8 spriteId2, u8 animNum)
-{
-    if (animNum == 0)
-    {
-        StartSpriteAnim(&gSprites[spriteId], 2);
-        StartSpriteAnim(&gSprites[spriteId2], 4);
-        gSprites[spriteId].y2 = 0;
-        gSprites[spriteId2].y2 = 0;
-    }
-    else
-    {
-        StartSpriteAnim(&gSprites[spriteId], 3);
-        StartSpriteAnim(&gSprites[spriteId2], 5);
-        gSprites[spriteId].y2 = -4;
-        gSprites[spriteId2].y2 = 4;
-    }
-}
-
 static void LoadPartyMenuPokeballGfx(void)
 {
     LoadCompressedSpriteSheet(&sSpriteSheet_MenuPokeball);
@@ -4290,10 +4243,7 @@ static bool8 IsHPRecoveryItem(u16 item)
 {
     const u8 *effect;
 
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-        effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    else
-        effect = gItemEffectTable[item - ITEM_POTION];
+    effect = gItemEffectTable[item - ITEM_POTION];
 
     if (effect[4] & ITEM4_HEAL_HP)
         return TRUE;
@@ -4330,27 +4280,27 @@ static void GetMedicineItemEffectMessage(u16 item)
         StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
         break;
     case ITEM_EFFECT_HP_EV:
-        StringCopy(gStringVar2, gText_HP3);
+        StringCopy(gStringVar2, gText_PS);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_ATK_EV:
-        StringCopy(gStringVar2, gText_Attack3);
+        StringCopy(gStringVar2, gText_Ataque);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_DEF_EV:
-        StringCopy(gStringVar2, gText_Defense3);
+        StringCopy(gStringVar2, gText_Defensa);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPEED_EV:
-        StringCopy(gStringVar2, gText_Speed2);
+        StringCopy(gStringVar2, gText_Velocidad);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPATK_EV:
-        StringCopy(gStringVar2, gText_SpAtk3);
+        StringCopy(gStringVar2, gText_AtaqueEspecial);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPDEF_EV:
-        StringCopy(gStringVar2, gText_SpDef3);
+        StringCopy(gStringVar2, gText_DefensaEspecial);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_PP_UP:
@@ -4738,22 +4688,22 @@ static void ItemEffectToStatString(u8 effectType, u8 *dest)
     switch (effectType)
     {
     case ITEM_EFFECT_HP_EV:
-        StringCopy(dest, gText_HP3);
+        StringCopy(dest, gText_PS);
         break;
     case ITEM_EFFECT_ATK_EV:
-        StringCopy(dest, gText_Attack3);
+        StringCopy(dest, gText_Ataque);
         break;
     case ITEM_EFFECT_DEF_EV:
-        StringCopy(dest, gText_Defense3);
+        StringCopy(dest, gText_Defensa);
         break;
     case ITEM_EFFECT_SPEED_EV:
-        StringCopy(dest, gText_Speed2);
+        StringCopy(dest, gText_Velocidad);
         break;
     case ITEM_EFFECT_SPATK_EV:
-        StringCopy(dest, gText_SpAtk3);
+        StringCopy(dest, gText_AtaqueEspecial);
         break;
     case ITEM_EFFECT_SPDEF_EV:
-        StringCopy(dest, gText_SpDef3);
+        StringCopy(dest, gText_DefensaEspecial);
         break;
     }
 }
@@ -4801,10 +4751,7 @@ void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task)
     const u8 *effect;
     u16 item = gSpecialVar_ItemId;
 
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-        effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    else
-        effect = gItemEffectTable[item - ITEM_POTION];
+    effect = gItemEffectTable[item - ITEM_POTION];
 
     if (!(effect[4] & ITEM4_HEAL_PP_ONE))
     {
@@ -5682,11 +5629,7 @@ u8 GetItemEffectType(u16 item)
     if (!ITEM_HAS_EFFECT(item))
         return ITEM_EFFECT_NONE;
 
-    // Read the item's effect properties.
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-        itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    else
-        itemEffect = gItemEffectTable[item - ITEM_POTION];
+    itemEffect = gItemEffectTable[item - ITEM_POTION];
 
     if ((itemEffect[0] & ITEM0_DIRE_HIT) || itemEffect[1] || (itemEffect[3] & ITEM3_GUARD_SPEC))
         return ITEM_EFFECT_X_ITEM;
@@ -6524,26 +6467,6 @@ static void UpdatePartyToFieldOrder(void)
     Free(partyBuffer);
 }
 
-// Unused
-static void SwitchAliveMonIntoLeadSlot(void)
-{
-    u8 i;
-    struct Pokemon *mon;
-    u8 partyId;
-
-    for (i = 1; i < PARTY_SIZE; i++)
-    {
-        mon = &gPlayerParty[GetPartyIdFromBattleSlot(i)];
-        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(mon, MON_DATA_HP) != 0)
-        {
-            partyId = GetPartyIdFromBattleSlot(0);
-            SwitchPartyMonSlots(0, i);
-            SwapPartyPokemon(&gPlayerParty[partyId], mon);
-            break;
-        }
-    }
-}
-
 static void CB2_SetUpExitToBattleScreen(void)
 {
     SetMainCallback2(CB2_SetUpReshowBattleScreenAfterMenu);
@@ -6625,13 +6548,6 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)
 void ChooseMonForDaycare(void)
 {
     InitPartyMenu(PARTY_MENU_TYPE_DAYCARE, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_CHOOSE_MON_2, Task_HandleChooseMonInput, BufferMonSelection);
-}
-
-// Unused
-static void ChoosePartyMonByMenuType(u8 menuType)
-{
-    gFieldCallback2 = CB2_FadeFromPartyMenu;
-    InitPartyMenu(menuType, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToField);
 }
 
 static void BufferMonSelection(void)

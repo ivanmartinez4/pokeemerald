@@ -55,8 +55,6 @@ struct TrainerCardData
     bool8 hasHofResult;
     bool8 hasLinkResults;
     bool8 hasBattleTowerWins;
-    bool8 unused_E;
-    bool8 unused_F;
     bool8 hasTrades;
     u8 badgeCount[NUM_BADGES];
     u8 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH][13];
@@ -135,7 +133,6 @@ static void PrintProfilePhraseOnCard(void);
 static bool8 PrintAllOnCardBack(void);
 static void PrintNameOnCardBack(void);
 static void PrintHofDebutTimeOnCard(void);
-static void PrintLinkBattleResultsOnCard(void);
 static void PrintTradesStringOnCard(void);
 static void PrintBerryCrushStringOnCard(void);
 static void PrintPokeblockStringOnCard(void);
@@ -147,7 +144,6 @@ static void PrintStickersOnCard(void);
 static void BufferTextsVarsForCardPage2(void);
 static void BufferNameForCardBack(void);
 static void BufferHofDebutTime(void);
-static void BufferLinkBattleResults(void);
 static void BufferNumTrades(void);
 static void BufferBerryCrushPoints(void);
 static void BufferUnionRoomStats(void);
@@ -169,7 +165,6 @@ static void UpdateCardFlipRegs(u16);
 static void LoadMonIconGfx(void);
 
 static const u32 sTrainerCardStickers_Gfx[]      = INCBIN_U32("graphics/trainer_card/frlg/stickers.4bpp.lz");
-static const u16 sUnused_Pal[]                   = INCBIN_U16("graphics/trainer_card/unused.gbapal");
 static const u16 sHoennTrainerCardBronze_Pal[]   = INCBIN_U16("graphics/trainer_card/bronze.gbapal");
 static const u16 sKantoTrainerCardGreen_Pal[]    = INCBIN_U16("graphics/trainer_card/frlg/green.gbapal");
 static const u16 sHoennTrainerCardCopper_Pal[]   = INCBIN_U16("graphics/trainer_card/copper.gbapal");
@@ -820,8 +815,6 @@ static void SetDataFromTrainerCard(void)
     sData->hasHofResult = FALSE;
     sData->hasLinkResults = FALSE;
     sData->hasBattleTowerWins = FALSE;
-    sData->unused_E = FALSE;
-    sData->unused_F = FALSE;
     sData->hasTrades = FALSE;
     memset(sData->badgeCount, 0, sizeof(sData->badgeCount));
     if (sData->trainerCard.hasPokedex)
@@ -959,7 +952,6 @@ static bool8 PrintAllOnCardBack(void)
         PrintHofDebutTimeOnCard();
         break;
     case 2:
-        PrintLinkBattleResultsOnCard();
         break;
     case 3:
         PrintTradesStringOnCard();
@@ -991,7 +983,6 @@ static void BufferTextsVarsForCardPage2(void)
 {
     BufferNameForCardBack();
     BufferHofDebutTime();
-    BufferLinkBattleResults();
     BufferNumTrades();
     BufferBerryCrushPoints();
     BufferUnionRoomStats();
@@ -1214,27 +1205,6 @@ static const u8 *const sLinkBattleTexts[] =
     [CARD_TYPE_RS]      = gText_LinkCableBattles,
     [CARD_TYPE_EMERALD] = gText_LinkBattles
 };
-
-static void BufferLinkBattleResults(void)
-{
-    if (sData->hasLinkResults)
-    {
-        StringCopy(sData->textLinkBattleType, sLinkBattleTexts[sData->cardType]);
-        ConvertIntToDecimalStringN(sData->textLinkBattleWins, sData->trainerCard.linkBattleWins, STR_CONV_MODE_LEFT_ALIGN, 4);
-        ConvertIntToDecimalStringN(sData->textLinkBattleLosses, sData->trainerCard.linkBattleLosses, STR_CONV_MODE_LEFT_ALIGN, 4);
-    }
-}
-
-static void PrintLinkBattleResultsOnCard(void)
-{
-    if (sData->hasLinkResults)
-    {
-        StringCopy(gStringVar1, sData->textLinkBattleWins);
-        StringCopy(gStringVar2, sData->textLinkBattleLosses);
-        StringExpandPlaceholders(gStringVar4, gText_WinsLosses);
-        PrintStatOnBackOfCard(1, sData->textLinkBattleType, gStringVar4, sTrainerCardTextColors);
-    }
-}
 
 static void BufferNumTrades(void)
 {

@@ -908,13 +908,6 @@ static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
     {},
 };
 
-// Unused
-static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
-{
-    {gDomeTourneyTreeButtons_Pal, 0x0000},
-    {},
-};
-
 static const struct OamData sOamData_TourneyTreePokeball =
 {
     .y = 0,
@@ -1395,9 +1388,6 @@ static const u8 sLeftTrainerMonX[FRONTIER_PARTY_SIZE]  = { 96,  96,  96};
 static const u8 sLeftTrainerMonY[FRONTIER_PARTY_SIZE]  = { 56,  80, 104};
 static const u8 sRightTrainerMonX[FRONTIER_PARTY_SIZE] = {144, 144, 144};
 static const u8 sRightTrainerMonY[FRONTIER_PARTY_SIZE] = { 56,  80, 104};
-
-// Duplicate of sTourneyTreeTrainerIds
-static const u8 sTourneyTreeTrainerIds2[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
 
 // The number of possible trainers that could be competing in a given match
 #define NUM_POSSIBLE_MATCH_TRAINERS(round) (DOME_TOURNAMENT_TRAINERS_COUNT / (1 << (DOME_ROUNDS_COUNT - round - 1)))
@@ -4266,6 +4256,18 @@ static u8 Task_GetInfoCardInput(u8 taskId)
 // allocatedArray below needs to be large enough to hold stat totals for each mon, or totals of each type of move points
 #define ALLOC_ARRAY_SIZE max(NUM_STATS * FRONTIER_PARTY_SIZE, NUM_MOVE_POINT_TYPES)
 
+static u8 SetDomeMonIconPalette(struct Sprite * sprite, u16 species, u8 index) {
+  u16 isShiny = species >> 15;
+  species &= 0x7FFF;
+  if (index < 16) {
+    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, 0, isShiny ? 0 : SHINY_ODDS), index*16 + 0x100, 32);
+    sprite->oam.paletteNum = index;
+    return index;
+  }
+  return 0xFF;
+}
+
+// Displays a single trainer's info on a card
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 {
     struct TextPrinterTemplate textPrinter;
@@ -4304,32 +4306,39 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     // Create party mon icons
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
+        u8 spriteId;
+        // #define POKE_ICON_BASE_PAL_TAG 56000
+        u8 index = IndexOfSpritePaletteTag(56000 + i + (flags & CARD_ALTERNATE_SLOT ? 3 : 0));
         if (trainerId == TRAINER_PLAYER)
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[trainerTourneyId][i],
+            // TODO: Fix Battle Dome card icons
+            sInfoCard->spriteIds[2 + i + arrId] = spriteId = CreateMonIcon(DOME_MONS[trainerTourneyId][i],
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
+            SetDomeMonIconPalette(&gSprites[spriteId], DOME_MONS[trainerTourneyId][i], index);
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[trainerTourneyId][i],
+            sInfoCard->spriteIds[2 + i + arrId] = spriteId = CreateMonIcon(DOME_MONS[trainerTourneyId][i],
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
+            SetDomeMonIconPalette(&gSprites[spriteId], DOME_MONS[trainerTourneyId][i], index);
         }
         else
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species,
+            sInfoCard->spriteIds[2 + i + arrId] = spriteId = CreateMonIcon(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species,
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
+            SetDomeMonIconPalette(&gSprites[spriteId], gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species, index);
         }
 
         if (flags & MOVE_CARD)
@@ -4668,7 +4677,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
     // Get winners name
     for (i = sCompetitorRangeByMatch[matchNum][0]; i < sCompetitorRangeByMatch[matchNum][0] + sCompetitorRangeByMatch[matchNum][1]; i++)
     {
-        tournamentId = sTourneyTreeTrainerIds2[i];
+        tournamentId = sTourneyTreeTrainerIds[i];
         if (!DOME_TRAINERS[tournamentId].isEliminated)
         {
             tournamentIds[count] = tournamentId;
@@ -4688,7 +4697,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
 
     for (i = sCompetitorRangeByMatch[matchNum][0]; i < sCompetitorRangeByMatch[matchNum][0] + sCompetitorRangeByMatch[matchNum][1]; i++)
     {
-        tournamentId = sTourneyTreeTrainerIds2[i];
+        tournamentId = sTourneyTreeTrainerIds[i];
 
         if (DOME_TRAINERS[tournamentId].isEliminated
             && DOME_TRAINERS[tournamentId].eliminatedAt >= sCompetitorRangeByMatch[matchNum][2])
@@ -4792,32 +4801,40 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     // Draw left trainer's pokemon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
+        u8 spriteId;
+        u8 index = IndexOfSpritePaletteTag(56000 + i + (flags & CARD_ALTERNATE_SLOT ? 3 : 0));
         if (trainerIds[0] == TRAINER_PLAYER)
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[0]][i],
+            sInfoCard->spriteIds[2 + i + arrId] = spriteId = CreateMonIcon(DOME_MONS[tournamentIds[0]][i],
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
+            if (lost[1])
+              SetDomeMonIconPalette(&gSprites[spriteId], DOME_MONS[tournamentIds[0]][i], index);
         }
         else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[0]][i],
+            sInfoCard->spriteIds[2 + i + arrId] = spriteId = CreateMonIcon(DOME_MONS[tournamentIds[0]][i],
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
+            if (lost[1])
+              SetDomeMonIconPalette(&gSprites[spriteId], DOME_MONS[tournamentIds[0]][i], index);
         }
         else
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[DOME_MONS[tournamentIds[0]][i]].species,
+            sInfoCard->spriteIds[2 + i + arrId] = spriteId =  CreateMonIcon(gFacilityTrainerMons[DOME_MONS[tournamentIds[0]][i]].species,
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].oam.priority = 0;
+            if (lost[1])
+              SetDomeMonIconPalette(&gSprites[spriteId], gFacilityTrainerMons[DOME_MONS[tournamentIds[0]][i]].species, index);
         }
 
         if (flags & MOVE_CARD)
@@ -4832,32 +4849,40 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     // Draw right trainer's pokemon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
+        u8 spriteId;
+        u8 index = IndexOfSpritePaletteTag(56000 + i + (flags & CARD_ALTERNATE_SLOT ? 3 : 0));
         if (trainerIds[1] == TRAINER_PLAYER)
         {
-            sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[1]][i],
+            sInfoCard->spriteIds[5 + i + arrId] = spriteId = CreateMonIcon(DOME_MONS[tournamentIds[1]][i],
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[5 + i + arrId]].oam.priority = 0;
+            if (lost[0])
+              SetDomeMonIconPalette(&gSprites[spriteId], DOME_MONS[tournamentIds[0]][i], index);
         }
         else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
         {
-            sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[1]][i],
+            sInfoCard->spriteIds[5 + i + arrId] = spriteId = CreateMonIcon(DOME_MONS[tournamentIds[1]][i],
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[5 + i + arrId]].oam.priority = 0;
+            if (lost[0])
+              SetDomeMonIconPalette(&gSprites[spriteId], DOME_MONS[tournamentIds[0]][i], index);
         }
         else
         {
-            sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[DOME_MONS[tournamentIds[1]][i]].species,
+            sInfoCard->spriteIds[5 + i + arrId] = spriteId =  CreateMonIcon(gFacilityTrainerMons[DOME_MONS[tournamentIds[1]][i]].species,
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
                                                                   0, 0);
             gSprites[sInfoCard->spriteIds[5 + i + arrId]].oam.priority = 0;
+            if (lost[0])
+              SetDomeMonIconPalette(&gSprites[spriteId], gFacilityTrainerMons[DOME_MONS[tournamentIds[1]][i]].species, index);
         }
 
         if (flags & MOVE_CARD)

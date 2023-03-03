@@ -35,8 +35,6 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 // static const rom data
 static const u16 sRotatingBall_Pal[] = INCBIN_U16("graphics/bag/rotating_ball.gbapal");
 static const u8 sRotatingBall_Gfx[] = INCBIN_U8("graphics/bag/rotating_ball.4bpp");
-static const u8 sCherryUnused[] = INCBIN_U8("graphics/unused/cherry.4bpp");
-static const u16 sCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
 static const struct OamData sBagOamData =
 {
@@ -393,7 +391,6 @@ static const struct CompressedTilesPal sBerryPicTable[] =
     [ITEM_TO_BERRY(ITEM_ROWAP_BERRY)  - 1]          = {gBerryPic_Rowap, gBerryPalette_Rowap},
     [ITEM_TO_BERRY(ITEM_KEE_BERRY)    - 1]          = {gBerryPic_Kee, gBerryPalette_Kee},
     [ITEM_TO_BERRY(ITEM_MARANGA_BERRY)- 1]          = {gBerryPic_Maranga, gBerryPalette_Maranga},
-    [ITEM_TO_BERRY(ITEM_ENIGMA_BERRY_E_READER) - 1] = {gBerryPic_Enigma, gBerryPalette_Enigma},
 };
 
 const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet =
@@ -643,11 +640,6 @@ static void ArrangeBerryGfx(void *src, void *dest)
 static void LoadBerryGfx(u8 berryId)
 {
     struct CompressedSpritePalette pal;
-
-    if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY_E_READER) - 1 && IsEnigmaBerryValid())
-    {
-        // unknown empty if statement
-    }
 
     pal.data = sBerryPicTable[berryId].pal;
     pal.tag = TAG_BERRY_PIC_PAL;

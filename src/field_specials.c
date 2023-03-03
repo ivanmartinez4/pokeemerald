@@ -138,7 +138,26 @@ static void Task_CloseBattlePikeCurtain(u8);
 static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
-static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
+static void BufferFanClubTrainerName_(u8, u8);
+
+static const u8 sAbnormalWeatherMapNumbers[] = {
+    MAP_NUM(ROUTE114),
+    MAP_NUM(ROUTE114),
+    MAP_NUM(ROUTE115),
+    MAP_NUM(ROUTE115),
+    MAP_NUM(ROUTE116),
+    MAP_NUM(ROUTE116),
+    MAP_NUM(ROUTE118),
+    MAP_NUM(ROUTE118),
+    MAP_NUM(ROUTE105),
+    MAP_NUM(ROUTE105),
+    MAP_NUM(ROUTE125),
+    MAP_NUM(ROUTE125),
+    MAP_NUM(ROUTE127),
+    MAP_NUM(ROUTE127),
+    MAP_NUM(ROUTE129),
+    MAP_NUM(ROUTE129)
+};
 
 void Special_ShowDiploma(void)
 {
@@ -1295,41 +1314,7 @@ void BufferEReaderTrainerName(void)
 
 u16 GetSlotMachineId(void)
 {
-    static const u8 sSlotMachineRandomSeeds[SLOT_MACHINE_COUNT] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
-    static const u8 sSlotMachineIds[SLOT_MACHINE_COUNT] = {
-        SLOT_MACHINE_UNLUCKIEST,
-        SLOT_MACHINE_UNLUCKIER,
-        SLOT_MACHINE_UNLUCKIER,
-        SLOT_MACHINE_UNLUCKY,
-        SLOT_MACHINE_UNLUCKY,
-        SLOT_MACHINE_UNLUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIEST
-    };
-    static const u8 sSlotMachineServiceDayIds[SLOT_MACHINE_COUNT] = {
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIEST,
-        SLOT_MACHINE_LUCKIEST
-    };
 
-    u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
-    if (IsPokeNewsActive(POKENEWS_GAME_CORNER))
-        return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
-
-    return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
 
 bool8 FoundAbandonedShipRoom1Key(void)
@@ -3408,25 +3393,6 @@ void CreateAbnormalWeatherEvent(void)
 // returns TRUE if the weather is for Kyogre, and FALSE if it's for Groudon.
 bool32 GetAbnormalWeatherMapNameAndType(void)
 {
-    static const u8 sAbnormalWeatherMapNumbers[] = {
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE129),
-        MAP_NUM(ROUTE129)
-    };
-
     u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
     GetMapName(gStringVar1, sAbnormalWeatherMapNumbers[abnormalWeather - 1], 0);
@@ -3439,27 +3405,6 @@ bool32 GetAbnormalWeatherMapNameAndType(void)
 
 bool8 AbnormalWeatherHasExpired(void)
 {
-    // Duplicate array.
-    static const u8 sAbnormalWeatherMapNumbers[] =
-    {
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE129),
-        MAP_NUM(ROUTE129)
-    };
-
     u16 steps = VarGet(VAR_ABNORMAL_WEATHER_STEP_COUNTER);
     u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
@@ -4140,45 +4085,11 @@ void BufferFanClubTrainerName(void)
     case FANCLUB_MEMBER8:
         break;
     }
-    BufferFanClubTrainerName_(&gSaveBlock1Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
 }
 
-static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 whichLinkTrainer, u8 whichNPCTrainer)
+static void BufferFanClubTrainerName_(u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
-    struct LinkBattleRecord *record = &linkRecords->entries[whichLinkTrainer];
-    if (record->name[0] == EOS)
-    {
-        switch (whichNPCTrainer)
-        {
-        case 0:
-            StringCopy(gStringVar1, gText_Wallace);
-            break;
-        case 1:
-            StringCopy(gStringVar1, gText_Steven);
-            break;
-        case 2:
-            StringCopy(gStringVar1, gText_Brawly);
-            break;
-        case 3:
-            StringCopy(gStringVar1, gText_Winona);
-            break;
-        case 4:
-            StringCopy(gStringVar1, gText_Phoebe);
-            break;
-        case 5:
-            StringCopy(gStringVar1, gText_Glacia);
-            break;
-        default:
-            StringCopy(gStringVar1, gText_Wallace);
-            break;
-        }
-    }
-    else
-    {
-        StringCopyN(gStringVar1, record->name, PLAYER_NAME_LENGTH);
-        gStringVar1[PLAYER_NAME_LENGTH] = EOS;
-        ConvertInternationalString(gStringVar1, linkRecords->languages[whichLinkTrainer]);
-    }
+
 }
 
 void UpdateTrainerFansAfterLinkBattle(void)

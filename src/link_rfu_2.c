@@ -27,7 +27,6 @@ enum {
     RFUSTATE_STOP_MANAGER_END,
     RFUSTATE_CHILD_CONNECT,
     RFUSTATE_CHILD_CONNECT_END,
-    RFUSTATE_UNUSED,
     RFUSTATE_RECONNECTED,
     RFUSTATE_CONNECTED,
     RFUSTATE_CHILD_TRY_JOIN,
@@ -77,8 +76,8 @@ struct RfuDebug
     u8 unused4[88];
 };
 
-u32 gRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4];
-struct RfuManager gRfu;
+EWRAM_DATA u32 gRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4] = {};
+EWRAM_DATA struct RfuManager gRfu = {};
 
 static u8 sHeldKeyCount;
 static u8 sResendBlock8[CMD_LENGTH * 2];
@@ -697,22 +696,6 @@ bool32 WaitRfuState(bool32 force)
 void StopUnionRoomLinkManager(void)
 {
     gRfu.state = RFUSTATE_UR_STOP_MANAGER;
-}
-
-// Unused
-static void ReadySendDataForSlots(u8 slots)
-{
-    u8 i;
-
-    for (i = 0; i < RFU_CHILD_MAX; i++)
-    {
-        if (slots & 1)
-        {
-            rfu_UNI_readySendData(i);
-            break;
-        }
-        slots >>= 1;
-    }
 }
 
 static void ReadAllPlayerRecvCmds(void)
@@ -2557,35 +2540,6 @@ static void VBlank_RfuIdle(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-}
-
-// Unused
-static void Debug_RfuIdle(void)
-{
-    s32 i;
-
-    ResetSpriteData();
-    FreeAllSpritePalettes();
-    ResetTasks();
-    ResetPaletteFade();
-    SetVBlankCallback(VBlank_RfuIdle);
-    if (IsWirelessAdapterConnected())
-    {
-        gLinkType = LINKTYPE_TRADE;
-        SetWirelessCommType1();
-        OpenLink();
-        SeedRng(gMain.vblankCounter2);
-        for (i = 0; i < TRAINER_ID_LENGTH; i++)
-            gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
-
-        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP);
-        RunTasks();
-        AnimateSprites();
-        BuildOamBuffer();
-        UpdatePaletteFade();
-        CreateTask_RfuIdle();
-        SetMainCallback2(CB2_RfuIdle);
-    }
 }
 
 bool32 IsUnionRoomListenTaskActive(void)

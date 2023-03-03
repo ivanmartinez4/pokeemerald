@@ -6,7 +6,6 @@
 #include "cable_club.h"
 #include "data.h"
 #include "decompress.h"
-#include "dodrio_berry_picking.h"
 #include "dynamic_placeholder_text_util.h"
 #include "easy_chat.h"
 #include "event_data.h"
@@ -29,7 +28,6 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokemon_jump.h"
 #include "random.h"
 #include "save_location.h"
 #include "script.h"
@@ -327,9 +325,7 @@ static void GetAwaitingCommunicationText(u8 *dst, u8 activity)
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_BATTLE_MULTI:
     case ACTIVITY_TRADE:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_BATTLE_TOWER:
     case ACTIVITY_BATTLE_TOWER_OPEN:
     case ACTIVITY_RECORD_CORNER:
@@ -356,9 +352,7 @@ static bool32 IsActivityWithVariableGroupSize(u32 activity)
 {
     switch (activity)
     {
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
     case ACTIVITY_BERRY_BLENDER:
     case ACTIVITY_CONTEST_COOL:
@@ -413,7 +407,6 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         CopyHostRfuGameDataAndUsername(&data->playerList->players[0].rfu.data, data->playerList->players[0].rfu.name);
         data->playerList->players[0].timeoutCounter = 0;
         data->playerList->players[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
-        data->playerList->players[0].useRedText = FALSE;
         data->playerList->players[0].newPlayerCountdown = 0;
         data->listenTaskId = CreateTask_ListenForCompatiblePartners(data->incomingPlayerList, 0xFF);
         data->bButtonCancelWindowId = AddWindow(&sWindowTemplate_BButtonCancel);
@@ -752,9 +745,7 @@ static void Leader_GetAcceptNewMemberPrompt(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, sText_PlayerContactedYouShareX);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
     case ACTIVITY_BERRY_BLENDER:
     case ACTIVITY_CONTEST_COOL:
@@ -796,9 +787,7 @@ static void GetYouAskedToJoinGroupPleaseWaitMessage(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, sText_AwaitingPlayersResponse);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
     case ACTIVITY_BERRY_BLENDER:
     case ACTIVITY_CONTEST_COOL:
@@ -825,9 +814,7 @@ static void GetGroupLeaderSentAnOKMessage(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, sText_PlayerSentBackOK);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
     case ACTIVITY_BERRY_BLENDER:
     case ACTIVITY_CONTEST_COOL:
@@ -949,7 +936,6 @@ static u8 LeaderPrunePlayerList(struct RfuPlayerList *list)
         data->playerList->players[copiedCount].rfu = sUnionRoomPlayer_DummyRfu;
         data->playerList->players[copiedCount].timeoutCounter = 0;
         data->playerList->players[copiedCount].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
-        data->playerList->players[copiedCount].useRedText = FALSE;
         data->playerList->players[copiedCount].newPlayerCountdown = 0;
     }
 
@@ -1098,9 +1084,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             case ACTIVITY_BATTLE_MULTI:
             case ACTIVITY_TRADE:
             case ACTIVITY_CHAT:
-            case ACTIVITY_POKEMON_JUMP:
             case ACTIVITY_BERRY_CRUSH:
-            case ACTIVITY_BERRY_PICK:
             case ACTIVITY_SPIN_TRADE:
             case ACTIVITY_BATTLE_TOWER:
             case ACTIVITY_BATTLE_TOWER_OPEN:
@@ -1382,8 +1366,6 @@ static u8 GetGroupListTextColor(struct WirelessLink_Group *data, u32 id)
     {
         if (data->playerList->players[id].rfu.data.startedActivity)
             return UR_COLOR_WHITE;
-        else if (data->playerList->players[id].useRedText)
-            return UR_COLOR_RED;
         else if (data->playerList->players[id].newPlayerCountdown != 0)
             return UR_COLOR_GREEN;
     }
@@ -1649,9 +1631,7 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_BATTLE_MULTI:
     case ACTIVITY_TRADE:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_SPIN_TRADE:
     case ACTIVITY_RECORD_CORNER:
         SaveLinkTrainerNames();
@@ -1727,17 +1707,9 @@ static void Task_StartActivity(u8 taskId)
         CreateTrainerCardInBuffer(gBlockSendBuffer, FALSE);
         SetMainCallback2(CB2_ShowCard);
         break;
-    case ACTIVITY_POKEMON_JUMP:
-        WarpForWirelessMinigame(USING_MINIGAME, 5, 1);
-        StartPokemonJump(GetCursorSelectionMonId(), CB2_LoadMap);
-        break;
     case ACTIVITY_BERRY_CRUSH:
         WarpForWirelessMinigame(USING_BERRY_CRUSH, 9, 1);
         StartBerryCrush(CB2_LoadMap);
-        break;
-    case ACTIVITY_BERRY_PICK:
-        WarpForWirelessMinigame(USING_MINIGAME, 5, 1);
-        StartDodrioBerryPicking(GetCursorSelectionMonId(), CB2_LoadMap);
         break;
     }
 
@@ -1794,16 +1766,8 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
     case 2:
         if (!gPaletteFade.active)
         {
-            if (gPlayerCurrActivity == ACTIVITY_29)
-            {
-                DestroyTask(taskId);
-                SetMainCallback2(CB2_StartCreateTradeMenu);
-            }
-            else
-            {
-                SetLinkStandbyCallback();
-                data[0] = 3;
-            }
+            SetLinkStandbyCallback();
+            data[0] = 3;
         }
         break;
     case 3:
@@ -1904,7 +1868,6 @@ static void Task_SendMysteryGift(u8 taskId)
         CopyHostRfuGameDataAndUsername(&data->playerList->players[0].rfu.data, data->playerList->players[0].rfu.name);
         data->playerList->players[0].timeoutCounter = 0;
         data->playerList->players[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
-        data->playerList->players[0].useRedText = FALSE;
         data->playerList->players[0].newPlayerCountdown = 0;
         data->listenTaskId = CreateTask_ListenForCompatiblePartners(data->incomingPlayerList, 0xFF);
 
@@ -2276,26 +2239,6 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         data->state = 2;
         break;
     case 2:
-        ClearIncomingPlayerList(data->incomingPlayerList, RFU_CHILD_MAX);
-        ClearRfuPlayerList(data->playerList->players, MAX_RFU_PLAYER_LIST_SIZE);
-        data->listenTaskId = CreateTask_ListenForWonderDistributor(data->incomingPlayerList, data->isWonderNews + LINK_GROUP_WONDER_CARD);
-
-        if (data->showListMenu)
-        {
-            winTemplate = sWindowTemplate_GroupList;
-            winTemplate.baseBlock = GetMysteryGiftBaseBlock();
-            data->listWindowId = AddWindow(&winTemplate);
-
-            MG_DrawTextBorder(data->listWindowId);
-            gMultiuseListMenuTemplate = sListMenuTemplate_UnionRoomGroups;
-            gMultiuseListMenuTemplate.windowId = data->listWindowId;
-            data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
-
-            CopyBgTilemapBufferToVram(0);
-        }
-
-        data->leaderId = 0;
-        data->state = 3;
         break;
     case 3:
         id = GetNewLeaderCandidate();
@@ -2304,39 +2247,8 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         case 1:
             PlaySE(SE_PC_LOGIN);
         default:
-            if (data->showListMenu)
-                RedrawListMenu(data->listTaskId);
             break;
         case 0:
-            if (data->showListMenu)
-                id = ListMenu_ProcessInput(data->listTaskId);
-            if (data->refreshTimer > 120)
-            {
-                if (data->playerList->players[0].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->playerList->players[0].rfu.data.startedActivity)
-                {
-                    if (HasWonderCardOrNewsByLinkGroup(&data->playerList->players[0].rfu.data, data->isWonderNews + LINK_GROUP_WONDER_CARD))
-                    {
-                        data->leaderId = 0;
-                        data->refreshTimer = 0;
-                        LoadWirelessStatusIndicatorSpriteGfx();
-                        CreateWirelessStatusIndicatorSprite(0, 0);
-                        CreateTask_RfuReconnectWithParent(data->playerList->players[0].rfu.name, ReadAsU16(data->playerList->players[0].rfu.data.compatibility.playerTrainerId));
-                        PlaySE(SE_POKENAV_ON);
-                        data->state = 4;
-                    }
-                    else
-                    {
-                        PlaySE(SE_BOO);
-                        data->state = 10;
-                    }
-                }
-            }
-            else if (JOY_NEW(B_BUTTON))
-            {
-                data->state = 6;
-                data->refreshTimer = 0;
-            }
-            data->refreshTimer++;
             break;
         }
         break;
@@ -2369,16 +2281,6 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
     case 8:
     case 10:
     case 12:
-        if (data->showListMenu)
-        {
-            DestroyListMenuTask(data->listTaskId, 0, 0);
-            CopyBgTilemapBufferToVram(0);
-            RemoveWindow(data->listWindowId);
-        }
-        DestroyTask(data->listenTaskId);
-        Free(data->playerList);
-        Free(data->incomingPlayerList);
-        data->state++;
         break;
     case 9:
         if (PrintMysteryGiftMenuMessage(&data->textState, sText_WirelessLinkDropped))
@@ -2434,7 +2336,6 @@ void RunUnionRoom(void)
 
     uroom->state = UR_STATE_INIT;
     uroom->textState = 0;
-    uroom->unknown = 0;
     uroom->unreadPlayerId = 0;
 
     gSpecialVar_Result = 0;
@@ -3302,7 +3203,6 @@ void InitUnionRoom(void)
     sURoom = sWirelessLinkMain.uRoom;
     data->state = 0;
     data->textState = 0;
-    data->unknown = 0;
     data->unreadPlayerId = 0;
     sUnionRoomPlayerName[0] = EOS;
 }
@@ -3863,7 +3763,6 @@ static void ClearRfuPlayerList(struct RfuPlayer *players, u8 count)
         players[i].rfu = sUnionRoomPlayer_DummyRfu;
         players[i].timeoutCounter = 255;
         players[i].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
-        players[i].useRedText = FALSE;
         players[i].newPlayerCountdown = 0;
     }
 }

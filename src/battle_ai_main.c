@@ -57,7 +57,6 @@ static s16 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
-static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
@@ -93,7 +92,7 @@ static s16 (*const sBattleAiFuncTable[])(u8, u8, u16, s16) =
     [26] = NULL,                     // Unused
     [27] = NULL,                     // Unused
     [28] = NULL,                     // Unused
-    [29] = AI_Roaming,              // AI_FLAG_ROAMING
+    [29] = NULL,                     // Unused
     [30] = AI_Safari,               // AI_FLAG_SAFARI
     [31] = AI_FirstBattle,          // AI_FLAG_FIRST_BATTLE
 };
@@ -156,8 +155,6 @@ void BattleAI_SetupFlags(void)
         AI_THINKING_STRUCT->aiFlags = GetAiScriptsInRecordedBattle();
     else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         AI_THINKING_STRUCT->aiFlags = AI_FLAG_SAFARI;
-    else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
-        AI_THINKING_STRUCT->aiFlags = AI_FLAG_ROAMING;
     else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         AI_THINKING_STRUCT->aiFlags = AI_FLAG_FIRST_BATTLE;
     else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
@@ -5223,16 +5220,6 @@ static void AI_Flee(void)
 static void AI_Watch(void)
 {
     AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK);
-}
-
-// Roaming pokemon logic
-static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
-{
-    if (IsBattlerTrapped(battlerAtk, FALSE))
-        return score;
-
-    AI_Flee();
-    return score;
 }
 
 // Safari pokemon logic

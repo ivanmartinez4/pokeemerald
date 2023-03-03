@@ -556,14 +556,6 @@ static const struct SubspriteTable sSubspriteTable_NextTurn[] =
     }
 };
 
-// Unused
-static const struct CompressedSpriteSheet sSpriteSheet_Faces =
-{
-    .data = gContestFaces_Gfx,
-    .size = 0x180,
-    .tag = TAG_FACES_GFX
-};
-
 static const struct OamData sOam_Faces =
 {
     .y = 0,
@@ -576,18 +568,6 @@ static const struct OamData sOam_Faces =
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-};
-
-// Unused
-static const struct SpriteTemplate sSpriteTemplate_Faces =
-{
-    .tileTag = TAG_FACES_GFX,
-    .paletteTag = TAG_CONTEST_SYMBOLS_PAL,
-    .oam = &sOam_Faces,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_ApplauseMeter =
@@ -3250,15 +3230,6 @@ static void DrawMoveEffectSymbol(u16 move, u8 contestant)
     }
 }
 
-// Unused
-static void DrawMoveEffectSymbols(void)
-{
-    s32 i;
-
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-        DrawMoveEffectSymbol(eContestantStatus[i].currMove, i);
-}
-
 static u16 GetStarTileOffset(void)
 {
     return 0x2034;
@@ -3630,13 +3601,7 @@ static void DetermineFinalStandings(void)
 
 void SaveLinkContestResults(void)
 {
-    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
-    {
-        gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] =
-        ((gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1) > 9999) ? 9999 :
-        (gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1);
 
-    }
 }
 
 static bool8 DidContestantPlaceHigher(s32 a, s32 b, struct ContestFinalStandings *standings)
@@ -4218,25 +4183,6 @@ static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
     eContestGfxState[sprite->data[1]].boxBlinking = FALSE;
     DestroyContestantBoxBlinkSprites(sprite->data[0]);
     ResetBlendForContestantBoxBlink();
-}
-
-// Unused.
-static void ContestDebugTogglePointTotal(void)
-{
-    if(eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL)
-        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
-    else
-        eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL;
-
-    if(eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
-    {
-        DrawContestantWindowText();
-        SwapMoveDescAndContestTilemaps();
-    }
-    else
-    {
-        ContestDebugDoPrint();
-    }
 }
 
 static void ContestDebugDoPrint(void)
@@ -4875,19 +4821,6 @@ static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
     }
 }
 
-// Unused.
-static void HideApplauseMeterNoAnim(void)
-{
-    gSprites[eContest.applauseMeterSpriteId].x2 = 0;
-    gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
-}
-
-// Unused.
-static void ShowApplauseMeterNoAnim(void)
-{
-    gSprites[eContest.applauseMeterSpriteId].invisible = TRUE;
-}
-
 #define tDelay  data[10]
 #define tFrame  data[11]
 #define tCycles data[12]
@@ -5510,12 +5443,7 @@ static void Contest_SetBgCopyFlags(u32 flagIndex)
 
 void ResetContestLinkResults(void)
 {
-    s32 i;
-    s32 j;
 
-    for(i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
-        for(j = 0; j < CONTESTANT_COUNT; j++)
-            gSaveBlock2Ptr->contestLinkResults[i][j] = 0;
 }
 
 bool8 SaveContestWinner(u8 rank)
@@ -5919,32 +5847,6 @@ static void SetConestLiveUpdateTVData(void)
     ContestLiveUpdates_SetWinnerAppealFlag(winnerFlag);
     ContestLiveUpdates_SetWinnerMoveUsed(gContestResources->tv[winner].move);
     ContestLiveUpdates_SetLoserData(loserFlag, loser);
-}
-
-// Unused
-void ContestDebugToggleBitfields(bool8 loserFlags)
-{
-    if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
-    {
-        if (!loserFlags)
-            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS;
-        else
-            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS;
-    }
-    else
-    {
-        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
-    }
-
-    if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
-    {
-        DrawContestantWindowText();
-        SwapMoveDescAndContestTilemaps();
-    }
-    else
-    {
-        ContestDebugPrintBitStrings();
-    }
 }
 
 static void ContestDebugPrintBitStrings(void)

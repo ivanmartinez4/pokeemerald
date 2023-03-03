@@ -125,7 +125,6 @@ static void ContestAICmd_save_result(void);
 static void ContestAICmd_setvar(void);
 static void ContestAICmd_add(void);
 static void ContestAICmd_addvar(void);
-static void ContestAICmd_addvar_duplicate(void);
 static void ContestAICmd_if_less_than(void);
 static void ContestAICmd_if_greater_than(void);
 static void ContestAICmd_if_eq(void);
@@ -266,7 +265,7 @@ static const ContestAICmdFunc sContestAICmdTable[] =
     ContestAICmd_setvar,                              // 0x71
     ContestAICmd_add,                                 // 0x72
     ContestAICmd_addvar,                              // 0x73
-    ContestAICmd_addvar_duplicate,                    // 0x74
+
     ContestAICmd_if_less_than,                        // 0x75
     ContestAICmd_if_greater_than,                     // 0x76
     ContestAICmd_if_eq,                               // 0x77
@@ -1551,12 +1550,6 @@ static void ContestAICmd_add(void)
 }
 
 static void ContestAICmd_addvar(void)
-{
-    eContestAI.vars[gAIScriptPtr[1]] += eContestAI.vars[gAIScriptPtr[2]];
-    gAIScriptPtr += 3;
-}
-
-static void ContestAICmd_addvar_duplicate(void)
 {
     eContestAI.vars[gAIScriptPtr[1]] += eContestAI.vars[gAIScriptPtr[2]];
     gAIScriptPtr += 3;

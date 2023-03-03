@@ -189,7 +189,6 @@ static EWRAM_DATA struct {
     u8 bufferPartyState;
     u8 filler_6A[5];
     u8 callbackId;
-    u8 neverRead_70;
     u16 bottomTextTileStart;
     u8 drawSelectedMonState[2];
     u8 selectedMonIdx[2];
@@ -222,7 +221,6 @@ static EWRAM_DATA struct {
     u8 linkTimeoutZero1;
     u8 linkTimeoutZero2;
     u16 linkTimeoutTimer;
-    u16 neverRead_8C;
     u8 monSpriteIds[2];
     u8 connectionSpriteId1; // Multi-purpose sprite ids used during the transfer sequence
     u8 connectionSpriteId2;
@@ -234,8 +232,6 @@ static EWRAM_DATA struct {
     u8 bouncingPokeballSpriteId;
     u16 texX;
     u16 texY;
-    u16 neverRead_D8;
-    u16 neverRead_DA;
     u16 scrX;
     u16 scrY;
     s16 bg1vofs;
@@ -322,15 +318,7 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 static bool8 SendLinkData(const void *linkData, u32 size)
 {
-    if (gPlayerCurrActivity == ACTIVITY_29)
-    {
-        rfu_NI_setSendData(lman.acceptSlot_flag, 84, linkData, size);
-        return TRUE;
-    }
-    else
-    {
-        return SendBlock(0, linkData, size);
-    }
+    return SendBlock(0, linkData, size);
 }
 
 static void RequestLinkData(u8 type)
@@ -340,17 +328,7 @@ static void RequestLinkData(u8 type)
 
 static bool32 IsLinkTradeTaskFinished(void)
 {
-    if (gPlayerCurrActivity == ACTIVITY_29)
-    {
-        if (gRfuSlotStatusNI[Rfu_GetIndexOfNewestChild(lman.acceptSlot_flag)]->send.state == 0)
-            return TRUE;
-        else
-            return FALSE;
-    }
-    else
-    {
-        return IsLinkTaskFinished();
-    }
+    return IsLinkTaskFinished();
 }
 
 static u32 _GetBlockReceivedStatus(void)
@@ -376,7 +354,7 @@ static void TradeResetReceivedFlag(u32 who)
 
 static bool32 IsWirelessTrade(void)
 {
-    if (gWirelessCommType && gPlayerCurrActivity == ACTIVITY_29)
+    if (gWirelessCommType)
         return TRUE;
     else
         return FALSE;
@@ -423,10 +401,9 @@ static void InitTradeMenu(void)
         FillBgTilemapBufferRect(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 15);
         LoadUserWindowBorderGfx_(0, 20, BG_PLTT_ID(12));
         LoadUserWindowBorderGfx(2, 1, BG_PLTT_ID(14));
-        LoadMonIconPalettes();
+        // LoadMonIconPalettes();
         sTradeMenu->bufferPartyState = 0;
         sTradeMenu->callbackId = CB_MAIN_MENU;
-        sTradeMenu->neverRead_70 = 0;
         sTradeMenu->drawSelectedMonState[TRADE_PLAYER] = 0;
         sTradeMenu->drawSelectedMonState[TRADE_PARTNER] = 0;
         sTradeMenu->playerConfirmStatus = STATUS_NONE;
@@ -448,6 +425,7 @@ static void CB2_CreateTradeMenu(void)
     struct SpriteTemplate temp;
     u8 id;
     u32 xPos;
+    u16 paletteData[16*2]; // temporarily holds decompressed palettes
 
     switch (gMain.state)
     {
@@ -564,23 +542,34 @@ static void CB2_CreateTradeMenu(void)
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
+            struct SpritePalette palette = {.data = paletteData, .tag = 56000 + i};
+            u32 index;
+            LZDecompressWram(GetMonFrontSpritePal(mon), paletteData);
+            index = LoadSpritePalette(&palette);
             sTradeMenu->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
+
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PLAYER][i]].oam.paletteNum = index;
         }
 
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PARTNER]; i++)
         {
             struct Pokemon *mon = &gEnemyParty[i];
+            struct SpritePalette palette = {.data = paletteData, .tag = 56000 + i + PARTY_SIZE};
+            u32 index;
+            LZDecompressWram(GetMonFrontSpritePal(mon), paletteData);
+            index = LoadSpritePalette(&palette);
             sTradeMenu->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PARTNER][i]].oam.paletteNum = index;
         }
         gMain.state++;
         break;
@@ -710,6 +699,7 @@ static void CB2_ReturnToTradeMenu(void)
     struct SpriteTemplate temp;
     u8 id;
     u32 xPos;
+    u16 paletteData[16*2]; // temporarily holds decompressed palettes
 
     switch (gMain.state)
     {
@@ -753,23 +743,33 @@ static void CB2_ReturnToTradeMenu(void)
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
+            struct SpritePalette palette = {.data = paletteData, .tag = 56000 + i};
+            u32 index;
+            LZDecompressWram(GetMonFrontSpritePal(mon), paletteData);
+            index = LoadSpritePalette(&palette);
             sTradeMenu->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PLAYER][i]].oam.paletteNum = index;
         }
 
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PARTNER]; i++)
         {
             struct Pokemon *mon = &gEnemyParty[i];
+            struct SpritePalette palette = {.data = paletteData, .tag = 56000 + i + PARTY_SIZE};
+            u32 index;
+            LZDecompressWram(GetMonFrontSpritePal(mon), paletteData);
+            index = LoadSpritePalette(&palette);
             sTradeMenu->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY));
+            gSprites[sTradeMenu->partySpriteIds[TRADE_PARTNER][i]].oam.paletteNum = index;
         }
         gMain.state++;
         break;
@@ -888,6 +888,7 @@ static void VBlankCB_TradeMenu(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+
 }
 
 static void CB_FadeToStartTrade(void)
@@ -2852,13 +2853,10 @@ void CB2_LinkTrade(void)
         TradeAnimInit_LoadGfx();
         ClearLinkTimeoutTimer();
         gMain.state++;
-        sTradeAnim->neverRead_8C = 0;
         sTradeAnim->state = 0;
         sTradeAnim->isLinkTrade = TRUE;
         sTradeAnim->texX = 64;
         sTradeAnim->texY = 64;
-        sTradeAnim->neverRead_D8 = 0;
-        sTradeAnim->neverRead_DA = 0;
         sTradeAnim->scrX = DISPLAY_WIDTH / 2;
         sTradeAnim->scrY = DISPLAY_HEIGHT / 2;
         sTradeAnim->sXY = 256;
@@ -3024,12 +3022,9 @@ static void CB2_InitInGameTrade(void)
         SetVBlankCallback(VBlankCB_TradeAnim);
         TradeAnimInit_LoadGfx();
         sTradeAnim->isLinkTrade = FALSE;
-        sTradeAnim->neverRead_8C = 0;
         sTradeAnim->state = 0;
         sTradeAnim->texX = 64;
         sTradeAnim->texY = 64;
-        sTradeAnim->neverRead_D8 = 0;
-        sTradeAnim->neverRead_DA = 0;
         sTradeAnim->scrX = DISPLAY_WIDTH / 2;
         sTradeAnim->scrY = DISPLAY_HEIGHT / 2;
         sTradeAnim->sXY = 256;
@@ -3412,7 +3407,6 @@ enum {
     STATE_LINK_MON_ARRIVED_DELAY,
     STATE_MOVE_GBA_TO_CENTER,
     STATE_GBA_FLASH_RECV,
-    STATE_UNUSED,
     STATE_GBA_STOP_FLASH_RECV,
     STATE_GBA_ZOOM_IN,
     STATE_FADE_OUT_TO_NEW_MON,

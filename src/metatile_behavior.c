@@ -1083,14 +1083,6 @@ bool8 MetatileBehavior_IsSkyPillarClosedDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsRoulette(u8 metatileBehavior) // unused
-{
-    if (metatileBehavior == MB_ROULETTE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 bool8 MetatileBehavior_IsPokeblockFeeder(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POKEBLOCK_FEEDER)
@@ -1372,14 +1364,6 @@ bool8 MetatileBehavior_IsCableBoxResults2(u8 tile, u8 playerDir)
 bool8 MetatileBehavior_IsQuestionnaire(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_QUESTIONNAIRE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsLongGrass_Duplicate(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_LONG_GRASS)
         return TRUE;
     else
         return FALSE;

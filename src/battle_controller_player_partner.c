@@ -65,7 +65,6 @@ static void PlayerPartnerHandleCmd32(void);
 static void PlayerPartnerHandleTwoReturnValues(void);
 static void PlayerPartnerHandleChosenMonReturnValue(void);
 static void PlayerPartnerHandleOneReturnValue(void);
-static void PlayerPartnerHandleOneReturnValue_Duplicate(void);
 static void PlayerPartnerHandleClearUnkVar(void);
 static void PlayerPartnerHandleSetUnkVar(void);
 static void PlayerPartnerHandleClearUnkFlag(void);
@@ -142,7 +141,6 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = PlayerPartnerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerPartnerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = PlayerPartnerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerPartnerHandleOneReturnValue_Duplicate,
     [CONTROLLER_CLEARUNKVAR]              = PlayerPartnerHandleClearUnkVar,
     [CONTROLLER_SETUNKVAR]                = PlayerPartnerHandleSetUnkVar,
     [CONTROLLER_CLEARUNKFLAG]             = PlayerPartnerHandleClearUnkFlag,
@@ -164,15 +162,6 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_ENDLINKBATTLE]            = PlayerPartnerHandleEndLinkBattle,
     [CONTROLLER_DEBUGMENU]                = PlayerPartnerHandleBattleDebug,
     [CONTROLLER_TERMINATOR_NOP]           = PlayerPartnerCmdEnd
-};
-
-// unknown unused data
-static const u8 sUnused[] =
-{
-    0x83, 0x4d, 0xf3, 0x5f, 0x6f, 0x4f, 0xeb, 0x3e,
-    0x67, 0x2e, 0x10, 0x46, 0x8c, 0x3d, 0x28, 0x35,
-    0xc5, 0x2c, 0x15, 0x7f, 0xb5, 0x56, 0x9d, 0x53,
-    0x3b, 0x43, 0xda, 0x36, 0x79, 0x2a, 0x0e, 0x53,
 };
 
 static void PlayerPartnerDummy(void)
@@ -1693,32 +1682,23 @@ static void PlayerPartnerHandleOneReturnValue(void)
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleOneReturnValue_Duplicate(void)
-{
-    PlayerPartnerBufferExecCompleted();
-}
-
 static void PlayerPartnerHandleClearUnkVar(void)
 {
-    gUnusedControllerStruct.unk = 0;
     PlayerPartnerBufferExecCompleted();
 }
 
 static void PlayerPartnerHandleSetUnkVar(void)
 {
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
     PlayerPartnerBufferExecCompleted();
 }
 
 static void PlayerPartnerHandleClearUnkFlag(void)
 {
-    gUnusedControllerStruct.flag = 0;
     PlayerPartnerBufferExecCompleted();
 }
 
 static void PlayerPartnerHandleToggleUnkFlag(void)
 {
-    gUnusedControllerStruct.flag ^= 1;
     PlayerPartnerBufferExecCompleted();
 }
 

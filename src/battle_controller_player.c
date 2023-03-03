@@ -73,7 +73,6 @@ static void PlayerHandleCmd32(void);
 static void PlayerHandleTwoReturnValues(void);
 static void PlayerHandleChosenMonReturnValue(void);
 static void PlayerHandleOneReturnValue(void);
-static void PlayerHandleOneReturnValue_Duplicate(void);
 static void PlayerHandleClearUnkVar(void);
 static void PlayerHandleSetUnkVar(void);
 static void PlayerHandleClearUnkFlag(void);
@@ -161,7 +160,6 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,
     [CONTROLLER_CLEARUNKVAR]              = PlayerHandleClearUnkVar,
     [CONTROLLER_SETUNKVAR]                = PlayerHandleSetUnkVar,
     [CONTROLLER_CLEARUNKFLAG]             = PlayerHandleClearUnkFlag,
@@ -184,9 +182,6 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_DEBUGMENU]                = PlayerHandleBattleDebug,
     [CONTROLLER_TERMINATOR_NOP]           = PlayerCmdEnd
 };
-
-// unknown unused data
-static const u8 sUnused[] = {0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58};
 
 void BattleControllerDummy(void)
 {
@@ -3097,33 +3092,23 @@ static void PlayerHandleOneReturnValue(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleOneReturnValue_Duplicate(void)
-{
-    BtlController_EmitOneReturnValue_Duplicate(BUFFER_B, 0);
-    PlayerBufferExecCompleted();
-}
-
 static void PlayerHandleClearUnkVar(void)
 {
-    gUnusedControllerStruct.unk = 0;
     PlayerBufferExecCompleted();
 }
 
 static void PlayerHandleSetUnkVar(void)
 {
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
     PlayerBufferExecCompleted();
 }
 
 static void PlayerHandleClearUnkFlag(void)
 {
-    gUnusedControllerStruct.flag = 0;
     PlayerBufferExecCompleted();
 }
 
 static void PlayerHandleToggleUnkFlag(void)
 {
-    gUnusedControllerStruct.flag ^= 1;
     PlayerBufferExecCompleted();
 }
 

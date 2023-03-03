@@ -174,18 +174,6 @@ const struct SpriteTemplate gFallingFeatherSpriteTemplate =
     .callback = AnimFallingFeather,
 };
 
-// Unused
-static const struct SpriteTemplate sUnusedBubbleThrowSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
-    .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnusedBubbleThrow,
-};
-
 static const union AnimCmd sAnim_WhirlwindLines[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -293,12 +281,6 @@ static const union AffineAnimCmd sAnim_Unused[] =
     AFFINEANIMCMD_END,
 };
 
-// Unused
-static const union AffineAnimCmd *const sAnims_Unused[] =
-{
-    sAnim_Unused,
-};
-
 const struct SpriteTemplate gDiveWaterSplashSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPLASH,
@@ -319,18 +301,6 @@ const struct SpriteTemplate gSprayWaterDropletSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSprayWaterDroplet,
-};
-
-// Unused
-static const struct SpriteTemplate sUnusedFlashingLightSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .oam = &gOamData_AffineOff_ObjBlend_64x64,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnusedFlashingLight,
 };
 
 const struct SpriteTemplate gSkyAttackBirdSpriteTemplate =
@@ -1214,22 +1184,6 @@ void AnimSkyAttackBird_Step(struct Sprite *sprite)
     if (sprite->x > DISPLAY_WIDTH + 45 || sprite->x < -45
      || sprite->y > 157 || sprite->y < -45)
         DestroySpriteAndMatrix(sprite);
-}
-
-// Unused
-static void AnimTask_SetAttackerVisibility(u8 taskId)
-{
-    if (gBattleAnimArgs[0] == 0)
-    {
-        u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-        gSprites[spriteId].invisible = TRUE;
-    }
-    else
-    {
-        u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-        gSprites[spriteId].invisible = FALSE;
-    }
-    DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_LoadWindstormBackground(u8 taskId)

@@ -505,20 +505,7 @@ static const struct YesNoFuncTable sTossDecorationYesNoFunctions =
 
 void InitDecorationContextItems(void)
 {
-    if (sCurDecorationCategory < DECORCAT_COUNT)
-        gCurDecorationItems = gDecorationInventories[sCurDecorationCategory].items;
 
-    if (sDecorationContext.isPlayerRoom == FALSE)
-    {
-        sDecorationContext.items = gSaveBlock1Ptr->secretBases[0].decorations;
-        sDecorationContext.pos = gSaveBlock1Ptr->secretBases[0].decorationPositions;
-    }
-
-    if (sDecorationContext.isPlayerRoom == TRUE)
-    {
-        sDecorationContext.items = gSaveBlock1Ptr->playerRoomDecorations;
-        sDecorationContext.pos = gSaveBlock1Ptr->playerRoomDecorationPositions;
-    }
 }
 
 static u8 AddDecorationWindow(u8 windowIndex)
@@ -581,12 +568,7 @@ void DoSecretBaseDecorationMenu(u8 taskId)
 
 void DoPlayerRoomDecorationMenu(u8 taskId)
 {
-    InitDecorationActionsWindow();
-    sDecorationContext.items = gSaveBlock1Ptr->playerRoomDecorations;
-    sDecorationContext.pos = gSaveBlock1Ptr->playerRoomDecorationPositions;
-    sDecorationContext.size = DECOR_MAX_PLAYERS_HOUSE;
-    sDecorationContext.isPlayerRoom = TRUE;
-    gTasks[taskId].func = HandleDecorationActionsMenuInput;
+
 }
 
 static void HandleDecorationActionsMenuInput(u8 taskId)
@@ -1060,55 +1042,7 @@ static bool8 IsDecorationIndexInPlayersRoom(u8 idx)
 
 static void IdentifyOwnedDecorationsCurrentlyInUseInternal(u8 taskId)
 {
-    u16 i, j, k;
-    u16 count;
 
-    count = 0;
-    memset(sSecretBaseItemsIndicesBuffer, 0, sizeof(sSecretBaseItemsIndicesBuffer));
-    memset(sPlayerRoomItemsIndicesBuffer, 0, sizeof(sPlayerRoomItemsIndicesBuffer));
-
-    for (i = 0; i < ARRAY_COUNT(sSecretBaseItemsIndicesBuffer); i++)
-    {
-        if (gSaveBlock1Ptr->secretBases[0].decorations[i] != DECOR_NONE)
-        {
-            for (j = 0; j < gDecorationInventories[sCurDecorationCategory].size; j++)
-            {
-                if (gCurDecorationItems[j] == gSaveBlock1Ptr->secretBases[0].decorations[i])
-                {
-                    for (k = 0; k < count && sSecretBaseItemsIndicesBuffer[k] != j + 1; k++)
-                        ;
-
-                    if (k == count)
-                    {
-                        sSecretBaseItemsIndicesBuffer[count] = j + 1;
-                        count++;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    count = 0;
-    for (i = 0; i < ARRAY_COUNT(sPlayerRoomItemsIndicesBuffer); i++)
-    {
-        if (gSaveBlock1Ptr->playerRoomDecorations[i] != DECOR_NONE)
-        {
-            for (j = 0; j < gDecorationInventories[sCurDecorationCategory].size; j++)
-            {
-                if (gCurDecorationItems[j] == gSaveBlock1Ptr->playerRoomDecorations[i] && IsDecorationIndexInSecretBase(j + 1) != TRUE)
-                {
-                    for (k = 0; k < count && sPlayerRoomItemsIndicesBuffer[k] != j + 1; k++);
-                    if (k == count)
-                    {
-                        sPlayerRoomItemsIndicesBuffer[count] = j + 1;
-                        count++;
-                        break;
-                    }
-                }
-            }
-        }
-    }
 }
 
 static void IdentifyOwnedDecorationsCurrentlyInUse(u8 taskId)
@@ -2188,21 +2122,6 @@ void PutAwayDecorationIteration(void)
                 gSpecialVar_0x8006 = gMapHeader.events->objectEvents[i].localId;
                 break;
             }
-        }
-    }
-}
-
-// Unused
-void GetObjectEventLocalIdByFlag(void)
-{
-    u8 i;
-
-    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
-    {
-        if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_0x8004)
-        {
-            gSpecialVar_0x8005 = gMapHeader.events->objectEvents[i].localId;
-            break;
         }
     }
 }

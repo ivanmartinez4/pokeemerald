@@ -318,19 +318,6 @@ AI_CGM_RepetitionNotBoring:
 	score +15
 	end
 
-AI_CGM_Unused:
-	if_last_appeal AI_CGM_Unused_LastAppeal
-	if_random_less_than 220, AI_CGM_Unused_Discourage
-	score +10
-	end
-AI_CGM_Unused_LastAppeal:
-	if_random_less_than 20, AI_CGM_End
-	score +15
-	end
-AI_CGM_Unused_Discourage:
-	score -20
-	end
-
 @ Enourages improving condition, esp if user has moves better with good condition or on 1st appeal
 @ Discourages improving condition if at max condition, or if last appeal
 AI_CGM_ImproveCondition:

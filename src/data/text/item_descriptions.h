@@ -3004,11 +3004,6 @@ static const u8 sMarangaBerryDesc[] = _(
     "move, it raises the\n"
     "Sp. Def. a bit.");
 
-static const u8 sEnigmaBerryEReaderDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow a mystery.");
-
 // TMs/HMs
 static const u8 sTM01Desc[] = _(
     "Powerful, but makes\n"

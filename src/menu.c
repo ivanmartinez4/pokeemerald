@@ -443,20 +443,6 @@ void Menu_LoadStdPalAt(u16 offset)
     LoadPalette(gStandardMenuPalette, offset, STD_WINDOW_PALETTE_SIZE);
 }
 
-// Unused
-static const u16 *Menu_GetStdPal(void)
-{
-    return gStandardMenuPalette;
-}
-
-// Unused
-static u16 Menu_GetStdPalColor(u8 colorNum)
-{
-    if (colorNum > 15)
-        colorNum = 0;
-    return gStandardMenuPalette[colorNum];
-}
-
 void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
 {
     LoadMessageBoxAndBorderGfx();
@@ -509,18 +495,6 @@ void RemoveStartMenuWindow(void)
         RemoveWindow(sStartMenuWindowId);
         sStartMenuWindowId = WINDOW_NONE;
     }
-}
-
-// Unused
-static u16 GetDialogFrameBaseTileNum(void)
-{
-    return DLG_WINDOW_BASE_TILE_NUM;
-}
-
-// Unused
-static u16 GetStandardFrameBaseTileNum(void)
-{
-    return STD_WINDOW_BASE_TILE_NUM;
 }
 
 u8 AddMapNamePopUpWindow(void)
@@ -878,23 +852,6 @@ void HofPCTopBar_PrintPair(const u8 *string, const u8 *string2, bool8 noBg, u8 l
     }
 }
 
-// Unused
-static void HofPCTopBar_CopyToVram(void)
-{
-    if (sHofPCTopBarWindowId != WINDOW_NONE)
-        CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
-}
-
-// Unused
-static void HofPCTopBar_Clear(void)
-{
-    if (sHofPCTopBarWindowId != WINDOW_NONE)
-    {
-        FillWindowPixelBuffer(sHofPCTopBarWindowId, PIXEL_FILL(15));
-        CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
-    }
-}
-
 void HofPCTopBar_RemoveWindow(void)
 {
     if (sHofPCTopBarWindowId != WINDOW_NONE)
@@ -935,13 +892,6 @@ static u8 InitMenu(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 
 u8 InitMenuNormal(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
 {
     return InitMenu(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos, FALSE);
-}
-
-// Unused
-static u8 InitMenuDefaultCursorHeight(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 initialCursorPos)
-{
-    u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
-    return InitMenuNormal(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos);
 }
 
 void RedrawMenuCursor(u8 oldPos, u8 newPos)
@@ -1115,21 +1065,6 @@ void PrintMenuActionTextsAtPos(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineH
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-// Unused
-static void PrintMenuActionTextsWithSpacing(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, u8 letterSpacing, u8 lineSpacing)
-{
-    u8 i;
-    for (i = 0; i < itemCount; i++)
-        AddTextPrinterParameterized5(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, TEXT_SKIP_DRAW, NULL, letterSpacing, lineSpacing);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
-}
-
-// Unused
-static void PrintMenuActionTextsAtTop(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions)
-{
-    PrintMenuActionTextsAtPos(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, lineHeight, itemCount, menuActions);
-}
-
 void PrintMenuActionTexts(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
@@ -1155,12 +1090,6 @@ void PrintMenuActionTexts(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpac
     }
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
-}
-
-// Unused
-static void PrintMenuActionTextsAtTopById(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
-{
-    PrintMenuActionTexts(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, menuActions, actionIds);
 }
 
 void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
@@ -1246,12 +1175,6 @@ static void PrintMenuActionGridText(u8 windowId, u8 fontId, u8 left, u8 top, u8 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-// Unused
-static void PrintMenuActionGridTextAtTop(u8 windowId, u8 fontId, u8 width, u8 height, u8 columns, u8 rows, const struct MenuAction *menuActions)
-{
-    PrintMenuActionGridText(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, width, height, columns, rows, menuActions);
-}
-
 void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
@@ -1283,12 +1206,6 @@ void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-// Unused
-static void PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, u8 unused, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
-{
-    PrintMenuActionGrid(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, optionWidth, horizontalCount, verticalCount, menuActions, actionIds);
-}
-
 static u8 InitMenuGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 optionHeight, u8 columns, u8 rows, u8 numChoices, u8 cursorPos)
 {
     s32 pos;
@@ -1314,14 +1231,6 @@ static u8 InitMenuGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, 
     // Why call this when it's not gonna move?
     ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_NONE);
     return sMenu.cursorPos;
-}
-
-// Unused
-static u8 InitMenuGridDefaultCursorHeight(u8 windowId, u8 fontId, u8 left, u8 top, u8 width, u8 columns, u8 rows, u8 cursorPos)
-{
-    u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
-    u8 numChoices = columns * rows;
-    return InitMenuGrid(windowId, fontId, left, top, width, cursorHeight, columns, rows, numChoices, cursorPos);
 }
 
 // Erase cursor at old position, draw cursor at new position.
@@ -1409,46 +1318,6 @@ u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
     }
 }
 
-// Unused
-static s8 Menu_ProcessGridInput_NoSoundLimit(void)
-{
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        return sMenu.cursorPos;
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        return MENU_B_PRESSED;
-    }
-    else if (JOY_NEW(DPAD_UP))
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_NEW(DPAD_DOWN))
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
-        return MENU_NOTHING_CHOSEN;
-    }
-
-    return MENU_NOTHING_CHOSEN;
-}
-
 s8 Menu_ProcessGridInput(void)
 {
     u8 oldPos = sMenu.cursorPos;
@@ -1481,88 +1350,6 @@ s8 Menu_ProcessGridInput(void)
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
-    {
-        if (oldPos != ChangeGridMenuCursorPosition(1, 0))
-            PlaySE(SE_SELECT);
-        return MENU_NOTHING_CHOSEN;
-    }
-
-    return MENU_NOTHING_CHOSEN;
-}
-
-// Unused
-static s8 Menu_ProcessGridInputRepeat_NoSoundLimit(void)
-{
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        return sMenu.cursorPos;
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        return MENU_B_PRESSED;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
-    {
-        PlaySE(SE_SELECT);
-        ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
-        return MENU_NOTHING_CHOSEN;
-    }
-
-    return MENU_NOTHING_CHOSEN;
-}
-
-// Unused
-static s8 Menu_ProcessGridInputRepeat(void)
-{
-    u8 oldPos = sMenu.cursorPos;
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        return sMenu.cursorPos;
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        return MENU_B_PRESSED;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
-    {
-        if (oldPos != ChangeGridMenuCursorPosition(0, -1))
-            PlaySE(SE_SELECT);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
-    {
-        if (oldPos != ChangeGridMenuCursorPosition(0, 1))
-            PlaySE(SE_SELECT);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
-    {
-        if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
-            PlaySE(SE_SELECT);
-        return MENU_NOTHING_CHOSEN;
-    }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -1672,38 +1459,6 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
         for (j = 0; j < columns; j++)
             AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
     }
-    CopyWindowToVram(windowId, COPYWIN_GFX);
-}
-
-// Unused
-static void PrintMenuActionGridTextNoSpacing(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *menuActions, const u8 *actionIds)
-{
-    u8 i;
-    u8 j;
-    struct TextPrinterTemplate printer;
-
-    printer.windowId = windowId;
-    printer.fontId = FONT_NORMAL;
-    printer.fgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_FOREGROUND);
-    printer.bgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_BACKGROUND);
-    printer.shadowColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_SHADOW);
-    printer.unk = GetFontAttribute(FONT_NORMAL, FONTATTR_UNKNOWN);
-    printer.letterSpacing = 0;
-    printer.lineSpacing = 0;
-
-    for (i = 0; i < rows; i++)
-    {
-        for (j = 0; j < columns; j++)
-        {
-            printer.currentChar = menuActions[actionIds[(columns * i) + j]].text;
-            printer.x = (optionWidth * j) + 8;
-            printer.y = (16 * i) + 1;
-            printer.currentX = printer.x;
-            printer.currentY = printer.y;
-            AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
-        }
-    }
-
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -2081,18 +1836,6 @@ static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u
             *(vu16 *)pixelsDst = toOrr;
         }
     }
-}
-
-// Unused
-static void LoadMonIconPalAtOffset(u8 palOffset, u16 speciesId)
-{
-    LoadPalette(GetValidMonIconPalettePtr(speciesId), palOffset, PLTT_SIZE_4BPP);
-}
-
-// Unused
-static void DrawMonIconAtPos(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
-{
-    BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality), x, y, 32, 32);
 }
 
 void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)

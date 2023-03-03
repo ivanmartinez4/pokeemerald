@@ -59,8 +59,7 @@
 #define AI_FLAG_ACE_POKEMON           (1 << 16)  // AI has an Ace Pokemon. The last Pokemon in the party will not be used until it's the last one remaining.
 
 // 'other' ai logic flags
-#define AI_FLAG_ROAMING               (1 << 29)
-#define AI_FLAG_SAFARI                (1 << 30)
-#define AI_FLAG_FIRST_BATTLE          (1 << 31)
+#define AI_FLAG_SAFARI                (1 << 29)
+#define AI_FLAG_FIRST_BATTLE          (1 << 30)
 
 #endif // GUARD_CONSTANTS_BATTLE_AI_H

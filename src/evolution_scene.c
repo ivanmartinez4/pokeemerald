@@ -68,14 +68,10 @@ static void StopBgAnimation(void);
 static void Task_AnimateBg(u8 taskId);
 static void RestoreBgAfterAnim(void);
 
-static const u16 sUnusedPal1[] = INCBIN_U16("graphics/evolution_scene/unused_1.gbapal");
 static const u32 sBgAnim_Gfx[] = INCBIN_U32("graphics/evolution_scene/bg.4bpp.lz");
 static const u32 sBgAnim_Inner_Tilemap[] = INCBIN_U32("graphics/evolution_scene/bg_inner.bin.lz");
 static const u32 sBgAnim_Outer_Tilemap[] = INCBIN_U32("graphics/evolution_scene/bg_outer.bin.lz");
 static const u16 sBgAnim_Intro_Pal[] = INCBIN_U16("graphics/evolution_scene/bg_anim_intro.gbapal");
-static const u16 sUnusedPal2[] = INCBIN_U16("graphics/evolution_scene/unused_2.gbapal");
-static const u16 sUnusedPal3[]  = INCBIN_U16("graphics/evolution_scene/unused_3.gbapal");
-static const u16 sUnusedPal4[] = INCBIN_U16("graphics/evolution_scene/unused_4.gbapal");
 static const u16 sBgAnim_Pal[] = INCBIN_U16("graphics/evolution_scene/bg_anim.gbapal");
 
 static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
@@ -1645,17 +1641,6 @@ static void StartBgAnimation(bool8 isLink)
 
     CreateTask(Task_UpdateBgPalette, 5);
     CreateBgAnimTask(isLink);
-}
-
-// Unused
-static void PauseBgPaletteAnim(void)
-{
-    u8 taskId = FindTaskIdByFunc(Task_UpdateBgPalette);
-
-    if (taskId != TASK_NONE)
-        gTasks[taskId].tPaused = TRUE;
-
-    FillPalette(RGB_BLACK, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
 }
 
 #undef tPaused

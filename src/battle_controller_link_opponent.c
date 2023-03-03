@@ -65,7 +65,6 @@ static void LinkOpponentHandleCmd32(void);
 static void LinkOpponentHandleTwoReturnValues(void);
 static void LinkOpponentHandleChosenMonReturnValue(void);
 static void LinkOpponentHandleOneReturnValue(void);
-static void LinkOpponentHandleOneReturnValue_Duplicate(void);
 static void LinkOpponentHandleClearUnkVar(void);
 static void LinkOpponentHandleSetUnkVar(void);
 static void LinkOpponentHandleClearUnkFlag(void);
@@ -138,7 +137,6 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TWORETURNVALUES]          = LinkOpponentHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = LinkOpponentHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = LinkOpponentHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = LinkOpponentHandleOneReturnValue_Duplicate,
     [CONTROLLER_CLEARUNKVAR]              = LinkOpponentHandleClearUnkVar,
     [CONTROLLER_SETUNKVAR]                = LinkOpponentHandleSetUnkVar,
     [CONTROLLER_CLEARUNKFLAG]             = LinkOpponentHandleClearUnkFlag,
@@ -1590,32 +1588,23 @@ static void LinkOpponentHandleOneReturnValue(void)
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleOneReturnValue_Duplicate(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleClearUnkVar(void)
 {
-    gUnusedControllerStruct.unk = 0;
     LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleSetUnkVar(void)
 {
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[gActiveBattler][1];
     LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleClearUnkFlag(void)
 {
-    gUnusedControllerStruct.flag = 0;
     LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleToggleUnkFlag(void)
 {
-    gUnusedControllerStruct.flag ^= 1;
     LinkOpponentBufferExecCompleted();
 }
 

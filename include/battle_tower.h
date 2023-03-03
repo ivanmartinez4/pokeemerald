@@ -76,13 +76,12 @@ void CopyEReaderTrainerGreeting(void);
 void TryHideBattleTowerReporter(void);
 bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst);
 bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, struct RSBattleTowerRecord *dst);
-void CalcApprenticeChecksum(struct Apprentice *apprentice);
+void CalcApprenticeChecksum(u8);
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(u8 lvlMode);
 s32 GetHighestLevelInPlayerParty(void);
 u8 FacilityClassToGraphicsId(u8 facilityClass);
-bool32 ValidateBattleTowerRecord(u8 recordId); // unused
 void TrySetLinkBattleTowerEnemyPartyLevel(void);
 
 #endif //GUARD_BATTLE_TOWER_H

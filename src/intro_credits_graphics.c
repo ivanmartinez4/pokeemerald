@@ -666,28 +666,6 @@ const struct CompressedSpriteSheet gSpriteSheet_CreditsBicycle[] =
     {}
 };
 
-// Unused
-static const struct CompressedSpriteSheet sSpriteSheet_Latios[] =
-{
-    {
-        .data = sLatios_Gfx,
-        .size = 0x1000,
-        .tag = TAG_FLYGON_LATIOS
-    },
-    {}
-};
-
-// Unused
-static const struct CompressedSpriteSheet sSpriteSheet_Latias[] =
-{
-    {
-        .data = sLatias_Gfx,
-        .size = 0x1000,
-        .tag = TAG_FLYGON_LATIAS
-    },
-    {}
-};
-
 const struct SpritePalette gSpritePalettes_Credits[] =
 {
     { .data = sBrendanCredits_Pal, .tag = TAG_BRENDAN },

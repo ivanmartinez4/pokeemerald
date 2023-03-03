@@ -113,8 +113,6 @@ static EWRAM_DATA u16 sLastSelectedPokemon = 0;
 static EWRAM_DATA u8 sPokeBallRotation = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 
-// This is written to, but never read.
-u8 gUnusedPokedexU8;
 void (*gPokedexVBlankCB)(void);
 
 struct SearchOptionText
@@ -1506,14 +1504,11 @@ void ResetPokedex(void)
 
     sLastSelectedPokemon = 0;
     sPokeBallRotation = POKEBALL_ROTATION_TOP;
-    gUnusedPokedexU8 = 0;
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
     gSaveBlock2Ptr->pokedex.order = 0;
     gSaveBlock2Ptr->pokedex.nationalMagic = 0;
-    gSaveBlock2Ptr->pokedex.unknown2 = 0;
     gSaveBlock2Ptr->pokedex.unownPersonality = 0;
     gSaveBlock2Ptr->pokedex.spindaPersonality = 0;
-    gSaveBlock2Ptr->pokedex.unknown3 = 0;
     DisableNationalPokedex();
     for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
@@ -4549,15 +4544,6 @@ static void DrawFootprint(u8 windowId, u16 dexNum)
         }
     }
     CopyToWindowPixelBuffer(windowId, footprint, sizeof(footprint), 0);
-}
-
-// Unused Ruby/Sapphire function.
-static void RS_DrawFootprint(u16 offset, u16 tileNum)
-{
-    *(u16 *)(VRAM + offset * 0x800 + 0x232) = 0xF000 + tileNum + 0;
-    *(u16 *)(VRAM + offset * 0x800 + 0x234) = 0xF000 + tileNum + 1;
-    *(u16 *)(VRAM + offset * 0x800 + 0x272) = 0xF000 + tileNum + 2;
-    *(u16 *)(VRAM + offset * 0x800 + 0x274) = 0xF000 + tileNum + 3;
 }
 
 static u16 GetNextPosition(u8 direction, u16 position, u16 min, u16 max)

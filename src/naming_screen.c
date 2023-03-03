@@ -147,7 +147,6 @@ struct NamingScreenTemplate
     u8 iconFunction;
     u8 addGenderIcon;
     u8 initialPage;
-    u8 unused;
     const u8 *title;
 };
 
@@ -1416,9 +1415,18 @@ static void NamingScreen_CreatePCIcon(void)
 static void NamingScreen_CreateMonIcon(void)
 {
     u8 spriteId;
+    u8 index;
 
     LoadMonIconPalettes();
     spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality);
+    index = IndexOfSpritePaletteTag(56000); // POKE_ICON_BASE_PAL_TAG
+    if (index < 16)
+    {
+      u32 otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+      const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(sNamingScreen->monSpecies, otId, sNamingScreen->monPersonality);
+      LoadCompressedPalette(palette, index*16 + 0x100, 32);
+      gSprites[spriteId].oam.paletteNum = index;
+    }
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1479,6 +1487,9 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
     if (input == INPUT_A_BUTTON)
     {
         bool8 textFull = AddTextCharacter();
+
+        if (sNamingScreen->currentPage == KBPAGE_LETTERS_UPPER && GetTextEntryPosition() == 1)
+            MainState_StartPageSwap();
 
         SquishCursor();
         if (textFull)
@@ -2058,12 +2069,6 @@ static bool8 IsWideLetter(u8 character)
     return FALSE;
 }
 
-// Debug? Unused, and arguments aren't sensible for non-player screens.
-static void Debug_NamingScreenPlayer(void)
-{
-    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
-}
-
 static void Debug_NamingScreenBox(void)
 {
     DoNamingScreen(NAMING_SCREEN_BOX, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
@@ -2091,7 +2096,6 @@ static const struct NamingScreenTemplate sPlayerNamingScreenTemplate =
     .iconFunction = 1,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 35,
     .title = gText_YourName,
 };
 
@@ -2102,7 +2106,6 @@ static const struct NamingScreenTemplate sPCBoxNamingTemplate =
     .iconFunction = 2,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 19,
     .title = gText_BoxName,
 };
 
@@ -2113,7 +2116,6 @@ static const struct NamingScreenTemplate sMonNamingScreenTemplate =
     .iconFunction = 3,
     .addGenderIcon = TRUE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 35,
     .title = gText_PkmnsNickname,
 };
 
@@ -2124,7 +2126,6 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
     .iconFunction = 4,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 11,
     .title = gText_TellHimTheWords,
 };
 
@@ -2584,5 +2585,3 @@ static const struct SpritePalette sSpritePalettes[] =
     {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
     {}
 };
-
-

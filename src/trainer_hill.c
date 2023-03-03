@@ -208,15 +208,6 @@ static const struct TrainerHillChallenge *const sChallengeData[NUM_TRAINER_HILL_
     [HILL_MODE_EXPERT]  = &sChallenge_Expert,
 };
 
-// Unused.
-static const u8 *const sFloorStrings[] =
-{
-    gText_TrainerHill1F,
-    gText_TrainerHill2F,
-    gText_TrainerHill3F,
-    gText_TrainerHill4F,
-};
-
 static void (* const sHillFunctions[])(void) =
 {
     [TRAINER_HILL_FUNC_START]                 = TrainerHillStartChallenge,
@@ -282,7 +273,6 @@ void ResetTrainerHillResults(void)
     s32 i;
 
     gSaveBlock2Ptr->frontier.savedGame = 0;
-    gSaveBlock2Ptr->frontier.unk_EF9 = 0;
     gSaveBlock1Ptr->trainerHill.bestTime = 0;
     for (i = 0; i < NUM_TRAINER_HILL_MODES; i++)
         SetTimerValue(&gSaveBlock1Ptr->trainerHillTimes[i], HILL_MAX_TIME);
@@ -401,7 +391,6 @@ static void TrainerHillStartChallenge(void)
     else
         gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 0;
 
-    gSaveBlock1Ptr->trainerHill.unk_3D6C = 0;
     SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
     gSaveBlock1Ptr->trainerHill.timer = 0;
     gSaveBlock1Ptr->trainerHill.spokeToOwner = 0;
@@ -436,7 +425,6 @@ static void GiveChallengePrize(void)
     {
         CopyItemName(itemId, gStringVar2);
         gSaveBlock1Ptr->trainerHill.receivedPrize = TRUE;
-        gSaveBlock2Ptr->frontier.unk_EF9 = 0;
         gSpecialVar_Result = 0;
     }
     else
@@ -766,19 +754,6 @@ u8 GetCurrentTrainerHillMapId(void)
         mapId = 0;
 
     return mapId;
-}
-
-// Unused
-static bool32 OnTrainerHillRoof(void)
-{
-    bool32 onRoof;
-
-    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ROOF)
-        onRoof = TRUE;
-    else
-        onRoof = FALSE;
-
-    return onRoof;
 }
 
 const struct WarpEvent* SetWarpDestinationTrainerHill4F(void)

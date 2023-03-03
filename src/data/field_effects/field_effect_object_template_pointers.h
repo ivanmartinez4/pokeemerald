@@ -15,9 +15,6 @@ extern const struct SpriteTemplate gFieldEffectObjectTemplate_Splash;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_JumpSmallSplash;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_LongGrass;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_JumpLongGrass;
-extern const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass;
-extern const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass2;
-extern const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedSand;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_WaterSurfacing;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_Sparkle;
@@ -35,6 +32,7 @@ extern const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_BallLight;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SlitherTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_BugTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SpotTracks;
@@ -57,9 +55,6 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_JUMP_SMALL_SPLASH]     = &gFieldEffectObjectTemplate_JumpSmallSplash,
     [FLDEFFOBJ_LONG_GRASS]            = &gFieldEffectObjectTemplate_LongGrass,
     [FLDEFFOBJ_JUMP_LONG_GRASS]       = &gFieldEffectObjectTemplate_JumpLongGrass,
-    [FLDEFFOBJ_UNUSED_GRASS]          = &gFieldEffectObjectTemplate_UnusedGrass,
-    [FLDEFFOBJ_UNUSED_GRASS_2]        = &gFieldEffectObjectTemplate_UnusedGrass2,
-    [FLDEFFOBJ_UNUSED_SAND]           = &gFieldEffectObjectTemplate_UnusedSand,
     [FLDEFFOBJ_WATER_SURFACING]       = &gFieldEffectObjectTemplate_WaterSurfacing,
     [FLDEFFOBJ_REFLECTION_DISTORTION] = &gFieldEffectObjectTemplate_ReflectionDistortion,
     [FLDEFFOBJ_SPARKLE]               = &gFieldEffectObjectTemplate_Sparkle,

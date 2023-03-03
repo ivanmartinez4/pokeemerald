@@ -33,7 +33,6 @@ static const u8 sText_UnusedTextFormat[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPAREN
 const u8 gText_MaleSymbol4[] = _("♂");
 const u8 gText_FemaleSymbol4[] = _("♀");
 const u8 gText_GenderlessSymbol[] = _("");
-static const u8 sText_SpaceMove[] = _(" MOVE"); // unused
 static const u8 sText_NewLine[] = _("\n");
 static const u8 sText_Slash[] = _("/");
 static const u8 sText_Lv[] = _("Lv. ");
@@ -41,19 +40,19 @@ static const u8 sText_ThreeDashes[] = _("---");
 static const u8 sText_FourQuestionMarks[] = _("????");
 static const u8 sText_UnusedEmpty[] = _("");
 static const u8 sText_IsThisTradeOkay[] = _("Is this trade okay?");
-static const u8 sText_Cancel[] = _("CANCEL");
-static const u8 sText_ChooseAPkmn[] = _("Choose a POKéMON.");
-static const u8 sText_Summary[] = _("SUMMARY");
-static const u8 sText_Trade[] = _("TRADE");
+static const u8 sText_Cancel[] = _("Cancel");
+static const u8 sText_ChooseAPkmn[] = _("Choose a Pokémon.");
+static const u8 sText_Summary[] = _("Summary");
+static const u8 sText_Trade[] = _("Trade");
 static const u8 sText_CancelTrade[] = _("Cancel trade?");
 static const u8 sJPText_PressBButtonToQuit[] = _("Bボタン　で　もどります");
-static const u8 sText_Summary2[] = _("SUMMARY");
-static const u8 sText_Trade2[] = _("TRADE");
+static const u8 sText_Summary2[] = _("Summary");
+static const u8 sText_Trade2[] = _("Trade");
 static const u8 sText_CommunicationStandby[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Communication standby…\nPlease wait.");
 static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}The trade has\nbeen canceled.");
-static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPOKéMON for battle.");
+static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPokémon for battle.");
 static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Waiting for your friend\nto finish…");
-static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
+static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade Pokémon.");
 
 static const struct OamData sOamData_MenuText =
 {
@@ -623,12 +622,8 @@ static const u8 sSelectedMonLevelGenderCoords[3][2] =
 
 static const u16 sPokeball_Pal[] = INCBIN_U16("graphics/trade/pokeball.gbapal");
 static const u8 sPokeball_Gfx[] = INCBIN_U8("graphics/trade/pokeball.4bpp");
-static const u8 sPokeballSymbol_Gfx[] = INCBIN_U8("graphics/trade/pokeball_symbol.8bpp"); // unused
 static const u16 sCableCloseup_Map[] = INCBIN_U16("graphics/trade/crossing_highlight_cable.bin");
-static const u16 sPokeballSymbol_Map[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin"); // unused?
-static const u16 sUnusedPal1[] = INCBIN_U16("graphics/trade/unused1.gbapal");
 static const u16 sGba_Pal[] = INCBIN_U16("graphics/trade/gba.gbapal");
-static const u16 sUnusedPal2[] = INCBIN_U16("graphics/trade/unused2.gbapal");
 static const u16 sWirelessSignalNone_Pal_Unused[] = INCBIN_U16("graphics/trade/wireless_signal_none.gbapal");
 static const u16 sLinkMon_Pal[] = INCBIN_U16("graphics/trade/link_mon.gbapal");
 static const u8 sLinkMonGlow_Gfx[] = INCBIN_U8("graphics/trade/link_mon_glow.4bpp");
@@ -986,7 +981,7 @@ static const struct InGameTrade sIngameTrades[] =
 {
     [INGAME_TRADE_SEEDOT] =
     {
-        .nickname = _("DOTS"),
+        .nickname = _("Dots"),
         .species = SPECIES_SEEDOT,
         .ivs = {5, 4, 5, 4, 4, 4},
         .abilityNum = 1,
@@ -995,14 +990,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x84,
         .heldItem = ITEM_CHESTO_BERRY,
         .mailNum = -1,
-        .otName = _("KOBE"),
-        .otGender = MALE,
+        .otName = _("Kobe"),
+        .otGender = MALE, 
         .sheen = 10,
         .requestedSpecies = SPECIES_RALTS
     },
     [INGAME_TRADE_PLUSLE] =
     {
-        .nickname = _("PLUSES"),
+        .nickname = _("Pluses"),
         .species = SPECIES_PLUSLE,
         .ivs = {4, 4, 4, 5, 5, 4},
         .abilityNum = 0,
@@ -1011,14 +1006,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x6F,
         .heldItem = ITEM_WOOD_MAIL,
         .mailNum = 0,
-        .otName = _("ROMAN"),
-        .otGender = MALE,
+        .otName = _("Roman"),
+        .otGender = MALE, 
         .sheen = 10,
         .requestedSpecies = SPECIES_VOLBEAT
     },
     [INGAME_TRADE_HORSEA] =
     {
-        .nickname = _("SEASOR"),
+        .nickname = _("Seasor"),
         .species = SPECIES_HORSEA,
         .ivs = {5, 4, 4, 4, 5, 4},
         .abilityNum = 0,
@@ -1027,14 +1022,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x7F,
         .heldItem = ITEM_WAVE_MAIL,
         .mailNum = 1,
-        .otName = _("SKYLAR"),
-        .otGender = MALE,
+        .otName = _("Skylar"),
+        .otGender = MALE, 
         .sheen = 10,
         .requestedSpecies = SPECIES_BAGON
     },
     [INGAME_TRADE_MEOWTH] =
     {
-        .nickname = _("MEOWOW"),
+        .nickname = _("Meowow"),
         .species = SPECIES_MEOWTH,
         .ivs = {4, 5, 4, 5, 4, 4},
         .abilityNum = 0,
@@ -1043,8 +1038,8 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x8B,
         .heldItem = ITEM_RETRO_MAIL,
         .mailNum = 2,
-        .otName = _("ISIS"),
-        .otGender = FEMALE,
+        .otName = _("Isis"),
+        .otGender = FEMALE, 
         .sheen = 10,
         .requestedSpecies = SPECIES_SKITTY
     }

@@ -48,6 +48,7 @@
 #include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
@@ -74,7 +75,7 @@ EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
-EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
+EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 EWRAM_DATA static u8 sTriedEvolving = 0;
 
 #include "data/battle_moves.h"
@@ -3835,36 +3836,9 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     CalculateMonStats(mon);
 }
 
-void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId)
+void CreateApprenticeMon(struct Pokemon *mon, u8 unused, u8 monId)
 {
-    s32 i;
-    u16 evAmount;
-    u8 language;
-    u32 otId = gApprentices[src->id].otId;
-    u32 personality = ((gApprentices[src->id].otId >> 8) | ((gApprentices[src->id].otId & 0xFF) << 8))
-                    + src->party[monId].species + src->number;
 
-    CreateMon(mon,
-              src->party[monId].species,
-              GetFrontierEnemyMonLevel(src->lvlMode - 1),
-              MAX_PER_STAT_IVS,
-              TRUE,
-              personality,
-              OT_ID_PRESET,
-              otId);
-
-    SetMonData(mon, MON_DATA_HELD_ITEM, &src->party[monId].item);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(mon, src->party[monId].moves[i], i);
-
-    evAmount = MAX_TOTAL_EVS / NUM_STATS;
-    for (i = 0; i < NUM_STATS; i++)
-        SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
-
-    language = src->language;
-    SetMonData(mon, MON_DATA_LANGUAGE, &language);
-    SetMonData(mon, MON_DATA_OT_NAME, GetApprenticeNameInLanguage(src->id, language));
-    CalculateMonStats(mon);
 }
 
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId)
@@ -3908,9 +3882,6 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
 
     dest->species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
-
-    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
-        heldItem = ITEM_NONE;
 
     dest->heldItem = heldItem;
 
@@ -4468,12 +4439,8 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
-    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A])
-        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A]->templates[battlerPosition];
-    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B])
-        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B]->templates[battlerPosition];
-    else
-        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
+    else if (sMonSpritesGfxManager)
+        gMultiuseSpriteTemplate = sMonSpritesGfxManager->templates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
@@ -5817,17 +5784,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
-    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        if (gMain.inBattle)
-            holdEffect = gEnigmaBerries[gBattlerInMenuId].holdEffect;
-        else
-            holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-    }
-    else
-    {
-        holdEffect = ItemId_GetHoldEffect(heldItem);
-    }
+    holdEffect = ItemId_GetHoldEffect(heldItem);
 
     // Get battler id (if relevant)
     gPotentialItemEffectBattler = gBattlerInMenuId;
@@ -5854,21 +5811,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     // Skip using the item if it won't do anything
     if (!ITEM_HAS_EFFECT(item))
         return TRUE;
-    if (gItemEffectTable[item - ITEM_POTION] == NULL && item != ITEM_ENIGMA_BERRY_E_READER)
+    if (gItemEffectTable[item - ITEM_POTION] == NULL)
         return TRUE;
 
-    // Get item effect
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        if (gMain.inBattle)
-            itemEffect = gEnigmaBerries[gActiveBattler].itemEffect;
-        else
-            itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    }
-    else
-    {
         itemEffect = gItemEffectTable[item - ITEM_POTION];
-    }
 
     // Do item effect
     for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
@@ -6423,13 +6369,8 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     temp = gItemEffectTable[itemId - ITEM_POTION];
 
-    if (!temp && itemId != ITEM_ENIGMA_BERRY_E_READER)
+    if (!temp)
         return 0;
-
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        temp = gEnigmaBerries[gActiveBattler].itemEffect;
-    }
 
     itemEffect = temp;
 
@@ -6542,18 +6483,7 @@ u8 *UseStatIncreaseItem(u16 itemId)
     int i;
     const u8 *itemEffect;
 
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        if (gMain.inBattle)
-            itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
-        else
-            itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    }
-    else
-    {
-        itemEffect = gItemEffectTable[itemId - ITEM_POTION];
-    }
-
+    itemEffect = gItemEffectTable[itemId - ITEM_POTION];
     gPotentialItemEffectBattler = gBattlerInMenuId;
 
     if (itemEffect[0] & ITEM0_DIRE_HIT)
@@ -6624,11 +6554,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     {
         partnerSpecies = GetMonData(tradePartner, MON_DATA_SPECIES, 0);
         partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
-
-        if (partnerHeldItem == ITEM_ENIGMA_BERRY)
-            partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-        else
-            partnerHoldEffect = ItemId_GetHoldEffect(partnerHeldItem);
+        partnerHoldEffect = ItemId_GetHoldEffect(partnerHeldItem);
     }
     else
     {
@@ -6637,10 +6563,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
         partnerHoldEffect = HOLD_EFFECT_NONE;
     }
 
-    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
-        holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(heldItem);
+    holdEffect = ItemId_GetHoldEffect(heldItem);
 
     // Prevent evolution with Everstone, unless we're just viewing the party menu with an evolution item
     if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE
@@ -6666,8 +6589,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
+                UpdateTimeOfDay();
+                if (gTimeOfDay != TIME_OF_DAY_NIGHT && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_DAY:
@@ -6676,8 +6599,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
+                UpdateTimeOfDay();
+                if (gTimeOfDay == TIME_OF_DAY_NIGHT && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_NIGHT:
@@ -7237,18 +7160,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
 
     species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-
-    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        if (gMain.inBattle)
-            holdEffect = gEnigmaBerries[0].holdEffect;
-        else
-            holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-    }
-    else
-    {
-        holdEffect = ItemId_GetHoldEffect(heldItem);
-    }
+    holdEffect = ItemId_GetHoldEffect(heldItem);
 
     if (species && species != SPECIES_EGG)
     {
@@ -7295,17 +7207,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     u8 bonus;
 
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-    if (heldItem == ITEM_ENIGMA_BERRY)
-    {
-        if (gMain.inBattle)
-            holdEffect = gEnigmaBerries[0].holdEffect;
-        else
-            holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-    }
-    else
-    {
-        holdEffect = ItemId_GetHoldEffect(heldItem);
-    }
+    holdEffect = ItemId_GetHoldEffect(heldItem);
 
     stat = ItemId_GetSecondaryId(heldItem);
     bonus = ItemId_GetHoldEffectParam(heldItem);
@@ -7794,7 +7696,149 @@ u16 GetBattleBGM(void)
         }
     }
     else
-        return MUS_VS_WILD;
+    {
+        switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
+        {    
+        case SPECIES_ARTICUNO:
+        case SPECIES_ZAPDOS:
+        case SPECIES_MOLTRES:
+        #if P_NEW_POKEMON == TRUE
+        case SPECIES_ARTICUNO_GALARIAN:
+        case SPECIES_ZAPDOS_GALARIAN:
+        case SPECIES_MOLTRES_GALARIAN:
+        #endif
+            return MUS_RG_VS_LEGEND;
+        case SPECIES_MEWTWO:
+        #if P_NEW_POKEMON == TRUE
+        case SPECIES_MEWTWO_MEGA_X:
+        case SPECIES_MEWTWO_MEGA_Y:
+        #endif
+            return MUS_RG_VS_MEWTWO;
+        case SPECIES_MEW:
+            return MUS_VS_MEW;
+        case SPECIES_RAIKOU:
+            return MUS_HG_VS_RAIKOU;
+        case SPECIES_ENTEI:
+            return MUS_HG_VS_ENTEI;
+        case SPECIES_SUICUNE:
+            return MUS_HG_VS_SUICUNE;
+        case SPECIES_LUGIA:
+            return MUS_HG_VS_LUGIA;
+        case SPECIES_HO_OH:
+            return MUS_HG_VS_HO_OH;
+        case SPECIES_CELEBI:
+            return MUS_HG_VS_WILD;
+        case SPECIES_REGIROCK:
+        case SPECIES_REGICE:
+        case SPECIES_REGISTEEL:
+        #if P_NEW_POKEMON == TRUE
+        case SPECIES_REGIGIGAS:
+        case SPECIES_REGIELEKI:
+        case SPECIES_REGIDRAGO:
+        #endif
+            return MUS_VS_REGI;
+        case SPECIES_LATIAS:
+        case SPECIES_LATIOS:
+        case SPECIES_JIRACHI:
+        #if P_NEW_POKEMON == TRUE
+        case SPECIES_LATIAS_MEGA:
+        case SPECIES_LATIOS_MEGA:
+        #endif
+            return MUS_VS_WILD;
+        case SPECIES_GROUDON:
+        case SPECIES_KYOGRE:
+        case SPECIES_RAYQUAZA:
+        #if P_NEW_POKEMON == TRUE
+        case SPECIES_RAYQUAZA_MEGA:
+        case SPECIES_KYOGRE_PRIMAL:
+        case SPECIES_GROUDON_PRIMAL:
+        #endif
+            return MUS_VS_KYOGRE_GROUDON;
+        case SPECIES_DEOXYS:
+        #if P_NEW_POKEMON == TRUE
+        case SPECIES_DEOXYS_ATTACK:
+        case SPECIES_DEOXYS_DEFENSE:
+        case SPECIES_DEOXYS_SPEED:
+        #endif
+            return MUS_RG_VS_DEOXYS;
+        #if P_NEW_POKEMON == TRUE
+        case SPECIES_UXIE:
+        case SPECIES_MESPRIT:
+        case SPECIES_AZELF:
+            return MUS_DP_VS_UXIE_MESPRIT_AZELF;
+        case SPECIES_DIALGA:
+        case SPECIES_PALKIA:
+            return MUS_DP_VS_DIALGA_PALKIA;
+        case SPECIES_ROTOM:
+        case SPECIES_ROTOM_HEAT:
+        case SPECIES_ROTOM_WASH:
+        case SPECIES_ROTOM_FROST:
+        case SPECIES_ROTOM_FAN:
+        case SPECIES_ROTOM_MOW:
+        case SPECIES_HEATRAN:
+        case SPECIES_MANAPHY:
+        case SPECIES_DARKRAI:
+            return MUS_DP_VS_LEGEND;
+        case SPECIES_GIRATINA:
+        case SPECIES_GIRATINA_ORIGIN:
+            return MUS_PL_VS_GIRATINA;
+        case SPECIES_CRESSELIA:
+        case SPECIES_PHIONE:
+        case SPECIES_SHAYMIN:
+        case SPECIES_SHAYMIN_SKY:
+            return MUS_DP_VS_WILD;
+        case SPECIES_ARCEUS:
+        case SPECIES_ARCEUS_FIGHTING:
+        case SPECIES_ARCEUS_FLYING:
+        case SPECIES_ARCEUS_POISON:
+        case SPECIES_ARCEUS_GROUND:
+        case SPECIES_ARCEUS_ROCK:
+        case SPECIES_ARCEUS_BUG:
+        case SPECIES_ARCEUS_GHOST:
+        case SPECIES_ARCEUS_STEEL:
+        case SPECIES_ARCEUS_FIRE:
+        case SPECIES_ARCEUS_WATER:
+        case SPECIES_ARCEUS_GRASS:
+        case SPECIES_ARCEUS_ELECTRIC:
+        case SPECIES_ARCEUS_PSYCHIC:
+        case SPECIES_ARCEUS_ICE:
+        case SPECIES_ARCEUS_DRAGON:
+        case SPECIES_ARCEUS_DARK:
+        case SPECIES_ARCEUS_FAIRY:
+            return MUS_DP_VS_ARCEUS;
+        case SPECIES_VICTINI:
+        case SPECIES_COBALION:
+        case SPECIES_TERRAKION:
+        case SPECIES_VIRIZION:
+        case SPECIES_TORNADUS:
+        case SPECIES_THUNDURUS:
+        case SPECIES_LANDORUS:
+        case SPECIES_TORNADUS_THERIAN:
+        case SPECIES_THUNDURUS_THERIAN:
+        case SPECIES_LANDORUS_THERIAN:
+        case SPECIES_KELDEO:
+        case SPECIES_KELDEO_RESOLUTE:
+        case SPECIES_MELOETTA:
+        case SPECIES_MELOETTA_PIROUETTE:
+        case SPECIES_GENESECT:
+        case SPECIES_GENESECT_DOUSE_DRIVE:
+        case SPECIES_GENESECT_SHOCK_DRIVE:
+        case SPECIES_GENESECT_BURN_DRIVE:
+        case SPECIES_GENESECT_CHILL_DRIVE:
+            return MUS_BW_VS_LEGEND;
+        case SPECIES_RESHIRAM:
+        case SPECIES_ZEKROM:
+            return MUS_BW_VS_RESHIRAM_ZEKROM;
+        case SPECIES_KYUREM:
+            return MUS_BW_VS_KYUREM;
+        case SPECIES_KYUREM_WHITE:
+        case SPECIES_KYUREM_BLACK:
+            return MUS_B2_VS_BLACK_WHITE_KYUREM;
+        #endif
+        default:
+            return MUS_VS_WILD;
+        }
+    }
 }
 
 void PlayBattleBGM(void)
@@ -8238,32 +8282,6 @@ void BattleAnimateBackSprite(struct Sprite *sprite, u16 species)
     }
 }
 
-// Unused, identical to GetOpposingLinkMultiBattlerId but for the player
-// "rightSide" from that team's perspective, i.e. B_POSITION_*_RIGHT
-static u8 GetOwnOpposingLinkMultiBattlerId(bool8 rightSide)
-{
-    s32 i;
-    s32 battlerId = 0;
-    u8 multiplayerId = GetMultiplayerId();
-    switch (gLinkPlayers[multiplayerId].id)
-    {
-    case 0:
-    case 2:
-        battlerId = rightSide ? 1 : 3;
-        break;
-    case 1:
-    case 3:
-        battlerId = rightSide ? 2 : 0;
-        break;
-    }
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        if (gLinkPlayers[i].id == (s16)battlerId)
-            break;
-    }
-    return i;
-}
-
 u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId)
 {
     s32 i;
@@ -8364,11 +8382,11 @@ static bool8 ShouldSkipFriendshipChange(void)
 #define ALLOC_FAIL_STRUCT (1 << 1)
 #define GFX_MANAGER_ACTIVE 0xA3 // Arbitrary value
 #define GFX_MANAGER_SPR_SIZE (MON_PIC_SIZE * 4) // Only Castform uses more than MON_PIC_SIZE, despite not displaying its forms.
-#define GFX_MANAGER_NUM_FRAMES 4  // Only 2 frames are needed
+#define GFX_MANAGER_NUM_FRAMES 2
 
 static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
 {
-    u16 i, j;
+    u32 i, j;
     for (i = 0; i < gfx->numSprites; i++)
     {
         gfx->templates[i] = gBattlerSpriteTemplates[i];
@@ -8394,41 +8412,21 @@ static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
     }
 }
 
-struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(void)
 {
-    u8 i;
+    u32 i;
     u8 failureFlags;
     struct MonSpritesGfxManager *gfx;
-
+ 
     failureFlags = 0;
-    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
     gfx = AllocZeroed(sizeof(*gfx));
     if (gfx == NULL)
         return NULL;
-
-    switch (mode)
-    {
-    case MON_SPR_GFX_MODE_FULL_PARTY:
-        gfx->numSprites = PARTY_SIZE + 1;
-        gfx->numSprites2 = PARTY_SIZE + 1;
-        gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
-        gfx->dataSize = 1;
-        gfx->mode = MON_SPR_GFX_MODE_FULL_PARTY;
-        break;
- // case MON_SPR_GFX_MODE_BATTLE:
-    case MON_SPR_GFX_MODE_NORMAL:
-    default:
-        gfx->numSprites = MAX_BATTLERS_COUNT;
-        gfx->numSprites2 = MAX_BATTLERS_COUNT;
-        gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
-        gfx->dataSize = 1;
-        gfx->mode = MON_SPR_GFX_MODE_NORMAL;
-        break;
-    }
-
-    // Set up sprite / sprite pointer buffers
-    gfx->spriteBuffer = AllocZeroed(gfx->dataSize * GFX_MANAGER_SPR_SIZE * gfx->numSprites);
-    gfx->spritePointers = AllocZeroed(gfx->numSprites * 32); // ? Only * 4 is necessary, perhaps they were thinking bits.
+ 
+    gfx->numSprites = MAX_BATTLERS_COUNT;
+    gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
+    gfx->spriteBuffer = AllocZeroed(GFX_MANAGER_SPR_SIZE * gfx->numSprites);
+    gfx->spritePointers = AllocZeroed(gfx->numSprites * 4);
     if (gfx->spriteBuffer == NULL || gfx->spritePointers == NULL)
     {
         failureFlags |= ALLOC_FAIL_BUFFER;
@@ -8436,9 +8434,9 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     else
     {
         for (i = 0; i < gfx->numSprites; i++)
-            gfx->spritePointers[i] = gfx->spriteBuffer + (gfx->dataSize * GFX_MANAGER_SPR_SIZE * i);
+            gfx->spritePointers[i] = gfx->spriteBuffer + (GFX_MANAGER_SPR_SIZE * i);
     }
-
+ 
     // Set up sprite structs
     gfx->templates = AllocZeroed(sizeof(struct SpriteTemplate) * gfx->numSprites);
     gfx->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * gfx->numSprites * gfx->numFrames);
@@ -8450,20 +8448,9 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     {
         for (i = 0; i < gfx->numFrames * gfx->numSprites; i++)
             gfx->frameImages[i].size = MON_PIC_SIZE;
-
-        switch (gfx->mode)
-        {
-        case MON_SPR_GFX_MODE_FULL_PARTY:
-            InitMonSpritesGfx_FullParty(gfx);
-            break;
-        case MON_SPR_GFX_MODE_NORMAL:
-        case MON_SPR_GFX_MODE_BATTLE:
-        default:
-            InitMonSpritesGfx_Battle(gfx);
-            break;
-        }
+        InitMonSpritesGfx_Battle(gfx);
     }
-
+ 
     // If either of the allocations failed free their respective members
     if (failureFlags & ALLOC_FAIL_STRUCT)
     {
@@ -8475,7 +8462,7 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
         TRY_FREE_AND_SET_NULL(gfx->spritePointers);
         TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
     }
-
+ 
     if (failureFlags)
     {
         // Clear, something failed to allocate
@@ -8484,27 +8471,21 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     }
     else
     {
-        gfx->active = GFX_MANAGER_ACTIVE;
-        sMonSpritesGfxManagers[managerId] = gfx;
+        gfx->active = TRUE;
+        sMonSpritesGfxManager = gfx;
     }
-
-    return sMonSpritesGfxManagers[managerId];
+ 
+    return sMonSpritesGfxManager;
 }
 
-void DestroyMonSpritesGfxManager(u8 managerId)
+void DestroyMonSpritesGfxManager(void)
 {
-    struct MonSpritesGfxManager *gfx;
-
-    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
-    gfx = sMonSpritesGfxManagers[managerId];
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManager;
+ 
     if (gfx == NULL)
         return;
-
-    if (gfx->active != GFX_MANAGER_ACTIVE)
-    {
-        memset(gfx, 0, sizeof(*gfx));
-    }
-    else
+ 
+    if (gfx->active)
     {
         TRY_FREE_AND_SET_NULL(gfx->frameImages);
         TRY_FREE_AND_SET_NULL(gfx->templates);
@@ -8513,22 +8494,22 @@ void DestroyMonSpritesGfxManager(u8 managerId)
         memset(gfx, 0, sizeof(*gfx));
         Free(gfx);
     }
+    else
+        memset(gfx, 0, sizeof(*gfx));
 }
 
-u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum)
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
 {
-    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManagers[managerId % MON_SPR_GFX_MANAGERS_COUNT];
-    if (gfx->active != GFX_MANAGER_ACTIVE)
-    {
-        return NULL;
-    }
-    else
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManager;
+ 
+    if (gfx->active)
     {
         if (spriteNum >= gfx->numSprites)
             spriteNum = 0;
-
+ 
         return gfx->spritePointers[spriteNum];
     }
+    return NULL;
 }
 
 u16 GetFormSpeciesId(u16 speciesId, u8 formId)

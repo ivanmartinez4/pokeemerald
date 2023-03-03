@@ -299,8 +299,6 @@ static const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transition
 static const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
 static const u8 sPokeball_Gfx[] = INCBIN_U8("graphics/battle_transitions/pokeball.4bpp");
 static const u32 sEliteFour_Tileset[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
-static const u8 sUnusedBrendan_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
-static const u8 sUnusedLass_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
 static const u32 sShrinkingBoxTileset[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
 static const u16 sEvilTeam_Palette[] = INCBIN_U16("graphics/battle_transitions/evil_team.gbapal");
 static const u32 sTeamAqua_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_aqua.4bpp.lz");
@@ -314,7 +312,6 @@ static const u16 sRegirock_Palette[] = INCBIN_U16("graphics/battle_transitions/r
 static const u32 sRegice_Tilemap[] = INCBIN_U32("graphics/battle_transitions/regice.bin");
 static const u32 sRegisteel_Tilemap[] = INCBIN_U32("graphics/battle_transitions/registeel.bin");
 static const u32 sRegirock_Tilemap[] = INCBIN_U32("graphics/battle_transitions/regirock.bin");
-static const u16 sUnused_Palette[] = INCBIN_U16("graphics/battle_transitions/unused.gbapal");
 static const u32 sKyogre_Tileset[] = INCBIN_U32("graphics/battle_transitions/kyogre.4bpp.lz");
 static const u32 sKyogre_Tilemap[] = INCBIN_U32("graphics/battle_transitions/kyogre.bin.lz");
 static const u32 sGroudon_Tileset[] = INCBIN_U32("graphics/battle_transitions/groudon.4bpp.lz");
@@ -822,66 +819,6 @@ static const struct SpriteTemplate sSpriteTemplate_Pokeball =
     .callback = SpriteCB_FldEffPokeballTrail
 };
 
-static const struct OamData sOam_UnusedBrendanLass =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(64x64),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(64x64),
-    .tileNum = 0,
-    .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-
-static const struct SpriteFrameImage sImageTable_UnusedBrendan[] =
-{
-    sUnusedBrendan_Gfx, sizeof(sUnusedBrendan_Gfx)
-};
-
-static const struct SpriteFrameImage sImageTable_UnusedLass[] =
-{
-    sUnusedLass_Gfx, sizeof(sUnusedLass_Gfx)
-};
-
-static const union AnimCmd sSpriteAnim_UnusedBrendanLass[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sSpriteAnimTable_UnusedBrendanLass[] =
-{
-    sSpriteAnim_UnusedBrendanLass
-};
-
-static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
-{
-    .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_UNUSED_MUGSHOT,
-    .oam = &sOam_UnusedBrendanLass,
-    .anims = sSpriteAnimTable_UnusedBrendanLass,
-    .images = sImageTable_UnusedBrendan,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_MugshotTrainerPic
-};
-
-static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
-{
-    .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_UNUSED_MUGSHOT,
-    .oam = &sOam_UnusedBrendanLass,
-    .anims = sSpriteAnimTable_UnusedBrendanLass,
-    .images = sImageTable_UnusedLass,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_MugshotTrainerPic
-};
-
 static const u16 sFieldEffectPal_Pokeball[] = INCBIN_U16("graphics/field_effects/palettes/pokeball.gbapal");
 
 const struct SpritePalette gSpritePalette_Pokeball = {sFieldEffectPal_Pokeball, FLDEFF_PAL_TAG_POKEBALL_TRAIL};
@@ -1015,13 +952,6 @@ static void CB2_TestBattleTransition(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-}
-
-// Unused
-static void TestBattleTransition(u8 transitionId)
-{
-    sTestingTransitionId = transitionId;
-    SetMainCallback2(CB2_TestBattleTransition);
 }
 
 void BattleTransition_StartOnField(u8 transitionId)
@@ -1390,6 +1320,7 @@ static void InitPatternWeaveTransition(struct Task *task)
     sTransitionData->WIN0V = DISPLAY_HEIGHT;
     sTransitionData->BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL;
     sTransitionData->BLDALPHA = BLDALPHA_BLEND(task->tBlendTarget2, task->tBlendTarget1);
+    UpdateShadowColor(0x3DEF); // force shadows to gray
 
     for (i = 0; i < DISPLAY_HEIGHT; i++)
         gScanlineEffectRegBuffers[1][i] = DISPLAY_WIDTH;
@@ -3961,6 +3892,8 @@ static void VBlankCB_AngledWipes(void)
 #define tFadeFromGrayIncrement data[5]
 #define tDelayTimer            data[6]
 #define tBlend                 data[7]
+#define tBldCntSaved           data[8]
+#define tShadowColor           data[9]
 
 static void CreateIntroTask(s16 fadeToGrayDelay, s16 fadeFromGrayDelay, s16 numFades, s16 fadeToGrayIncrement, s16 fadeFromGrayIncrement)
 {
@@ -3988,17 +3921,29 @@ void Task_BattleTransition_Intro(u8 taskId)
 
 static bool8 TransitionIntro_FadeToGray(struct Task *task)
 {
+    u8 paletteNum = IndexOfSpritePaletteTag(TAG_WEATHER_START);
+    u16 index = (paletteNum+16)*16+9; // SHADOW_COLOR_INDEX
     if (task->tDelayTimer == 0 || --task->tDelayTimer == 0)
     {
+
         task->tDelayTimer = task->tFadeToGrayDelay;
         task->tBlend += task->tFadeToGrayIncrement;
         if (task->tBlend > 16)
             task->tBlend = 16;
+        if (paletteNum < 16)
+            task->tShadowColor = gPlttBufferFaded[index];
         BlendPalettes(PALETTES_ALL, task->tBlend, RGB(11, 11, 11));
+        if (paletteNum < 16)
+            gPlttBufferFaded[index] = task->tShadowColor;
     }
     if (task->tBlend >= 16)
     {
         // Fade to gray complete, start fade back
+        // Save BLDCNT and turn off targets temporarily
+        task->tBldCntSaved = GetGpuReg(REG_OFFSET_BLDCNT);
+        SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntSaved & ~BLDCNT_TGT2_BG_ALL);
+        if (paletteNum < 16)
+            gPlttBufferFaded[index] = RGB(11, 11, 11);
         task->tState++;
         task->tDelayTimer = task->tFadeFromGrayDelay;
     }
@@ -4009,11 +3954,18 @@ static bool8 TransitionIntro_FadeFromGray(struct Task *task)
 {
     if (task->tDelayTimer == 0 || --task->tDelayTimer == 0)
     {
+        u8 paletteNum = IndexOfSpritePaletteTag(TAG_WEATHER_START);
         task->tDelayTimer = task->tFadeFromGrayDelay;
         task->tBlend -= task->tFadeFromGrayIncrement;
         if (task->tBlend < 0)
             task->tBlend = 0;
         BlendPalettes(PALETTES_ALL, task->tBlend, RGB(11, 11, 11));
+        // Restore BLDCNT
+        SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntSaved);
+        if (paletteNum < 16) {
+            u16 index = (paletteNum+16)*16+9; // SHADOW_COLOR_INDEX
+            gPlttBufferFaded[index] = task->tShadowColor;
+        }
     }
     if (task->tBlend == 0)
     {
@@ -4306,6 +4258,7 @@ static bool8 FrontierLogoWave_Init(struct Task *task)
     LZ77UnCompVram(sFrontierLogo_Tileset, tileset);
     LoadPalette(sFrontierLogo_Palette, BG_PLTT_ID(15), sizeof(sFrontierLogo_Palette));
     sTransitionData->cameraY = 0;
+    UpdateShadowColor(0x3DEF); // force shadows to gray
 
     task->tState++;
     return FALSE;

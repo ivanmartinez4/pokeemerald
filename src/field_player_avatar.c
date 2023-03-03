@@ -288,14 +288,6 @@ static const u8 sPlayerAvatarGfxToStateFlag[GENDER_COUNT][5][2] =
     }
 };
 
-static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
-{
-    [DIR_SOUTH - 1] = MetatileBehavior_IsSouthArrowWarp,
-    [DIR_NORTH - 1] = MetatileBehavior_IsNorthArrowWarp,
-    [DIR_WEST - 1]  = MetatileBehavior_IsWestArrowWarp,
-    [DIR_EAST - 1]  = MetatileBehavior_IsEastArrowWarp,
-};
-
 static bool8 (*const sPushBoulderFuncs[])(struct Task *, struct ObjectEvent *, struct ObjectEvent *) =
 {
     PushBoulder_Start,
@@ -326,6 +318,21 @@ static u8 ObjectEventCB2_NoMovement2(void)
     return 0;
 }
 
+static void TryHidePlayerReflection(void)
+{
+    if (gObjectEvents[gPlayerAvatar.objectEventId].hasReflection) {
+        s16 x, y;
+        struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        x = playerObjEvent->currentCoords.x;
+        y = playerObjEvent->currentCoords.y;
+        MoveCoords(DIR_SOUTH, &x, &y);
+        if (!MetatileBehavior_IsReflective(MapGridGetMetatileBehaviorAt(x, y)))
+            playerObjEvent->hideReflection = TRUE;
+        else 
+            playerObjEvent->hideReflection = FALSE;
+    }
+}
+
 void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -333,6 +340,7 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
     HideShowWarpArrow(playerObjEvent);
     if (gPlayerAvatar.preventStep == FALSE)
     {
+        TryHidePlayerReflection();
         Bike_TryAcroBikeHistoryUpdate(newKeys, heldKeys);
         if (TryInterruptObjectEventSpecialAnim(playerObjEvent, direction) == 0)
         {
@@ -343,6 +351,8 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
                 MovePlayerAvatarUsingKeypadInput(direction, newKeys, heldKeys);
                 PlayerAllowForcedMovementIfMovingSameDirection();
             }
+
+            TryHidePlayerReflection();
         }
     }
 }
@@ -1173,12 +1183,6 @@ u8 PlayerGetElevation(void)
     return gObjectEvents[gPlayerAvatar.objectEventId].previousElevation;
 }
 
-// unused
-void MovePlayerToMapCoords(s16 x, s16 y)
-{
-    MoveObjectEventToMapCoords(&gObjectEvents[gPlayerAvatar.objectEventId], x, y);
-}
-
 u8 TestPlayerAvatarFlags(u8 flag)
 {
     return gPlayerAvatar.flags & flag;
@@ -1430,7 +1434,7 @@ static void HideShowWarpArrow(struct ObjectEvent *objectEvent)
 
     for (x = 0, direction = DIR_SOUTH; x < 4; x++, direction++)
     {
-        if (sArrowWarpMetatileBehaviorChecks2[x](metatileBehavior) && direction == objectEvent->movementDirection)
+        if (sArrowWarpMetatileBehaviorChecks[x](metatileBehavior) && direction == objectEvent->movementDirection)
         {
             // Show warp arrow if applicable
             x = objectEvent->currentCoords.x;
@@ -1663,6 +1667,7 @@ static void Task_WaitStopSurfing(u8 taskId)
         gPlayerAvatar.preventStep = FALSE;
         UnlockPlayerFieldControls();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
+        playerObjEvent->triggerGroundEffectsOnMove = TRUE;
         DestroyTask(taskId);
     }
 }

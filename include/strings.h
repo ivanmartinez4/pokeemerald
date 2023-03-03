@@ -17,6 +17,16 @@ extern const u8 gText_ExpandedPlaceholder_Groudon[];
 extern const u8 gText_ExpandedPlaceholder_Brendan[];
 extern const u8 gText_ExpandedPlaceholder_May[];
 
+//Stats
+extern const u8 gText_PS[];
+extern const u8 gText_Ataque[];
+extern const u8 gText_Defensa[];
+extern const u8 gText_AtaqueEspecial[];
+extern const u8 gText_DefensaEspecial[];
+extern const u8 gText_Velocidad[];
+static const u8 gText_Precision[];
+static const u8 gText_Evasion[];
+
 extern const u8 gText_FromSpace[];
 
 extern const u8 gText_Lv50[];
@@ -480,9 +490,6 @@ extern const u8 gText_PkmnCuredOfParalysis[];
 extern const u8 gText_PkmnGotOverInfatuation[];
 extern const u8 gText_PkmnTransformed[];
 extern const u8 gText_PkmnBecameHealthy[];
-extern const u8 gText_HP3[];
-extern const u8 gText_SpAtk3[];
-extern const u8 gText_SpDef3[];
 extern const u8 gText_PkmnBaseVar2StatIncreased[];
 extern const u8 gText_MovesPPIncreased[];
 extern const u8 gText_PPWasRestored[];
@@ -514,12 +521,6 @@ extern const u8 gText_EggCantBattle[];
 extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnAlreadyInBattle[];
 extern const u8 gText_PkmnCantSwitchOut[];
-extern const u8 gText_MaxHP[];
-extern const u8 gText_Attack[];
-extern const u8 gText_Defense[];
-extern const u8 gText_SpAtk[];
-extern const u8 gText_SpDef[];
-extern const u8 gText_Speed[];
 extern const u8 gText_Dash[];
 extern const u8 gText_Plus[];
 
@@ -954,17 +955,10 @@ extern const u8 gText_Info[];
 extern const u8 gText_Switch[];
 extern const u8 gText_RentalPkmn[];
 extern const u8 gText_TypeSlash[];
-extern const u8 gText_HP4[];
-extern const u8 gText_Attack3[];
-extern const u8 gText_Defense3[];
-extern const u8 gText_SpAtk4[];
-extern const u8 gText_SpDef4[];
-extern const u8 gText_Speed2[];
 extern const u8 gText_ExpPoints[];
 extern const u8 gText_NextLv[];
 extern const u8 gText_Status[];
 extern const u8 gText_Power[];
-extern const u8 gText_Accuracy2[];
 extern const u8 gText_Appeal[];
 extern const u8 gText_Jam[];
 extern const u8 gText_OTSlash[];
@@ -1229,8 +1223,6 @@ extern const u8 gText_SingleBattle[];
 extern const u8 gText_DoubleBattle[];
 extern const u8 gText_MultiBattle[];
 extern const u8 gText_BerryCrush3[];
-extern const u8 gText_PokemonJump[];
-extern const u8 gText_DodrioBerryPicking[];
 extern const u8 gText_JoinGroup[];
 extern const u8 gText_BecomeLeader[];
 extern const u8 gText_NormalRank[];
@@ -2856,42 +2848,6 @@ extern const u8 gText_Lower[];
 extern const u8 gText_Symbols[];
 extern const u8 gText_Register2[];
 extern const u8 gText_Exit2[];
-
-// Dodrio Berry Picking
-extern const u8 gText_BerryPickingRecords[];
-extern const u8 gText_BerriesPicked[];
-extern const u8 gText_BerriesInRowFivePlayers[];
-extern const u8 gText_BestScore[];
-extern const u8 gText_1Colon[];
-extern const u8 gText_2Colon[];
-extern const u8 gText_3Colon[];
-extern const u8 gText_4Colon[];
-extern const u8 gText_5Colon[];
-extern const u8 gText_SpacePoints[];
-extern const u8 gText_10P30P50P50P[];
-extern const u8 gText_AnnouncingPrizes[];
-extern const u8 gText_AnnouncingRankings[];
-extern const u8 gText_FirstPlacePrize[];
-extern const u8 gText_CantHoldAnyMore[];
-extern const u8 gText_FilledStorageSpace[];
-extern const u8 gText_BerryPickingResults[];
-extern const u8 gText_WantToPlayAgain[];
-extern const u8 gText_CommunicationStandby3[];
-extern const u8 gText_SomeoneDroppedOut[];
-
-// Pokemon jump
-extern const u8 gText_WantToPlayAgain2[];
-extern const u8 gText_SomeoneDroppedOut2[];
-extern const u8 gText_CommunicationStandby4[];
-extern const u8 gText_AwesomeWonF701F700[];
-extern const u8 gText_FilledStorageSpace2[];
-extern const u8 gText_CantHoldMore[];
-extern const u8 gText_SpacePoints2[];
-extern const u8 gText_SpaceTimes3[];
-extern const u8 gText_PkmnJumpRecords[];
-extern const u8 gText_JumpsInARow[];
-extern const u8 gText_BestScore2[];
-extern const u8 gText_ExcellentsInARow[];
 
 // Berry crush
 extern const u8 gText_Var1Berry[];

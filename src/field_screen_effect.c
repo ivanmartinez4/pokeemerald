@@ -689,7 +689,6 @@ static void Task_DoDoorWarp(u8 taskId)
         PlaySE(GetDoorSoundEffect(*x, *y - 1));
         if (followerObject) { // Put follower into pokeball
           ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
-          gSprites[followerObject->spriteId].animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
           ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);
         }
         task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
@@ -1138,6 +1137,7 @@ static void Task_OrbEffect(u8 taskId)
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
         SetGpuRegBits(REG_OFFSET_BLDCNT, gOrbEffectBackgroundLayerFlags[0]);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 7));
+        UpdateShadowColor(0x2109); // force shadows to gray
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
         SetBgTilemapPalette(0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 0xF);
@@ -1205,6 +1205,7 @@ static void Task_OrbEffect(u8 taskId)
         SetGpuReg(REG_OFFSET_DISPCNT, tDispCnt);
         SetGpuReg(REG_OFFSET_BLDCNT, tBldCnt);
         SetGpuReg(REG_OFFSET_BLDALPHA, tBldAlpha);
+        UpdateShadowColor(RGB_BLACK); // force shadows to gray
         SetGpuReg(REG_OFFSET_WININ, tWinIn);
         SetGpuReg(REG_OFFSET_WINOUT, tWinOut);
         ScriptContext_Enable();

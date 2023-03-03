@@ -506,16 +506,8 @@ static void InitPaintingMonOamData(u8 contestWinnerId)
     gMain.oamBuffer[0] = sContestPaintingMonOamData;
     gMain.oamBuffer[0].tileNum = 0;
 
-    if (contestWinnerId > 1)
-    {
-        gMain.oamBuffer[0].x = 88;
-        gMain.oamBuffer[0].y = 24;
-    }
-    else
-    {
-        gMain.oamBuffer[0].x = 88; // Duplicated code
-        gMain.oamBuffer[0].y = 24;
-    }
+    gMain.oamBuffer[0].x = 88;
+    gMain.oamBuffer[0].y = 24;
 }
 
 static u8 GetImageEffectForContestWinner(u8 contestWinnerId)

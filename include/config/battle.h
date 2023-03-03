@@ -100,8 +100,8 @@
 
 // Ability settings
 #define B_EXPANDED_ABILITY_NAMES    TRUE       // If TRUE, ability names are increased from 12 characters to 16 characters.
-#define B_ABILITY_WEATHER           GEN_LATEST // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.
-#define B_GALE_WINGS                GEN_LATEST // In Gen7+ requires full HP to trigger.
+#define B_ABILITY_WEATHER           GEN_5      // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.
+#define B_GALE_WINGS                GEN_6      // In Gen7+ requires full HP to trigger.
 #define B_STANCE_CHANGE_FAIL        GEN_LATEST // In Gen7+, Stance Change fails if the Pokémon is unable to use a move because of confusion, paralysis, etc. In Gen6, it doesn't.
 #define B_SHADOW_TAG_ESCAPE         GEN_LATEST // In Gen4+, if both sides have a Pokémon with Shadow Tag, all battlers can escape. Before, neither side could escape this situation.
 #define B_MOODY_ACC_EVASION         GEN_LATEST // In Gen8, Moody CANNOT raise Accuracy and Evasion anymore.
@@ -155,7 +155,7 @@
 
 // Terrain settings
 #define B_TERRAIN_BG_CHANGE         TRUE       // If set to TRUE, terrain moves permanently change the default battle background until the effect fades.
-#define B_THUNDERSTORM_TERRAIN      TRUE       // If TRUE, overworld Thunderstorm generates Rain and Electric Terrain as in Gen 8.
+#define B_THUNDERSTORM_TERRAIN      FALSE      // If TRUE, overworld Thunderstorm generates Rain and Electric Terrain as in Gen 8.
 #define B_TERRAIN_TYPE_BOOST        GEN_LATEST // In Gen8, damage is boosted by 30% instead of 50%.
 #define B_SECRET_POWER_EFFECT       GEN_LATEST // Secret Power's effects change depending on terrain and generation. See GetSecretPowerMoveEffect.
 #define B_SECRET_POWER_ANIMATION    GEN_LATEST // Secret Power's animations change depending on terrain and generation.
@@ -189,20 +189,20 @@
 #define B_OBEDIENCE_MECHANICS       GEN_LATEST // In PLA+ (here Gen8+), obedience restrictions also apply to non-outsider Pokémon, albeit based on their level met rather than actual level
 
 // Animation Settings
-#define B_NEW_SWORD_PARTICLE            FALSE    // If set to TRUE, it updates Swords Dance's particle.
-#define B_NEW_LEECH_SEED_PARTICLE       FALSE    // If set to TRUE, it updates Leech Seed's animation particle.
-#define B_NEW_HORN_ATTACK_PARTICLE      FALSE    // If set to TRUE, it updates Horn Attack's horn particle.
-#define B_NEW_LEAF_PARTICLE             FALSE    // If set to TRUE, it updates leaf particle.
-#define B_NEW_EMBER_PARTICLES           FALSE    // If set to TRUE, it updates Ember's fire particle.
-#define B_NEW_MEAN_LOOK_PARTICLE        FALSE    // If set to TRUE, it updates Mean Look's eye particle.
-#define B_NEW_TEETH_PARTICLE            FALSE    // If set to TRUE, it updates Bite/Crunch teeth particle.
-#define B_NEW_HANDS_FEET_PARTICLE       FALSE    // If set to TRUE, it updates chop/kick/punch particles.
-#define B_NEW_SPIKES_PARTICLE           FALSE    // If set to TRUE, it updates Spikes particle.
-#define B_NEW_FLY_BUBBLE_PARTICLE       FALSE    // If set to TRUE, it updates Fly's 'bubble' particle.
-#define B_NEW_CURSE_NAIL_PARTICLE       FALSE    // If set to TRUE, it updates Curse's nail.
-#define B_NEW_BATON_PASS_BALL_PARTICLE  FALSE    // If set to TRUE, it updates Baton Pass' Poké Ball sprite.
-#define B_NEW_MORNING_SUN_STAR_PARTICLE FALSE    // If set to TRUE, it updates Morning Sun's star particles.
-#define B_NEW_IMPACT_PALETTE            FALSE    // If set to TRUE, it updates the basic 'hit' palette.
-#define B_NEW_SURF_PARTICLE_PALETTE     FALSE    // If set to TRUE, it updates Surf's wave palette.
+#define B_NEW_SWORD_PARTICLE            TRUE   // If set to TRUE, it updates Swords Dance's particle.
+#define B_NEW_LEECH_SEED_PARTICLE       TRUE   // If set to TRUE, it updates Leech Seed's animation particle.
+#define B_NEW_HORN_ATTACK_PARTICLE      TRUE   // If set to TRUE, it updates Horn Attack's horn particle.
+#define B_NEW_LEAF_PARTICLE             TRUE   // If set to TRUE, it updates leaf particle.
+#define B_NEW_EMBER_PARTICLES           TRUE   // If set to TRUE, it updates Ember's fire particle.
+#define B_NEW_MEAN_LOOK_PARTICLE        TRUE   // If set to TRUE, it updates Mean Look's eye particle.
+#define B_NEW_TEETH_PARTICLE            TRUE   // If set to TRUE, it updates Bite/Crunch teeth particle.
+#define B_NEW_HANDS_FEET_PARTICLE       TRUE   // If set to TRUE, it updates chop/kick/punch particles.
+#define B_NEW_SPIKES_PARTICLE           TRUE   // If set to TRUE, it updates Spikes particle.
+#define B_NEW_FLY_BUBBLE_PARTICLE       TRUE   // If set to TRUE, it updates Fly's 'bubble' particle.
+#define B_NEW_CURSE_NAIL_PARTICLE       TRUE   // If set to TRUE, it updates Curse's nail.
+#define B_NEW_BATON_PASS_BALL_PARTICLE  TRUE   // If set to TRUE, it updates Baton Pass' Poké Ball sprite.
+#define B_NEW_MORNING_SUN_STAR_PARTICLE TRUE   // If set to TRUE, it updates Morning Sun's star particles.
+#define B_NEW_IMPACT_PALETTE            TRUE   // If set to TRUE, it updates the basic 'hit' palette.
+#define B_NEW_SURF_PARTICLE_PALETTE     TRUE   // If set to TRUE, it updates Surf's wave palette.
 
 #endif // GUARD_CONFIG_BATTLE_H

@@ -23,35 +23,30 @@
 #define ACTIVITY_BATTLE_MULTI       3
 #define ACTIVITY_TRADE              4
 #define ACTIVITY_CHAT               5
-#define ACTIVITY_WONDER_CARD_DUP    6 // Duplicates of later WONDER constants
-#define ACTIVITY_WONDER_NEWS_DUP    7 //
+#define ACTIVITY_RECORD_CORNER      6
+#define ACTIVITY_BATTLE_TOWER_OPEN  7
 #define ACTIVITY_CARD               8
-#define ACTIVITY_POKEMON_JUMP       9
+#define ACTIVITY_BERRY_BLENDER      9
 #define ACTIVITY_BERRY_CRUSH        10
-#define ACTIVITY_BERRY_PICK         11
-#define ACTIVITY_SEARCH             12
-#define ACTIVITY_SPIN_TRADE         13
-#define ACTIVITY_BATTLE_TOWER_OPEN  14
-#define ACTIVITY_RECORD_CORNER      15
-#define ACTIVITY_BERRY_BLENDER      16
+#define ACTIVITY_SEARCH             11
+#define ACTIVITY_SPIN_TRADE         12
 
 // Player response
-#define ACTIVITY_ACCEPT             17
-#define ACTIVITY_DECLINE            18
+#define ACTIVITY_ACCEPT             13
+#define ACTIVITY_DECLINE            14
 
-#define ACTIVITY_NPCTALK            19
-#define ACTIVITY_PLYRTALK           20
+#define ACTIVITY_NPCTALK            15
+#define ACTIVITY_PLYRTALK           16
 
-#define ACTIVITY_WONDER_CARD        21
-#define ACTIVITY_WONDER_NEWS        22
+#define ACTIVITY_WONDER_CARD        17
+#define ACTIVITY_WONDER_NEWS        18
 
-#define ACTIVITY_CONTEST_COOL       23
-#define ACTIVITY_CONTEST_BEAUTY     24
-#define ACTIVITY_CONTEST_CUTE       25
-#define ACTIVITY_CONTEST_SMART      26
-#define ACTIVITY_CONTEST_TOUGH      27
-#define ACTIVITY_BATTLE_TOWER       28
-#define ACTIVITY_29                 29
+#define ACTIVITY_CONTEST_COOL       19
+#define ACTIVITY_CONTEST_BEAUTY     20
+#define ACTIVITY_CONTEST_CUTE       21
+#define ACTIVITY_CONTEST_SMART      22
+#define ACTIVITY_CONTEST_TOUGH      23
+#define ACTIVITY_BATTLE_TOWER       24
 
 #define IN_UNION_ROOM               (1 << 6)
 
@@ -59,9 +54,9 @@
 #define LINK_GROUP_DOUBLE_BATTLE        1
 #define LINK_GROUP_MULTI_BATTLE         2
 #define LINK_GROUP_TRADE                3
-#define LINK_GROUP_POKEMON_JUMP         4
+#define LINK_GROUP_BATTLE_TOWER_OPEN    4
 #define LINK_GROUP_BERRY_CRUSH          5
-#define LINK_GROUP_BERRY_PICKING        6
+#define LINK_GROUP_BATTLE_TOWER         6
 #define LINK_GROUP_WONDER_CARD          7
 #define LINK_GROUP_WONDER_NEWS          8
 #define LINK_GROUP_UNION_ROOM_RESUME    9
@@ -75,9 +70,8 @@
 #define LINK_GROUP_CUTE_CONTEST         17
 #define LINK_GROUP_SMART_CONTEST        18
 #define LINK_GROUP_TOUGH_CONTEST        19
-#define LINK_GROUP_BATTLE_TOWER         20
-#define LINK_GROUP_BATTLE_TOWER_OPEN    21
-#define NUM_LINK_GROUP_TYPES            22
+
+#define NUM_LINK_GROUP_TYPES            21
 
 #define UR_TRADE_MATCH  0
 #define UR_TRADE_NOTYPE 1
