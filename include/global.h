@@ -496,6 +496,9 @@ struct RankingHall2P
     //u8 padding;
 };
 
+#include "constants/items.h"
+#define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -531,7 +534,7 @@ struct SaveBlock2
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
     /*0xF2C*/ bool8 autoRun;
-}; // sizeof=0xF2C
+};
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
@@ -1070,7 +1073,7 @@ struct SaveBlock1
     /*0x3???*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3???*/ struct TrainerHillSave trainerHill;
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
-    // sizeof: 0x3???
+    /*0x???*/ u8 itemFlags[ITEM_FLAGS_COUNT];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
