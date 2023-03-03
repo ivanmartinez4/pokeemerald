@@ -14,7 +14,7 @@ Es un romhack en desarrollo que tiene como base la pokeemerald-expansion, con mu
 
 -Ghoulslash (overworld expansion/rock climb/sideways stairs/item descripction header/autorun)
 
--TheXaman (pokedex)
+-TheXaman (pokedex/tm case)
 
 -aarant (DNS/icons/followers)
 
