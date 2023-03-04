@@ -269,27 +269,6 @@ const u8 *const gContestEffectDescriptionPointers[] =
     [CONTEST_EFFECT_DONT_EXCITE_AUDIENCE]                  = gText_TemporarilyStopCrowdExcited
 };
 
-// Unreferenced array of pointers to move names.
-// All of the moves except Conversion are combo starters, so this may have
-// been an early list of combo starters.
-static const u8 *const sUnusedComboMoveNameTexts[] =
-{
-    gText_RainDance,
-    gText_RainDance,
-    gText_Rage,
-    gText_FocusEnergy,
-    gText_Hypnosis,
-    gText_Softboiled,
-    gText_HornAttack,
-    gText_SwordsDance,
-    gText_Conversion,
-    gText_SunnyDay,
-    gText_Rest2,
-    gText_Vicegrip,
-    gText_DefenseCurl,
-    gText_LockOn
-};
-
 const u8 *const gContestMoveTypeTextPointers[] =
 {
     [CONTEST_CATEGORY_COOL]   = gContestMoveTypeCoolText,

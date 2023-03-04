@@ -5199,7 +5199,6 @@ static u16 CreateSizeScreenTrainerPic(u16 species, s16 x, s16 y, s8 paletteSlot)
 bool8  SpeciesCanLearnLvlUpMove(u16 species, u16 move) //Move search PokedexPlus HGSS_Ui
 {
     u16 j;
-    #if defined (BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
         for (j = 0; j < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][j].move != LEVEL_UP_END; j++)
         {
             if (move == (gLevelUpLearnsets[species][j].move))
@@ -5207,15 +5206,6 @@ bool8  SpeciesCanLearnLvlUpMove(u16 species, u16 move) //Move search PokedexPlus
                 return TRUE;
             }
         }
-    #else
-        for (j = 0; j < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][j] != LEVEL_UP_END; j++)
-        {
-            if (move == (gLevelUpLearnsets[species][j] & LEVEL_UP_MOVE_ID))
-            {
-                return TRUE;
-            }
-        }
-    #endif
     return FALSE;
 }
 

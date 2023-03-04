@@ -227,7 +227,6 @@ static const struct BlockRequest sBlockRequests[] = {
 static const u16 sAcceptedSerialNos[] = {
     RFU_SERIAL_GAME,
     RFU_SERIAL_WONDER_DISTRIBUTOR,
-    RFU_SERIAL_UNKNOWN,
     RFU_SERIAL_END
 };
 

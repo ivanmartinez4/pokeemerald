@@ -1377,11 +1377,7 @@ static void SpriteCB_TradePokeball(struct Sprite *sprite)
         // sDelay re-used to store task id but never read
         sprite->sDelay = LaunchBallFadeMonTaskForPokeball(TRUE, monPalNum, selectedPalettes);
         sprite->callback = SpriteCB_TradePokeballSendOff;
-#ifdef BUGFIX
-        // FIX: If this is used on a sprite that has previously had an affine animation, it will not
-        // play the shrink anim properly due to being paused. Works together with the fix to ResetSpriteAfterAnim.
         gSprites[monSpriteId].affineAnimPaused = FALSE;
-#endif // BUGFIX
         StartSpriteAffineAnim(&gSprites[monSpriteId], BATTLER_AFFINE_RETURN);
         AnimateSprite(&gSprites[monSpriteId]);
         gSprites[monSpriteId].data[1] = 0;
@@ -1427,12 +1423,6 @@ static void SpriteCB_TradePokeballEnd(struct Sprite *sprite)
 #undef sFadePalsLo
 #undef sFadePalsHi
 #undef sTimer
-
-// Unreferenced here and in RS, but used in FRLG, possibly by mistake.
-static void DestroySpriteAndFreeResources_Ball(struct Sprite *sprite)
-{
-    DestroySpriteAndFreeResources(sprite);
-}
 
 #define sSpeedX data[0]
 #define sSpeedY data[1]
