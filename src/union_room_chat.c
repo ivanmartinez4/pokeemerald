@@ -173,7 +173,8 @@ struct UnionRoomChatDisplay
     u8 bg1Buffer[BG_SCREEN_SIZE];
     u8 bg3Buffer[BG_SCREEN_SIZE];
     u8 bg2Buffer[BG_SCREEN_SIZE];
-    u8 textEntryTiles[TILE_SIZE_4BPP * 2];
+    u8 unk2128[0x20];
+    u8 unk2148[0x20];
 };
 
 struct UnionRoomChatSprites
@@ -253,11 +254,11 @@ static void FreeSprites(void);
 static void ResetGpuBgState(void);
 static void SetBgTilemapBuffers(void);
 static void ClearBg0(void);
-static void LoadKeyboardWindowGfx(void);
+static void LoadChatWindowBorderGfx(void);
 static void LoadChatWindowGfx(void);
 static void LoadChatUnkPalette(void);
 static void LoadChatMessagesWindow(void);
-static void DrawKeyboardWindow(void);
+static void LoadKeyboardWindow(void);
 static void LoadKeyboardSwapWindow(void);
 static void LoadTextEntryWindow(void);
 static void CreateKeyboardCursorSprite(void);
@@ -526,8 +527,8 @@ static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNIO
     }
 };
 
-static const u16 sUnusedPalette[] = INCBIN_U16("graphics/union_room_chat/unused.gbapal"); // Loaded but never apparently used
-static const u16 sChatMessagesWindow_Pal[] = INCBIN_U16("graphics/union_room_chat/chat_messages_window.gbapal");
+static const u16 sUnk_Palette1[] = INCBIN_U16("graphics/union_room_chat/unk_palette1.gbapal");
+static const u16 sUnk_Palette2[] = INCBIN_U16("graphics/union_room_chat/unk_palette2.gbapal");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -758,15 +759,15 @@ static const u32 sTextEntryArrowTiles[] = INCBIN_U32("graphics/union_room_chat/t
 static const u32 sRButtonGfxTiles[] = INCBIN_U32("graphics/union_room_chat/r_button.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {.data = sKeyboardCursorTiles,         .size = 0x1000, .tag = GFXTAG_KEYBOARD_CURSOR},
-    {.data = sTextEntryArrowTiles,         .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_ARROW},
-    {.data = sTextEntryCursorTiles,        .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_CURSOR},
-    {.data = sRButtonGfxTiles,             .size = 0x0080, .tag = GFXTAG_RBUTTON_ICON},
-    {.data = gUnionRoomChat_RButtonLabels, .size = 0x0400, .tag = GFXTAG_RBUTTON_LABELS}
+    {sKeyboardCursorTiles,         0x1000, 0},
+    {sTextEntryArrowTiles,         0x0040, 1},
+    {sTextEntryCursorTiles,        0x0040, 2},
+    {sRButtonGfxTiles,             0x0080, 3},
+    {gUnionRoomChat_RButtonLabels, 0x0400, 4}
 };
 
 static const struct SpritePalette sSpritePalette = {
-    .data = sUnionRoomChatInterfacePal, .tag = PALTAG_INTERFACE
+    sUnionRoomChatInterfacePal, 0
 };
 
 static const struct OamData sOam_KeyboardCursor = {
@@ -969,7 +970,7 @@ static void CB2_LoadInterface(void)
             sChat->handleInputTask = CreateTask(Task_HandlePlayerInput, 8);
             sChat->receiveMessagesTask = CreateTask(Task_ReceiveChatMessage, 7);
             LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(DISPLAY_WIDTH - 8, DISPLAY_HEIGHT - 10);
+            CreateWirelessStatusIndicatorSprite(232, 150);
         }
         break;
     }
@@ -1758,7 +1759,7 @@ static void RegisterTextAtRow(void)
 static void ResetMessageEntryBuffer(void)
 {
     sChat->messageEntryBuffer[0] = EOS;
-    sChat->lastBufferCursorPos = MAX_MESSAGE_LENGTH;
+    sChat->lastBufferCursorPos = 15;
     sChat->bufferCursorPos = 0;
 }
 
@@ -2062,10 +2063,10 @@ static void Task_ReceiveChatMessage(u8 taskId)
         tState = 3;
         // fall through
     case 3:
-        for (; tI < MAX_RFU_PLAYERS && ((tBlockReceivedStatus >> tI) & 1) == 0; tI++)
+        for (; tI < 5 && ((tBlockReceivedStatus >> tI) & 1) == 0; tI++)
             ;
 
-        if (tI == MAX_RFU_PLAYERS)
+        if (tI == 5)
         {
             tState = 1;
             return;
@@ -2253,7 +2254,7 @@ static bool32 Display_LoadGfx(u8 *state)
         ClearBg0();
         break;
     case 2:
-        LoadKeyboardWindowGfx();
+        LoadChatWindowBorderGfx();
         break;
     case 3:
         LoadChatWindowGfx();
@@ -2263,7 +2264,7 @@ static bool32 Display_LoadGfx(u8 *state)
         break;
     case 5:
         LoadChatMessagesWindow();
-        DrawKeyboardWindow();
+        LoadKeyboardWindow();
         LoadKeyboardSwapWindow();
         LoadTextEntryWindow();
         break;
@@ -3062,12 +3063,12 @@ static void ClearBg0(void)
     CopyBgTilemapBufferToVram(0);
 }
 
-static void LoadKeyboardWindowGfx(void)
+static void LoadChatWindowBorderGfx(void)
 {
-    LoadPalette(gUnionRoomChat_Keyboard_Pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
-    LoadPalette(gUnionRoomChat_InputText_Pal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
-    DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Keyboard_Gfx, 0, 0, 0);
-    CopyToBgTilemapBuffer(1, gUnionRoomChat_Keyboard_Tilemap, 0, 0);
+    LoadPalette(gUnionRoomChat_Window_Pal2, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+    LoadPalette(gUnionRoomChat_Window_Pal1, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+    DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Border_Gfx, 0, 0, 0);
+    CopyToBgTilemapBuffer(1, gUnionRoomChat_Border_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 
@@ -3079,12 +3080,8 @@ static void LoadChatWindowGfx(void)
     ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Background_Gfx, 0, 0, 0);
     if (ptr)
     {
-        // The below is nonsense. Tiles 0x11 and 0x21 of the background tileset are
-        // the second half of "OK" and the "T" in "START" in the instructions header.
-        // They're later blitted onto the text entry window, then immediately cleared.
-        // The window has a different palette as well, so the tiles would appear mostly black anyway.
-        CpuFastCopy(&ptr[0x11 * TILE_SIZE_4BPP], &sDisplay->textEntryTiles[TILE_SIZE_4BPP * 0], TILE_SIZE_4BPP);
-        CpuFastCopy(&ptr[0x21 * TILE_SIZE_4BPP], &sDisplay->textEntryTiles[TILE_SIZE_4BPP * 1], TILE_SIZE_4BPP);
+        CpuFastCopy(&ptr[0x220], sDisplay->unk2128, sizeof(sDisplay->unk2128));
+        CpuFastCopy(&ptr[0x420], sDisplay->unk2148, sizeof(sDisplay->unk2148));
     }
 
     CopyToBgTilemapBuffer(2, gUnionRoomChat_Background_Tilemap, 0, 0);
@@ -3093,19 +3090,19 @@ static void LoadChatWindowGfx(void)
 
 static void LoadChatUnkPalette(void)
 {
-    LoadPalette(sUnusedPalette, BG_PLTT_ID(8), sizeof(sUnusedPalette));
-    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + TILE_SIZE_4BPP, TILE_SIZE_4BPP, 1);
+    LoadPalette(sUnk_Palette1, BG_PLTT_ID(8), sizeof(sUnk_Palette1));
+    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
 }
 
 static void LoadChatMessagesWindow(void)
 {
-    LoadPalette(sChatMessagesWindow_Pal, BG_PLTT_ID(15), sizeof(sChatMessagesWindow_Pal));
+    LoadPalette(sUnk_Palette2, BG_PLTT_ID(15), sizeof(sUnk_Palette2));
     PutWindowTilemap(WIN_CHAT_HISTORY);
     FillWindowPixelBuffer(WIN_CHAT_HISTORY, PIXEL_FILL(1));
     CopyWindowToVram(WIN_CHAT_HISTORY, COPYWIN_FULL);
 }
 
-static void DrawKeyboardWindow(void)
+static void LoadKeyboardWindow(void)
 {
     PutWindowTilemap(WIN_KEYBOARD);
     PrintCurrentKeyboardPage();
@@ -3119,9 +3116,8 @@ static void LoadTextEntryWindow(void)
     unused[0] = 0;
     unused[1] = 0xFF;
 
-    // Pointless, cleared below. The tiles are nonsense anyway, see LoadChatWindowGfx.
     for (i = 0; i < MAX_MESSAGE_LENGTH; i++)
-        BlitBitmapToWindow(WIN_TEXT_ENTRY, sDisplay->textEntryTiles, i * 8, 0, 8, 16);
+        BlitBitmapToWindow(WIN_TEXT_ENTRY, sDisplay->unk2128, i * 8, 0, 8, 16);
 
     FillWindowPixelBuffer(WIN_TEXT_ENTRY, PIXEL_FILL(0));
     PutWindowTilemap(WIN_TEXT_ENTRY);
@@ -3133,7 +3129,7 @@ static void LoadKeyboardSwapWindow(void)
     FillWindowPixelBuffer(WIN_SWAP_MENU, PIXEL_FILL(1));
     LoadUserWindowBorderGfx(WIN_SWAP_MENU, 1, BG_PLTT_ID(13));
     LoadUserWindowBorderGfx_(WIN_SWAP_MENU, 0xA, BG_PLTT_ID(2));
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(14),  PLTT_SIZE_4BPP);
 }
 
 static void InitScanlineEffect(void)
