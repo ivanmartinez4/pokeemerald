@@ -336,7 +336,7 @@ const u32 gBattleAnimSpriteGfx_BlackSmoke[] = INCBIN_U32("graphics/battle_anims/
 const u32 gBattleAnimSpritePal_BlackSmoke[] = INCBIN_U32("graphics/battle_anims/sprites/black_smoke.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_BlackBall[] = INCBIN_U32("graphics/battle_anims/sprites/black_ball.4bpp.lz");
-const u32 gBattleAnimSpritePal_BlackBall[] = INCBIN_U32("graphics/battle_anims/sprites/black_ball.bin");
+const u32 gBattleAnimSpritePal_BlackBall[] = INCBIN_U32("graphics/battle_anims/sprites/black_ball.gbapal.lz");
 
 const u32 gBattleAnimSpritePal_Glass[] = INCBIN_U32("graphics/battle_anims/sprites/glass.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_Glass[] = INCBIN_U32("graphics/battle_anims/sprites/glass.4bpp.lz");
@@ -1868,10 +1868,10 @@ const u32 gNamingScreenKeyboardSymbols_Tilemap[] = INCBIN_U32("graphics/naming_s
 const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/background.gbapal");
 const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/background.4bpp.lz");
 const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/background.bin.lz");
-const u16 gUnionRoomChat_Window_Pal1[] = INCBIN_U16("graphics/union_room_chat/window_1.gbapal");
-const u16 gUnionRoomChat_Window_Pal2[] = INCBIN_U16("graphics/union_room_chat/window_2.gbapal");
-const u32 gUnionRoomChat_Border_Gfx[] = INCBIN_U32("graphics/union_room_chat/border.4bpp.lz");
-const u32 gUnionRoomChat_Border_Tilemap[] = INCBIN_U32("graphics/union_room_chat/border.bin.lz");
+const u16 gUnionRoomChat_InputText_Pal[] = INCBIN_U16("graphics/union_room_chat/input_text.gbapal");
+const u16 gUnionRoomChat_Keyboard_Pal[] = INCBIN_U16("graphics/union_room_chat/keyboard.gbapal");
+const u32 gUnionRoomChat_Keyboard_Gfx[] = INCBIN_U32("graphics/union_room_chat/keyboard.4bpp.lz");
+const u32 gUnionRoomChat_Keyboard_Tilemap[] = INCBIN_U32("graphics/union_room_chat/keyboard.bin.lz");
 const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/r_button_labels.4bpp.lz");
 
 const u16 ALIGNED(4) gTilesetPalettes_General[][16] =

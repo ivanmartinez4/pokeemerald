@@ -75,7 +75,7 @@ enum {
     MON_DATA_SPATK,
     MON_DATA_SPDEF,
     MON_DATA_MAIL,
-    MON_DATA_SPECIES2,
+    MON_DATA_SPECIES_OR_EGG,
     MON_DATA_IVS,
     MON_DATA_CHAMPION_RIBBON,
     MON_DATA_WINNING_RIBBON,
@@ -90,7 +90,7 @@ enum {
     MON_DATA_EARTH_RIBBON,
     MON_DATA_WORLD_RIBBON,
     MON_DATA_UNUSED_RIBBONS,
-    MON_DATA_EVENT_LEGAL,
+    MON_DATA_MODERN_FATEFUL_ENCOUNTER,
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
     MON_DATA_RIBBONS,
@@ -173,8 +173,14 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
  /* 0x0B */ u32 unusedRibbons:2; // discarded in Gen 4
  /* 0x0B */ u32 abilityNum:2;
- /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
-}; /* size = 12 */
+ // The functionality of this bit changed in FRLG:
+ // In RS, this bit does nothing, is never set, & is accidentally unset when hatching Eggs.
+ // In FRLG & Emerald, this controls Mew & Deoxys obedience and whether they can be traded.
+ // If set, a Pokémon is a fateful encounter in FRLG's summary screen if hatched & for all Pokémon in Gen 4+ summary screens.
+ // Set for in-game event island legendaries, events distributed after a certain date, & Pokémon from XD: Gale of Darkness.
+ // Not to be confused with METLOC_FATEFUL_ENCOUNTER.
+ /* 0x0B */ u32 modernFatefulEncounter:1;
+};
 
 // Number of bytes in the largest Pokémon substruct.
 // They are assumed to be the same size, and will be padded to
@@ -426,11 +432,10 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
-void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
-void CreateEventLegalEnemyMon(void);
+void CreateEnemyEventMon(void);
 void CalculateMonStats(struct Pokemon *mon);
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);

@@ -1583,14 +1583,14 @@
 	.endm
 
 	@ Sets the eventLegal bit for the Pokemon in the specified slot of the player's party.
-	.macro setmoneventlegal slot:req
+	.macro setmodernfatefulencounter slot:req
 	.byte 0xcd
 	.2byte \slot
 	.endm
 
 	@ Checks if the eventLegal bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
 	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmoneventlegal slot:req
+	.macro checkmodernfatefulencounter slot:req
 	.byte 0xce
 	.2byte \slot
 	.endm
@@ -2084,7 +2084,7 @@
 	setvar VAR_0x8004, \species
 	setvar VAR_0x8005, \level
 	setvar VAR_0x8006, \item
-	special CreateEventLegalEnemyMon
+	special CreateEnemyEventMon
 	.endm
 
 	@ Set up a totem boost for the next battle.
