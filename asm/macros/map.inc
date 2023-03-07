@@ -31,6 +31,22 @@
 	inc _num_npcs
 	.endm
 
+	@ Defines an object event template for map data, to be used by a clone object. Mirrors the struct layout of ObjectEventTemplate in include/global.fieldmap.h
+	@ NOTE: The handling for this type of event does not exist in Emerald by default; it is exclusive to FRLG.
+	.macro clone_event index:req, gfx:req, x:req, y:req, target_local_id:req, target_map_id:req
+	.byte \index
+	.byte \gfx
+	.byte OBJ_KIND_CLONE
+	.space 1  @ Padding
+	.2byte \x, \y
+	.byte \target_local_id
+	.space 3  @ Padding
+	.2byte \target_map_id & 0xFF  @ map num
+	.2byte \target_map_id >> 8    @ map group
+	.space 8  @ Padding
+	inc _num_npcs
+	.endm
+
 	@ Defines a warp event for map data. Mirrors the struct layout of WarpEvent in include/global.fieldmap.h
 	.macro warp_def x:req, y:req, elevation:req, warpId:req, map_id:req
 	.2byte \x, \y
