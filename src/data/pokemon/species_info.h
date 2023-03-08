@@ -1862,20 +1862,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_VILEPLUME] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 80,
-        .baseDefense   = 85,
+        .baseHP        = 85,
+        .baseAttack    = 45,
+        .baseDefense   = 115,
         .baseSpeed     = 50,
-        .baseSpDefense = 90,
-        #if P_UPDATED_STATS >= GEN_6
-            .baseSpAttack  = 110,
-        #else
-            .baseSpAttack  = 100,
-        #endif
-        .types = {TYPE_GRASS, TYPE_POISON},
+        .baseSpDefense = 95,
+        .baseSpAttack  = 110,
+        .types = {TYPE_GRASS, TYPE_DARK},
         .catchRate = 45,
         .expYield = 221,
-        .evYield_SpAttack  = 3,
+        .evYield_Defense  = 3,
         .itemRare = ITEM_ABSORB_BULB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -1889,11 +1885,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PARAS] =
     {
-        .baseHP        = 35,
+        .baseHP        = 50,
         .baseAttack    = 70,
         .baseDefense   = 55,
-        .baseSpeed     = 25,
-        .baseSpAttack  = 45,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 40,
         .baseSpDefense = 55,
         .types = {TYPE_BUG, TYPE_GRASS},
         .catchRate = 190,
@@ -1913,17 +1909,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PARASECT] =
     {
-        .baseHP        = 60,
+        .baseHP        = 145,
         .baseAttack    = 95,
-        .baseDefense   = 80,
+        .baseDefense   = 85,
         .baseSpeed     = 30,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 80,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 85,
         .types = {TYPE_BUG, TYPE_GRASS},
         .catchRate = 75,
         .expYield = 142,
-        .evYield_Attack    = 2,
-        .evYield_Defense   = 1,
+        .evYield_HP   = 2,
         .itemCommon = ITEM_TINY_MUSHROOM,
         .itemRare = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
@@ -1960,17 +1955,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_VENOMOTH] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 65,
-        .baseDefense   = 60,
-        .baseSpeed     = 90,
+        .baseHP        = 80,
+        .baseAttack    = 40,
+        .baseDefense   = 70,
+        .baseSpeed     = 95,
         .baseSpAttack  = 90,
-        .baseSpDefense = 75,
+        .baseSpDefense = 105,
         .types = {TYPE_BUG, TYPE_POISON},
         .catchRate = 75,
         .expYield = 158,
-        .evYield_Speed     = 1,
-        .evYield_SpAttack  = 1,
+        .evYield_Speed      = 1,
+        .evYield_SpDefense  = 1,
         .itemRare = ITEM_SHED_SHELL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -1984,9 +1979,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_DIGLETT] =
     {
-        .baseHP        = 10,
+        .baseHP        = 30,
         .baseAttack    = 55,
-        .baseDefense   = 25,
+        .baseDefense   = 40,
         .baseSpeed     = 95,
         .baseSpAttack  = 35,
         .baseSpDefense = 45,
@@ -2007,11 +2002,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_DUGTRIO] =
     {
-        .baseHP        = 35,
-        .baseDefense   = 50,
+        .baseHP        = 60,
+        .baseDefense   = 80,
         .baseSpeed     = 120,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 70,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 80,
         #if P_UPDATED_STATS >= GEN_7
             .baseAttack    = 100,
         #else
@@ -2035,8 +2030,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_MEOWTH] =
     {
         .baseHP        = 40,
-        .baseAttack    = 45,
-        .baseDefense   = 35,
+        .baseAttack    = 55,
+        .baseDefense   = 45,
         .baseSpeed     = 90,
         .baseSpAttack  = 40,
         .baseSpDefense = 40,
@@ -2057,12 +2052,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PERSIAN] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 70,
-        .baseDefense   = 60,
-        .baseSpeed     = 115,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 65,
+        .baseHP        = 75,
+        .baseAttack    = 95,
+        .baseDefense   = 90,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 75,
         .types = {TYPE_NORMAL, TYPE_NORMAL},
         .catchRate = 90,
         .expYield = 154,
@@ -2086,7 +2081,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 55,
         .baseSpAttack  = 65,
         .baseSpDefense = 50,
-        .types = {TYPE_WATER, TYPE_WATER},
+        .types = {TYPE_WATER, TYPE_PSYCHIC},
         .catchRate = 190,
         .expYield = 64,
         .evYield_SpAttack  = 1,
@@ -2102,16 +2097,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_GOLDUCK] =
     {
-        .baseHP        = 80,
-        .baseAttack    = 82,
-        .baseDefense   = 78,
+        .baseHP        = 81,
+        .baseAttack    = 95,
+        .baseDefense   = 82,
         .baseSpeed     = 85,
         .baseSpAttack  = 95,
-        .baseSpDefense = 80,
-        .types = {TYPE_WATER, TYPE_WATER},
+        .baseSpDefense = 82,
+        .types = {TYPE_WATER, TYPE_PSYCHIC},
         .catchRate = 75,
         .expYield = 175,
-        .evYield_SpAttack  = 2,
+        .evYield_Attack    = 1,
+        .evYield_SpAttack  = 1,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2126,7 +2122,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     {
         .baseHP        = 40,
         .baseAttack    = 80,
-        .baseDefense   = 35,
+        .baseDefense   = 50,
         .baseSpeed     = 70,
         .baseSpAttack  = 35,
         .baseSpDefense = 45,
@@ -2146,13 +2142,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PRIMEAPE] =
     {
-        .baseHP        = 65,
+        .baseHP        = 85,
         .baseAttack    = 105,
-        .baseDefense   = 60,
+        .baseDefense   = 85,
         .baseSpeed     = 95,
-        .baseSpAttack  = 60,
+        .baseSpAttack  = 40,
         .baseSpDefense = 70,
-        .types = {TYPE_FIGHTING, TYPE_FIGHTING},
+        .types = {TYPE_FIGHTING, TYPE_DARK},
         .catchRate = 75,
         .expYield = 159,
         .evYield_Attack    = 2,
@@ -2191,10 +2187,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_ARCANINE] =
     {
         .baseHP        = 90,
-        .baseAttack    = 110,
+        .baseAttack    = 105,
         .baseDefense   = 80,
-        .baseSpeed     = 95,
-        .baseSpAttack  = 100,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 105,
         .baseSpDefense = 80,
         .types = {TYPE_FIRE, TYPE_FIRE},
         .catchRate = 75,
@@ -2257,20 +2253,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_POLIWRATH] =
     {
-        .baseHP        = 90,
+        .baseHP        = 110,
         .baseDefense   = 95,
         .baseSpeed     = 70,
-        .baseSpAttack  = 70,
+        .baseSpAttack  = 50,
         .baseSpDefense = 90,
         #if P_UPDATED_STATS >= GEN_6
-            .baseAttack    = 95,
+            .baseAttack    = 105,
         #else
             .baseAttack    = 85,
         #endif
         .types = {TYPE_WATER, TYPE_FIGHTING},
         .catchRate = 45,
         .expYield = 230,
-        .evYield_Defense   = 3,
+        .evYield_HP   = 3,
         .itemRare = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -5020,17 +5016,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_BELLOSSOM] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 80,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 90,
-        .baseSpDefense = 100,
-        #if P_UPDATED_STATS >= GEN_6
-            .baseDefense   = 95,
-        #else
-            .baseDefense   = 85,
-        #endif
-        .types = {TYPE_GRASS, TYPE_GRASS},
+        .baseHP        = 85,
+        .baseAttack    = 45,
+        .baseDefense   = 60,
+        .baseSpeed     = 85,
+        .baseSpDefense = 115,
+        .baseSpAttack  = 110,
+        .types = {TYPE_GRASS, TYPE_FAIRY},
         .catchRate = 45,
         .expYield = 221,
         .evYield_SpDefense = 3,
@@ -5125,13 +5117,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_POLITOED] =
     {
-        .baseHP        = 90,
-        .baseAttack    = 75,
+        .baseHP        = 100,
+        .baseAttack    = 50,
         .baseDefense   = 75,
-        .baseSpeed     = 70,
+        .baseSpeed     = 95,
         .baseSpAttack  = 90,
-        .baseSpDefense = 100,
-        .types = {TYPE_WATER, TYPE_WATER},
+        .baseSpDefense = 110,
+        .types = {TYPE_WATER, TYPE_GROUND},
         .catchRate = 45,
         .expYield = 225,
         .evYield_SpDefense = 3,
@@ -22421,10 +22413,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_MEOWTH_ALOLAN] =
     {
         .baseHP        = 40,
-        .baseAttack    = 35,
-        .baseDefense   = 35,
+        .baseAttack    = 45,
+        .baseDefense   = 55,
         .baseSpeed     = 90,
-        .baseSpAttack  = 50,
+        .baseSpAttack  = 40,
         .baseSpDefense = 40,
         .types = {TYPE_DARK, TYPE_DARK},
         .catchRate = 255,
@@ -22444,16 +22436,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PERSIAN_ALOLAN] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 60,
-        .baseDefense   = 60,
-        .baseSpeed     = 115,
-        .baseSpAttack  = 75,
-        .baseSpDefense = 65,
+        .baseHP        = 90,
+        .baseAttack    = 75,
+        .baseDefense   = 120,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 95,
         .types = {TYPE_DARK, TYPE_DARK},
         .catchRate = 90,
         .expYield = 154,
-        .evYield_Speed     = 2,
+        .evYield_Defense     = 2,
         .itemRare = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -23097,16 +23089,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_ARCANINE_HISUIAN] =
     {
-        .baseHP        = 95,
-        .baseAttack    = 115,
-        .baseDefense   = 80,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 95,
+        .baseHP        = 90,
+        .baseAttack    = 100,
+        .baseDefense   = 110,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 100,
         .baseSpDefense = 80,
         .types = {TYPE_FIRE, TYPE_ROCK},
         .catchRate = 75,
         .expYield = 194,
-        .evYield_Attack    = 2,
+        .evYield_Defense    = 2,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
