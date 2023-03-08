@@ -964,17 +964,6 @@ static const struct ListMenuTemplate sTradeBoardListMenuTemplate = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
-// Unused
-static const struct WindowTemplate sWindowTemplate_Unused = {
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 5,
-    .width = 28,
-    .height = 12,
-    .paletteNum = 13,
-    .baseBlock = 0x0039
-};
-
 static const struct ListMenuItem sEmptyListMenuItems[] = {
     { sText_EmptyString,  0 },
     { sText_EmptyString,  1 },

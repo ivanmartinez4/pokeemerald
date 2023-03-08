@@ -3453,7 +3453,6 @@ static void ResetGame(struct BerryCrushGame *game)
     u8 i = 0;
 
     IncrementGameStat(GAME_STAT_PLAYED_BERRY_CRUSH);
-    game->unused = 0;
     game->cmdTimer = 0;
     game->gameState = STATE_RESET;
     game->playAgainState = 0;

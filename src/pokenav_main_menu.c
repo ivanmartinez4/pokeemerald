@@ -376,13 +376,11 @@ void SetActiveMenuLoopTasks(void *createLoopTask, void *isLoopTaskActive) // Fix
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
     menu->loopTask = createLoopTask;
     menu->isLoopTaskActiveFunc = isLoopTaskActive;
-    menu->unused = 0;
 }
 
 void RunMainMenuLoopedTask(u32 state)
 {
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
-    menu->unused = 0;
     menu->loopTask(state);
 }
 

@@ -1737,11 +1737,12 @@
 	.2byte \quantity
 	.endm
 
-  @ Like callnative, but function expects a ctx
-  .macro callfunc func:req
-  .byte 0xe3
-  .4byte \func
-  .endm
+	@ Like callnative, but function expects a ctx
+	.macro callfunc func:req
+	.byte 0xe3
+	.4byte \func
+	.endm
+	
 	.macro showdescription
 	.byte 0xe4
 	.endm

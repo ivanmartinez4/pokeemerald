@@ -2099,7 +2099,6 @@ static const struct NamingScreenTemplate sPlayerNamingScreenTemplate =
     .iconFunction = 1,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 35,
     .title = gText_YourName,
 };
 
@@ -2110,7 +2109,6 @@ static const struct NamingScreenTemplate sPCBoxNamingTemplate =
     .iconFunction = 2,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 19,
     .title = gText_BoxName,
 };
 
@@ -2121,7 +2119,6 @@ static const struct NamingScreenTemplate sMonNamingScreenTemplate =
     .iconFunction = 3,
     .addGenderIcon = TRUE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 35,
     .title = gText_PkmnsNickname,
 };
 
@@ -2132,7 +2129,6 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
     .iconFunction = 4,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
-    .unused = 11,
     .title = gText_TellHimTheWords,
 };
 

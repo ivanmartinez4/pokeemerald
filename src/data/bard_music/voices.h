@@ -82,7 +82,7 @@ const struct BardSound gBardSounds_Voices[][6] = {
         NULL_BARD_SOUND,
     },
     {
-        { .songLengthId = 27, .songLengthOffset = 0x5, .unused = 0x8 },
+        { .songLengthId = 27, .songLengthOffset = 0x5},
         { .songLengthId = 51 },
         { .songLengthId = 51 },
         NULL_BARD_SOUND,

@@ -12,11 +12,13 @@ Es un romhack en desarrollo que tiene como base la pokeemerald-expansion, con mu
 
 -Whack a Hack!
 
--Ghoulslash (overworld expansion/rock climb/sideways stairs/item descripction header/autorun)
+-Ghoulslash (overworld expansion/rock climb/sideways stairs/item descripction header/autorun/custom givemon)
 
--TheXaman (pokedex/tm case)
+-TheXaman (pokedex/tm case/options plus)
 
 -aarant (DNS/icons/followers)
+
+-CyanSMP64 (music expansion)
 
 ## Cambios de balance:
 

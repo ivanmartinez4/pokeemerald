@@ -312,13 +312,9 @@ $(BTLANMSPRGFXDIR)/ice_cube.4bpp: $(BTLANMSPRGFXDIR)/ice_cube_0.4bpp \
                                   $(BTLANMSPRGFXDIR)/ice_cube_3.4bpp
 	@cat $^ >$@
 
-$(BATINTGFXDIR)/battle_bar.4bpp: $(BATINTGFXDIR)/hpbar_anim_unused.4bpp \
-                                 $(BATINTGFXDIR)/numbers1.4bpp \
+$(BATINTGFXDIR)/battle_bar.4bpp: $(BATINTGFXDIR)/numbers1.4bpp \
                                  $(BATINTGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
-
-$(BATINTGFXDIR)/unused_window2bar.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 5 -Wnum_tiles
 
 $(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
                                      $(JPCONTESTGFXDIR)/floor.4bpp \

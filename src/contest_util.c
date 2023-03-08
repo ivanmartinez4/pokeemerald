@@ -1900,7 +1900,6 @@ static void AllocContestResults(void)
     sContestResults->tilemapBuffers[1] = AllocZeroed(BG_SCREEN_SIZE);
     sContestResults->tilemapBuffers[2] = AllocZeroed(BG_SCREEN_SIZE);
     sContestResults->tilemapBuffers[3] = AllocZeroed(BG_SCREEN_SIZE);
-    sContestResults->unused = AllocZeroed(0x1000);
     AllocateMonSpritesGfx();
 }
 

@@ -1132,7 +1132,6 @@ static void AllocContestResources(void)
     gContestResources->gfxState = AllocZeroed(sizeof(struct ContestGraphicsState) * CONTESTANT_COUNT);
     gContestResources->moveAnim = AllocZeroed(sizeof(struct ContestMoveAnimData));
     gContestResources->tv = AllocZeroed(sizeof(struct ContestTV) * CONTESTANT_COUNT);
-    gContestResources->unused = AllocZeroed(sizeof(struct ContestUnused));
     gContestResources->contestBgTilemaps[0] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[1] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[2] = AllocZeroed(0x1000);
