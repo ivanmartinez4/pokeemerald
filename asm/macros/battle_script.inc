@@ -1162,9 +1162,9 @@
 	.4byte \failInstr
 	.endm
 
-	.macro unused2 ptr:req
+	.macro tryworryseed failInstr:req
 	.byte 0xe1
-	.4byte \ptr
+	.4byte \failInstr
 	.endm
 
 	.macro switchoutabilities battler:req
@@ -1214,9 +1214,9 @@
 	.4byte \failInstr
 	.endm
 
-	.macro pursuitdoubles failInstr:req
+	.macro jumpifoppositegenders jumpInstr:req
 	.byte 0xec
-	.4byte \failInstr
+	.4byte \jumpInstr
 	.endm
 
 	.macro snatchsetbattlers
@@ -1285,23 +1285,8 @@
 	.byte \stat
 	.endm
 
-	.macro jumpifoppositegenders jumpInstr:req
-	.byte 0xfc
-	.4byte \jumpInstr
-	.endm
-
-	.macro unused ptr:req
-	.byte 0xfd
-	.4byte \ptr
-	.endm
-
-	.macro tryworryseed failInstr:req
-	.byte 0xfe
-	.4byte \failInstr
-	.endm
-
 	.macro callnative func:req
-	.byte 0xff
+	.byte 0xfc
 	.4byte \func
 	.endm
 

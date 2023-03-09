@@ -983,28 +983,6 @@ static const struct ListMenuItem sEmptyListMenuItems[] = {
     { sText_EmptyString, 15 }
 };
 
-// Unused
-static const struct ListMenuTemplate sEmptyListMenuTemplate = {
-    .items = sEmptyListMenuItems,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = ItemPrintFunc_EmptyList,
-    .totalItems = ARRAY_COUNT(sEmptyListMenuItems),
-    .maxShowed = 4,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
-    .fontId = FONT_NORMAL,
-    .cursorKind = CURSOR_BLACK_ARROW
-};
-
 static const struct RfuPlayerData sUnionRoomPlayer_DummyRfu = {0};
 
 ALIGNED(4) static const u8 sAcceptedActivityIds_SingleBattle[]    = {ACTIVITY_BATTLE_SINGLE, 0xff};

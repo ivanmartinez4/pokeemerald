@@ -420,13 +420,6 @@ TrainerHill_Roof_Text_ArriveZippierNextTime:
 	.string "a tag team with you!\p"
 	.string "Until we meet again, amigo!$"
 
-@ Unused
-TrainerHill_Roof_Text_BuiltTrainerHillToFindPartner:
-	.string "I had the TRAINER HILL built for but\n"
-	.string "one reason and one only!\p"
-	.string "To find the most suitable partner\n"
-	.string "with whom I may form a tag team!$"
-
 TrainerHill_Entrance_Text_ChallengeTime:
 	.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
 

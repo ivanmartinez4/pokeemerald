@@ -367,12 +367,6 @@ CableClub_EventScript_EnterColosseum::
 	waitstate
 	end
 
-@ Unused
-CableClub_EventScript_PlayerApproachLinkRoomRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomRight
-	waitmovement 0
-	return
-
 CableClub_EventScript_WarpTo4PColosseum::
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_4P, 5, 8

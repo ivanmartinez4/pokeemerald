@@ -577,7 +577,7 @@ static void Cmd_setuserstatus3(void);
 static void Cmd_assistattackselect(void);
 static void Cmd_trysetmagiccoat(void);
 static void Cmd_trysetsnatch(void);
-static void Cmd_unused2(void);
+static void Cmd_tryworryseed(void);
 static void Cmd_switchoutabilities(void);
 static void Cmd_jumpifhasnohp(void);
 static void Cmd_getsecretpowereffect(void);
@@ -588,7 +588,7 @@ static void Cmd_settypebasedhalvers(void);
 static void Cmd_jumpifsubstituteblocks(void);
 static void Cmd_tryrecycleitem(void);
 static void Cmd_settypetoterrain(void);
-static void Cmd_pursuitdoubles(void);
+static void Cmd_jumpifoppositegenders(void);
 static void Cmd_snatchsetbattlers(void);
 static void Cmd_removelightscreenreflect(void);
 static void Cmd_handleballthrow(void);
@@ -604,9 +604,6 @@ static void Cmd_trainerslideout(void);
 static void Cmd_settelekinesis(void);
 static void Cmd_swapstatstages(void);
 static void Cmd_averagestats(void);
-static void Cmd_jumpifoppositegenders(void);
-static void Cmd_unused(void);
-static void Cmd_tryworryseed(void);
 static void Cmd_callnative(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
@@ -743,7 +740,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_trysetrest,                              //0x81
     Cmd_jumpifnotfirstturn,                      //0x82
     Cmd_setmiracleeye,                           //0x83
-    Cmd_jumpifuproarwakes,                    //0x84
+    Cmd_jumpifuproarwakes,                       //0x84
     Cmd_stockpile,                               //0x85
     Cmd_stockpiletobasedamage,                   //0x86
     Cmd_stockpiletohpheal,                       //0x87
@@ -836,7 +833,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_assistattackselect,                      //0xDE
     Cmd_trysetmagiccoat,                         //0xDF
     Cmd_trysetsnatch,                            //0xE0
-    Cmd_unused2,                                 //0xE1
+    Cmd_tryworryseed,                            //0xE1
     Cmd_switchoutabilities,                      //0xE2
     Cmd_jumpifhasnohp,                           //0xE3
     Cmd_getsecretpowereffect,                    //0xE4
@@ -847,7 +844,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifsubstituteblocks,                  //0xE9
     Cmd_tryrecycleitem,                          //0xEA
     Cmd_settypetoterrain,                        //0xEB
-    Cmd_pursuitdoubles,                          //0xEC
+    Cmd_jumpifoppositegenders,                   //0xEC
     Cmd_snatchsetbattlers,                       //0xED
     Cmd_removelightscreenreflect,                //0xEE
     Cmd_handleballthrow,                         //0xEF
@@ -863,10 +860,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_settelekinesis,                          //0xF9
     Cmd_swapstatstages,                          //0xFA
     Cmd_averagestats,                            //0xFB
-    Cmd_jumpifoppositegenders,                   //0xFC
-    Cmd_unused,                                  //0xFD
-    Cmd_tryworryseed,                            //0xFE
-    Cmd_callnative,                              //0xFF
+    Cmd_callnative,                              //0xFC
 };
 
 const struct StatFractions gAccuracyStageRatios[] =
@@ -917,17 +911,6 @@ static const u8 *const sMoveEffectBS_Ptrs[] =
     [MOVE_EFFECT_UPROAR]           = BattleScript_MoveEffectUproar,
     [MOVE_EFFECT_PAYDAY]           = BattleScript_MoveEffectPayDay,
     [MOVE_EFFECT_WRAP]             = BattleScript_MoveEffectWrap,
-};
-
-static const struct WindowTemplate sUnusedWinTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 3,
-    .width = 7,
-    .height = 15,
-    .paletteNum = 31,
-    .baseBlock = 0x3F
 };
 
 static const u16 sLevelUpBanner_Pal[] = INCBIN_U16("graphics/battle_interface/level_up_banner.gbapal");
@@ -13258,26 +13241,6 @@ static bool8 IsTwoTurnsMove(u16 move)
         return FALSE;
 }
 
-// unused
-static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a charging turn, otherwise 2
-{
-    // first argument is unused
-    if (gBattleMoves[move].effect == EFFECT_SOLAR_BEAM
-        && IsBattlerWeatherAffected(battlerId, B_WEATHER_SUN))
-        return 2;
-
-    if (gBattleMoves[move].effect == EFFECT_SKULL_BASH
-     || gBattleMoves[move].effect == EFFECT_TWO_TURNS_ATTACK
-     || gBattleMoves[move].effect == EFFECT_SOLAR_BEAM
-     || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
-     || gBattleMoves[move].effect == EFFECT_BIDE)
-    {
-        if ((gHitMarker & HITMARKER_CHARGING))
-            return 1;
-    }
-    return 2;
-}
-
 static void Cmd_trychoosesleeptalkmove(void)
 {
     CMD_ARGS(const u8 *failInstr);
@@ -14844,10 +14807,6 @@ static void Cmd_trysetsnatch(void)
     }
 }
 
-static void Cmd_unused2(void)
-{
-}
-
 static void Cmd_switchoutabilities(void)
 {
     CMD_ARGS(u8 battler);
@@ -15259,31 +15218,6 @@ static void Cmd_settypetoterrain(void)
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, terrainType);
 
         gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-}
-
-// Unused
-static void Cmd_pursuitdoubles(void)
-{
-    CMD_ARGS(const u8 *failInstr);
-
-    gActiveBattler = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerAttacker)));
-
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-        && !(gAbsentBattlerFlags & gBitTable[gActiveBattler])
-        && gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
-        && gChosenMoveByBattler[gActiveBattler] == MOVE_PURSUIT)
-    {
-        gActionsByTurnOrder[gActiveBattler] = B_ACTION_TRY_FINISH;
-        gCurrentMove = MOVE_PURSUIT;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-        gBattleScripting.animTurn = 1;
-        gBattleScripting.savedBattler = gBattlerAttacker;
-        gBattlerAttacker = gActiveBattler;
     }
     else
     {
@@ -16048,10 +15982,6 @@ static void Cmd_jumpifoppositegenders(void)
         gBattlescriptCurrInstr = cmd->jumpInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-static void Cmd_unused(void)
-{
 }
 
 static void Cmd_tryworryseed(void)

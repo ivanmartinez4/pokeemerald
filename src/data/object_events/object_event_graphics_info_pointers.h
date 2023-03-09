@@ -74,12 +74,6 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Greta;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Spenser;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Noland;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lucy;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedNatuDoll;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMagnemiteDoll;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedSquirtleDoll;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedWooperDoll;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedPikachuDoll;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedPorygon2Doll;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CuttableTree;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MartEmployee;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RooftopSaleWoman;
@@ -247,8 +241,6 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trader;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Storyteller;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Giddy;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan1;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2;
 
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
@@ -328,12 +320,6 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SPENSER] =                  &gObjectEventGraphicsInfo_Spenser,
     [OBJ_EVENT_GFX_NOLAND] =                   &gObjectEventGraphicsInfo_Noland,
     [OBJ_EVENT_GFX_LUCY] =                     &gObjectEventGraphicsInfo_Lucy,
-    [OBJ_EVENT_GFX_UNUSED_NATU_DOLL] =         &gObjectEventGraphicsInfo_UnusedNatuDoll,
-    [OBJ_EVENT_GFX_UNUSED_MAGNEMITE_DOLL] =    &gObjectEventGraphicsInfo_UnusedMagnemiteDoll,
-    [OBJ_EVENT_GFX_UNUSED_SQUIRTLE_DOLL] =     &gObjectEventGraphicsInfo_UnusedSquirtleDoll,
-    [OBJ_EVENT_GFX_UNUSED_WOOPER_DOLL] =       &gObjectEventGraphicsInfo_UnusedWooperDoll,
-    [OBJ_EVENT_GFX_UNUSED_PIKACHU_DOLL] =      &gObjectEventGraphicsInfo_UnusedPikachuDoll,
-    [OBJ_EVENT_GFX_UNUSED_PORYGON2_DOLL] =     &gObjectEventGraphicsInfo_UnusedPorygon2Doll,
     [OBJ_EVENT_GFX_CUTTABLE_TREE] =            &gObjectEventGraphicsInfo_CuttableTree,
     [OBJ_EVENT_GFX_MART_EMPLOYEE] =            &gObjectEventGraphicsInfo_MartEmployee,
     [OBJ_EVENT_GFX_ROOFTOP_SALE_WOMAN] =       &gObjectEventGraphicsInfo_RooftopSaleWoman,
@@ -502,6 +488,4 @@ const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[
     [MAUVILLE_MAN_TRADER]      = &gObjectEventGraphicsInfo_Trader,
     [MAUVILLE_MAN_STORYTELLER] = &gObjectEventGraphicsInfo_Storyteller,
     [MAUVILLE_MAN_GIDDY]       = &gObjectEventGraphicsInfo_Giddy,
-    [MAUVILLE_MAN_UNUSED1]     = &gObjectEventGraphicsInfo_UnusedMauvilleOldMan1,
-    [MAUVILLE_MAN_UNUSED2]     = &gObjectEventGraphicsInfo_UnusedMauvilleOldMan2,
 };

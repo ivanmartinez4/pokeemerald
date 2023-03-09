@@ -93,7 +93,6 @@ struct Weather
     u8 fogHSpritesCreated;
     // Ash
     u16 ashBaseSpritesX;
-    u16 ashUnused;
     u8 ashSpritesCreated;
     // Sandstorm
     u32 sandstormXOffset;
