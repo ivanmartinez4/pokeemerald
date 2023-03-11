@@ -787,7 +787,6 @@ Common_EventScript_FerryDepartIsland::
 	call Common_EventScript_FerryDepart
 	return
 
-	.include "data/scripts/cave_of_origin.inc"
 	.include "data/scripts/kecleon.inc"
 
 Common_EventScript_NameReceivedPartyMon::

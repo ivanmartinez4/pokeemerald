@@ -208,15 +208,6 @@ static const struct TrainerHillChallenge *const sChallengeData[NUM_TRAINER_HILL_
     [HILL_MODE_EXPERT]  = &sChallenge_Expert,
 };
 
-// Unused.
-static const u8 *const sFloorStrings[] =
-{
-    gText_TrainerHill1F,
-    gText_TrainerHill2F,
-    gText_TrainerHill3F,
-    gText_TrainerHill4F,
-};
-
 static void (* const sHillFunctions[])(void) =
 {
     [TRAINER_HILL_FUNC_START]                 = TrainerHillStartChallenge,
@@ -569,11 +560,6 @@ static void IsTrainerHillChallengeActive(void)
         gSpecialVar_Result = TRUE;
 }
 
-static void TrainerHillDummy_Unused(void)
-{
-
-}
-
 static void TrainerHillDummy(void)
 {
 
@@ -766,19 +752,6 @@ u8 GetCurrentTrainerHillMapId(void)
     return mapId;
 }
 
-// Unused
-static bool32 OnTrainerHillRoof(void)
-{
-    bool32 onRoof;
-
-    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ROOF)
-        onRoof = TRUE;
-    else
-        onRoof = FALSE;
-
-    return onRoof;
-}
-
 const struct WarpEvent* SetWarpDestinationTrainerHill4F(void)
 {
     const struct MapHeader *header = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(TRAINER_HILL_4F), MAP_NUM(TRAINER_HILL_4F));
@@ -890,14 +863,6 @@ void FillHillTrainersParties(void)
     ZeroEnemyPartyMons();
     CreateNPCTrainerHillParty(gTrainerBattleOpponent_A, 0);
     CreateNPCTrainerHillParty(gTrainerBattleOpponent_B, PARTY_SIZE / 2);
-}
-
-// This function is unused, but my best guess is
-// it was supposed to return AI scripts for trainer
-// hill trainers.
-u32 GetTrainerHillAIFlags(void)
-{
-    return (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
 }
 
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)

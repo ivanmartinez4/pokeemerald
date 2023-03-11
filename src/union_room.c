@@ -190,7 +190,6 @@ enum {
     PLIST_NONE,
     PLIST_NEW_PLAYER,
     PLIST_RECENT_UPDATE,
-    PLIST_UNUSED,
     PLIST_CONTACTED,
 };
 
@@ -2265,21 +2264,6 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         ClearIncomingPlayerList(data->incomingPlayerList, RFU_CHILD_MAX);
         ClearRfuPlayerList(data->playerList->players, MAX_RFU_PLAYER_LIST_SIZE);
         data->listenTaskId = CreateTask_ListenForWonderDistributor(data->incomingPlayerList, data->isWonderNews + LINK_GROUP_WONDER_CARD);
-
-        if (data->showListMenu)
-        {
-            winTemplate = sWindowTemplate_GroupList;
-            winTemplate.baseBlock = GetMysteryGiftBaseBlock();
-            data->listWindowId = AddWindow(&winTemplate);
-
-            MG_DrawTextBorder(data->listWindowId);
-            gMultiuseListMenuTemplate = sListMenuTemplate_UnionRoomGroups;
-            gMultiuseListMenuTemplate.windowId = data->listWindowId;
-            data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
-
-            CopyBgTilemapBufferToVram(0);
-        }
-
         data->leaderId = 0;
         data->state = 3;
         break;
@@ -2290,12 +2274,8 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         case 1:
             PlaySE(SE_PC_LOGIN);
         default:
-            if (data->showListMenu)
-                RedrawListMenu(data->listTaskId);
             break;
         case 0:
-            if (data->showListMenu)
-                id = ListMenu_ProcessInput(data->listTaskId);
             if (data->refreshTimer > 120)
             {
                 if (data->playerList->players[0].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->playerList->players[0].rfu.data.startedActivity)
@@ -2355,12 +2335,6 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
     case 8:
     case 10:
     case 12:
-        if (data->showListMenu)
-        {
-            DestroyListMenuTask(data->listTaskId, 0, 0);
-            CopyBgTilemapBufferToVram(0);
-            RemoveWindow(data->listWindowId);
-        }
         DestroyTask(data->listenTaskId);
         Free(data->playerList);
         Free(data->incomingPlayerList);
@@ -2420,7 +2394,6 @@ void RunUnionRoom(void)
 
     uroom->state = UR_STATE_INIT;
     uroom->textState = 0;
-    uroom->unknown = 0;
     uroom->unreadPlayerId = 0;
 
     gSpecialVar_Result = 0;
@@ -3288,7 +3261,6 @@ void InitUnionRoom(void)
     sURoom = sWirelessLinkMain.uRoom;
     data->state = 0;
     data->textState = 0;
-    data->unknown = 0;
     data->unreadPlayerId = 0;
     sUnionRoomPlayerName[0] = EOS;
 }
@@ -3344,8 +3316,6 @@ static void Task_InitUnionRoom(u8 taskId)
                     }
                 }
             }
-            break;
-        case PLIST_UNUSED:
             break;
         }
         break;

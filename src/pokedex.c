@@ -360,7 +360,6 @@ static void PrintMonHeight(u16 height, u8 left, u8 top);
 static void PrintMonWeight(u16 weight, u8 left, u8 top);
 static void ResetOtherVideoRegisters(u16);
 static u8 PrintCryScreenSpeciesName(u8, u16, u8, u8);
-static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top);
 static void DrawFootprint(u8 windowId, u16 dexNum);
 static u16 CreateSizeScreenTrainerPic(u16, s16, s16, s8);
 static u16 GetNextPosition(u8, u16, u16, u16);
@@ -5137,60 +5136,6 @@ static u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
     return i;
 }
 
-static void UnusedPrintMonName(u8 windowId, const u8 *name, u8 left, u8 top)
-{
-    u8 str[POKEMON_NAME_LENGTH + 1];
-    u8 i;
-    u8 nameLength;
-
-    for (i = 0; i < ARRAY_COUNT(str); i++)
-        str[i] = CHAR_SPACE;
-    for (nameLength = 0; name[nameLength] != CHAR_SPACE && nameLength < ARRAY_COUNT(str); nameLength++)
-        ;
-    for (i = 0; i < nameLength; i++)
-        str[ARRAY_COUNT(str) - nameLength + i] = name[i];
-    str[ARRAY_COUNT(str) - 1] = EOS;
-    PrintInfoSubMenuText(windowId, str, left, top);
-}
-
-// Unused in the English version, used to print height/weight in versions which use metric system.
-static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
-{
-    u8 str[6];
-    bool8 outputted = FALSE;
-    u8 result;
-
-    result = num / 1000;
-    if (result == 0)
-    {
-        str[0] = CHAR_SPACER;
-        outputted = FALSE;
-    }
-    else
-    {
-        str[0] = CHAR_0 + result;
-        outputted = TRUE;
-    }
-
-    result = (num % 1000) / 100;
-    if (result == 0 && !outputted)
-    {
-        str[1] = CHAR_SPACER;
-        outputted = FALSE;
-    }
-    else
-    {
-        str[1] = CHAR_0 + result;
-        outputted = TRUE;
-    }
-
-    str[2] = CHAR_0 + ((num % 1000) % 100) / 10;
-    str[3] = CHAR_DEC_SEPARATOR;
-    str[4] = CHAR_0 + ((num % 1000) % 100) % 10;
-    str[5] = EOS;
-    PrintInfoSubMenuText(windowId, str, left, top);
-}
-
 static void DrawFootprint(u8 windowId, u16 dexNum)
 {
     u8 footprint[32 * 4] = {0};
@@ -5213,15 +5158,6 @@ static void DrawFootprint(u8 windowId, u16 dexNum)
         }
     }
     CopyToWindowPixelBuffer(windowId, footprint, sizeof(footprint), 0);
-}
-
-// Unused Ruby/Sapphire function.
-static void RS_DrawFootprint(u16 offset, u16 tileNum)
-{
-    *(u16 *)(VRAM + offset * 0x800 + 0x232) = 0xF000 + tileNum + 0;
-    *(u16 *)(VRAM + offset * 0x800 + 0x234) = 0xF000 + tileNum + 1;
-    *(u16 *)(VRAM + offset * 0x800 + 0x272) = 0xF000 + tileNum + 2;
-    *(u16 *)(VRAM + offset * 0x800 + 0x274) = 0xF000 + tileNum + 3;
 }
 
 static u16 GetNextPosition(u8 direction, u16 position, u16 min, u16 max)

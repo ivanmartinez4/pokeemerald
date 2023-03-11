@@ -48,9 +48,6 @@ enum {
     AFFINE_TURN_DOWN_SLOW,
     AFFINE_TURN_DOWN_SLIGHT,
     AFFINE_TURN_UP_HIGH,
-    AFFINE_UNUSED_1,
-    AFFINE_UNUSED_2,
-    AFFINE_UNUSED_3,
     NUM_MON_AFFINES,
 };
 
@@ -90,19 +87,16 @@ struct PokeblockFeed
     struct Sprite *monSpritePtr;
     struct Sprite savedMonSprite;
     u8 tilemapBuffer[BG_SCREEN_SIZE];
-    u8 unused1[8];
     s16 monAnimX[0x200];
     s16 monAnimY[0x200];
     u8 animRunState;
     u8 animId;
-    u8 unused2;
     bool8 noMonFlip;
     u16 species;
     u16 monAnimLength;
     u16 timer;
     u8 nature;
     u8 monSpriteId_; // Duplicated unnecessarily
-    u8 unused3;
     u8 monSpriteId;
     u8 pokeblockCaseSpriteId;
     u8 pokeblockSpriteId;
@@ -113,7 +107,6 @@ struct PokeblockFeed
     s16 monX;
     s16 monY;
     s16 loadGfxState;
-    u8 unused4;
 };
 
 static void HandleInitBackgrounds(void);
@@ -410,9 +403,6 @@ static const union AffineAnimCmd *const sAffineAnims_Mon[] =
     [AFFINE_TURN_DOWN_SLOW]   = sAffineAnim_Mon_TurnDownSlow,
     [AFFINE_TURN_DOWN_SLIGHT] = sAffineAnim_Mon_TurnDownSlight,
     [AFFINE_TURN_UP_HIGH]     = sAffineAnim_Mon_TurnUpHigh,
-    [AFFINE_UNUSED_1]         = sAffineAnim_Mon_None,
-    [AFFINE_UNUSED_2]         = sAffineAnim_Mon_None,
-    [AFFINE_UNUSED_3]         = sAffineAnim_Mon_None,
 
     // Animations for flipped mon sprites
     [AFFINE_NONE + NUM_MON_AFFINES]             = sAffineAnim_Mon_None,
@@ -422,9 +412,6 @@ static const union AffineAnimCmd *const sAffineAnims_Mon[] =
     [AFFINE_TURN_DOWN_SLOW + NUM_MON_AFFINES]   = sAffineAnim_Mon_TurnDownSlow_Flipped,
     [AFFINE_TURN_DOWN_SLIGHT + NUM_MON_AFFINES] = sAffineAnim_Mon_TurnDownSlight_Flipped,
     [AFFINE_TURN_UP_HIGH + NUM_MON_AFFINES]     = sAffineAnim_Mon_TurnUpHigh_Flipped,
-    [AFFINE_UNUSED_1 + NUM_MON_AFFINES]         = sAffineAnim_Mon_None,
-    [AFFINE_UNUSED_2 + NUM_MON_AFFINES]         = sAffineAnim_Mon_None,
-    [AFFINE_UNUSED_3 + NUM_MON_AFFINES]         = sAffineAnim_Mon_None,
 
     sAffineAnim_Mon_None, // ? Extra for some reason
 };

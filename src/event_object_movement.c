@@ -814,17 +814,6 @@ static const u8 sAcroWheelieDirectionAnimNums[] = {
     [DIR_NORTHWEST] = ANIM_BUNNY_HOP_BACK_WHEEL_WEST,
     [DIR_NORTHEAST] = ANIM_BUNNY_HOP_BACK_WHEEL_EAST,
 };
-static const u8 sAcroUnusedDirectionAnimNums[] = {
-    [DIR_NONE] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
-    [DIR_SOUTH] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
-    [DIR_NORTH] = ANIM_BUNNY_HOP_FRONT_WHEEL_NORTH,
-    [DIR_WEST] = ANIM_BUNNY_HOP_FRONT_WHEEL_WEST,
-    [DIR_EAST] = ANIM_BUNNY_HOP_FRONT_WHEEL_EAST,
-    [DIR_SOUTHWEST] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
-    [DIR_SOUTHEAST] = ANIM_BUNNY_HOP_FRONT_WHEEL_SOUTH,
-    [DIR_NORTHWEST] = ANIM_BUNNY_HOP_FRONT_WHEEL_NORTH,
-    [DIR_NORTHEAST] = ANIM_BUNNY_HOP_FRONT_WHEEL_NORTH,
-};
 static const u8 sAcroEndWheelieDirectionAnimNums[] = {
     [DIR_NONE] = ANIM_STANDING_WHEELIE_BACK_WHEEL_SOUTH,
     [DIR_SOUTH] = ANIM_STANDING_WHEELIE_BACK_WHEEL_SOUTH,
@@ -835,17 +824,6 @@ static const u8 sAcroEndWheelieDirectionAnimNums[] = {
     [DIR_SOUTHEAST] = ANIM_STANDING_WHEELIE_BACK_WHEEL_EAST,
     [DIR_NORTHWEST] = ANIM_STANDING_WHEELIE_BACK_WHEEL_WEST,
     [DIR_NORTHEAST] = ANIM_STANDING_WHEELIE_BACK_WHEEL_EAST,
-};
-static const u8 sAcroUnusedActionDirectionAnimNums[] = {
-    [DIR_NONE] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_SOUTH,
-    [DIR_SOUTH] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_SOUTH,
-    [DIR_NORTH] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_NORTH,
-    [DIR_WEST] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_WEST,
-    [DIR_EAST] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_EAST,
-    [DIR_SOUTHWEST] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_SOUTH,
-    [DIR_SOUTHEAST] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_SOUTH,
-    [DIR_NORTHWEST] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_NORTH,
-    [DIR_NORTHEAST] = ANIM_STANDING_WHEELIE_FRONT_WHEEL_NORTH,
 };
 static const u8 sAcroWheeliePedalDirectionAnimNums[] = {
     [DIR_NONE] = ANIM_MOVING_WHEELIE_SOUTH,
@@ -2767,15 +2745,6 @@ u8 LoadObjectEventPalette(u16 paletteTag)
     return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
 }
 
-// Unused
-static void LoadObjectEventPaletteSet(u16 *paletteTags)
-{
-    u8 i;
-
-    for (i = 0; paletteTags[i] != OBJ_EVENT_PAL_TAG_NONE; i++)
-        LoadObjectEventPalette(paletteTags[i]);
-}
-
 // Really just loads the palette and applies weather fade
 static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette)
 {
@@ -2852,15 +2821,6 @@ void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot)
 static void _PatchObjectPalette(u16 tag, u8 slot)
 {
     PatchObjectPalette(tag, slot);
-}
-
-// Unused
-static void IncrementObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
-{
-    objectEvent->previousCoords.x = objectEvent->currentCoords.x;
-    objectEvent->previousCoords.y = objectEvent->currentCoords.y;
-    objectEvent->currentCoords.x += x;
-    objectEvent->currentCoords.y += y;
 }
 
 void ShiftObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
@@ -3054,18 +3014,6 @@ void CameraObjectSetFollowedSpriteId(u8 spriteId)
     }
 }
 
-// Unused
-static u8 CameraObjectGetFollowedSpriteId(void)
-{
-    struct Sprite *camera;
-
-    camera = FindCameraSprite();
-    if (camera == NULL)
-        return MAX_SPRITES;
-
-    return camera->sLinkedSpriteId;
-}
-
 void CameraObjectReset2(void)
 {
     // UB: Possible null dereference
@@ -3153,34 +3101,6 @@ static u16 GetObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGrou
 static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
 {
     return GetObjectEventFlagIdByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
-}
-
-// Unused
-static u8 GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
-{
-    u8 objectEventId;
-
-    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId))
-        return 0xFF;
-
-    return gObjectEvents[objectEventId].trainerType;
-}
-
-// Unused
-static u8 GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
-{
-    return gObjectEvents[objectEventId].trainerType;
-}
-
-// Unused
-u8 GetObjectEventBerryTreeIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
-{
-    u8 objectEventId;
-
-    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId))
-        return 0xFF;
-
-    return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
 
 u8 GetObjectEventBerryTreeId(u8 objectEventId)
@@ -5611,19 +5531,9 @@ u8 GetAcroWheelieDirectionAnimNum(u8 direction)
     return sAcroWheelieDirectionAnimNums[direction];
 }
 
-u8 GetAcroUnusedDirectionAnimNum(u8 direction)
-{
-    return sAcroUnusedDirectionAnimNums[direction];
-}
-
 u8 GetAcroEndWheelieDirectionAnimNum(u8 direction)
 {
     return sAcroEndWheelieDirectionAnimNums[direction];
-}
-
-u8 GetAcroUnusedActionDirectionAnimNum(u8 direction)
-{
-    return sAcroUnusedActionDirectionAnimNums[direction];
 }
 
 u8 GetAcroWheeliePedalDirectionAnimNum(u8 direction)
@@ -8261,30 +8171,6 @@ bool8 MovementAction_AcroEndWheelieFaceLeft_Step0(struct ObjectEvent *objectEven
 bool8 MovementAction_AcroEndWheelieFaceRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     StartSpriteAnimInDirection(objectEvent, sprite, DIR_EAST, GetAcroEndWheelieDirectionAnimNum(DIR_EAST));
-    return FALSE;
-}
-
-bool8 MovementAction_UnusedAcroActionDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
-{
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, GetAcroUnusedActionDirectionAnimNum(DIR_SOUTH));
-    return FALSE;
-}
-
-bool8 MovementAction_UnusedAcroActionUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
-{
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_NORTH, GetAcroUnusedActionDirectionAnimNum(DIR_NORTH));
-    return FALSE;
-}
-
-bool8 MovementAction_UnusedAcroActionLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
-{
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_WEST, GetAcroUnusedActionDirectionAnimNum(DIR_WEST));
-    return FALSE;
-}
-
-bool8 MovementAction_UnusedAcroActionRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
-{
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_EAST, GetAcroUnusedActionDirectionAnimNum(DIR_EAST));
     return FALSE;
 }
 

@@ -596,9 +596,7 @@ static void ShowUsePokeblockMenu(void)
 enum {
     STATE_HANDLE_INPUT,
     STATE_UPDATE_SELECTION,
-    STATE_2, // unused state
     STATE_CLOSE,
-    STATE_4, // unused state
     STATE_CONFIRM_SELECTION,
     STATE_HANDLE_CONFIRMATION,
     STATE_WAIT_MSG,
@@ -646,12 +644,8 @@ static void UsePokeblockMenu(void)
         if (!loading)
             sInfo->mainState = STATE_HANDLE_INPUT;
         break;
-    case STATE_2:
-        break;
     case STATE_CLOSE:
         SetUsePokeblockCallback(CloseUsePokeblockMenu);
-        break;
-    case STATE_4:
         break;
     case STATE_CONFIRM_SELECTION:
         AskUsePokeblock();
@@ -1106,12 +1100,6 @@ static u8 GetSelectionIdFromPartyId(u8 partyId)
     }
 
     return partyId - numEggs;
-}
-
-// Unused
-static u8 GetPartyIdFromSelectionId_(u8 selectionId)
-{
-    return GetPartyIdFromSelectionId(selectionId);
 }
 
 static void LoadAndCreateUpDownSprites(void)

@@ -7523,7 +7523,6 @@ extern const u32 gPokedexMenuSearch_Gfx[];
 extern const u32 gPokedexMenuSearch_DECA_Gfx[];
 extern const u32 gPokedexStartMenuMain_Tilemap[];
 extern const u32 gPokedexStartMenuSearchResults_Tilemap[];
-extern const u32 gUnused_PokedexNoBall[];
 extern const u32 gPokedexScreenSelectBarSubmenu_Tilemap[];
 extern const u32 gPokedexScreenSelectBarSubmenu_Tilemap_Clear[];
 

@@ -135,7 +135,6 @@ void ClearSavedWonderCardAndRelated(void)
     ClearSavedTrainerIds();
     ClearRamScript();
     ClearMysteryGiftFlags();
-    ClearMysteryGiftVars();
     ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
 }
 

@@ -1625,10 +1625,6 @@ LilycoveCity_ContestLobby_Text_Explain4PlayerContest:
 LilycoveCity_ContestLobby_Text_EnterWhichContest2:
 	.string "Which CONTEST would you like to enter?$"
 
-@ Unused
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon2:
-	.string "Which POKéMON would you like to enter?$"
-
 LilycoveCity_ContestLobby_Text_Transmitting:
 	.string "Transmitting…$"
 
@@ -1646,16 +1642,6 @@ LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice:
 LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel:
 	.string "Please wait.\n"
 	.string "… … B Button: Cancel$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2:
-	.string "We hope you will participate another\n"
-	.string "time.$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain:
-	.string "Transmission error.\n"
-	.string "Please try again.$"
 
 LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX:
 	.string "Your POKéMON will be entered in\n"

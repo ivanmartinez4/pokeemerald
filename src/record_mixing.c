@@ -225,10 +225,7 @@ static void PrepareExchangePacket(void)
 
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
-        if (LinkDummy_Return2() == 0)
-            PrepareUnknownExchangePacket(&sSentRecord->ruby);
-        else
-            PrepareExchangePacketForRubySapphire(&sSentRecord->ruby);
+        PrepareExchangePacketForRubySapphire(&sSentRecord->ruby);
     }
     else
     {

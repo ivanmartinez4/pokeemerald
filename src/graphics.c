@@ -1668,7 +1668,6 @@ const u32 gPokedexMenuSearch_Gfx[]          = INCBIN_U32("graphics/pokedex/HGSS_
 const u32 gPokedexMenuSearch_DECA_Gfx[]     = INCBIN_U32("graphics/pokedex/HGSS_tileset_menu_search_DECA.4bpp.lz");
 const u32 gPokedexStartMenuMain_Tilemap[]           = INCBIN_U32("graphics/pokedex/HGSS_tilemap_start_menu.bin.lz");
 const u32 gPokedexStartMenuSearchResults_Tilemap[]  = INCBIN_U32("graphics/pokedex/HGSS_tilemap_start_menu_search_results.bin.lz");
-const u32 gUnused_PokedexNoBall[]                   = INCBIN_U32("graphics/pokedex/noball_unused.4bpp.lz");
 const u32 gPokedexScreenSelectBarSubmenu_Tilemap[]          = INCBIN_U32("graphics/pokedex/HGSS_SelectBar.bin.lz");
 const u32 gPokedexScreenSelectBarSubmenu_Tilemap_Clear[]    = INCBIN_U32("graphics/pokedex/HGSS_SelectBar_clear.bin.lz");
 

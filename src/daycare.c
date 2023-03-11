@@ -498,22 +498,9 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
     FlagSet(FLAG_PENDING_DAYCARE_EGG);
 }
 
-// Functionally unused
-static void _TriggerPendingDaycareMaleEgg(struct DayCare *daycare)
-{
-    daycare->offspringPersonality = (Random()) | (EGG_GENDER_MALE);
-    FlagSet(FLAG_PENDING_DAYCARE_EGG);
-}
-
 void TriggerPendingDaycareEgg(void)
 {
     _TriggerPendingDaycareEgg(&gSaveBlock1Ptr->daycare);
-}
-
-// Unused
-static void TriggerPendingDaycareMaleEgg(void)
-{
-    _TriggerPendingDaycareMaleEgg(&gSaveBlock1Ptr->daycare);
 }
 
 // Removes the selected index from the given IV list and shifts the remaining

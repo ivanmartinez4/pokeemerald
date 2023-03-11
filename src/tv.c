@@ -53,7 +53,6 @@
 
 enum {
     TVGROUP_NONE,
-    TVGROUP_UNUSED,
     TVGROUP_NORMAL,
     TVGROUP_RECORD_MIX,
     TVGROUP_OUTBREAK,
@@ -380,10 +379,6 @@ static const u8 *const sTVBravoTrainerBattleTowerTextGroup[] = {
     [BRAVOTOWER_STATE_LOST_FINAL]           = BravoTrainerBattleTower_Text_LostFinal,
     [BRAVOTOWER_STATE_SATISFIED]            = BravoTrainerBattleTower_Text_Satisfied,
     [BRAVOTOWER_STATE_UNSATISFIED]          = BravoTrainerBattleTower_Text_Unsatisfied,
-    [BRAVOTOWER_STATE_UNUSED_1]             = BravoTrainerBattleTower_Text_None1,
-    [BRAVOTOWER_STATE_UNUSED_2]             = BravoTrainerBattleTower_Text_None2,
-    [BRAVOTOWER_STATE_UNUSED_3]             = BravoTrainerBattleTower_Text_None3,
-    [BRAVOTOWER_STATE_UNUSED_4]             = BravoTrainerBattleTower_Text_None4,
     [BRAVOTOWER_STATE_RESPONSE]             = BravoTrainerBattleTower_Text_Response,
     [BRAVOTOWER_STATE_RESPONSE_SATISFIED]   = BravoTrainerBattleTower_Text_ResponseSatisfied,
     [BRAVOTOWER_STATE_RESPONSE_UNSATISFIED] = BravoTrainerBattleTower_Text_ResponseUnsatisfied,
@@ -4402,15 +4397,6 @@ static void DoTVShowBravoTrainerBattleTower(void)
         break;
     case BRAVOTOWER_STATE_UNSATISFIED:
         TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
-        sTVShowState = BRAVOTOWER_STATE_RESPONSE;
-        break;
-    case BRAVOTOWER_STATE_UNUSED_1:
-        sTVShowState = BRAVOTOWER_STATE_RESPONSE;
-        break;
-    case BRAVOTOWER_STATE_UNUSED_2:
-    case BRAVOTOWER_STATE_UNUSED_3:
-    case BRAVOTOWER_STATE_UNUSED_4:
-        TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.trainerName, show->bravoTrainerTower.language);
         sTVShowState = BRAVOTOWER_STATE_RESPONSE;
         break;
     case BRAVOTOWER_STATE_RESPONSE:

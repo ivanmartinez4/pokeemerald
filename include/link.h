@@ -57,8 +57,6 @@
 #define LINKCMD_BLENDER_SEND_KEYS       0x4444
 #define LINKCMD_BLENDER_SCORE_BEST      0x4523
 #define LINKCMD_BLENDER_SCORE_GOOD      0x5432
-#define LINKCMD_DUMMY_1                 0x5555
-#define LINKCMD_DUMMY_2                 0x5566
 #define LINKCMD_READY_CLOSE_LINK        0x5FFF
 #define LINKCMD_SEND_EMPTY              0x6666
 #define LINKCMD_SEND_0xEE               0x7777
@@ -88,7 +86,6 @@
 #define LINKTYPE_TRADE_SETUP           0x1133
 #define LINKTYPE_TRADE_DISCONNECTED    0x1144
 #define LINKTYPE_BATTLE                0x2211
-#define LINKTYPE_UNUSED_BATTLE         0x2222 // Unused, inferred from gap
 #define LINKTYPE_SINGLE_BATTLE         0x2233
 #define LINKTYPE_DOUBLE_BATTLE         0x2244
 #define LINKTYPE_MULTI_BATTLE          0x2255
@@ -119,9 +116,7 @@ struct LinkStatus
     u32 playerCount:3;
     u32 master:1;
     u32 connEstablished:1;
-    u32 unused_7:1;
     u32 receivedNothing:1;
-    u32 unused_9:7;
     u32 errors:7;
 };
 
@@ -331,7 +326,6 @@ extern u16 gLinkSavedIme;
 extern struct LinkPlayer gLocalLinkPlayer;
 
 bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
-bool32 LinkDummy_Return2(void);
 void SetLocalLinkPlayerId(u8);
 u8 GetSavedPlayerCount(void);
 bool8 SendBlockRequest(u8 type);
