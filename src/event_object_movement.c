@@ -5723,12 +5723,17 @@ u8 GetSidewaysStairsCollision(struct ObjectEvent *objectEvent, u8 dir, u8 curren
     }
     
     return collision;
+    
+#if OW_FLAG_NO_COLLISION != 0
+    if (FlagGet(OW_FLAG_NO_COLLISION))
+        return COLLISION_NONE;
+#endif
 }
 
 static u8 GetVanillaCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction)
 {
-#if DEBUG_FLAG_NO_COLLISION != 0
-    if (FlagGet(DEBUG_FLAG_NO_COLLISION))
+#if OW_FLAG_NO_COLLISION != 0
+    if (FlagGet(OW_FLAG_NO_COLLISION))
         return COLLISION_NONE;
 #endif
 
