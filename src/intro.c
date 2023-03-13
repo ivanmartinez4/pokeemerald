@@ -887,17 +887,6 @@ static const struct SpriteTemplate sSpriteTemplate_GameFreakLetter =
     .affineAnims = sAffineAnims_GameFreak,
     .callback = SpriteCB_LogoLetter,
 };
-// Unused
-static const struct SpriteTemplate sSpriteTemplate_PresentsLetter =
-{
-    .tileTag = GFXTAG_DROPS_LOGO,
-    .paletteTag = PALTAG_LOGO,
-    .oam = &sOamData_PresentsLetter,
-    .anims = sAnims_PresentsLetter,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_LogoLetter,
-};
 static const struct SpriteTemplate sSpriteTemplate_GameFreakLogo =
 {
     .tileTag = GFXTAG_DROPS_LOGO,

@@ -234,11 +234,6 @@ BattleFrontier_OutsideWest_EventScript_Fisherman1::
 	msgbox BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling, MSGBOX_NPC
 	end
 
-@ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC3::
-	msgbox BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_EventScript_Gentleman::
 	msgbox BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome, MSGBOX_NPC
 	end

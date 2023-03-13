@@ -311,7 +311,6 @@ static EWRAM_DATA struct Roulette
     bool8 ballUnstuck:1;
     bool8 ballRolling:1; // Never read
     u8 tableId:2;
-    u8 unused:5;
     bool8 isSpecialRate:1;
     u32 hitFlags;
     u8 hitSquares[BALLS_PER_ROUND];
@@ -392,7 +391,7 @@ static void FlashSelectionOnWheel(u8);
 static void DrawGridBackground(u8);
 static u8 GetMultiplier(u8);
 static void UpdateWheelPosition(void);
-static void LoadOrFreeMiscSpritePalettesAndSheets(u8);
+static void LoadOrFreeMiscSpritePalettesAndSheets(void);
 static void CreateGridSprites(void);
 static void ShowHideGridIcons(bool8, u8);
 static void CreateGridBallSprites(void);
@@ -1207,7 +1206,7 @@ static void CB2_LoadRoulette(void)
         CopyToBgTilemapBuffer(2, sWheel_Tilemap, 0, 0);
         break;
     case 5:
-        LoadOrFreeMiscSpritePalettesAndSheets(FALSE);
+        LoadOrFreeMiscSpritePalettesAndSheets();
         CreateWheelBallSprites();
         CreateWheelCenterSprite();
         CreateInterfaceSprites();
@@ -2388,27 +2387,6 @@ static const struct OamData sOam_WheelIcon =
     .priority = 2,
 };
 
-static const union AnimCmd sAffineAnim_Unused1[] =
-{
-    ANIMCMD_FRAME(0, 0),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sAffineAnims_Unused1[] =
-{
-    sAffineAnim_Unused1
-};
-
-static const union AffineAnimCmd sAffineAnim_Unused2[] =
-{
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_Unused2[] =
-{
-    sAffineAnim_Unused2
-};
-
 static const struct CompressedSpriteSheet sSpriteSheet_WheelIcons =
 {
     .data = sWheelIcons_Gfx,
@@ -3272,13 +3250,6 @@ static const struct CompressedSpriteSheet sSpriteSheet_Shadow =
     .tag = GFXTAG_SHADOW
 };
 
-static const union AffineAnimCmd sAffineAnim_Unused3[] =
-{
-    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
-    AFFINEANIMCMD_FRAME(2,    2,    0, 60),
-    AFFINEANIMCMD_END
-};
-
 static const union AffineAnimCmd sAffineAnim_TaillowShadow[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
@@ -3288,25 +3259,9 @@ static const union AffineAnimCmd sAffineAnim_TaillowShadow[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sAffineAnims_Unused3[] =
-{
-    sAffineAnim_Unused3
-};
-
 static const union AffineAnimCmd *const sAffineAnims_TaillowShadow[] =
 {
     sAffineAnim_TaillowShadow
-};
-
-static const union AffineAnimCmd sAffineAnim_Unused4[] =
-{
-    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_Unused4[] =
-{
-    sAffineAnim_Unused4
 };
 
 static const union AnimCmd sAnim_ShroomishBallShadow[] =
@@ -3477,24 +3432,13 @@ void PlayRoulette(void)
     gTasks[taskId].tCoins = GetCoins();
 }
 
-static void LoadOrFreeMiscSpritePalettesAndSheets(bool8 free)
+static void LoadOrFreeMiscSpritePalettesAndSheets(void)
 {
-    if (!free)
-    {
-        FreeAllSpritePalettes();
-        LoadSpritePalettes(sSpritePalettes);
-        LoadCompressedSpriteSheet(&sSpriteSheet_Ball);
-        LoadCompressedSpriteSheet(&sSpriteSheet_ShroomishTaillow);
-        LoadCompressedSpriteSheet(&sSpriteSheet_Shadow);
-    }
-    else
-    {
-        // Unused
-        FreeSpriteTilesByTag(GFXTAG_SHADOW);
-        FreeSpriteTilesByTag(GFXTAG_SHROOMISH_TAILLOW);
-        FreeSpriteTilesByTag(GFXTAG_BALL);
-        FreeAllSpritePalettes();
-    }
+    FreeAllSpritePalettes();
+    LoadSpritePalettes(sSpritePalettes);
+    LoadCompressedSpriteSheet(&sSpriteSheet_Ball);
+    LoadCompressedSpriteSheet(&sSpriteSheet_ShroomishTaillow);
+    LoadCompressedSpriteSheet(&sSpriteSheet_Shadow);
 }
 
 static u8 CreateWheelIconSprite(const struct SpriteTemplate *template, u8 r1, u16 *angle)
@@ -3549,16 +3493,6 @@ static void CreateGridSprites(void)
     {
         spriteId = sRoulette->spriteIds[i + SPR_COLOR_HEADERS] = CreateSprite(&sSpriteTemplates_ColorHeaders[i], 126, (i * 24) + 92, 30);
         gSprites[spriteId].animPaused = TRUE;
-    }
-}
-
-// Unused
-static void DestroyGridSprites(void)
-{
-    u8 i;
-    for (i = 0; i < NUM_ROULETTE_SLOTS; i++)
-    {
-        DestroySprite(&gSprites[sRoulette->spriteIds[i + SPR_GRID_ICONS]]);
     }
 }
 

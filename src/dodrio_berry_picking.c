@@ -178,7 +178,6 @@ struct DodrioGame_Gfx
 
 struct StatusBar
 {
-    u8 unused[12];
     bool8 entered[NUM_STATUS_SQUARES];
     s16 yChange[NUM_STATUS_SQUARES];
     u16 spriteIds[NUM_STATUS_SQUARES];
@@ -201,10 +200,8 @@ struct DodrioGame_PlayerCommData
 struct DodrioGame_Player
 {
     u8 name[16];
-    bool32 receivedGameStatePacket; // Never read
     struct DodrioGame_Berries berries;
     struct DodrioGame_PlayerCommData comm;
-    u32 unused;
 }; // size = 0x3C
 
 // Because Dodrio is required for this minigame,
@@ -230,14 +227,11 @@ struct DodrioGame
     /*0x0010*/ u8 ALIGNED(4) state;
     /*0x0014*/ u8 ALIGNED(4) timer;
     /*0x0018*/ u8 ALIGNED(4) funcId;
-    /*0x001C*/ u8 ALIGNED(4) prevFuncId; // Set, never read
     /*0x0020*/ bool8 ALIGNED(4) isLeader;
     /*0x0024*/ u8 ALIGNED(4) numPlayers;
     /*0x0028*/ u8 ALIGNED(4) multiplayerId;
-    /*0x0029*/ u8 unused1[7];
     /*0x0030*/ u8 ALIGNED(4) countdownEndDelay;
     /*0x0034*/ u8 ALIGNED(4) posToPlayerId[MAX_RFU_PLAYERS];
-    /*0x003C*/ u8 ALIGNED(4) unused2; // Set to 0, never read
     /*0x0040*/ u8 ALIGNED(4) numGraySquares;
     /*0x0044*/ u8 ALIGNED(4) berryColStart;
     /*0x0048*/ u8 ALIGNED(4) berryColEnd;
@@ -257,7 +251,6 @@ struct DodrioGame
     /*0x010C*/ u8 ALIGNED(4) playAgainStates[MAX_RFU_PLAYERS];
     /*0x0112*/ u16 berriesPickedInRow;
     /*0x0114*/ u16 maxBerriesPickedInRow;
-    /*0x0118*/ bool32 startCountdown; // Never read
     /*0x011C*/ bool32 startGame;
     /*0x0120*/ bool32 berriesFalling;
     /*0x0124*/ u8 ALIGNED(4) clearRecvCmdTimer;
@@ -363,8 +356,8 @@ static void SendPacket_ReadyToEnd(bool32);
 static bool32 RecvPacket_ReadyToEnd(u32);
 static void LoadDodrioGfx(void);
 static void CreateDodrioSprite(struct DodrioGame_MonInfo *, u8, u8, u8);
-static void StartDodrioMissedAnim(u8);
-static void StartDodrioIntroAnim(u8);
+static void StartDodrioMissedAnim(void);
+static void StartDodrioIntroAnim(void);
 static void FreeDodrioSprites(u8);
 static void SetAllDodrioInvisibility(bool8, u8);
 static void CreateStatusBarSprites(void);
@@ -684,12 +677,10 @@ static void InitDodrioGame(struct DodrioGame * game)
     game->state = 0;
     game->timer = 0;
     game->funcId = FUNC_INTRO;
-    game->prevFuncId = FUNC_INTRO;
     game->startGame = FALSE;
     game->berriesFalling = FALSE;
     game->countdownEndDelay = 0;
     game->numGraySquares = 0;
-    game->unused2 = 0;
     game->allReadyToEnd = FALSE;
 
     for (i = 0; i < ARRAY_COUNT(game->pickStateQueue); i++)
@@ -823,7 +814,7 @@ static void DoGameIntro(void)
     switch (sGame->state)
     {
     case 0:
-        StartDodrioIntroAnim(1);
+        StartDodrioIntroAnim();
         SetGfxFuncById(GFXFUNC_SHOW_NAMES);
         sGame->state++;
         break;
@@ -843,7 +834,6 @@ static void InitCountdown(void)
         sGame->state++;
         break;
     default:
-        sGame->startCountdown = TRUE;
         SetGameFunc(FUNC_COUNTDOWN);
         break;
     }
@@ -1449,16 +1439,6 @@ static void RecvLinkData_Gameplay(void)
     u8 i;
     u8 numPlayers = sGame->numPlayers;
 
-    sGame->players[0].receivedGameStatePacket = RecvPacket_GameState(0,
-                                                  &sGame->players[0],
-                                                  &sGame->players[0].comm,
-                                                  &sGame->players[1].comm,
-                                                  &sGame->players[2].comm,
-                                                  &sGame->players[3].comm,
-                                                  &sGame->players[4].comm,
-                                                  &sGame->numGraySquares,
-                                                  &sGame->berriesFalling,
-                                                  &sGame->allReadyToEnd);
     sGame->clearRecvCmds = TRUE;
 
     for (i = 1; i < numPlayers; i++)
@@ -1526,16 +1506,6 @@ static void RecvLinkData_ReadyToEnd(void)
     u8 i;
     u8 numPlayers = sGame->numPlayers;
 
-    sGame->players[0].receivedGameStatePacket = RecvPacket_GameState(0,
-                                                  &sGame->players[0],
-                                                  &sGame->players[0].comm,
-                                                  &sGame->players[1].comm,
-                                                  &sGame->players[2].comm,
-                                                  &sGame->players[3].comm,
-                                                  &sGame->players[4].comm,
-                                                  &sGame->numGraySquares,
-                                                  &sGame->berriesFalling,
-                                                  &sGame->allReadyToEnd);
     sGame->clearRecvCmds = TRUE;
 
     for (i = 1; i < numPlayers; i++)
@@ -1683,7 +1653,7 @@ static void HandleSound_Leader(void)
         if (!sGame->playingPickSound && !IsSEPlaying())
         {
             PlaySE(SE_BOO);
-            StartDodrioMissedAnim(1);
+            StartDodrioMissedAnim();
             sGame->playingPickSound = TRUE;
         }
     }
@@ -1727,7 +1697,7 @@ static void HandleSound_Member(void)
         if (!sGame->playingPickSound && !IsSEPlaying())
         {
             PlaySE(SE_BOO);
-            StartDodrioMissedAnim(1);
+            StartDodrioMissedAnim();
             sGame->playingPickSound = TRUE;
         }
     }
@@ -1796,7 +1766,6 @@ static void CreateDodrioGameTask(TaskFunc func)
 
 static void SetGameFunc(u8 funcId)
 {
-    sGame->prevFuncId = sGame->funcId;
     sGame->funcId = funcId;
     sGame->state = 0;
     sGame->timer = 0;
@@ -2815,28 +2784,6 @@ static void GetScoreResults(struct DodrioGame_ScoreResults *dst, u8 playerId)
     *dst = sGame->scoreResults[playerId];
 }
 
-// Unused
-// Returns where the specified player's score ranks, 0 being first (highest score)
-static u8 GetScoreRanking(u8 playerId)
-{
-    u8 i, ranking = 0;
-    u8 numPlayers = sGame->numPlayers;
-    u32 playersScore;
-    u32 scores[MAX_RFU_PLAYERS] = {0};
-
-    for (i = 0; i < numPlayers; i++)
-        scores[i] = GetScore(i);
-
-    playersScore = scores[playerId];
-    for (i = 0; i < MAX_RFU_PLAYERS; i++)
-    {
-        if (i != playerId && playersScore < scores[i])
-            ranking++;
-    }
-
-    return ranking;
-}
-
 enum {
     PRIZE_RECEIVED,
     PRIZE_FILLED_BAG,
@@ -3579,7 +3526,6 @@ static const union AnimCmd *const sAnims_Dodrio[] =
     [PICK_MIDDLE]   = sAnim_Dodrio_PickMiddle,
     [PICK_LEFT]     = sAnim_Dodrio_PickLeft,
     [PICK_DISABLED] = sAnim_Dodrio_Down,
-    // There is an unused 6th frame of Dodrio's graphic
 };
 
 static const union AnimCmd sAnims_StatusBar_Yellow[] =
@@ -3725,9 +3671,6 @@ static void CreateDodrioSprite(struct DodrioGame_MonInfo * monInfo, u8 playerId,
 
 #define sState   data[0]
 #define sTimer   data[1]
-#define sUnused1 data[2]
-#define sUnused2 data[3]
-#define sUnused3 data[4]
 
 static void SpriteCB_Dodrio(struct Sprite *sprite)
 {
@@ -3744,24 +3687,18 @@ static void SpriteCB_Dodrio(struct Sprite *sprite)
     }
 }
 
-static void StartDodrioMissedAnim(u8 unused)
+static void StartDodrioMissedAnim(void)
 {
     struct Sprite *sprite = &gSprites[*sDodrioSpriteIds[GetMultiplayerId()]];
     sprite->sState = 1;
     sprite->sTimer = 0;
-    sprite->sUnused1 = 0;
-    sprite->sUnused2 = 0;
-    sprite->sUnused3 = 0;
 }
 
-static void StartDodrioIntroAnim(u8 unused)
+static void StartDodrioIntroAnim(void)
 {
     struct Sprite *sprite = &gSprites[*sDodrioSpriteIds[GetMultiplayerId()]];
     sprite->sState = 2;
     sprite->sTimer = 0;
-    sprite->sUnused1 = 0;
-    sprite->sUnused2 = 0;
-    sprite->sUnused3 = 0;
 }
 
 // Do animation where Dodrio shakes horizontally after reaching for a berry and missing
@@ -3819,9 +3756,6 @@ static u32 DoDodrioIntroAnim(struct Sprite *sprite)
 
 #undef sState
 #undef sTimer
-#undef sUnused1
-#undef sUnused2
-#undef sUnused3
 
 static void FreeDodrioSprites(u8 numPlayers)
 {
@@ -4001,19 +3935,6 @@ static void SetStatusBarInvisibility(bool8 invisible)
         gSprites[sStatusBar->spriteIds[i]].invisible = invisible;
 }
 
-static const u8 sUnusedSounds[] = {
-    SE_M_CHARM,
-    SE_NOTE_C,
-    SE_NOTE_D,
-    SE_NOTE_E,
-    SE_NOTE_F,
-    SE_NOTE_G,
-    SE_NOTE_A,
-    SE_NOTE_B,
-    SE_NOTE_C_HIGH,
-    SE_RG_CARD_OPEN
-};
-
 static void LoadBerryGfx(void)
 {
     void *ptr = AllocZeroed(0x480);
@@ -4121,13 +4042,6 @@ static void SetBerryYPos(u8 id, u8 y)
 static void SetBerryAnim(u16 id, u8 animNum)
 {
     StartSpriteAnim(&gSprites[*sBerrySpriteIds[id]], animNum);
-}
-
-// Unused
-static void UnusedSetSpritePos(u8 spriteId)
-{
-    gSprites[spriteId].x = 20 * spriteId + 50;
-    gSprites[spriteId].y = 50;
 }
 
 // Gamefreak made a mistake there and goes out of bounds for the data array as it holds 8 elements
@@ -4356,12 +4270,6 @@ static void InitGameGfx(struct DodrioGame_Gfx *ptr)
     SetGfxFunc(LoadGfx);
 }
 
-// Unused
-static void FreeAllWindowBuffers_(void)
-{
-    FreeAllWindowBuffers();
-}
-
 // Data used by functions below.
 struct WinCoords
 {
@@ -4373,7 +4281,6 @@ enum {
     COLORID_GRAY,
     COLORID_RED,
     COLORID_BLUE,
-    COLORID_GREEN, // Unused
 };
 
 static const u8 sTextColorTable[][3] =
@@ -4381,7 +4288,6 @@ static const u8 sTextColorTable[][3] =
     [COLORID_GRAY]  = {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
     [COLORID_RED]   = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED},
     [COLORID_BLUE]  = {TEXT_COLOR_WHITE, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_BLUE},
-    [COLORID_GREEN] = {TEXT_COLOR_WHITE, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN},
 };
 
 static const struct WinCoords sNameWindowCoords_1Player[] = {{12, 6}};

@@ -901,22 +901,8 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
     }
 }
 
-void ApplyWeatherColorMapToPal(u8 paletteIndex) // now unused / obselete
-{
-    ApplyColorMap(paletteIndex, 1, gWeatherPtr->colorMapIndex);
-}
-
 void ApplyWeatherColorMapToPals(u8 startPalIndex, u8 numPalettes) {
     ApplyColorMap(startPalIndex, numPalettes, gWeatherPtr->colorMapIndex);
-}
-
-// Unused
-static bool8 IsFirstFrameOfWeatherFadeIn(void)
-{
-    if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_SCREEN_FADING_IN)
-        return gWeatherPtr->fadeInFirstFrame;
-    else
-        return FALSE;
 }
 
 void LoadCustomWeatherSpritePalette(const u16 *palette)

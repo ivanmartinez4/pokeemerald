@@ -16,10 +16,6 @@ TrainerHill_Entrance_OnTransition:
 	getplayerxy VAR_TEMP_D, VAR_RESULT
 	end
 
-@ Unused
-TrainerHill_Entrance_OnWarp:
-	end
-
 TrainerHill_Entrance_OnResume:
 	trainerhill_resumetimer
 	setvar VAR_TEMP_0, 0
@@ -207,11 +203,6 @@ TrainerHill_Entrance_Movement_PushPlayerBackFromCounter:
 	walk_down
 	step_end
 
-@ Unused
-TrainerHill_Entrance_Movement_FaceUp:
-	face_up
-	step_end
-
 TrainerHill_Entrance_Movement_PlayerExitElevator:
 	walk_down
 	walk_down
@@ -369,13 +360,6 @@ TrainerHill_Entrance_Text_ExplainTrainerHill:
 	.string "In TRAINER battles along the way,\n"
 	.string "neither Exp. Points nor money will\l"
 	.string "be awarded.$"
-
-@ Unused
-TrainerHill_Entrance_Text_NeedAtLeastTwoPokemon:
-	.string "Oh, I'm sorry, but you appear to have\n"
-	.string "only one POKéMON with you.\p"
-	.string "You will need at least two POKéMON\n"
-	.string "to enter this event.$"
 
 TrainerHill_Roof_Text_YouFinallyCameBravo:
 	.string "Hm! Hm!\p"

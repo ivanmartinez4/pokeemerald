@@ -564,10 +564,6 @@ gText_Contest_Smartness::
 gText_Contest_Toughness::
 	.string "toughness$"
 
-@ Unused
-gText_Tension::
-	.string "TENSION$"
-
 gText_CoolMove::
 	.string "COOL Move$"
 

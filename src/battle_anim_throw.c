@@ -49,7 +49,7 @@ enum {
     SHINY_STAR_DIAGONAL,
 };
 
-static void AnimTask_UnusedLevelUpHealthBox_Step(u8);
+static void AnimTask_EvolutionLevelUpHealthBox_Step(u8);
 static void AnimTask_FlashHealthboxOnLevelUp_Step(u8);
 static void AnimTask_ThrowBall_Step(u8);
 static void SpriteCB_Ball_Throw(struct Sprite *);
@@ -651,7 +651,7 @@ extern const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate;
 // This is an unused function, but it seems likely that it was
 // intended to be an additional effect during the level-up animation.
 // It is an upward blue gradient effect on the mon's healthbox.
-void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
+void AnimTask_EvolutionLevelUpHealthBox(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     u8 healthBoxSpriteId;
@@ -687,8 +687,8 @@ void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
     gSprites[spriteId4].callback = SpriteCallbackDummy;
 
     GetBattleAnimBg1Data(&animBgData);
-    AnimLoadCompressedBgTilemap(animBgData.bgId, UnusedLevelupAnimationTilemap);
-    AnimLoadCompressedBgGfx(animBgData.bgId, UnusedLevelupAnimationGfx, animBgData.tilesOffset);
+    AnimLoadCompressedBgTilemap(animBgData.bgId, EvolutionLevelUpAnimationTilemap);
+    AnimLoadCompressedBgGfx(animBgData.bgId, EvolutionLevelUpAnimationGfx, animBgData.tilesOffset);
     LoadCompressedPalette(gCureBubblesPal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
 
     gBattle_BG1_X = -gSprites[spriteId3].x + 32;
@@ -696,10 +696,10 @@ void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
     gTasks[taskId].data[1] = 640;
     gTasks[taskId].data[0] = spriteId3;
     gTasks[taskId].data[2] = spriteId4;
-    gTasks[taskId].func = AnimTask_UnusedLevelUpHealthBox_Step;
+    gTasks[taskId].func = AnimTask_EvolutionLevelUpHealthBox_Step;
 }
 
-static void AnimTask_UnusedLevelUpHealthBox_Step(u8 taskId)
+static void AnimTask_EvolutionLevelUpHealthBox_Step(u8 taskId)
 {
     u8 spriteId1, spriteId2;
     u8 battler;

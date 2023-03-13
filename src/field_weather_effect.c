@@ -17,7 +17,6 @@
 #include "palette.h"
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
-EWRAM_DATA static u16 sUnusedWeatherRelated = 0;
 
 const u16 gCloudsWeatherPalette[] = INCBIN_U16("graphics/weather/cloud.gbapal");
 const u16 gSandstormWeatherPalette[] = INCBIN_U16("graphics/weather/sandstorm.gbapal");
@@ -2453,13 +2452,6 @@ static void UpdateBubbleSprite(struct Sprite *sprite)
 
 //------------------------------------------------------------------------------
 
-// Unused function.
-static void UnusedSetCurrentAbnormalWeather(u32 weather, u32 unknown)
-{
-    sCurrentAbnormalWeather = weather;
-    sUnusedWeatherRelated = unknown;
-}
-
 #define tState         data[0]
 #define tWeatherA      data[1]
 #define tWeatherB      data[2]
@@ -2550,12 +2542,6 @@ void SetWeather(u32 weather)
 {
     SetSavedWeather(weather);
     SetNextWeather(GetSavedWeather());
-}
-
-void SetWeather_Unused(u32 weather)
-{
-    SetSavedWeather(weather);
-    SetCurrentAndNextWeather(GetSavedWeather());
 }
 
 void DoCurrentWeather(void)

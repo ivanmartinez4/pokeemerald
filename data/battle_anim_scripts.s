@@ -956,6 +956,7 @@ gBattleAnims_Special::
 	.4byte Special_SubstituteToMon          @ B_ANIM_SUBSTITUTE_TO_MON
 	.4byte Special_MonToSubstitute          @ B_ANIM_MON_TO_SUBSTITUTE
 	.4byte Special_CriticalCaptureBallThrow @ B_ANIM_CRITICAL_CAPTURE_THROW
+	.4byte Special_LevelUpEvolve            @ B_ANIM_LVL_UP_EVOLVE
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 4 @@@@@@@@@@@@@@@@@@@@@@@
 Move_ROOST:
@@ -25089,6 +25090,20 @@ Special_LevelUp:
 	createvisualtask AnimTask_LoadHealthboxPalsForLevelUp, 2
 	delay 0
 	createvisualtask AnimTask_FlashHealthboxOnLevelUp, 5, 0, 0
+	waitforvisualfinish
+	createvisualtask AnimTask_FreeHealthboxPalsForLevelUp, 2
+	end
+@ Extra effect played on an evolution level
+Special_LevelUpEvolve:
+	playsewithpan SE_EXP_MAX, 0
+	createvisualtask AnimTask_LoadHealthboxPalsForLevelUp, 2
+	delay 0
+	createvisualtask AnimTask_FlashHealthboxOnLevelUp, 5, 0, 0
+	waitforvisualfinish
+	delay 1 @ Wait for the exp noise to end so the charge can actually play.
+	playsewithpan MUS_HG_LEVEL_UP, 0
+	createvisualtask AnimTask_FlashHealthboxOnLevelUp, 5, 1, 5
+	createvisualtask AnimTask_EvolutionLevelUpHealthBox, 5, 0
 	waitforvisualfinish
 	createvisualtask AnimTask_FreeHealthboxPalsForLevelUp, 2
 	end

@@ -100,12 +100,6 @@ enum {
 #define RET_VALUE_LEVELED_UP   11
 #define RET_MEGA_EVOLUTION 0x80
 
-struct UnusedControllerStruct
-{
-    u8 unk:7;
-    u8 flag:1;
-};
-
 struct HpAndStatus
 {
     u16 hp;
@@ -194,8 +188,6 @@ enum
     CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
 };
-
-extern struct UnusedControllerStruct gUnusedControllerStruct;
 
 // general functions
 void HandleLinkBattleSetup(void);

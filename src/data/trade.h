@@ -324,28 +324,6 @@ static const u8 sTradeMonBoxCoords[PARTY_SIZE * 2][2] = {
         {23, 13},
 };
 
-static const u8 sUnusedCoords[][2] =
-{
-    { 0, 14},
-    {15, 29},
-    { 3,  5},
-    { 3,  7},
-    {18,  5},
-    {18,  7},
-    { 8,  7},
-    {22, 12},
-    { 8,  7},
-    {22, 12},
-    { 6,  7},
-    {24, 12},
-    { 6,  7},
-    {24, 12},
-    { 8,  7},
-    {22, 12},
-    { 7,  7},
-    {23, 12}
-};
-
 static const u8 *const sActionTexts[] =
 {
     [TEXT_CANCEL]       = sText_Cancel,
