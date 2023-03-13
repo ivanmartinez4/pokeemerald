@@ -6881,46 +6881,6 @@ static const struct SubspriteTable sSubspriteTable_DigitalDisplay_Insert[] =
 [0_____][1_____]
 [2     ][3     ]   64x16
 */
-static const struct Subsprite sSubsprites_DigitalDisplay_Unused1[] =
-{
-    {
-        .x = -32,
-        .y = -8,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 0,
-        .priority = 3,
-    },
-    {
-        .x = 0,
-        .y = -8,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 4,
-        .priority = 3,
-    },
-    {
-        .x = -32,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 8,
-        .priority = 3,
-    },
-    {
-        .x = 0,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 12,
-        .priority = 3,
-    }
-};
-
-static const struct SubspriteTable sSubspriteTable_DigitalDisplay_Unused1[] =
-{
-    ARRAY_COUNT(sSubsprites_DigitalDisplay_Unused1), sSubsprites_DigitalDisplay_Unused1
-};
 
 /*      v-- Origin on 3
 [0_____][1_____]
@@ -6996,26 +6956,9 @@ static const struct Subsprite sSubsprites_DigitalDisplay_Smoke[] =
     }
 };
 
-static const struct Subsprite sSubsprites_DigitalDisplay_Unused2[] =
-{
-    {
-        .x = -8,
-        .y = -8,
-        .shape = SPRITE_SHAPE(16x16),
-        .size = SPRITE_SIZE(16x16),
-        .tileOffset = 16,
-        .priority = 3,
-    }
-};
-
 static const struct SubspriteTable sSubspriteTable_DigitalDisplay_Smoke[] =
 {
     ARRAY_COUNT(sSubsprites_DigitalDisplay_Smoke), sSubsprites_DigitalDisplay_Smoke
-};
-
-static const struct SubspriteTable sSubspriteTable_DigitalDisplay_Unused2[] =
-{
-    ARRAY_COUNT(sSubsprites_DigitalDisplay_Unused2), sSubsprites_DigitalDisplay_Unused2
 };
 
 /*
@@ -7847,20 +7790,6 @@ static const struct SpriteSheet sSlotMachineSpriteSheets[22] =
 };
 
 static const u8 *const sReelBackground_Tilemap = gSlotMachineReelBackground_Tilemap;
-
-static const u16 sUnusedColors[] =
-{
-    RGB(27, 27, 27),
-    RGB(8, 11, 26),
-    RGB(11, 21, 13),
-    RGB(31, 31, 31),
-    RGB(16, 26, 21),
-    RGB(0, 22, 31),
-    RGB(26, 21, 0),
-    RGB(26, 21, 0),
-    RGB(29, 15, 0),
-    RGB(29, 15, 0),
-};
 
 // The Bet 2 and 3 match line palettes are duplicated unnecessarily
 static const u16 sMiddleRowLit_Pal[] = {RGB(17, 28, 31)};

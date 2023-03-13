@@ -42,7 +42,6 @@ enum
 
 struct Pokenav_RibbonsSummaryList
 {
-    u8 unused1[8];
     struct PokenavMonList *monList;
     u16 selectedPos;
     u16 normalRibbonLastRowStart;
@@ -50,7 +49,6 @@ struct Pokenav_RibbonsSummaryList
     u16 numGiftRibbons;
     u32 ribbonIds[FIRST_GIFT_RIBBON];
     u32 giftRibbonIds[NUM_GIFT_RIBBONS];
-    u32 unused2;
     u32 (*callback)(struct Pokenav_RibbonsSummaryList *);
 };
 
@@ -61,10 +59,8 @@ struct Pokenav_RibbonsSummaryMenu
     u16 nameWindowId;
     u16 ribbonCountWindowId;
     u16 listIdxWindowId;
-    u16 unusedWindowId;
     u16 monSpriteId;
     struct Sprite *bigRibbonSprite;
-    u32 unused;
     u8 tilemapBuffers[2][BG_SCREEN_SIZE];
 };
 
@@ -542,9 +538,6 @@ void FreeRibbonsSummaryScreen2(void)
     RemoveWindow(menu->ribbonCountWindowId);
     RemoveWindow(menu->nameWindowId);
     RemoveWindow(menu->listIdxWindowId);
-#ifndef BUGFIX
-    RemoveWindow(menu->unusedWindowId); // Removing window, but window id is never set
-#endif
     DestroyRibbonsMonFrontPic(menu);
     FreeSpriteTilesByTag(GFXTAG_RIBBON_ICONS_BIG);
     FreeSpritePaletteByTag(PALTAG_RIBBON_ICONS_1);

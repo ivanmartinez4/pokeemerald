@@ -17,7 +17,6 @@ struct Pokenav_MainMenu
 {
     void (*loopTask)(u32);
     u32 (*isLoopTaskActiveFunc)(void);
-    u32 unused;
     u32 currentTaskId;
     u32 helpBarWindowId;
     u32 palettes;
