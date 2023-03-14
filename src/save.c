@@ -26,11 +26,9 @@ static u8 HandleReplaceSector(u16, const struct SaveSectorLocation *);
 /*
  * Sector Layout:
  *
- * Sectors 0 - 13:      Save Slot 1
- * Sectors 14 - 27:     Save Slot 2
- * Sectors 28 - 29:     Hall of Fame
- * Sector 30:           Trainer Hill
- * Sector 31:           Recorded Battle
+ * Sectors 0 - 14:      Save Slot 1
+ * Sectors 15 - 29:     Save Slot 2
+ * Sectors 30 - 31:     Hall of Fame
  *
  * There are two save slots for saving the player's game data. We alternate between
  * them each time the game is saved, so that if the current save slot is corrupt,
@@ -70,7 +68,8 @@ struct
     SAVEBLOCK_CHUNK(struct PokemonStorage, 5),
     SAVEBLOCK_CHUNK(struct PokemonStorage, 6),
     SAVEBLOCK_CHUNK(struct PokemonStorage, 7),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 8), // SECTOR_ID_PKMN_STORAGE_END
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 8),
+    SAVEBLOCK_CHUNK(struct PokemonStorage, 9), // SECTOR_ID_PKMN_STORAGE_END
 };
 
 // These will produce an error if a save struct is larger than the space
@@ -908,52 +907,6 @@ u16 GetSaveBlocksPointersBaseOffset(void)
                    sector->data[offsetof(struct SaveBlock2, playerTrainerId[3])];
     }
     return 0;
-}
-
-u32 TryReadSpecialSaveSector(u8 sector, u8 *dst)
-{
-    s32 i;
-    s32 size;
-    u8 *savData;
-
-    if (sector != SECTOR_ID_TRAINER_HILL && sector != SECTOR_ID_RECORDED_BATTLE)
-        return SAVE_STATUS_ERROR;
-
-    ReadFlash(sector, 0, (u8 *)&gSaveDataBuffer, SECTOR_SIZE);
-    if (*(u32 *)(&gSaveDataBuffer.data[0]) != SPECIAL_SECTOR_SENTINEL)
-        return SAVE_STATUS_ERROR;
-
-    // Copies whole save sector except u32 counter
-    i = 0;
-    size = SECTOR_COUNTER_OFFSET - 1;
-    savData = &gSaveDataBuffer.data[4]; // data[4] to skip past SPECIAL_SECTOR_SENTINEL
-    for (; i <= size; i++)
-        dst[i] = savData[i];
-    return SAVE_STATUS_OK;
-}
-
-u32 TryWriteSpecialSaveSector(u8 sector, u8 *src)
-{
-    s32 i;
-    s32 size;
-    u8 *savData;
-    void *savDataBuffer;
-
-    if (sector != SECTOR_ID_TRAINER_HILL && sector != SECTOR_ID_RECORDED_BATTLE)
-        return SAVE_STATUS_ERROR;
-
-    savDataBuffer = &gSaveDataBuffer;
-    *(u32 *)(savDataBuffer) = SPECIAL_SECTOR_SENTINEL;
-
-    // Copies whole save sector except u32 counter
-    i = 0;
-    size = SECTOR_COUNTER_OFFSET - 1;
-    savData = &gSaveDataBuffer.data[4]; // data[4] to skip past SPECIAL_SECTOR_SENTINEL
-    for (; i <= size; i++)
-        savData[i] = src[i];
-    if (ProgramFlashSectorAndVerify(sector, savDataBuffer) != 0)
-        return SAVE_STATUS_ERROR;
-    return SAVE_STATUS_OK;
 }
 
 #define tState         data[0]
