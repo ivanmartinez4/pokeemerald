@@ -12405,19 +12405,3 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Leaf[] = {
     .species = SPECIES_BULBASAUR,
     }
 };
-
-static const struct TrainerMonNoItemDefaultMoves sParty_BrendanLinkPlaceholder[] = {
-    {
-    .iv = 0,
-    .lvl = 5,
-    .species = SPECIES_GROUDON,
-    }
-};
-
-static const struct TrainerMonNoItemDefaultMoves sParty_MayLinkPlaceholder[] = {
-    {
-    .iv = 0,
-    .lvl = 5,
-    .species = SPECIES_KYOGRE,
-    }
-};
