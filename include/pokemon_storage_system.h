@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEMON_STORAGE_SYSTEM_H
 #define GUARD_POKEMON_STORAGE_SYSTEM_H
 
-#define TOTAL_BOXES_COUNT       16
+#define TOTAL_BOXES_COUNT       22
 #define IN_BOX_ROWS             5 // Number of rows, 6 Pokémon per row
 #define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
@@ -20,8 +20,8 @@ struct PokemonStorage
 {
     /*0x0000*/ u8 currentBox;
     /*0x0001*/ struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
-    /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
-    /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
+    /*0x859C*/ u8 boxNames[TOTAL_BOXES_COUNT][9];
+    /*0x8647*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
 };
 
 extern struct PokemonStorage *gPokemonStoragePtr;
