@@ -1640,138 +1640,17 @@ u8 GetFrontierBrainStatus(void)
 
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
 {
-    switch (whichText)
-    {
-    case FRONTIER_BEFORE_TEXT:
-        if (trainerId == TRAINER_EREADER)
-            FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
-        else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            CopyFrontierBrainText(FALSE);
-        else if (trainerId < FRONTIER_TRAINERS_COUNT)
-            FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
-        else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
-            FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
-        else
-            BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
-        break;
-    case FRONTIER_PLAYER_LOST_TEXT:
-        if (trainerId == TRAINER_EREADER)
-        {
-            FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerLost);
-        }
-        else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        {
-            CopyFrontierBrainText(FALSE);
-        }
-        else if (trainerId < FRONTIER_TRAINERS_COUNT)
-        {
-            FrontierSpeechToString(gFacilityTrainers[trainerId].speechWin);
-        }
-        else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-                FrontierSpeechToString(GetRecordedBattleEasyChatSpeech());
-            else
-                FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].speechWon);
-        }
-        else
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-                FrontierSpeechToString(GetRecordedBattleEasyChatSpeech());
-            else
-                FrontierSpeechToString(gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].speechWon);
-        }
-        break;
-    case FRONTIER_PLAYER_WON_TEXT:
-        if (trainerId == TRAINER_EREADER)
-        {
-            FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerWon);
-        }
-        else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        {
-            CopyFrontierBrainText(TRUE);
-        }
-        else if (trainerId < FRONTIER_TRAINERS_COUNT)
-        {
-            FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
-        }
-        else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-                FrontierSpeechToString(GetRecordedBattleEasyChatSpeech());
-            else
-                FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].speechLost);
-        }
-        else
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            {
-                trainerId = GetRecordedBattleApprenticeId();
-                FrontierSpeechToString(gApprentices[trainerId].speechLost);
-            }
-            else
-            {
-                trainerId = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id;
-                FrontierSpeechToString(gApprentices[trainerId].speechLost);
-            }
-        }
-        break;
-    }
+
 }
 
 void ResetWinStreaks(void)
 {
-    s32 battleMode, lvlMode;
 
-    gSaveBlock2Ptr->frontier.winStreakActiveFlags = 0;
-    for (battleMode = 0; battleMode < FRONTIER_MODE_COUNT; battleMode++)
-    {
-        for (lvlMode = 0; lvlMode < FRONTIER_LVL_TENT; lvlMode++)
-        {
-            gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
-            if (battleMode < FRONTIER_MODE_MULTIS)
-            {
-                gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = 0;
-                gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] = 0;
-                gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] = 0;
-            }
-            if (battleMode == FRONTIER_MODE_SINGLES)
-            {
-                gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = 0;
-                gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] = 0;
-                gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] = 0;
-            }
-        }
-    }
-    if (gSaveBlock2Ptr->frontier.challengeStatus != 0)
-        gSaveBlock2Ptr->frontier.challengeStatus = CHALLENGE_STATUS_SAVING;
 }
 
 u32 GetCurrentFacilityWinStreak(void)
 {
-    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    switch (facility)
-    {
-    case FRONTIER_FACILITY_TOWER:
-        return gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
-    case FRONTIER_FACILITY_DOME:
-        return gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
-    case FRONTIER_FACILITY_PALACE:
-        return gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
-    case FRONTIER_FACILITY_ARENA:
-        return gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode];
-    case FRONTIER_FACILITY_FACTORY:
-        return gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
-    case FRONTIER_FACILITY_PIKE:
-        return gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
-    case FRONTIER_FACILITY_PYRAMID:
-        return gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
-    default:
-        return 0;
-    }
 }
 
 void ResetFrontierTrainerIds(void)
