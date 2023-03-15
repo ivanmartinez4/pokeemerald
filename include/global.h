@@ -719,19 +719,6 @@ struct LinkBattleRecords
     //u8 padding;
 };
 
-struct RecordMixingGiftData
-{
-    u8 unk0;
-    u8 quantity;
-    u16 itemId;
-};
-
-struct RecordMixingGift
-{
-    int checksum;
-    struct RecordMixingGiftData data;
-};
-
 struct ContestWinner
 {
     u32 personality;
@@ -839,84 +826,6 @@ struct WaldaPhrase
     //u8 padding;
 };
 
-struct TrainerNameRecord
-{
-    u32 trainerId;
-    u8 trainerName[PLAYER_NAME_LENGTH + 1];
-};
-
-struct TrainerHillSave
-{
-    /*0x3D64*/ u32 timer;
-    /*0x3D68*/ u32 bestTime;
-    /*0x3D6C*/ u8 unk_3D6C;
-    /*0x3D6E*/ u16 receivedPrize:1;
-               u16 checkedFinalTime:1;
-               u16 spokeToOwner:1;
-               u16 hasLost:1;
-               u16 maybeECardScanDuringChallenge:1;
-               u16 field_3D6E_0f:1;
-               u16 mode:2; // HILL_MODE_*
-               //u16 padding:8;
-};
-
-struct WonderNewsMetadata
-{
-    u8 newsType:2;
-    u8 sentRewardCounter:3;
-    u8 rewardCounter:3;
-    u8 berry;
-    //u8 padding[2];
-};
-
-struct WonderNews
-{
-    u16 id;
-    u8 sendType; // SEND_TYPE_*
-    u8 bgType;
-    u8 titleText[WONDER_NEWS_TEXT_LENGTH];
-    u8 bodyText[WONDER_NEWS_BODY_TEXT_LINES][WONDER_NEWS_TEXT_LENGTH];
-};
-
-struct WonderCard
-{
-    u16 flagId; // Event flag (sReceivedGiftFlags) + WONDER_CARD_FLAG_OFFSET
-    u16 iconSpecies;
-    u32 idNumber;
-    u8 type:2; // CARD_TYPE_*
-    u8 bgType:4;
-    u8 sendType:2; // SEND_TYPE_*
-    u8 maxStamps;
-    u8 titleText[WONDER_CARD_TEXT_LENGTH];
-    u8 subtitleText[WONDER_CARD_TEXT_LENGTH];
-    u8 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH];
-    u8 footerLine1Text[WONDER_CARD_TEXT_LENGTH];
-    u8 footerLine2Text[WONDER_CARD_TEXT_LENGTH];
-    //u8 padding[2];
-};
-
-struct WonderCardMetadata
-{
-    u16 battlesWon;
-    u16 battlesLost;
-    u16 numTrades;
-    u16 iconSpecies;
-    u16 stampData[2][MAX_STAMP_CARD_STAMPS]; // First element is STAMP_SPECIES, second is STAMP_ID
-};
-
-struct MysteryGiftSave
-{
-    u32 newsCrc;
-    struct WonderNews news;
-    u32 cardCrc;
-    struct WonderCard card;
-    u32 cardMetadataCrc;
-    struct WonderCardMetadata cardMetadata;
-    u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
-    struct WonderNewsMetadata newsMetadata;
-    u32 trainerIds[2][5]; // Saved ids for 10 trainers, 5 each for battles and trades 
-}; // 0x36C 0x3598
-
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -991,17 +900,10 @@ struct SaveBlock1
     /*0x3150*/ struct LinkBattleRecords linkBattleRecords;
     /*0x31A8*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
     /*0x31DC*/ struct Roamer roamer;
-    /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-    /*0x322C*/ struct MysteryGiftSave mysteryGift;
     /*0x3???*/ u8 dexSeen[NUM_DEX_FLAG_BYTES];
     /*0x3???*/ u8 dexCaught[NUM_DEX_FLAG_BYTES];
-    /*0x3???*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
-    /*0x3???*/ struct RamScript ramScript;
-    /*0x3???*/ struct RecordMixingGift recordMixingGift;
     /*0x3???*/ LilycoveLady lilycoveLady;
-    /*0x3???*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3???*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
-    /*0x3???*/ struct TrainerHillSave trainerHill;
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
     /*0x???*/ u8 itemFlags[ITEM_FLAGS_COUNT];
 };

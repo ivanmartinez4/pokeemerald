@@ -48,28 +48,6 @@ struct CardStatTextData
     u8 statNumberText[4];
 };
 
-struct WonderCardData
-{
-    /*0000*/ struct WonderCard card;
-    /*014c*/ struct WonderCardMetadata cardMetadata;
-    /*0170*/ const struct WonderGraphics * gfx;
-    /*0174*/ u8 enterExitState;
-    /*0175*/ u8 statFooterWidth;
-    /*0176*/ u16 windowIds[CARD_WIN_COUNT];
-    /*017C*/ u8 monIconSpriteId;
-    /*017D*/ u8 stampSpriteIds[MAX_STAMP_CARD_STAMPS][2]; // 2 sprites each, 1 for the shadow and 1 for the Pokémon
-    /*018B*/ u8 titleText[WONDER_CARD_TEXT_LENGTH + 1];
-    /*01B4*/ u8 subtitleText[WONDER_CARD_TEXT_LENGTH + 1];
-    /*01DD*/ u8 idNumberText[7];
-    /*01E4*/ u8 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH + 1];
-    /*0288*/ u8 footerLine1Text[WONDER_CARD_TEXT_LENGTH + 1];
-    /*02B1*/ u8 giftText[WONDER_CARD_TEXT_LENGTH + 1];
-    /*02DC*/ struct CardStatTextData statTextData[8];
-    /*045C*/ u8 bgTilemapBuffer[0x1000];
-};
-
-EWRAM_DATA static struct WonderCardData * sWonderCardData = NULL;
-
 static void BufferCardText(void);
 static void DrawCardWindow(u8 whichWindow);
 static void CreateCardSprites(void);
@@ -184,356 +162,44 @@ static const struct WonderGraphics sCardGraphics[NUM_WONDER_BGS] = {
     {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 7, .tiles = sWonderCardBgGfx8, .map = sWonderCardBgTilemap8, .pal = sWonderCardBgPal8}
 };
 
-bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata)
+bool32 WonderCard_Init(void)
 {
-    if (card == NULL || metadata == NULL)
-        return FALSE;
-    sWonderCardData = AllocZeroed(sizeof(*sWonderCardData));
-    if (sWonderCardData == NULL)
-        return FALSE;
-    sWonderCardData->card = *card;
-    sWonderCardData->cardMetadata = *metadata;
-    if (sWonderCardData->card.bgType >= NUM_WONDER_BGS)
-        sWonderCardData->card.bgType = 0;
-    if (sWonderCardData->card.type >= CARD_TYPE_COUNT)
-        sWonderCardData->card.type = 0;
-    if (sWonderCardData->card.maxStamps > MAX_STAMP_CARD_STAMPS)
-        sWonderCardData->card.maxStamps = 0;
-    sWonderCardData->gfx = &sCardGraphics[sWonderCardData->card.bgType];
-    return TRUE;
+
 }
 
 void WonderCard_Destroy(void)
 {
-    if (sWonderCardData != NULL)
-    {
-        *sWonderCardData = (struct WonderCardData){};
-        FREE_AND_SET_NULL(sWonderCardData);
-    }
+
 }
 
 s32 WonderCard_Enter(void)
 {
-    if (sWonderCardData == NULL)
-        return -1;
-    switch(sWonderCardData->enterExitState)
-    {
-    case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        break;
-    case 1:
-        if (UpdatePaletteFade())
-            return 0;
-        break;
-    case 2:
-        FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        CopyBgTilemapBufferToVram(0);
-        CopyBgTilemapBufferToVram(1);
-        CopyBgTilemapBufferToVram(2);
-        DecompressAndCopyTileDataToVram(2, sWonderCardData->gfx->tiles, 0, 0x008, 0);
-        sWonderCardData->windowIds[CARD_WIN_HEADER] = AddWindow(&sCard_WindowTemplates[CARD_WIN_HEADER]);
-        sWonderCardData->windowIds[CARD_WIN_BODY] = AddWindow(&sCard_WindowTemplates[CARD_WIN_BODY]);
-        sWonderCardData->windowIds[CARD_WIN_FOOTER] = AddWindow(&sCard_WindowTemplates[CARD_WIN_FOOTER]);
-        break;
-    case 3:
-        if (FreeTempTileDataBuffersIfPossible())
-            return 0;
-        LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(2), PLTT_SIZE_4BPP);
-        gPaletteFade.bufferTransferDisabled = TRUE;
-        LoadPalette(sWonderCardData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-        LZ77UnCompWram(sWonderCardData->gfx->map, sWonderCardData->bgTilemapBuffer);
-        CopyRectToBgTilemapBufferRect(2, sWonderCardData->bgTilemapBuffer, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 1, 0x008, 0);
-        CopyBgTilemapBufferToVram(2);
-        break;
-    case 4:
-        BufferCardText();
-        break;
-    case 5:
-        DrawCardWindow(CARD_WIN_HEADER);
-        DrawCardWindow(CARD_WIN_BODY);
-        DrawCardWindow(CARD_WIN_FOOTER);
-        CopyBgTilemapBufferToVram(1);
-        break;
-    case 6:
-        LoadMonIconPalettes();
-        break;
-    case 7:
-        ShowBg(1);
-        ShowBg(2);
-        gPaletteFade.bufferTransferDisabled = FALSE;
-        CreateCardSprites();
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        UpdatePaletteFade();
-        break;
-    default:
-        if (UpdatePaletteFade())
-            return 0;
-        sWonderCardData->enterExitState = 0;
-        return 1;
-    }
-    sWonderCardData->enterExitState++;
-    return 0;
+
 }
 
 s32 WonderCard_Exit(bool32 useCancel)
 {
-    if (sWonderCardData == NULL)
-        return -1;
-    switch (sWonderCardData->enterExitState)
-    {
-    case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        break;
-    case 1:
-        if (UpdatePaletteFade())
-            return 0;
-        break;
-    case 2:
-        FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-        CopyBgTilemapBufferToVram(0);
-        CopyBgTilemapBufferToVram(1);
-        CopyBgTilemapBufferToVram(2);
-        break;
-    case 3:
-        HideBg(1);
-        HideBg(2);
-        RemoveWindow(sWonderCardData->windowIds[CARD_WIN_FOOTER]);
-        RemoveWindow(sWonderCardData->windowIds[CARD_WIN_BODY]);
-        RemoveWindow(sWonderCardData->windowIds[CARD_WIN_HEADER]);
-        break;
-    case 4:
-        DestroyCardSprites();
-        FreeMonIconPalettes();
-        break;
-    case 5:
-        PrintMysteryGiftOrEReaderHeader(gGiftIsFromEReader, useCancel);
-        CopyBgTilemapBufferToVram(0);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        break;
-    default:
-        if (UpdatePaletteFade())
-            return 0;
-        sWonderCardData->enterExitState = 0;
-        return 1;
-    }
-    sWonderCardData->enterExitState++;
-    return 0;
+
 }
 
 static void BufferCardText(void)
 {
-    u16 i = 0;
-    u16 charsUntilStat;
-    u16 stats[3] = {0, 0, 0};
 
-    // Copy title/subtitle text
-    memcpy(sWonderCardData->titleText, sWonderCardData->card.titleText, WONDER_CARD_TEXT_LENGTH);
-    sWonderCardData->titleText[WONDER_CARD_TEXT_LENGTH] = EOS;
-    memcpy(sWonderCardData->subtitleText, sWonderCardData->card.subtitleText, WONDER_CARD_TEXT_LENGTH);
-    sWonderCardData->subtitleText[WONDER_CARD_TEXT_LENGTH] = EOS;
-
-    // Copy card id number
-    if (sWonderCardData->card.idNumber > 999999)
-        sWonderCardData->card.idNumber = 999999;
-    ConvertIntToDecimalStringN(sWonderCardData->idNumberText, sWonderCardData->card.idNumber, STR_CONV_MODE_LEFT_ALIGN, 6);
-
-    // Copy body text
-    for (i = 0; i < WONDER_CARD_BODY_TEXT_LINES; i++)
-    {
-        memcpy(sWonderCardData->bodyText[i], sWonderCardData->card.bodyText[i], WONDER_CARD_TEXT_LENGTH);
-        sWonderCardData->bodyText[i][WONDER_CARD_TEXT_LENGTH] = EOS;
-    }
-
-    // Copy footer line 1
-    memcpy(sWonderCardData->footerLine1Text, sWonderCardData->card.footerLine1Text, WONDER_CARD_TEXT_LENGTH);
-    sWonderCardData->footerLine1Text[WONDER_CARD_TEXT_LENGTH] = EOS;
-
-    // Copy footer line 2
-    switch (sWonderCardData->card.type)
-    {
-    case CARD_TYPE_GIFT:
-        memcpy(sWonderCardData->giftText, sWonderCardData->card.footerLine2Text, WONDER_CARD_TEXT_LENGTH);
-        sWonderCardData->giftText[WONDER_CARD_TEXT_LENGTH] = EOS;
-        break;
-    case CARD_TYPE_STAMP:
-        sWonderCardData->giftText[0] = EOS;
-        break;
-    case CARD_TYPE_LINK_STAT:
-        sWonderCardData->giftText[0] = EOS;
-
-        // Load stats
-        stats[0] = sWonderCardData->cardMetadata.battlesWon < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesWon : MAX_WONDER_CARD_STAT;
-        stats[1] = sWonderCardData->cardMetadata.battlesLost < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesLost : MAX_WONDER_CARD_STAT;
-        stats[2] = sWonderCardData->cardMetadata.numTrades < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.numTrades : MAX_WONDER_CARD_STAT;
-
-        // Init stat text arrays
-        for (i = 0; i < ARRAY_COUNT(sWonderCardData->statTextData); i++)
-        {
-            memset(sWonderCardData->statTextData[i].statNumberText, EOS, sizeof(sWonderCardData->statTextData[i].statNumberText));
-            memset(sWonderCardData->statTextData[i].statText,       EOS, sizeof(sWonderCardData->statTextData[i].statText));
-        }
-
-        // Copy stat texts
-        for (i = 0, charsUntilStat = 0; i < WONDER_CARD_TEXT_LENGTH; i++)
-        {
-            if (sWonderCardData->card.footerLine2Text[i] != CHAR_DYNAMIC)
-            {
-                // Regular text, just copy as is
-                sWonderCardData->statTextData[sWonderCardData->statFooterWidth].statText[charsUntilStat] = sWonderCardData->card.footerLine2Text[i];
-                charsUntilStat++;
-            }
-            else
-            {
-                // Dynamic char encountered
-                // These are used to give the id of which stat to print
-                u8 id = sWonderCardData->card.footerLine2Text[i + 1];
-                if (id >= ARRAY_COUNT(stats))
-                {
-                    // Invalid stat id, skip ahead
-                    i += 2;
-                }
-                else
-                {
-                    // Copy stat number
-                    ConvertIntToDecimalStringN(sWonderCardData->statTextData[sWonderCardData->statFooterWidth].statNumberText, stats[id], STR_CONV_MODE_LEADING_ZEROS, 3);
-                    sWonderCardData->statTextData[sWonderCardData->statFooterWidth].width = sWonderCardData->card.footerLine2Text[i + 2];
-                    sWonderCardData->statFooterWidth++;
-                    if (sWonderCardData->statFooterWidth >= ARRAY_COUNT(sWonderCardData->statTextData))
-                        break;
-                    charsUntilStat = 0;
-                    i += 2;
-                }
-            }
-        }
-    }
 }
 
 static void DrawCardWindow(u8 whichWindow)
 {
-    s8 i = 0;
-    s32 windowId = sWonderCardData->windowIds[whichWindow];
-    PutWindowTilemap(windowId);
-    FillWindowPixelBuffer(windowId, 0);
-    switch (whichWindow)
-    {
-    case CARD_WIN_HEADER:
-    {
-        // Print card title/subtitle
-        s32 x;
-        AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, 0, 1, sCard_TextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->titleText);
-        x = 160 - GetStringWidth(FONT_SHORT_COPY_1, sWonderCardData->subtitleText, GetFontAttribute(FONT_SHORT_COPY_1, FONTATTR_LETTER_SPACING));
-        if (x < 0)
-            x = 0;
-        AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, x, 17, sCard_TextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->subtitleText);
 
-        // Print id number
-        if (sWonderCardData->card.idNumber != 0)
-            AddTextPrinterParameterized3(windowId, FONT_NORMAL, 166, 17, sCard_TextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->idNumberText);
-        break;
-    }
-    case CARD_WIN_BODY:
-        // Print body text
-        for (; i < WONDER_CARD_BODY_TEXT_LINES; i++)
-            AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, 0, 16 * i + 2, sCard_TextColorTable[sWonderCardData->gfx->bodyTextPal], 0, sWonderCardData->bodyText[i]);
-        break;
-    case CARD_WIN_FOOTER:
-        // Print footer line 1
-        AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, 0,
-                                     sCard_FooterTextOffsets[sWonderCardData->card.type],
-                                     sCard_TextColorTable[sWonderCardData->gfx->footerTextPal],
-                                     0, sWonderCardData->footerLine1Text);
-
-        // Print footer line 2
-        if (sWonderCardData->card.type != CARD_TYPE_LINK_STAT)
-        {
-            // Print gift text
-            // Odd that CARD_TYPE_STAMP is not ignored, it has empty text for this
-            AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, 0,
-                                         16 + sCard_FooterTextOffsets[sWonderCardData->card.type],
-                                         sCard_TextColorTable[sWonderCardData->gfx->footerTextPal],
-                                         0, sWonderCardData->giftText);
-        }
-        else
-        {
-            s32 x = 0;
-            s32 y = sCard_FooterTextOffsets[sWonderCardData->card.type] + 16;
-            s32 spacing = GetFontAttribute(FONT_SHORT_COPY_1, FONTATTR_LETTER_SPACING);
-            for (; i < sWonderCardData->statFooterWidth; i++)
-            {
-                // Print stat text
-                AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, x, y, sCard_TextColorTable[sWonderCardData->gfx->footerTextPal], 0, sWonderCardData->statTextData[i].statText);
-                if (sWonderCardData->statTextData[i].statNumberText[0] != EOS)
-                {
-                    // Print stat number
-                    x += GetStringWidth(FONT_SHORT_COPY_1, sWonderCardData->statTextData[i].statText, spacing);
-                    AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, x, y,
-                                                 sCard_TextColorTable[sWonderCardData->gfx->footerTextPal],
-                                                 0, sWonderCardData->statTextData[i].statNumberText);
-                    x += GetStringWidth(FONT_SHORT_COPY_1, sWonderCardData->statTextData[i].statNumberText, spacing) + sWonderCardData->statTextData[i].width;
-                }
-            }
-        }
-        break;
-    }
-    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void CreateCardSprites(void)
 {
-    u8 i = 0;
-    sWonderCardData->monIconSpriteId = SPRITE_NONE;
 
-    // Create icon sprite
-    if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
-    {
-        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0);
-        gSprites[sWonderCardData->monIconSpriteId].oam.priority = 2;
-    }
-
-    // Create stamp sprites
-    if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
-    {
-        LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_StampShadow);
-        LoadSpritePalette(&sSpritePalettes_StampShadow[sWonderCardData->gfx->stampShadowPal]);
-        for (; i < sWonderCardData->card.maxStamps; i++)
-        {
-            sWonderCardData->stampSpriteIds[i][0] = SPRITE_NONE;
-            sWonderCardData->stampSpriteIds[i][1] = SPRITE_NONE;
-            sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_StampShadow, 216 - 32 * i, 144, 8);
-            if (sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i] != SPECIES_NONE)
-                sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i]),
-                                                                               SpriteCallbackDummy,
-                                                                               216 - 32 * i,
-                                                                               136, 0);
-        }
-    }
 }
 
 static void DestroyCardSprites(void)
 {
-    u8 i = 0;
 
-    // Destroy icon sprite
-    if (sWonderCardData->monIconSpriteId != SPRITE_NONE)
-        FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->monIconSpriteId]);
-
-    // Destroy stamp sprites
-    if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
-    {
-        for (; i < sWonderCardData->card.maxStamps; i++)
-        {
-            if (sWonderCardData->stampSpriteIds[i][0] != SPRITE_NONE)
-                DestroySprite(&gSprites[sWonderCardData->stampSpriteIds[i][0]]);
-            if (sWonderCardData->stampSpriteIds[i][1] != SPRITE_NONE)
-                FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->stampSpriteIds[i][1]]);
-        }
-        FreeSpriteTilesByTag(TAG_STAMP_SHADOW);
-        FreeSpritePaletteByTag(TAG_STAMP_SHADOW);
-    }
 }
 
 //======================
@@ -550,7 +216,6 @@ enum {
 
 struct WonderNewsData
 {
-    /*0000*/ struct WonderNews news;
     /*01bc*/ const struct WonderGraphics * gfx;
     /*01c0*/ u8 arrowsRemoved:1;
              u8 enterExitState:7;
@@ -639,19 +304,9 @@ static const struct WonderGraphics sNewsGraphics[NUM_WONDER_BGS] = {
     {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sWonderNewsGfx8, .map = sWonderNewsTilemap8, .pal = sWonderNewsPal8}
 };
 
-bool32 WonderNews_Init(const struct WonderNews * news)
+bool32 WonderNews_Init(void)
 {
-    if (news == NULL)
-        return FALSE;
-    sWonderNewsData = AllocZeroed(sizeof(*sWonderNewsData));
-    if (sWonderNewsData == NULL)
-        return FALSE;
-    sWonderNewsData->news = *news;
-    if (sWonderNewsData->news.bgType >= NUM_WONDER_BGS)
-        sWonderNewsData->news.bgType = 0;
-    sWonderNewsData->gfx = &sNewsGraphics[sWonderNewsData->news.bgType];
-    sWonderNewsData->arrowTaskId = TASK_NONE;
-    return TRUE;
+
 }
 
 void WonderNews_Destroy(void)
@@ -802,133 +457,31 @@ s32 WonderNews_Exit(bool32 useCancel)
 
 void WonderNews_RemoveScrollIndicatorArrowPair(void)
 {
-    if (!sWonderNewsData->arrowsRemoved && sWonderNewsData->arrowTaskId != TASK_NONE)
-    {
-        RemoveScrollIndicatorArrowPair(sWonderNewsData->arrowTaskId);
-        sWonderNewsData->arrowTaskId = TASK_NONE;
-        sWonderNewsData->arrowsRemoved = TRUE;
-    }
+
 }
 
 
 void WonderNews_AddScrollIndicatorArrowPair(void)
 {
-    if (sWonderNewsData->arrowsRemoved)
-    {
-        sWonderNewsData->arrowTaskId = AddScrollIndicatorArrowPair(&sWonderNewsData->arrowsTemplate, &sWonderNewsData->scrollOffset);
-        sWonderNewsData->arrowsRemoved = FALSE;
-    }
+
 }
 
 u32 WonderNews_GetInput(u16 input)
 {
-    if (sWonderNewsData->scrolling)
-    {
-        UpdateNewsScroll();
-        return NEWS_INPUT_NONE;
-    }
-    switch (input)
-    {
-    case A_BUTTON:
-        return NEWS_INPUT_A;
-    case B_BUTTON:
-        return NEWS_INPUT_B;
-    case DPAD_UP:
-        if (sWonderNewsData->scrollOffset == 0)
-            return NEWS_INPUT_NONE;
-        if (sWonderNewsData->arrowsRemoved)
-            return NEWS_INPUT_NONE;
-        sWonderNewsData->scrollingDown = FALSE;
-        break;
-    case DPAD_DOWN:
-        if (sWonderNewsData->scrollOffset == sWonderNewsData->scrollEnd)
-            return NEWS_INPUT_NONE;
-        if (sWonderNewsData->arrowsRemoved)
-            return NEWS_INPUT_NONE;
-        sWonderNewsData->scrollingDown = TRUE;
-        break;
-    default:
-        return NEWS_INPUT_NONE;
-    }
 
-    // Init scroll
-    sWonderNewsData->scrolling = TRUE;
-    sWonderNewsData->scrollIncrement = 2;
-    sWonderNewsData->scrollTotal = 0;
-    if (!sWonderNewsData->scrollingDown)
-        return NEWS_INPUT_SCROLL_UP;
-    else
-        return NEWS_INPUT_SCROLL_DOWN;
 }
 
 static void BufferNewsText(void)
 {
-    u8 i = 0;
 
-    // Copy title text
-    memcpy(sWonderNewsData->titleText, sWonderNewsData->news.titleText, WONDER_NEWS_TEXT_LENGTH);
-    sWonderNewsData->titleText[WONDER_NEWS_TEXT_LENGTH] = EOS;
-
-    // Copy body text
-    for (; i < WONDER_NEWS_BODY_TEXT_LINES; i++)
-    {
-        memcpy(sWonderNewsData->bodyText[i], sWonderNewsData->news.bodyText[i], WONDER_NEWS_TEXT_LENGTH);
-        sWonderNewsData->bodyText[i][WONDER_NEWS_TEXT_LENGTH] = EOS;
-        if (i > 7 && sWonderNewsData->bodyText[i][0] != EOS)
-            sWonderNewsData->scrollEnd++;
-    }
-    sWonderNewsData->arrowsTemplate = sNews_ArrowsTemplate;
-    sWonderNewsData->arrowsTemplate.fullyDownThreshold = sWonderNewsData->scrollEnd;
 }
 
 static void DrawNewsWindows(void)
 {
-    u8 i = 0;
-    s32 x;
-    PutWindowTilemap(sWonderNewsData->windowIds[NEWS_WIN_TITLE]);
-    PutWindowTilemap(sWonderNewsData->windowIds[NEWS_WIN_BODY]);
-    FillWindowPixelBuffer(sWonderNewsData->windowIds[NEWS_WIN_TITLE], 0);
-    FillWindowPixelBuffer(sWonderNewsData->windowIds[NEWS_WIN_BODY], 0);
 
-    // Print title text
-    x = (224 - GetStringWidth(FONT_SHORT_COPY_1, sWonderNewsData->titleText, GetFontAttribute(FONT_SHORT_COPY_1, FONTATTR_LETTER_SPACING))) / 2;
-    if (x < 0)
-        x = 0;
-    AddTextPrinterParameterized3(sWonderNewsData->windowIds[NEWS_WIN_TITLE], FONT_SHORT_COPY_1, x, 6, sNews_TextColorTable[sWonderNewsData->gfx->titleTextPal], 0, sWonderNewsData->titleText);
-
-    // Print body text
-    for (; i < WONDER_NEWS_BODY_TEXT_LINES; i++)
-        AddTextPrinterParameterized3(sWonderNewsData->windowIds[NEWS_WIN_BODY], FONT_SHORT_COPY_1, 0,
-                                     16 * i + 2,
-                                     sNews_TextColorTable[sWonderNewsData->gfx->bodyTextPal],
-                                     0, sWonderNewsData->bodyText[i]);
-
-    CopyWindowToVram(sWonderNewsData->windowIds[NEWS_WIN_TITLE], COPYWIN_FULL);
-    CopyWindowToVram(sWonderNewsData->windowIds[NEWS_WIN_BODY], COPYWIN_FULL);
 }
 
 static void UpdateNewsScroll(void)
 {
-    u16 bgMove = sWonderNewsData->scrollIncrement;
-    bgMove *= 256;
-    if (sWonderNewsData->scrollingDown)
-    {
-        ChangeBgY(2, bgMove, BG_COORD_ADD);
-        ChangeBgY(3, bgMove, BG_COORD_ADD);
-    }
-    else
-    {
-        ChangeBgY(2, bgMove, BG_COORD_SUB);
-        ChangeBgY(3, bgMove, BG_COORD_SUB);
-    }
-    sWonderNewsData->scrollTotal += sWonderNewsData->scrollIncrement;
-    if (sWonderNewsData->scrollTotal > 15)
-    {
-        if (sWonderNewsData->scrollingDown)
-            sWonderNewsData->scrollOffset++;
-        else
-            sWonderNewsData->scrollOffset--;
-        sWonderNewsData->scrolling = FALSE;
-        sWonderNewsData->scrollTotal = 0;
-    }
+
 }

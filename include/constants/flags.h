@@ -338,24 +338,23 @@
 #define FLAG_RECEIVED_AURORA_TICKET          0x13A
 #define FLAG_RECEIVED_MYSTIC_TICKET          0x13B
 #define FLAG_RECEIVED_OLD_SEA_MAP            0x13C
-#define FLAG_WONDER_CARD_UNUSED_1            0x13D // These Wonder Card flags are referenced but never set
-#define FLAG_WONDER_CARD_UNUSED_2            0x13E
-#define FLAG_WONDER_CARD_UNUSED_3            0x13F
-#define FLAG_WONDER_CARD_UNUSED_4            0x140
-#define FLAG_WONDER_CARD_UNUSED_5            0x141
-#define FLAG_WONDER_CARD_UNUSED_6            0x142
-#define FLAG_WONDER_CARD_UNUSED_7            0x143
-#define FLAG_WONDER_CARD_UNUSED_8            0x144
-#define FLAG_WONDER_CARD_UNUSED_9            0x145
-#define FLAG_WONDER_CARD_UNUSED_10           0x146
-#define FLAG_WONDER_CARD_UNUSED_11           0x147
-#define FLAG_WONDER_CARD_UNUSED_12           0x148
-#define FLAG_WONDER_CARD_UNUSED_13           0x149
-#define FLAG_WONDER_CARD_UNUSED_14           0x14A
-#define FLAG_WONDER_CARD_UNUSED_15           0x14B
-#define FLAG_WONDER_CARD_UNUSED_16           0x14C
-#define FLAG_WONDER_CARD_UNUSED_17           0x14D
-#define NUM_WONDER_CARD_FLAGS                (1 + FLAG_WONDER_CARD_UNUSED_17 - FLAG_RECEIVED_AURORA_TICKET)
+#define FLAG_UNUSED_0x13D                    0x13D
+#define FLAG_UNUSED_0x13E                    0x13E
+#define FLAG_UNUSED_0x13F                    0x13F
+#define FLAG_UNUSED_0x140                    0x140
+#define FLAG_UNUSED_0x141                    0x141
+#define FLAG_UNUSED_0x142                    0x142
+#define FLAG_UNUSED_0x143                    0x143
+#define FLAG_UNUSED_0x144                    0x144
+#define FLAG_UNUSED_0x145                    0x145
+#define FLAG_UNUSED_0x146                    0x146
+#define FLAG_UNUSED_0x147                    0x147
+#define FLAG_UNUSED_0x148                    0x148
+#define FLAG_UNUSED_0x149                    0x149
+#define FLAG_UNUSED_0x14A                    0x14A
+#define FLAG_UNUSED_0x14B                    0x14B
+#define FLAG_UNUSED_0x14C                    0x14C
+#define FLAG_UNUSED_0x14D                    0x14D
 
 #define FLAG_MIRAGE_TOWER_VISIBLE            0x14E
 #define FLAG_CHOSE_ROOT_FOSSIL               0x14F
@@ -517,24 +516,22 @@
 #define FLAG_UNUSED_0x1E1                    0x1E1 // Unused Flag
 #define FLAG_UNUSED_0x1E2                    0x1E2 // Unused Flag
 #define FLAG_UNUSED_0x1E3                    0x1E3 // Unused Flag
-
-// Mystery Gift Flags (Unknown)
-#define FLAG_MYSTERY_GIFT_DONE               0x1E4
-#define FLAG_MYSTERY_GIFT_1                  0x1E5
-#define FLAG_MYSTERY_GIFT_2                  0x1E6
-#define FLAG_MYSTERY_GIFT_3                  0x1E7
-#define FLAG_MYSTERY_GIFT_4                  0x1E8
-#define FLAG_MYSTERY_GIFT_5                  0x1E9
-#define FLAG_MYSTERY_GIFT_6                  0x1EA
-#define FLAG_MYSTERY_GIFT_7                  0x1EB
-#define FLAG_MYSTERY_GIFT_8                  0x1EC
-#define FLAG_MYSTERY_GIFT_9                  0x1ED
-#define FLAG_MYSTERY_GIFT_10                 0x1EE
-#define FLAG_MYSTERY_GIFT_11                 0x1EF
-#define FLAG_MYSTERY_GIFT_12                 0x1F0
-#define FLAG_MYSTERY_GIFT_13                 0x1F1
-#define FLAG_MYSTERY_GIFT_14                 0x1F2
-#define FLAG_MYSTERY_GIFT_15                 0x1F3
+#define FLAG_UNUSED_0x1E4                    0x1E4
+#define FLAG_UNUSED_0x1E5                    0x1E5
+#define FLAG_UNUSED_0x1E6                    0x1E6
+#define FLAG_UNUSED_0x1E7                    0x1E7
+#define FLAG_UNUSED_0x1E8                    0x1E8
+#define FLAG_UNUSED_0x1E9                    0x1E9
+#define FLAG_UNUSED_0x1EA                    0x1EA
+#define FLAG_UNUSED_0x1EB                    0x1EB
+#define FLAG_UNUSED_0x1EC                    0x1EC
+#define FLAG_UNUSED_0x1ED                    0x1ED
+#define FLAG_UNUSED_0x1EE                    0x1EE
+#define FLAG_UNUSED_0x1EF                    0x1EF
+#define FLAG_UNUSED_0x1F0                    0x1F0
+#define FLAG_UNUSED_0x1F1                    0x1F1
+#define FLAG_UNUSED_0x1F2                    0x1F2
+#define FLAG_UNUSED_0x1F3                    0x1F3
 
 // Hidden Items
 #define FLAG_HIDDEN_ITEMS_START                                                         0x1F4

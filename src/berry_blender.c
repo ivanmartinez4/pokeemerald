@@ -1517,21 +1517,9 @@ static void SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, struct B
     u16 berryMasterDiff;
     u16 i;
 
-    if (playerBerryItemId == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        for (i = 0; i < FLAVOR_COUNT; i++)
-        {
-            if (playerBerry->flavors[opponentSetId] > playerBerry->flavors[i])
-                opponentSetId = i;
-        }
-        opponentSetId += NUM_NPC_BERRIES;
-    }
-    else
-    {
-        opponentSetId = ITEM_TO_BERRY(playerBerryItemId) - 1;
-        if (opponentSetId >= NUM_NPC_BERRIES)
-            opponentSetId = (opponentSetId % NUM_NPC_BERRIES) + NUM_NPC_BERRIES;
-    }
+    opponentSetId = ITEM_TO_BERRY(playerBerryItemId) - 1;
+    if (opponentSetId >= NUM_NPC_BERRIES)
+        opponentSetId = (opponentSetId % NUM_NPC_BERRIES) + NUM_NPC_BERRIES;
     for (i = 0; i < playersNum - 1; i++)
     {
         opponentBerryId = sOpponentBerrySets[opponentSetId][i];
@@ -2225,7 +2213,6 @@ static void Blender_DummiedOutFunc(s16 bgX, s16 bgY)
 static bool8 AreBlenderBerriesSame(struct BlenderBerry* berries, u8 a, u8 b)
 {
     // First check to itemId is pointless (and wrong anyway?), always false when this is called
-    // Only used to determine if two enigma berries are equivalent
     if (berries[a].itemId != berries[b].itemId
      || (StringCompare(berries[a].name, berries[b].name) == 0
       && (berries[a].flavors[FLAVOR_SPICY] == berries[b].flavors[FLAVOR_SPICY]
@@ -2265,7 +2252,7 @@ static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, 
         for (j = 0; j < numPlayers; j++)
         {
             if (berries[i].itemId == berries[j].itemId && i != j
-                && (berries[i].itemId != ITEM_ENIGMA_BERRY_E_READER || AreBlenderBerriesSame(berries, i, j)))
+                && (AreBlenderBerriesSame(berries, i, j)))
                     return PBLOCK_CLR_BLACK;
         }
     }

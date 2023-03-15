@@ -15,7 +15,6 @@ struct MysteryGiftLinkGameData
     u32 validationGiftType2;
     u16 flagId;
     u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
-    struct WonderCardMetadata cardMetadata;
     u8 maxStamps;
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 playerTrainerId[TRAINER_ID_LENGTH];
@@ -27,8 +26,6 @@ struct MysteryGiftLinkGameData
 void ClearMysteryGift(void);
 struct WonderNews *GetSavedWonderNews(void);
 struct WonderCard *GetSavedWonderCard(void);
-struct WonderCardMetadata *GetSavedWonderCardMetadata(void);
-struct WonderNewsMetadata *GetSavedWonderNewsMetadata(void);
 u16 *GetQuestionnaireWordsPtr(void);
 void ClearSavedWonderNewsAndRelated(void);
 void ClearSavedWonderCardAndRelated(void);

@@ -759,31 +759,7 @@ static bool32 ValidateCardOrNews(bool32 isWonderNews)
 
 static bool32 HandleLoadWonderCardOrNews(u8 *state, bool32 isWonderNews)
 {
-    switch (*state)
-    {
-    case 0:
-        if (!isWonderNews)
-            WonderCard_Init(GetSavedWonderCard(), GetSavedWonderCardMetadata());
-        else
-            WonderNews_Init(GetSavedWonderNews());
-        (*state)++;
-        break;
-    case 1:
-        if (!isWonderNews)
-        {
-            if (!WonderCard_Enter())
-                return FALSE;
-        }
-        else
-        {
-            if (!WonderNews_Enter())
-                return FALSE;
-        }
-        *state = 0;
-        return TRUE;
-    }
 
-    return FALSE;
 }
 
 static bool32 ClearSavedNewsOrCard(bool32 isWonderNews)

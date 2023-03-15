@@ -20,10 +20,6 @@ CableClub_Text_RecordCornerUsingLinkCable::
 	.string "You can use the RECORD CORNER with\n"
 	.string "others using a GBA Game Link cable.$"
 
-@ Unused
-CableClub_Text_CloseThisMenu:
-	.string "Close this menu.$"
-
 CableClub_Text_NeedTwoMonsForDoubleBattle:
 	.string "For a DOUBLE BATTLE, you must\n"
 	.string "have at least two POKéMON.$"
@@ -31,10 +27,6 @@ CableClub_Text_NeedTwoMonsForDoubleBattle:
 CableClub_Text_NeedTwoMonsToTrade:
 	.string "For trading, you must have at\n"
 	.string "least two POKéMON with you.$"
-
-CableClub_Text_CantTradeEnigmaBerry:
-	.string "A POKéMON holding the {STR_VAR_1}\n"
-	.string "BERRY can't be traded.$"
 
 gText_PleaseWaitForLink::
 	.string "Please wait.\n"
@@ -53,11 +45,6 @@ gText_ConfirmStartLinkWithXPlayers::
 gText_AwaitingLinkup::
 	.string "Awaiting linkup…\n"
 	.string "… … B Button: Cancel$"
-
-@ Unused
-CableClub_Text_OkayToSaveProgress::
-	.string "Your progress must be saved before\n"
-	.string "linking. Is it okay to save?$"
 
 CableClub_Text_PleaseEnter:
 	.string "Please enter.$"
@@ -224,10 +211,6 @@ CableClub_Text_NeedBerryForBerryCrush:
 CableClub_Text_NeedTwoMonsForUnionRoom:
 	.string "To enter the UNION ROOM, you must\n"
 	.string "have at least two POKéMON.$"
-
-CableClub_Text_NoEnigmaBerryInUnionRoom:
-	.string "No POKéMON holding the {STR_VAR_1}\n"
-	.string "BERRY may enter the UNION ROOM.$"
 
 CableClub_Text_UnionRoomAdapterNotConnected:
 	.string "This is the POKéMON WIRELESS CLUB\n"

@@ -471,7 +471,6 @@ struct LinkBattlerHeader
     u8 versionSignatureHi;
     u8 vsScreenHealthFlagsLo;
     u8 vsScreenHealthFlagsHi;
-    struct BattleEnigmaBerry battleEnigmaBerry;
 };
 
 struct MegaEvolutionData
@@ -953,7 +952,6 @@ extern struct WishFutureKnock gWishFutureKnock;
 extern u16 gIntroSlideFlags;
 extern u8 gSentPokesToOpponent[2];
 extern u16 gExpShareExp;
-extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern struct BattleScripting gBattleScripting;
 extern struct BattleStruct *gBattleStruct;
 extern u8 *gLinkBattleSendBuffer;
