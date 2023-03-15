@@ -239,7 +239,6 @@ static void Task_ShowAppealJamWindow(u8);
 static void HandleStatusTilemap(u16, s16);
 static void Task_ShowStatusWindow(u8);
 static void TilemapFiveMovesDisplay(u16 *, u16, bool8);
-static void DrawPokerusCuredSymbol(struct Pokemon *);
 static void DrawExperienceProgressBar(struct Pokemon *);
 static void DrawContestMoveHearts(u16);
 static void LimitEggSummaryPageDisplay(void);
@@ -1104,10 +1103,6 @@ static const union AnimCmd sSpriteAnim_StatusBurn[] = {
     ANIMCMD_FRAME(16, 0, FALSE, FALSE),
     ANIMCMD_END
 };
-static const union AnimCmd sSpriteAnim_StatusPokerus[] = {
-    ANIMCMD_FRAME(20, 0, FALSE, FALSE),
-    ANIMCMD_END
-};
 static const union AnimCmd sSpriteAnim_StatusFaint[] = {
     ANIMCMD_FRAME(24, 0, FALSE, FALSE),
     ANIMCMD_END
@@ -1118,7 +1113,6 @@ static const union AnimCmd *const sSpriteAnimTable_StatusCondition[] = {
     sSpriteAnim_StatusSleep,
     sSpriteAnim_StatusFrozen,
     sSpriteAnim_StatusBurn,
-    sSpriteAnim_StatusPokerus,
     sSpriteAnim_StatusFaint,
 };
 static const struct CompressedSpriteSheet sStatusIconsSpriteSheet =
@@ -1524,7 +1518,6 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         GetMonData(mon, MON_DATA_OT_NAME, sum->OTName);
         ConvertInternationalString(sum->OTName, GetMonData(mon, MON_DATA_LANGUAGE));
         sum->ailment = GetMonAilment(mon);
-        sum->OTGender = GetMonData(mon, MON_DATA_OT_GENDER);
         sum->OTID = GetMonData(mon, MON_DATA_OT_ID);
         sum->metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
         sum->metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
@@ -1564,7 +1557,6 @@ static void SetDefaultTilemaps(void)
         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
 
     LimitEggSummaryPageDisplay();
-    DrawPokerusCuredSymbol(&sMonSummaryScreen->currentMon);
 }
 
 static void FreeSummaryScreen(void)
@@ -1735,7 +1727,6 @@ static void Task_ChangeSummaryMon(u8 taskId)
     case 7:
         if (sMonSummaryScreen->summary.ailment != AILMENT_NONE)
             HandleStatusTilemap(10, -2);
-        DrawPokerusCuredSymbol(&sMonSummaryScreen->currentMon);
         data[1] = 0;
         break;
     case 8:
@@ -2679,21 +2670,6 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
             dst[id + i + 0x40] = gSummaryScreen_MoveEffect_Cancel_Tilemap[i + 40] + palette;
         }
     }
-}
-
-static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mon has been cured of pokerus
-{
-    if (!CheckPartyPokerus(mon, 0) && CheckPartyHasHadPokerus(mon, 0)) // If yes it draws the cured symbol
-    {
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x2C;
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x2C;
-    }
-    else
-    {
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x81A;
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x81A;
-    }
-    ScheduleBgCopyTilemapToVram(3);
 }
 
 static void SetMonPicBackgroundPalette(bool8 isMonShiny)

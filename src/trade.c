@@ -2519,17 +2519,7 @@ s32 GetGameProgressForLinkTrade(void)
     return TRADE_BOTH_PLAYERS_READY;
 }
 
-static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isModernFatefulEncounter)
-{
-    if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
-    {
-        if (!isModernFatefulEncounter)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isModernFatefulEncounter)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies)
 {
     bool8 playerHasNationalDex = player.hasNationalDex;
     bool8 playerCanLinkNationally = player.canLinkNationally;
@@ -2546,10 +2536,6 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
         else if (!partnerCanLinkNationally)
             return UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2;
     }
-
-    // Cannot trade illegitimate Deoxys/Mew
-    if (IsDeoxysOrMewUntradable(playerSpecies, isModernFatefulEncounter))
-        return UR_TRADE_MSG_MON_CANT_BE_TRADED;
 
     // Can't trade specific species
     if (gSpeciesInfo[playerSpecies].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
@@ -2595,12 +2581,9 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     return UR_TRADE_MSG_NONE;
 }
 
-int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isModernFatefulEncounter)
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species)
 {
     bool8 hasNationalDex = player.hasNationalDex;
-
-    if (IsDeoxysOrMewUntradable(species, isModernFatefulEncounter))
-        return CANT_REGISTER_MON_NOW;
 
     // Can't trade specific species
     if (gSpeciesInfo[species].flags & SPECIES_FLAG_CANNOT_BE_TRADED)
@@ -4598,7 +4581,6 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
     SetMonData(pokemon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
     SetMonData(pokemon, MON_DATA_NICKNAME, inGameTrade->nickname);
     SetMonData(pokemon, MON_DATA_OT_NAME, inGameTrade->otName);
-    SetMonData(pokemon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
     SetMonData(pokemon, MON_DATA_ABILITY_NUM, &inGameTrade->abilityNum);
     SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->conditions[1]);
     SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->conditions[2]);

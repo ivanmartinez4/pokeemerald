@@ -44,7 +44,6 @@ enum {
     MON_DATA_SPDEF_EV,
     MON_DATA_FRIENDSHIP,
     MON_DATA_SMART,
-    MON_DATA_POKERUS,
     MON_DATA_MET_LOCATION,
     MON_DATA_MET_LEVEL,
     MON_DATA_MET_GAME,
@@ -107,23 +106,15 @@ struct BoxPokemon
     /*0x00*/ u32 personality;
     /*0x04*/ u32 otId;
     /*0x08*/ u8 nickname[POKEMON_NAME_LENGTH];
-    /*0x12*/ u8 language:3; // 7 languages
-             u8 pokerus:5;  // 1-0xF is the timer. 0x10 is set when timer runs out
-    /*0x13*/ u8 isBadEgg:1;
-             u8 hasSpecies:1;
              u8 isEgg:1;
-             u8 modernFatefulEncounter:1;   // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
-             u8 markings:4; // 15 combinations as per sAnims_MarkingCombo
     /*0x14*/ u8 otName[PLAYER_NAME_LENGTH];
     /*0x1B*/ u8 metLocation;    // better to not limit the number of map sections. this is actually used for friendship growth, too
     /*0x1C*/ u32 species:11;    // up to 2047 species. could probably go down to 10 bits...
              u32 heldItem:10;   // up to 1023 items. could probably be 9 bits if hold items are limited to IDs below 511
              u32 metLevel:7;
-             u32 metGame:4;
     /*0x20*/ u32 experience:21;
              u32 spAttackIV:5;
              u32 spDefenseIV:5;
-             u32 otGender:1;
     /*0x24*/ u32 move1:10;  // 1023 moves
              u32 move2:10;  // bits 11-20
              u32 move3:10;  // bits 21-30
@@ -423,11 +414,6 @@ u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
 void AdjustFriendship(struct Pokemon *mon, u8 event);
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 u16 GetMonEVCount(struct Pokemon *mon);
-void RandomlyGivePartyPokerus(struct Pokemon *party);
-u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
-u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
-void UpdatePartyPokerusTime(u16 days);
-void PartySpreadPokerus(struct Pokemon *party);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 u8 CanLearnTeachableMove(u16 species, u16 move);
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);

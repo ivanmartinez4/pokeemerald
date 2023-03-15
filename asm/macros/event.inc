@@ -1582,19 +1582,6 @@
 	.4byte \value
 	.endm
 
-	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
-	.macro setmodernfatefulencounter slot:req
-	.byte 0xcd
-	.2byte \slot
-	.endm
-
-	@ Checks if the modernFatefulEncounter bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
-	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmodernfatefulencounter slot:req
-	.byte 0xce
-	.2byte \slot
-	.endm
-
 	@ Jumps to the ram script saved from a Wonder Card. If there is no valid saved Wonder Card or if the
 	@ ram script is invalid then this does nothing.
 	.macro trywondercardscript
@@ -2078,14 +2065,6 @@
 	braillemessage \text
 	waitbuttonpress
 	closebraillemessage
-	.endm
-
-	@ Creates a Pokémon with the modernFatefulEncounter bit set for an encounter
-	.macro seteventmon species:req, level:req, item=ITEM_NONE
-	setvar VAR_0x8004, \species
-	setvar VAR_0x8005, \level
-	setvar VAR_0x8006, \item
-	special CreateEnemyEventMon
 	.endm
 
 	@ Set up a totem boost for the next battle.

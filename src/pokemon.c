@@ -3399,11 +3399,10 @@ void ZeroEnemyPartyMons(void)
 
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    u32 mail;
+    u32 mail = MAIL_NONE;
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
-    mail = MAIL_NONE;
     SetMonData(mon, MON_DATA_MAIL, &mail);
     CalculateMonStats(mon);
 }
@@ -3413,7 +3412,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
     u32 personality;
     u32 value;
-    u16 checksum;
     u8 i;
     u8 availableIVs[NUM_STATS];
     u8 selectedIvs[LEGENDARY_PERFECT_IV_COUNT];
@@ -3498,7 +3496,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
     value = ITEM_POKE_BALL;
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
-    SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
     if (fixedIV < USE_RANDOM_IVS)
     {
@@ -3924,10 +3921,7 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
 
 static void CreateEventMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    bool32 isModernFatefulEncounter = TRUE;
 
-    CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
-    SetMonData(mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &isModernFatefulEncounter);
 }
 
 // If FALSE, should load this game's Deoxys form. If TRUE, should load normal Deoxys form
@@ -4019,19 +4013,7 @@ u16 GetUnionRoomTrainerClass(void)
 
 void CreateEnemyEventMon(void)
 {
-    s32 species = gSpecialVar_0x8004;
-    s32 level = gSpecialVar_0x8005;
-    s32 itemId = gSpecialVar_0x8006;
 
-    ZeroEnemyPartyMons();
-    CreateEventMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    if (itemId)
-    {
-        u8 heldItem[2];
-        heldItem[0] = itemId;
-        heldItem[1] = itemId >> 8;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
-    }
 }
 
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
@@ -4594,31 +4576,10 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_NICKNAME:
     {
-        if (boxMon->isBadEgg)
-        {
-            for (retVal = 0;
-                retVal < POKEMON_NAME_LENGTH && gText_BadEgg[retVal] != EOS;
-                data[retVal] = gText_BadEgg[retVal], retVal++) {}
-
-            data[retVal] = EOS;
-        }
-        else if (boxMon->isEgg)
+        if (boxMon->isEgg)
         {
             StringCopy(data, gText_EggNickname);
             retVal = StringLength(data);
-        }
-        else if (boxMon->language == LANGUAGE_JAPANESE)
-        {
-            data[0] = EXT_CTRL_CODE_BEGIN;
-            data[1] = EXT_CTRL_CODE_JPN;
-
-            for (retVal = 2, i = 0;
-                i < 5 && boxMon->nickname[i] != EOS;
-                data[retVal] = boxMon->nickname[i], retVal++, i++) {}
-
-            data[retVal++] = EXT_CTRL_CODE_BEGIN;
-            data[retVal++] = EXT_CTRL_CODE_ENG;
-            data[retVal] = EOS;
         }
         else
         {
@@ -4631,13 +4592,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     }
     case MON_DATA_LANGUAGE:
-        retVal = boxMon->language;
+        retVal = 0;
         break;
     case MON_DATA_SANITY_IS_BAD_EGG:
-        retVal = boxMon->isBadEgg;
+        retVal = 0;
         break;
     case MON_DATA_SANITY_HAS_SPECIES:
-        retVal = boxMon->hasSpecies;
+        retVal = 0;
         break;
     case MON_DATA_SANITY_IS_EGG:
         retVal = boxMon->isEgg;
@@ -4656,7 +4617,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     }
     case MON_DATA_MARKINGS:
-        retVal = boxMon->markings;
+        retVal = 0;
         break;
     case MON_DATA_CHECKSUM:
         retVal = 0;//boxMon->checksum;
@@ -4665,7 +4626,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = 0;//boxMon->unused1E;
         break;
     case MON_DATA_SPECIES:
-        retVal = boxMon->isBadEgg ? SPECIES_EGG : boxMon->species;
+        retVal = boxMon->species;
         break;
     case MON_DATA_HELD_ITEM:
         retVal = boxMon->heldItem;
@@ -4739,9 +4700,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_SHEEN:
         retVal = 0;//boxMon->sheen;
         break;
-    case MON_DATA_POKERUS:
-        retVal = boxMon->pokerus;
-        break;
     case MON_DATA_MET_LOCATION:
         retVal = boxMon->metLocation;
         break;
@@ -4749,13 +4707,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = boxMon->metLevel;
         break;
     case MON_DATA_MET_GAME:
-        retVal = boxMon->metGame;
+        retVal = 0;
         break;
     case MON_DATA_POKEBALL:
         retVal = boxMon->pokeball;
         break;
     case MON_DATA_OT_GENDER:
-        retVal = boxMon->otGender;
+        retVal = 0;
         break;
     case MON_DATA_HP_IV:
         retVal = boxMon->hpIV;
@@ -4836,11 +4794,11 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = 0;//boxMon->unusedRibbons;
         break;
     case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
-        retVal = TRUE;//boxMon->modernFatefulEncounter;
+        retVal = 0;//boxMon->modernFatefulEncounter;
         break;
     case MON_DATA_SPECIES_OR_EGG:
         retVal = boxMon->species;
-        if (boxMon->species && (boxMon->isEgg || boxMon->isBadEgg))
+        if (boxMon->species && (boxMon->isEgg))
             retVal = SPECIES_EGG;
         break;
     case MON_DATA_IVS:
@@ -4914,9 +4872,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (boxMon->earthRibbon << 25)
                 | (boxMon->worldRibbon << 26);
         }*/
-        break;
-    case MON_DATA_NATURE:
-        return boxMon->personality % 25;
         break;
     default:
         break;
@@ -4997,13 +4952,10 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     }
     case MON_DATA_LANGUAGE:
-        SET8(boxMon->language);
         break;
     case MON_DATA_SANITY_IS_BAD_EGG:
-        SET8(boxMon->isBadEgg);
         break;
     case MON_DATA_SANITY_HAS_SPECIES:
-        SET8(boxMon->hasSpecies);
         break;
     case MON_DATA_SANITY_IS_EGG:
         SET8(boxMon->isEgg);
@@ -5016,7 +4968,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     }
     case MON_DATA_MARKINGS:
-        SET8(boxMon->markings);
         break;
     case MON_DATA_CHECKSUM:
         //SET16(boxMon->checksum);
@@ -5025,14 +4976,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         //SET16(boxMon->unused1E);
         break;
     case MON_DATA_SPECIES:
-    {
         SET32(boxMon->species);
-        if (boxMon->species)
-            boxMon->hasSpecies = 1;
-        else
-            boxMon->hasSpecies = FALSE;
         break;
-    }
     case MON_DATA_HELD_ITEM:
         SET32(boxMon->heldItem);
         break;
@@ -5105,9 +5050,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_SHEEN:
         //SET8(boxMon->sheen);
         break;
-    case MON_DATA_POKERUS:
-        SET8(boxMon->pokerus);
-        break;
     case MON_DATA_MET_LOCATION:
         SET8(boxMon->metLocation);
         break;
@@ -5118,7 +5060,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     }
     case MON_DATA_MET_GAME:
-        SET8(boxMon->metGame);
         break;
     case MON_DATA_POKEBALL:
     {
@@ -5127,7 +5068,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     }
     case MON_DATA_OT_GENDER:
-        SET32(boxMon->otGender);
         break;
     case MON_DATA_HP_IV:
         SET32(boxMon->hpIV);
@@ -5315,7 +5255,6 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     s32 i;
 
     SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
-    SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
     SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -7196,9 +7135,6 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
         if (totalEVs >= MAX_TOTAL_EVS)
             break;
 
-        if (CheckPartyHasHadPokerus(mon, 0))
-            multiplier = 2;
-        else
             multiplier = 1;
 
         switch (i)
@@ -7269,156 +7205,6 @@ u16 GetMonEVCount(struct Pokemon *mon)
         count += GetMonData(mon, MON_DATA_HP_EV + i, 0);
 
     return count;
-}
-
-void RandomlyGivePartyPokerus(struct Pokemon *party)
-{
-    u16 rnd = Random();
-    if (rnd == 0x4000 || rnd == 0x8000 || rnd == 0xC000)
-    {
-        struct Pokemon *mon;
-
-        do
-        {
-            do
-            {
-                rnd = Random() % PARTY_SIZE;
-                mon = &party[rnd];
-            }
-            while (!GetMonData(mon, MON_DATA_SPECIES, 0));
-        }
-        while (GetMonData(mon, MON_DATA_IS_EGG, 0));
-
-        if (!(CheckPartyHasHadPokerus(party, gBitTable[rnd])))
-        {
-            u8 rnd2;
-
-            do
-            {
-                rnd2 = Random();
-            }
-            while ((rnd2 & 0x7) == 0);
-
-            if (rnd2 & 0xF0)
-                rnd2 &= 0x7;
-
-            rnd2 |= (rnd2 << 4);
-            rnd2 &= 0xF3;
-            rnd2++;
-
-            SetMonData(&party[rnd], MON_DATA_POKERUS, &rnd2);
-        }
-    }
-}
-
-u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
-{
-    u8 retVal;
-
-    int partyIndex = 0;
-    unsigned curBit = 1;
-    retVal = 0;
-
-    if (selection)
-    {
-        do
-        {
-            if ((selection & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0) & 0xF))
-                retVal |= curBit;
-            partyIndex++;
-            curBit <<= 1;
-            selection >>= 1;
-        }
-        while (selection);
-    }
-    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0) & 0xF)
-    {
-        retVal = 1;
-    }
-
-    return retVal;
-}
-
-u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
-{
-    u8 retVal;
-
-    int partyIndex = 0;
-    unsigned curBit = 1;
-    retVal = 0;
-
-    if (selection)
-    {
-        do
-        {
-            if ((selection & 1) && GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0))
-                retVal |= curBit;
-            partyIndex++;
-            curBit <<= 1;
-            selection >>= 1;
-        }
-        while (selection);
-    }
-    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0))
-    {
-        retVal = 1;
-    }
-
-    return retVal;
-}
-
-void UpdatePartyPokerusTime(u16 days)
-{
-    int i;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0))
-        {
-            u8 pokerus = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS, 0);
-            if (pokerus & 0xF)
-            {
-                if ((pokerus & 0xF) < days || days > 4)
-                    pokerus &= 0xF0;
-                else
-                    pokerus -= days;
-
-                if (pokerus == 0)
-                    pokerus = 0x10;
-
-                SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &pokerus);
-            }
-        }
-    }
-}
-
-void PartySpreadPokerus(struct Pokemon *party)
-{
-    if ((Random() % 3) == 0)
-    {
-        int i;
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&party[i], MON_DATA_SPECIES, 0))
-            {
-                u8 pokerus = GetMonData(&party[i], MON_DATA_POKERUS, 0);
-                u8 curPokerus = pokerus;
-                if (pokerus)
-                {
-                    if (pokerus & 0xF)
-                    {
-                        // Spread to adjacent party members.
-                        if (i != 0 && !(GetMonData(&party[i - 1], MON_DATA_POKERUS, 0) & 0xF0))
-                            SetMonData(&party[i - 1], MON_DATA_POKERUS, &curPokerus);
-                        if (i != (PARTY_SIZE - 1) && !(GetMonData(&party[i + 1], MON_DATA_POKERUS, 0) & 0xF0))
-                        {
-                            SetMonData(&party[i + 1], MON_DATA_POKERUS, &curPokerus);
-                            i++;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 bool8 TryIncrementMonLevel(struct Pokemon *mon)
