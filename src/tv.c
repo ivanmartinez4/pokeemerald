@@ -1872,142 +1872,17 @@ void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent)
 
 static void SecretBaseVisit_CalculateDecorationData(TVShow *show)
 {
-    u8 i, j;
-    u16 k;
-    u8 n;
-    u8 decoration;
 
-    for (i = 0; i < DECOR_MAX_SECRET_BASE; i++)
-        sTV_DecorationsBuffer[i] = DECOR_NONE;
-
-    // Count (and save) the unique decorations in the base
-    for (i = 0, n = 0; i < DECOR_MAX_SECRET_BASE; i++)
-    {
-        decoration = gSaveBlock1Ptr->secretBases[0].decorations[i];
-        if (decoration != DECOR_NONE)
-        {
-            // Search for an empty spot to save decoration
-            for (j = 0; j < DECOR_MAX_SECRET_BASE; j++)
-            {
-                if (sTV_DecorationsBuffer[j] == DECOR_NONE)
-                {
-                    // Save and count new unique decoration
-                    sTV_DecorationsBuffer[j] = decoration;
-                    n++;
-                    break;
-                }
-
-                // Decoration has already been saved, skip and move on to the next base decoration
-                if (sTV_DecorationsBuffer[j] == decoration)
-                    break;
-            }
-        }
-    }
-
-    // Cap the number of unique decorations to the number the TV show will talk about
-    if (n > ARRAY_COUNT(show->secretBaseVisit.decorations))
-        show->secretBaseVisit.numDecorations = ARRAY_COUNT(show->secretBaseVisit.decorations);
-    else
-        show->secretBaseVisit.numDecorations = n;
-
-    switch (show->secretBaseVisit.numDecorations)
-    {
-    case 0:
-        break;
-    case 1:
-        show->secretBaseVisit.decorations[0] = sTV_DecorationsBuffer[0];
-        break;
-    default:
-        // More than 1 decoration, randomize the full list
-        for (k = 0; k < n * n; k++)
-        {
-            decoration = Random() % n;
-            j = Random() % n;
-            SWAP(sTV_DecorationsBuffer[decoration], sTV_DecorationsBuffer[j], i);
-        }
-
-        // Pick the first decorations in the randomized list to talk about on the show
-        for (i = 0; i < show->secretBaseVisit.numDecorations; i++)
-            show->secretBaseVisit.decorations[i] = sTV_DecorationsBuffer[i];
-        break;
-    }
 }
 
 static void SecretBaseVisit_CalculatePartyData(TVShow *show)
 {
-    u8 i;
-    u16 move;
-    u16 j;
-    u8 numMoves;
-    u8 numPokemon;
-    u16 sum;
 
-    for (i = 0, numPokemon = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-        {
-            sTV_SecretBaseVisitMonsTemp[numPokemon].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            sTV_SecretBaseVisitMonsTemp[numPokemon].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-
-            // Check all the Pokémon's moves, then randomly select one to save
-            numMoves = 0;
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
-            if (move != MOVE_NONE)
-            {
-                sTV_SecretBaseVisitMovesTemp[numMoves] = move;
-                numMoves++;
-            }
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
-            if (move != MOVE_NONE)
-            {
-                sTV_SecretBaseVisitMovesTemp[numMoves] = move;
-                numMoves++;
-            }
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
-            if (move != MOVE_NONE)
-            {
-                sTV_SecretBaseVisitMovesTemp[numMoves] = move;
-                numMoves++;
-            }
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
-            if (move != MOVE_NONE)
-            {
-                sTV_SecretBaseVisitMovesTemp[numMoves] = move;
-                numMoves++;
-            }
-            sTV_SecretBaseVisitMonsTemp[numPokemon].move = sTV_SecretBaseVisitMovesTemp[Random() % numMoves];
-            numPokemon++;
-        }
-    }
-
-    for (i = 0, sum = 0; i < numPokemon; i++)
-        sum += sTV_SecretBaseVisitMonsTemp[i].level;
-
-    // Using the data calculated above, save the data to talk about on the show
-    // (average level, and one randomly selected species / move)
-    show->secretBaseVisit.avgLevel = sum / numPokemon;
-    j = Random() % numPokemon;
-    show->secretBaseVisit.species = sTV_SecretBaseVisitMonsTemp[j].species;
-    show->secretBaseVisit.move = sTV_SecretBaseVisitMonsTemp[j].move;
 }
 
 void TryPutSecretBaseVisitOnAir(void)
 {
-    TVShow *show;
 
-    IsRecordMixShowAlreadySpawned(TVSHOW_SECRET_BASE_VISIT, TRUE); // Delete old version of show
-    sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
-    {
-        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-        show->secretBaseVisit.kind = TVSHOW_SECRET_BASE_VISIT;
-        show->secretBaseVisit.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
-        StringCopy(show->secretBaseVisit.playerName, gSaveBlock2Ptr->playerName);
-        SecretBaseVisit_CalculateDecorationData(show);
-        SecretBaseVisit_CalculatePartyData(show);
-        StorePlayerIdInRecordMixShow(show);
-        show->secretBaseVisit.language = gGameLanguage;
-    }
 }
 
 void TryPutBreakingNewsOnAir(void)
@@ -2319,33 +2194,7 @@ void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode)
 
 void TryPutSecretBaseSecretsOnAir(void)
 {
-    TVShow *show;
-    u8 strbuf[32];
 
-    if (IsRecordMixShowAlreadySpawned(TVSHOW_SECRET_BASE_SECRETS, FALSE) != TRUE)
-    {
-        sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
-        if (sCurTVShowSlot != -1)
-        {
-            show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-            show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
-            show->secretBaseSecrets.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
-            StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
-            show->secretBaseSecrets.stepsInBase = VarGet(VAR_SECRET_BASE_STEP_COUNTER);
-            CopyCurSecretBaseOwnerName_StrVar1();
-            StringCopy(strbuf, gStringVar1);
-            StripExtCtrlCodes(strbuf);
-            StringCopy(show->secretBaseSecrets.baseOwnersName, strbuf);
-            show->secretBaseSecrets.item = VarGet(VAR_SECRET_BASE_LAST_ITEM_USED);
-            show->secretBaseSecrets.flags = VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) + (VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) << 16);
-            StorePlayerIdInRecordMixShow(show);
-            show->secretBaseSecrets.language = gGameLanguage;
-            if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language == LANGUAGE_JAPANESE)
-                show->secretBaseSecrets.baseOwnersNameLanguage = LANGUAGE_JAPANESE;
-            else
-                show->secretBaseSecrets.baseOwnersNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language;
-        }
-    }
 }
 
 // Check var thresholds required to trigger the Number One show

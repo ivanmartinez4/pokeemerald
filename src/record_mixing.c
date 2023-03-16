@@ -51,7 +51,6 @@ struct RecordMixingHallRecords
 
 struct PlayerRecordRS
 {
-    struct SecretBase secretBases[SECRET_BASES_COUNT];
     TVShow tvShows[TV_SHOWS_COUNT];
     PokeNews pokeNews[POKE_NEWS_COUNT];
     OldMan oldMan;
@@ -64,7 +63,6 @@ struct PlayerRecordRS
 
 struct PlayerRecordEmerald
 {
-    /* 0x0000 */ struct SecretBase secretBases[SECRET_BASES_COUNT];
     /* 0x0C80 */ TVShow tvShows[TV_SHOWS_COUNT];
     /* 0x1004 */ PokeNews pokeNews[POKE_NEWS_COUNT];
     /* 0x1044 */ OldMan oldMan;
@@ -84,7 +82,6 @@ union PlayerRecord
 };
 
 static bool8 sReadyToReceive;
-static struct SecretBase *sSecretBasesSave;
 static TVShow *sTvShowsSave;
 static PokeNews *sPokeNewsSave;
 static OldMan *sOldManSave;
@@ -175,36 +172,12 @@ static void SetSrcLookupPointers(void)
 
 static void PrepareUnknownExchangePacket(struct PlayerRecordRS *dest)
 {
-    memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
-    memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
-    SanitizeTVShowLocationsForRuby(dest->tvShows);
-    memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
-    memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
-    memcpy(dest->dewfordTrends, sDewfordTrendsSave, sizeof(dest->dewfordTrends));
-    GetRecordMixingDaycareMail(&dest->daycareMail);
-    EmeraldBattleTowerRecordToRuby(sBattleTowerSave, &dest->battleTowerRecord);
 
-    if (GetMultiplayerId() == 0)
-        dest->giftItem = GetRecordMixingGift();
 }
 
 static void PrepareExchangePacketForRubySapphire(struct PlayerRecordRS *dest)
 {
-    memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
-    ClearJapaneseSecretBases(dest->secretBases);
-    memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
-    SanitizeTVShowsForRuby(dest->tvShows);
-    memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
-    memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
-    SanitizeMauvilleOldManForRuby(&dest->oldMan);
-    memcpy(dest->dewfordTrends, sDewfordTrendsSave, sizeof(dest->dewfordTrends));
-    GetRecordMixingDaycareMail(&dest->daycareMail);
-    SanitizeDaycareMailForRuby(&dest->daycareMail);
-    EmeraldBattleTowerRecordToRuby(sBattleTowerSave, &dest->battleTowerRecord);
-    SanitizeRubyBattleTowerRecord(&dest->battleTowerRecord);
 
-    if (GetMultiplayerId() == 0)
-        dest->giftItem = GetRecordMixingGift();
 }
 
 static void PrepareExchangePacket(void)

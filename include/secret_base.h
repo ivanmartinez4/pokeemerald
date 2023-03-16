@@ -3,7 +3,7 @@
 
 void HideSecretBaseDecorationSprites(void);
 void CopyCurSecretBaseOwnerName_StrVar1(void);
-void ClearJapaneseSecretBases(struct SecretBase *dest);
+void ClearJapaneseSecretBases(void);
 void SetPlayerSecretBaseParty(void);
 u8 *GetSecretBaseMapName(u8 *dest);
 const u8 *GetSecretBaseTrainerLoseText(void);
