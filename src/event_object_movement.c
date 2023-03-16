@@ -1811,6 +1811,12 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
     case SPECIES_CASTFORM: // Sunny, rainy, snowy forms stored separately
       graphicsInfo = &gCastformObjectGraphics[form % NUM_CASTFORM_FORMS];
       break;
+    case SPECIES_VENUSAUR:
+      if(form==0)
+        graphicsInfo = &gPokemonObjectGraphics[SPECIES_VENUSAUR];
+      else
+        graphicsInfo = &gPokemonObjectGraphics[413];
+      break;
     default:
       graphicsInfo = &gPokemonObjectGraphics[species];
       break;
@@ -1923,6 +1929,12 @@ static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
         break;
     case SPECIES_CASTFORM: // form is based on overworld weather
         *form = GetOverworldCastformForm();
+        break;
+    case SPECIES_VENUSAUR:
+        *form = GetMonGender(mon);
+        break;
+    default:
+        *form = 0;
         break;
     }
     return TRUE;

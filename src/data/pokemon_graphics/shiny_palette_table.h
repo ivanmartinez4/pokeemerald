@@ -1337,6 +1337,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
 
 const struct CompressedSpritePalette gMonShinyPaletteTableFemale[] =
 {
+    SPECIES_SHINY_PAL(VENUSAUR, gMonShinyPalette_Venusaur),
     SPECIES_SHINY_PAL(EEVEE, gMonShinyPalette_Eevee),
 #if P_GEN_4_POKEMON == TRUE
     SPECIES_SHINY_PAL(STARLY, gMonShinyPalette_Starly),

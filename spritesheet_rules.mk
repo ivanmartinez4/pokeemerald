@@ -734,6 +734,9 @@ $(OBJEVENTGFXDIR)/pokemon/ivysaur.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/venusaur.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(OBJEVENTGFXDIR)/pokemon/venusaur_f.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(OBJEVENTGFXDIR)/pokemon/charmander.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 

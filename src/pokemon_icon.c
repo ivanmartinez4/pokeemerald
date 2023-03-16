@@ -1300,6 +1300,7 @@ const u8 *const gMonIconTable[] =
 
 const u8 *const gMonIconTableFemale[] =
 {
+    [SPECIES_VENUSAUR] = gMonIcon_VenusaurF,
     [SPECIES_EEVEE] = gMonIcon_Eevee,
 #if P_GEN_4_POKEMON == TRUE
     [SPECIES_STARLY] = gMonIcon_Starly,
@@ -2546,7 +2547,8 @@ const u8 gMonIconPaletteIndices[] =
 };
 
 const u8 gMonIconPaletteIndicesFemale[] =
-{
+{   
+    [SPECIES_VENUSAUR] = 4,
     [SPECIES_EEVEE] = 2,
 #if P_GEN_4_POKEMON == TRUE
     [SPECIES_STARLY] = 0,

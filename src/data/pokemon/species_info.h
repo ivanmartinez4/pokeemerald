@@ -907,6 +907,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .flags = SPECIES_FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_CHARMANDER] =
