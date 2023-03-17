@@ -485,6 +485,7 @@ const u32 gObjectEventPic_Croconaw[] = INCBIN_U32("graphics/object_events/pics/p
 const u32 gObjectEventPic_Feraligatr[] = INCBIN_U32("graphics/object_events/pics/pokemon/feraligatr.4bpp");
 const u32 gObjectEventPic_Sentret[] = INCBIN_U32("graphics/object_events/pics/pokemon/sentret.4bpp");
 const u32 gObjectEventPic_Furret[] = INCBIN_U32("graphics/object_events/pics/pokemon/furret.4bpp");
+const u32 gObjectEventPic_Abomasnow[] = INCBIN_U32("graphics/object_events/pics/pokemon/abomasnow.4bpp");
 const u32 gObjectEventPic_Hoothoot[] = INCBIN_U32("graphics/object_events/pics/pokemon/hoothoot.4bpp");
 const u32 gObjectEventPic_Noctowl[] = INCBIN_U32("graphics/object_events/pics/pokemon/noctowl.4bpp");
 const u32 gObjectEventPic_Ledyba[] = INCBIN_U32("graphics/object_events/pics/pokemon/ledyba.4bpp");
