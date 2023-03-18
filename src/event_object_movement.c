@@ -1817,6 +1817,12 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
       else
         graphicsInfo = &gPokemonObjectGraphics[413];
       break;
+    case SPECIES_AEGISLASH:
+      if(form==0)
+        graphicsInfo = &gPokemonObjectGraphics[SPECIES_AEGISLASH];
+      else
+        graphicsInfo = &gPokemonObjectGraphics[SPECIES_AEGISLASH_BLADE];
+      break;
     default:
       graphicsInfo = &gPokemonObjectGraphics[species];
       break;
@@ -1932,6 +1938,9 @@ static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
         break;
     case SPECIES_VENUSAUR:
         *form = GetMonGender(mon);
+        break;
+    case SPECIES_AEGISLASH:
+        *form = FlagGet(FLAG_AEGISLASH_CAMBIO_FORMA);
         break;
     default:
         *form = 0;
@@ -5069,7 +5078,13 @@ static bool8 EndFollowerTransformEffect(struct ObjectEvent *objectEvent, struct 
 
 static bool8 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
     u32 multi;
-    if (objectEvent->extra.mon.species == SPECIES_CASTFORM && objectEvent->extra.mon.form != (multi = GetOverworldCastformForm())) {
+    if (objectEvent->extra.mon.species == SPECIES_CASTFORM && objectEvent->extra.mon.form != (multi = GetOverworldCastformForm())) 
+    {
+        sprite->data[7] = TRANSFORM_TYPE_PERMANENT << 8;
+        objectEvent->extra.mon.form = multi;
+        return TRUE;
+    }
+    else if (objectEvent->extra.mon.species == SPECIES_AEGISLASH && objectEvent->extra.mon.form != (multi = FlagGet(FLAG_AEGISLASH_CAMBIO_FORMA))) {
         sprite->data[7] = TRANSFORM_TYPE_PERMANENT << 8;
         objectEvent->extra.mon.form = multi;
         return TRUE;
