@@ -9885,7 +9885,9 @@ static const union AnimCmd sAnim_PersianAlolan_1[] =
 
 static const union AnimCmd sAnim_GeodudeAlolan_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 36),
+    ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 

@@ -485,6 +485,7 @@ const u32 gObjectEventPic_Croconaw[] = INCBIN_U32("graphics/object_events/pics/p
 const u32 gObjectEventPic_Feraligatr[] = INCBIN_U32("graphics/object_events/pics/pokemon/feraligatr.4bpp");
 const u32 gObjectEventPic_Sentret[] = INCBIN_U32("graphics/object_events/pics/pokemon/sentret.4bpp");
 const u32 gObjectEventPic_Furret[] = INCBIN_U32("graphics/object_events/pics/pokemon/furret.4bpp");
+const u32 gObjectEventPic_AlolanGeodude[] = INCBIN_U32("graphics/object_events/pics/pokemon/alolan_geodude.4bpp");
 const u32 gObjectEventPic_Aegislash[] = INCBIN_U32("graphics/object_events/pics/pokemon/aegislash.4bpp");
 const u32 gObjectEventPic_AegislashBlade[] = INCBIN_U32("graphics/object_events/pics/pokemon/aegislash_blade.4bpp");
 const u32 gObjectEventPic_Abomasnow[] = INCBIN_U32("graphics/object_events/pics/pokemon/abomasnow.4bpp");
