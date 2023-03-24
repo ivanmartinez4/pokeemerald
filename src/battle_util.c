@@ -6535,8 +6535,8 @@ bool32 CanBeFrozen(u8 battlerId)
 
 bool32 CanBeConfused(u8 battlerId)
 {
-    if (GetBattlerAbility(gEffectBattler) == ABILITY_OWN_TEMPO
-      || gBattleMons[gEffectBattler].status2 & STATUS2_CONFUSION
+    if (GetBattlerAbility(battlerId) == ABILITY_OWN_TEMPO
+      || gBattleMons[battlerId].status2 & STATUS2_CONFUSION
       || IS_BATTLER_OF_TYPE(battlerId, TYPE_BUG)
       || IS_BATTLER_OF_TYPE(battlerId, TYPE_PSYCHIC)
       || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN))
@@ -8176,7 +8176,6 @@ u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating)
     return ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 }
 
-//
 static u32 GetBattlerItemHoldEffectParam(u8 battlerId, u16 item)
 {
     return ItemId_GetHoldEffectParam(item);

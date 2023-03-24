@@ -5594,13 +5594,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
 
     // Skip using the item if it won't do anything
-    if (!ITEM_HAS_EFFECT(item))
-        return TRUE;
-    if (gItemEffectTable[item - ITEM_POTION] == NULL)
+    if (gItemEffectTable[item] == NULL)
         return TRUE;
 
     // Get item effect
-    itemEffect = gItemEffectTable[item - ITEM_POTION];
+    itemEffect = gItemEffectTable[item];
 
     // Do item effect
     for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
@@ -6153,9 +6151,9 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = ITEM_EFFECT_ARG_START;
 
-    temp = gItemEffectTable[itemId - ITEM_POTION];
+    temp = gItemEffectTable[itemId];
 
-    if (!temp)
+    if (temp != NULL)
         return 0;
 
     itemEffect = temp;
@@ -6269,8 +6267,7 @@ u8 *UseStatIncreaseItem(u16 itemId)
     int i;
     const u8 *itemEffect;
 
-    itemEffect = gItemEffectTable[itemId - ITEM_POTION];
-
+    itemEffect = gItemEffectTable[itemId];
     gPotentialItemEffectBattler = gBattlerInMenuId;
 
     if (itemEffect[0] & ITEM0_DIRE_HIT)
