@@ -74,6 +74,7 @@ struct GFRomHeader
     const struct BattleMove * moves;
     const struct CompressedSpriteSheet * ballGfx;
     const struct CompressedSpritePalette * ballPalettes;
+    u32 gcnLinkFlagsOffset;
     u32 gameClearFlag;
     u32 ribbonFlag;
     u8 bagCountItems;
@@ -150,6 +151,7 @@ static const struct GFRomHeader sGFRomHeader = {
     .moves = gBattleMoves,
     .ballGfx = gBallSpriteSheets,
     .ballPalettes = gBallSpritePalettes,
+    .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),
     .gameClearFlag = FLAG_SYS_GAME_CLEAR,
     .ribbonFlag = FLAG_SYS_RIBBON_GET,
     .bagCountItems = BAG_ITEMS_COUNT,

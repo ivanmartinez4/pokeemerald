@@ -275,7 +275,7 @@ static void WaitForMonAnimAfterLoad(void)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR);
+    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
@@ -380,7 +380,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
         u8 battlerId = gTasks[taskId].tExpTask_bank;
         s16 r4;
 
-        r4 = MoveBattleBar(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR);
+        r4 = MoveBattleBar(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR, 0);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[battlerId]);
         if (r4 == -1)
         {
