@@ -9565,12 +9565,12 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         if (moveType == TYPE_FIRE)
             dmg = ApplyModifier(UQ_4_12(0.5), dmg);
         else if (moveType == TYPE_WATER)
-            dmg = ApplyModifier(UQ_4_12(1.5), dmg);
+            dmg = ApplyModifier(UQ_4_12(1.3), dmg);
     }
     else if (IsBattlerWeatherAffected(battlerAtk, B_WEATHER_SUN))
     {
         if (moveType == TYPE_FIRE || gBattleMoves[move].effect == EFFECT_HYDRO_STEAM)
-            dmg = ApplyModifier(UQ_4_12(1.5), dmg);
+            dmg = ApplyModifier(UQ_4_12(1.3), dmg);
         else if (moveType == TYPE_WATER)
             dmg = ApplyModifier(UQ_4_12(0.5), dmg);
     }
