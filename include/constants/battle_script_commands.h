@@ -335,7 +335,8 @@
 #define MOVEEND_WEATHER_FORM                      33
 #define MOVEEND_SYMBIOSIS                         34
 #define MOVEEND_CLEAR_BITS                        35
-#define MOVEEND_COUNT                             36
+#define MOVEEND_BURN_HEAL                         36
+#define MOVEEND_COUNT                             37
 
 // switch cases
 #define B_SWITCH_NORMAL     0

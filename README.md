@@ -24,6 +24,8 @@ Es un romhack en desarrollo que tiene como base la pokeemerald-expansion, con mu
 
 -Cambios a los climas --> Los climas invocados por habilidad duran hasta que el Pokémon que lo haya invocado sea debilitado. Si ha sido invocado por movimiento, dura 6 turnos (o 9 con objetos climáticos). A cambio, el aumento de daño de clima soleado y lluvioso pasa a ser del 30% (en vez del 50%). (por hacer)
 
+-Cambios a los cambios de estado --> Congelamiento ahora es una copia especial de quemaduras: 1/16 de daño por turno, -30% de ataque especial (misma bajada que quemaduras). Los ataques de fuego o que quemen recibidos te descongelan. Los ataques de tipo agua te curan las quemaduras (Excepto Escaldar). Solo un 20% de probabilidades de no atacar si parálisis.
+
 -Defensa de los tipo Hielo en granizo +50%.
 
 -Balance tabla de tipos: 

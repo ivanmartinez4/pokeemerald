@@ -423,7 +423,7 @@ static bool8 ShouldSwitchIfAbilityBenefit(void)
         case ABILITY_NATURAL_CURE:
             moduloChance = 4; //25%
             //Attempt to cure bad ailment
-            if (gBattleMons[gActiveBattler].status1 & (STATUS1_SLEEP | STATUS1_FREEZE | STATUS1_TOXIC_POISON)
+            if (gBattleMons[gActiveBattler].status1 & (STATUS1_SLEEP | STATUS1_TOXIC_POISON)
                 && GetMostSuitableMonToSwitchInto() != PARTY_SIZE)
                 break;
             //Attempt to cure lesser ailment
