@@ -4410,6 +4410,36 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_BIRCHS_GARDEN",
+      "name": "BirchsGarden_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/BirchsGarden/border.bin",
+      "blockdata_filepath": "data/layouts/BirchsGarden/map.bin"
+    },
+    {
+      "id": "LAYOUT_BIRCHS_POND",
+      "name": "BirchsPond_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/BirchsPond/border.bin",
+      "blockdata_filepath": "data/layouts/BirchsPond/map.bin"
+    },
+    {
+      "id": "LAYOUT_BIRCHS_SANDBOX",
+      "name": "BirchsSandbox_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/BirchsSandbox/border.bin",
+      "blockdata_filepath": "data/layouts/BirchsSandbox/map.bin"
     }
   ]
 }
